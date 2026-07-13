@@ -1,1 +1,2 @@
-D:/Downloads/warehouse_proj/Core/Src/uart_control.c:9:6:UART_CONTROL_update	96	static
+D:/Downloads/warehouse_proj/Core/Src/uart_control.c:10:13:UART_SendMessage	16	static
+D:/Downloads/warehouse_proj/Core/Src/uart_control.c:15:6:UART_CONTROL_update	16	static
