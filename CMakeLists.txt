@@ -46,6 +46,7 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/blinky.c
     Core/Src/button.c
+    Core/Src/uart_control.c
     # Add user sources here
 )
 

@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <blinky.h>
+#include <uart_control.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -115,6 +116,7 @@ int main(void) {
     if (Blinky_update()) {
       printf("Button pressed\n\r");
     }
+    UART_CONTROL_update();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
