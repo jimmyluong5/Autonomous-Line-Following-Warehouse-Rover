@@ -15,5 +15,5 @@ void Blinky_Init(void) {
 // to be called every 500ms
 void Blinky_update(void) {
   HAL_GPIO_TogglePin(LD2_GPIO_PORT, LD2_PIN);
-  HAL_Delay(500); // hal_delay is in milliseconds
+  HAL_Delay(250); // hal_delay is in milliseconds
 }

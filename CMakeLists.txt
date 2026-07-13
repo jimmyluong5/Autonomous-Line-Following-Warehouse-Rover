@@ -67,3 +67,25 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 
     # Add user defined libraries
 )
+
+
+find_program(STM32_PROGRAMMER
+    NAMES STM32_Programmer_CLI STM32_Programmer_CLI.exe
+)
+
+if(NOT STM32_PROGRAMMER)
+    set(STM32_PROGRAMMER
+        "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/STM32_Programmer_CLI.exe"
+    )
+endif()
+
+add_custom_target(flash
+    COMMAND "${STM32_PROGRAMMER}"
+        -c port=SWD
+        -w $<TARGET_FILE:${CMAKE_PROJECT_NAME}>
+        -v
+        -rst
+    DEPENDS ${CMAKE_PROJECT_NAME}
+    COMMENT "Flashing STM32 firmware"
+    VERBATIM
+)

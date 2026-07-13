@@ -462,7 +462,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xa6 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c.obj
  .debug_macro   0x00000000      0x306 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c.obj
  .debug_line    0x00000000      0xfd3 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c.obj
- .debug_str     0x00000000    0xb0173 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c.obj
+ .debug_str     0x00000000    0xb0142 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c.obj
  .comment       0x00000000       0x47 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c.obj
  .debug_frame   0x00000000      0x2ac cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c.obj
  .ARM.attributes
@@ -579,7 +579,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xa6 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c.obj
  .debug_macro   0x00000000      0x306 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c.obj
  .debug_line    0x00000000      0x9a0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c.obj
- .debug_str     0x00000000    0xafd19 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c.obj
+ .debug_str     0x00000000    0xafce8 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c.obj
  .comment       0x00000000       0x47 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c.obj
  .debug_frame   0x00000000      0x21c cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c.obj
  .ARM.attributes
@@ -711,7 +711,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xa6 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c.obj
  .debug_macro   0x00000000      0x306 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c.obj
  .debug_line    0x00000000      0xc30 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c.obj
- .debug_str     0x00000000    0xafe17 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c.obj
+ .debug_str     0x00000000    0xafde6 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c.obj
  .comment       0x00000000       0x47 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c.obj
  .debug_frame   0x00000000      0x344 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c.obj
  .ARM.attributes
@@ -800,7 +800,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xa6 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c.obj
  .debug_macro   0x00000000      0x306 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c.obj
  .debug_line    0x00000000      0x610 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c.obj
- .debug_str     0x00000000    0xaf959 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c.obj
+ .debug_str     0x00000000    0xaf928 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c.obj
  .comment       0x00000000       0x47 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c.obj
  .debug_frame   0x00000000       0x50 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c.obj
  .ARM.attributes
@@ -991,7 +991,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xa6 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c.obj
  .debug_macro   0x00000000      0x306 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c.obj
  .debug_line    0x00000000      0x964 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c.obj
- .debug_str     0x00000000    0xafb13 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c.obj
+ .debug_str     0x00000000    0xafae2 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c.obj
  .comment       0x00000000       0x47 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c.obj
  .debug_frame   0x00000000      0x174 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c.obj
  .ARM.attributes
@@ -1109,7 +1109,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xa6 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c.obj
  .debug_macro   0x00000000      0x306 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c.obj
  .debug_line    0x00000000      0xd3a cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c.obj
- .debug_str     0x00000000    0xafe53 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c.obj
+ .debug_str     0x00000000    0xafe22 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c.obj
  .comment       0x00000000       0x47 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c.obj
  .debug_frame   0x00000000      0x24c cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c.obj
  .ARM.attributes
@@ -1207,7 +1207,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xa6 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c.obj
  .debug_macro   0x00000000      0x306 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c.obj
  .debug_line    0x00000000      0x79e cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c.obj
- .debug_str     0x00000000    0xafd30 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c.obj
+ .debug_str     0x00000000    0xafcff cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c.obj
  .comment       0x00000000       0x47 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c.obj
  .debug_frame   0x00000000       0xd4 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c.obj
  .ARM.attributes
@@ -1327,7 +1327,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xa6 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c.obj
  .debug_macro   0x00000000      0x306 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c.obj
  .debug_line    0x00000000      0x7b9 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c.obj
- .debug_str     0x00000000    0xafde9 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c.obj
+ .debug_str     0x00000000    0xafdb8 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c.obj
  .comment       0x00000000       0x47 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c.obj
  .debug_frame   0x00000000      0x230 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c.obj
  .ARM.attributes
@@ -1687,7 +1687,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xa6 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart.c.obj
  .debug_macro   0x00000000      0x306 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart.c.obj
  .debug_line    0x00000000      0x5e3 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart.c.obj
- .debug_str     0x00000000    0xaf860 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart.c.obj
+ .debug_str     0x00000000    0xaf82f cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart.c.obj
  .comment       0x00000000       0x47 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart.c.obj
  .ARM.attributes
                 0x00000000       0x34 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart.c.obj
@@ -1772,7 +1772,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xa6 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c.obj
  .debug_macro   0x00000000      0x306 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c.obj
  .debug_line    0x00000000      0x5e6 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c.obj
- .debug_str     0x00000000    0xaf863 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c.obj
+ .debug_str     0x00000000    0xaf832 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c.obj
  .comment       0x00000000       0x47 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c.obj
  .ARM.attributes
                 0x00000000       0x34 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c.obj
@@ -1899,7 +1899,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xa6 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c.obj
  .debug_macro   0x00000000      0x306 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c.obj
  .debug_line    0x00000000      0xb59 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c.obj
- .debug_str     0x00000000    0xb0232 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c.obj
+ .debug_str     0x00000000    0xb0201 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c.obj
  .comment       0x00000000       0x47 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c.obj
  .debug_frame   0x00000000      0x2c0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c.obj
  .ARM.attributes
@@ -2600,7 +2600,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x6a CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
  .debug_macro   0x00000000      0x1d0 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
  .debug_line    0x00000000      0x2fe CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
- .debug_str     0x00000000     0x7205 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
+ .debug_str     0x00000000     0x71d4 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
  .comment       0x00000000       0x47 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
  .debug_frame   0x00000000       0x34 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
  .ARM.attributes
@@ -2731,7 +2731,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 CMakeFiles/warehouse_proj.dir/Core/Src/syscalls.c.obj
  .debug_macro   0x00000000       0xce CMakeFiles/warehouse_proj.dir/Core/Src/syscalls.c.obj
  .debug_line    0x00000000      0x622 CMakeFiles/warehouse_proj.dir/Core/Src/syscalls.c.obj
- .debug_str     0x00000000     0x950b CMakeFiles/warehouse_proj.dir/Core/Src/syscalls.c.obj
+ .debug_str     0x00000000     0x94da CMakeFiles/warehouse_proj.dir/Core/Src/syscalls.c.obj
  .comment       0x00000000       0x47 CMakeFiles/warehouse_proj.dir/Core/Src/syscalls.c.obj
  .debug_frame   0x00000000      0x2ac CMakeFiles/warehouse_proj.dir/Core/Src/syscalls.c.obj
  .ARM.attributes
@@ -3150,7 +3150,7 @@ LOAD C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../li
                 0x08000000                g_pfnVectors
                 0x080001d8                        . = ALIGN (0x4)
 
-.text           0x080001d8     0x2510
+.text           0x080001d8     0x250c
                 0x080001d8                        . = ALIGN (0x4)
  *(.text)
  .text          0x080001d8       0x30 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
@@ -3391,101 +3391,101 @@ LOAD C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../li
                 0x08002320       0x18 CMakeFiles/warehouse_proj.dir/Core/Src/blinky.c.obj
                 0x08002320                Blinky_Init
  .text.Blinky_update
-                0x08002338       0x20 CMakeFiles/warehouse_proj.dir/Core/Src/blinky.c.obj
+                0x08002338       0x1c CMakeFiles/warehouse_proj.dir/Core/Src/blinky.c.obj
                 0x08002338                Blinky_update
  .text.__udivmoddi4
-                0x08002358      0x320 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
-                0x08002358                __udivmoddi4
- .text.memset   0x08002678       0x10 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-memset.o)
-                0x08002678                memset
+                0x08002354      0x320 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+                0x08002354                __udivmoddi4
+ .text.memset   0x08002674       0x10 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-memset.o)
+                0x08002674                memset
  .text.__libc_init_array
-                0x08002688       0x48 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-init.o)
-                0x08002688                __libc_init_array
+                0x08002684       0x48 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-init.o)
+                0x08002684                __libc_init_array
  *(.glue_7)
- .glue_7        0x080026d0        0x0 linker stubs
+ .glue_7        0x080026cc        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x080026d0        0x0 linker stubs
+ .glue_7t       0x080026cc        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x080026d0        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .eh_frame      0x080026cc        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
  *(.init)
- .init          0x080026d0        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crti.o
-                0x080026d0                _init
- .init          0x080026d4        0x8 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtn.o
+ .init          0x080026cc        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crti.o
+                0x080026cc                _init
+ .init          0x080026d0        0x8 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtn.o
  *(.fini)
- .fini          0x080026dc        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crti.o
-                0x080026dc                _fini
- .fini          0x080026e0        0x8 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtn.o
-                0x080026e8                        . = ALIGN (0x4)
-                0x080026e8                        _etext = .
+ .fini          0x080026d8        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crti.o
+                0x080026d8                _fini
+ .fini          0x080026dc        0x8 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtn.o
+                0x080026e4                        . = ALIGN (0x4)
+                0x080026e4                        _etext = .
 
-.vfp11_veneer   0x080026e8        0x0
- .vfp11_veneer  0x080026e8        0x0 linker stubs
+.vfp11_veneer   0x080026e4        0x0
+ .vfp11_veneer  0x080026e4        0x0 linker stubs
 
-.v4_bx          0x080026e8        0x0
- .v4_bx         0x080026e8        0x0 linker stubs
+.v4_bx          0x080026e4        0x0
+ .v4_bx         0x080026e4        0x0 linker stubs
 
-.iplt           0x080026e8        0x0
- .iplt          0x080026e8        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+.iplt           0x080026e4        0x0
+ .iplt          0x080026e4        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.rodata         0x080026e8       0x30
-                0x080026e8                        . = ALIGN (0x4)
+.rodata         0x080026e4       0x30
+                0x080026e4                        . = ALIGN (0x4)
  *(.rodata)
  *(.rodata*)
  .rodata.AHBPrescTable
-                0x080026e8       0x10 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
-                0x080026e8                AHBPrescTable
+                0x080026e4       0x10 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
+                0x080026e4                AHBPrescTable
  .rodata.APBPrescTable
-                0x080026f8        0x8 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
-                0x080026f8                APBPrescTable
+                0x080026f4        0x8 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
+                0x080026f4                APBPrescTable
  .rodata.UARTPrescTable
-                0x08002700       0x18 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj
-                0x08002700                UARTPrescTable
-                0x08002718                        . = ALIGN (0x4)
+                0x080026fc       0x18 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj
+                0x080026fc                UARTPrescTable
+                0x08002714                        . = ALIGN (0x4)
 
-.ARM.extab      0x08002718        0x0
-                0x08002718                        . = ALIGN (0x4)
+.ARM.extab      0x08002714        0x0
+                0x08002714                        . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x08002718                        . = ALIGN (0x4)
+                0x08002714                        . = ALIGN (0x4)
 
-.ARM            0x08002718        0x8
-                0x08002718                        . = ALIGN (0x4)
-                0x08002718                        __exidx_start = .
+.ARM            0x08002714        0x8
+                0x08002714                        . = ALIGN (0x4)
+                0x08002714                        __exidx_start = .
  *(.ARM.exidx*)
  .ARM.exidx.text.__udivmoddi4
-                0x08002718        0x8 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
-                0x08002720                        __exidx_end = .
-                0x08002720                        . = ALIGN (0x4)
+                0x08002714        0x8 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+                0x0800271c                        __exidx_end = .
+                0x0800271c                        . = ALIGN (0x4)
 
-.preinit_array  0x08002720        0x0
-                0x08002720                        . = ALIGN (0x4)
-                0x08002720                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x0800271c        0x0
+                0x0800271c                        . = ALIGN (0x4)
+                0x0800271c                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x08002720                        PROVIDE (__preinit_array_end = .)
-                0x08002720                        . = ALIGN (0x4)
+                0x0800271c                        PROVIDE (__preinit_array_end = .)
+                0x0800271c                        . = ALIGN (0x4)
 
-.init_array     0x08002720        0x4
-                0x08002720                        . = ALIGN (0x4)
-                0x08002720                        PROVIDE (__init_array_start = .)
+.init_array     0x0800271c        0x4
+                0x0800271c                        . = ALIGN (0x4)
+                0x0800271c                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x08002720        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
-                0x08002724                        PROVIDE (__init_array_end = .)
-                0x08002724                        . = ALIGN (0x4)
+ .init_array    0x0800271c        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x08002720                        PROVIDE (__init_array_end = .)
+                0x08002720                        . = ALIGN (0x4)
 
-.fini_array     0x08002724        0x4
-                0x08002724                        . = ALIGN (0x4)
+.fini_array     0x08002720        0x4
+                0x08002720                        . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x08002724        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .fini_array    0x08002720        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x08002728                        . = ALIGN (0x4)
-                0x08002728                        _sidata = LOADADDR (.data)
+                0x08002724                        . = ALIGN (0x4)
+                0x08002724                        _sidata = LOADADDR (.data)
 
-.rel.dyn        0x08002728        0x0
- .rel.iplt      0x08002728        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+.rel.dyn        0x08002724        0x0
+ .rel.iplt      0x08002724        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.data           0x20000000       0x14 load address 0x08002728
+.data           0x20000000       0x14 load address 0x08002724
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -3508,16 +3508,16 @@ LOAD C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../li
                 0x20000014                        . = ALIGN (0x4)
 
 .tm_clone_table
-                0x20000014        0x0 load address 0x0800273c
+                0x20000014        0x0 load address 0x08002738
  .tm_clone_table
                 0x20000014        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
  .tm_clone_table
                 0x20000014        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtend.o
 
-.igot.plt       0x20000014        0x0 load address 0x0800273c
+.igot.plt       0x20000014        0x0 load address 0x08002738
  .igot.plt      0x20000014        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.tdata          0x20000014        0x0 load address 0x0800273c
+.tdata          0x20000014        0x0 load address 0x08002738
  *(.tdata .tdata.* .gnu.linkonce.td.*)
                 0x20000014                        . = ALIGN (0x4)
                 0x20000014                        _edata = .
@@ -3534,7 +3534,7 @@ LOAD C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../li
                 [!provide]                        PROVIDE (__data_source_end = __tdata_source_end)
                 [!provide]                        PROVIDE (__data_source_size = (__data_source_end - __data_source))
 
-.tbss           0x20000014        0x0 load address 0x0800273c
+.tbss           0x20000014        0x0 load address 0x08002738
                 0x20000014                        _sbss = .
                 0x20000014                        __bss_start__ = _sbss
  *(.tbss .tbss.*)
@@ -3551,7 +3551,7 @@ LOAD C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../li
                 [!provide]                        PROVIDE (__arm32_tls_tcb_offset = MAX (0x8, __tls_align))
                 [!provide]                        PROVIDE (__arm64_tls_tcb_offset = MAX (0x10, __tls_align))
 
-.bss            0x20000014       0xc4 load address 0x0800273c
+.bss            0x20000014       0xc4 load address 0x08002738
  *(.bss)
  *(.bss*)
  .bss.completed.1
@@ -3576,7 +3576,7 @@ LOAD C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../li
                 [!provide]                        PROVIDE (__bss_size = (__bss_end - __bss_start))
 
 ._user_heap_stack
-                0x200000d8      0x600 load address 0x0800273c
+                0x200000d8      0x600 load address 0x08002738
                 0x200000d8                        . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
                 0x200000d8                        PROVIDE (_end = .)
@@ -3840,33 +3840,33 @@ LOAD linker stubs
  .debug_line    0x000093b6       0x7b CMakeFiles/warehouse_proj.dir/startup_stm32g431xx.s.obj
  .debug_line    0x00009431      0x710 CMakeFiles/warehouse_proj.dir/Core/Src/blinky.c.obj
 
-.debug_str      0x00000000    0xb60be
- .debug_str     0x00000000    0xb60be cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
-                              0xafa79 (size before relaxing)
- .debug_str     0x000b60be        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj
-                              0xb05b8 (size before relaxing)
- .debug_str     0x000b60be        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj
-                              0xb0172 (size before relaxing)
- .debug_str     0x000b60be        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c.obj
-                              0xafc04 (size before relaxing)
- .debug_str     0x000b60be        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c.obj
-                              0xaff67 (size before relaxing)
- .debug_str     0x000b60be        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c.obj
-                              0xb0274 (size before relaxing)
- .debug_str     0x000b60be        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj
-                              0xb0a34 (size before relaxing)
- .debug_str     0x000b60be        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32G4xx_Nucleo/stm32g4xx_nucleo.c.obj
-                              0xb09f8 (size before relaxing)
- .debug_str     0x000b60be        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
-                              0xb3794 (size before relaxing)
- .debug_str     0x000b60be        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_it.c.obj
-                              0xb323c (size before relaxing)
- .debug_str     0x000b60be        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_hal_msp.c.obj
-                              0xb330c (size before relaxing)
- .debug_str     0x000b60be        0x0 CMakeFiles/warehouse_proj.dir/startup_stm32g431xx.s.obj
+.debug_str      0x00000000    0xb608d
+ .debug_str     0x00000000    0xb608d cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
+                              0xafa48 (size before relaxing)
+ .debug_str     0x000b608d        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj
+                              0xb0587 (size before relaxing)
+ .debug_str     0x000b608d        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj
+                              0xb0141 (size before relaxing)
+ .debug_str     0x000b608d        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c.obj
+                              0xafbd3 (size before relaxing)
+ .debug_str     0x000b608d        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c.obj
+                              0xaff36 (size before relaxing)
+ .debug_str     0x000b608d        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c.obj
+                              0xb0243 (size before relaxing)
+ .debug_str     0x000b608d        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj
+                              0xb0a03 (size before relaxing)
+ .debug_str     0x000b608d        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32G4xx_Nucleo/stm32g4xx_nucleo.c.obj
+                              0xb09c7 (size before relaxing)
+ .debug_str     0x000b608d        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+                              0xb3763 (size before relaxing)
+ .debug_str     0x000b608d        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_it.c.obj
+                              0xb320b (size before relaxing)
+ .debug_str     0x000b608d        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_hal_msp.c.obj
+                              0xb32db (size before relaxing)
+ .debug_str     0x000b608d        0x0 CMakeFiles/warehouse_proj.dir/startup_stm32g431xx.s.obj
                                  0x70 (size before relaxing)
- .debug_str     0x000b60be        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/blinky.c.obj
-                              0xb325f (size before relaxing)
+ .debug_str     0x000b608d        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/blinky.c.obj
+                              0xb322e (size before relaxing)
 
 .debug_frame    0x00000000     0x226c
  .debug_frame   0x00000000       0x58 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
