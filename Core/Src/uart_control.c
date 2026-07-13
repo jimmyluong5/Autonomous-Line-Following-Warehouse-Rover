@@ -7,6 +7,8 @@
 
 extern UART_HandleTypeDef hcom_uart[];
 
+static uint32_t last_command_time = 0;
+
 static void UART_SendMessage(const char *message) {
   HAL_UART_Transmit(&hcom_uart[COM1], (uint8_t *)message, strlen(message),
                     HAL_MAX_DELAY);
@@ -21,6 +23,9 @@ void UART_CONTROL_update(void) {
     HAL_GPIO_WritePin(LED2_GPIO_PORT, LED2_PIN, GPIO_PIN_SET);
     HAL_Delay(50);
     HAL_GPIO_WritePin(LED2_GPIO_PORT, LED2_PIN, GPIO_PIN_RESET);
+
+    // Update the last command timestamp
+    last_command_time = HAL_GetTick();
 
     if (received_byte == 'w') {
       Robot_SetState(robot_forward);
@@ -40,6 +45,16 @@ void UART_CONTROL_update(void) {
     } else if (received_byte == 'f') {
       Robot_SetState(robot_fault);
       UART_SendMessage("ROBOT FAULT\r\n");
+    }
+  }
+}
+
+void UART_CONTROL_check_timeout(void) {
+  // If the robot is not idle or fault, check for communication timeout
+  if (Robot_GetState() != robot_idle && Robot_GetState() != robot_fault) {
+    if (HAL_GetTick() - last_command_time > 2000) {
+      Robot_SetState(robot_idle);
+      UART_SendMessage("TIMEOUT - ROBOT STOPPED\r\n");
     }
   }
 }

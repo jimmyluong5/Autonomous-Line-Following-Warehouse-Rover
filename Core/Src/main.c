@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include <blinky.h>
 #include <uart_control.h>
+#include <robot.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -92,6 +93,7 @@ int main(void) {
 
   /* USER CODE BEGIN 2 */
   Blinky_Init();
+  Robot_Init();
   /* USER CODE END 2 */
 
   /* Initialize leds */
@@ -117,6 +119,7 @@ int main(void) {
       printf("Button pressed\n\r");
     }
     UART_CONTROL_update();
+    UART_CONTROL_check_timeout();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
