@@ -88,6 +88,7 @@ int main(void) {
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+
   /* USER CODE BEGIN 2 */
   Blinky_Init();
   /* USER CODE END 2 */
@@ -106,10 +107,14 @@ int main(void) {
     Error_Handler();
   }
 
+  printf("Robot starting...\n\r");
+
   /* Infinite loop */
   while (1) {
     /* USER CODE BEGIN WHILE */
-    Blinky_update();
+    if (Blinky_update()) {
+      printf("Button pressed\n\r");
+    }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

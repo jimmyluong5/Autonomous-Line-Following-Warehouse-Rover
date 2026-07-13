@@ -2,7 +2,6 @@
 #include <button.h>
 #include <main.h>
 
-
 // creating the functions
 void Blinky_Init(void) {
   // these functions are found in the stm32g4xx_hal_gpio.c file
@@ -17,8 +16,12 @@ void Blinky_Init(void) {
 
 // updates the state of led
 // to be called every 500ms
-void Blinky_update(void) {
+bool Blinky_update(void) {
   if (button_press()) {
     HAL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    // button pressed detected
+    return true;
   }
+  // no button press
+  return false;
 }
