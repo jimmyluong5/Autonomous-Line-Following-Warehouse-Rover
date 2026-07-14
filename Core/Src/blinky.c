@@ -4,14 +4,14 @@
 
 // creating the functions
 void Blinky_Init(void) {
-  // these functions are found in the stm32g4xx_hal_gpio.c file
-  // they are imported into blinky.h
-  // we are setting the led to off initially
-  // ld2 is just an arbitrary name for the pin
-  // you can find the pin in the main.c file
-
-  // start with the LED off.
-  HAL_GPIO_WritePin(LED2_GPIO_PORT, LED2_PIN, GPIO_PIN_RESET);
+  // Make it noticeable when reset is clicked by doing a startup blink sequence:
+  // Blink the LED 10 times (100ms ON, 100ms OFF)
+  for (int i = 0; i < 10; i++) {
+    HAL_GPIO_WritePin(LED2_GPIO_PORT, LED2_PIN, GPIO_PIN_SET);
+    HAL_Delay(100);
+    HAL_GPIO_WritePin(LED2_GPIO_PORT, LED2_PIN, GPIO_PIN_RESET);
+    HAL_Delay(100);
+  }
 }
 
 // updates the state of led

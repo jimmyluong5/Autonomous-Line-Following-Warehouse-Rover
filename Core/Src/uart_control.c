@@ -14,15 +14,37 @@ static void UART_SendMessage(const char *message) {
                     HAL_MAX_DELAY);
 }
 
+static uint32_t led_blink_start_time = 0;
+static bool led_is_blinking = false;
+
 void UART_CONTROL_update(void) {
   uint8_t received_byte;
 
-  // Check if one keyboard character was received
+  // Handle non-blocking keypress LED turn-off after 50ms
+  if (led_is_blinking && (HAL_GetTick() - led_blink_start_time >= 50)) {
+    // Only turn off if the robot is currently idle or in fault state (other states keep it ON)
+    if (Robot_GetState() == robot_idle || Robot_GetState() == robot_fault) {
+      HAL_GPIO_WritePin(LED2_GPIO_PORT, LED2_PIN, GPIO_PIN_RESET);
+    }
+    led_is_blinking = false;
+  }
+
+  // Clear any overrun or error flags that lock up UART reception
+  if (__HAL_UART_GET_FLAG(&hcom_uart[COM1], UART_FLAG_ORE)) {
+    __HAL_UART_CLEAR_OREFLAG(&hcom_uart[COM1]);
+  }
+  if (__HAL_UART_GET_FLAG(&hcom_uart[COM1], UART_FLAG_NE) ||
+      __HAL_UART_GET_FLAG(&hcom_uart[COM1], UART_FLAG_FE) ||
+      __HAL_UART_GET_FLAG(&hcom_uart[COM1], UART_FLAG_PE)) {
+    __HAL_UART_CLEAR_FLAG(&hcom_uart[COM1], UART_CLEAR_NEF | UART_CLEAR_FEF | UART_CLEAR_PEF);
+  }
+
+  // Check if one keyboard character was received (non-blocking)
   if (HAL_UART_Receive(&hcom_uart[COM1], &received_byte, 1, 0) == HAL_OK) {
-    // Blink the LED to indicate a keypress
+    // Turn on the LED to indicate keypress
     HAL_GPIO_WritePin(LED2_GPIO_PORT, LED2_PIN, GPIO_PIN_SET);
-    HAL_Delay(50);
-    HAL_GPIO_WritePin(LED2_GPIO_PORT, LED2_PIN, GPIO_PIN_RESET);
+    led_blink_start_time = HAL_GetTick();
+    led_is_blinking = true;
 
     // Update the last command timestamp
     last_command_time = HAL_GetTick();
@@ -53,8 +75,8 @@ void UART_CONTROL_check_timeout(void) {
   // If the robot is not idle or fault, check for communication timeout
   if (Robot_GetState() != robot_idle && Robot_GetState() != robot_fault) {
     if (HAL_GetTick() - last_command_time > 2000) {
-      Robot_SetState(robot_idle);
-      UART_SendMessage("TIMEOUT - ROBOT STOPPED\r\n");
+      Robot_SetState(robot_fault);
+      UART_SendMessage("TIMEOUT - ROBOT FAULT\r\n");
     }
   }
 }

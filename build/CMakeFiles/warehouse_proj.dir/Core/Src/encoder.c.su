@@ -1,0 +1,6 @@
+D:/Downloads/warehouse_proj/Core/Src/encoder.c:13:6:Encoder_Init	8	static
+D:/Downloads/warehouse_proj/Core/Src/encoder.c:20:9:Encoder_GetRightCount	4	static
+D:/Downloads/warehouse_proj/Core/Src/encoder.c:24:9:Encoder_GetLeftCount	4	static
+D:/Downloads/warehouse_proj/Core/Src/encoder.c:28:6:Encoder_ResetRight	4	static
+D:/Downloads/warehouse_proj/Core/Src/encoder.c:32:6:Encoder_ResetLeft	4	static
+D:/Downloads/warehouse_proj/Core/Src/encoder.c:36:6:Encoder_Update	88	static

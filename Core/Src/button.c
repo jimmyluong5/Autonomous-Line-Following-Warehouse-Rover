@@ -18,7 +18,7 @@ bool button_press(void) {
 
   // determine the raw state of the pin
   // the button is active low because it reads low when pressed
-  GPIO_PinState raw_state = HAL_GPIO_ReadPin(Button_GPIO_Port, Button_Pin);
+  GPIO_PinState raw_state = HAL_GPIO_ReadPin(Led_Button_GPIO_Port, Led_Button_Pin);
 
   // get the current time in milliseconds
   uint32_t curr_time = HAL_GetTick();

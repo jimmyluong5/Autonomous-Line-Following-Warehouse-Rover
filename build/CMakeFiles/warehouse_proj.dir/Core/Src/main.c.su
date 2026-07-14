@@ -1,4 +1,8 @@
-D:/Downloads/warehouse_proj/Core/Src/main.c:68:5:main	8	static
-D:/Downloads/warehouse_proj/Core/Src/main.c:135:6:SystemClock_Config	88	static
-D:/Downloads/warehouse_proj/Core/Src/main.c:179:13:MX_GPIO_Init	40	static
-D:/Downloads/warehouse_proj/Core/Src/main.c:245:6:Error_Handler	4	static
+D:/Downloads/warehouse_proj/Core/Src/main.c:79:5:main	8	static
+D:/Downloads/warehouse_proj/Core/Src/main.c:149:6:SystemClock_Config	88	static
+D:/Downloads/warehouse_proj/Core/Src/main.c:196:13:MX_TIM1_Init	56	static
+D:/Downloads/warehouse_proj/Core/Src/main.c:247:13:MX_TIM2_Init	48	static
+D:/Downloads/warehouse_proj/Core/Src/main.c:296:13:MX_TIM3_Init	56	static
+D:/Downloads/warehouse_proj/Core/Src/main.c:345:13:MX_TIM17_Init	88	static
+D:/Downloads/warehouse_proj/Core/Src/main.c:408:13:MX_GPIO_Init	40	static
+D:/Downloads/warehouse_proj/Core/Src/main.c:488:6:Error_Handler	40	static
