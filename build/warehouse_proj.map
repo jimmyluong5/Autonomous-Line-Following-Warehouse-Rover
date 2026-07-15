@@ -4104,12 +4104,12 @@ Discarded input sections
  .bss           0x00000000        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
  .debug_macro   0x00000000      0xaf0 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
  .debug_macro   0x00000000       0x22 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+ .debug_macro   0x00000000       0x22 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
  .debug_macro   0x00000000       0x8e CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
  .debug_macro   0x00000000       0x6d CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
  .debug_macro   0x00000000      0x103 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
  .debug_macro   0x00000000       0x6a CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
  .debug_macro   0x00000000      0x1d0 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
- .debug_macro   0x00000000       0x22 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
  .debug_macro   0x00000000      0x161 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
  .debug_macro   0x00000000       0x2e CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
  .debug_macro   0x00000000       0x28 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
@@ -5570,7 +5570,7 @@ LOAD linker stubs
  .debug_rnglists
                 0x00000e06       0x32 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
 
-.debug_macro    0x00000000    0x1fc5a
+.debug_macro    0x00000000    0x1fc6c
  .debug_macro   0x00000000      0x1e3 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
  .debug_macro   0x000001e3      0xaf0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
  .debug_macro   0x00000cd3       0x2e cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
@@ -5624,42 +5624,42 @@ LOAD linker stubs
  .debug_macro   0x0001d3f3       0x52 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32G4xx_Nucleo/stm32g4xx_nucleo.c.obj
  .debug_macro   0x0001d445       0x1c cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32G4xx_Nucleo/stm32g4xx_nucleo.c.obj
  .debug_macro   0x0001d461       0xc8 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32G4xx_Nucleo/stm32g4xx_nucleo.c.obj
- .debug_macro   0x0001d529      0x30d CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001d836       0x22 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001d858       0x7b CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001d8d3       0x2a CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001d8fd       0x3c CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001d939       0x34 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001d96d       0x16 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001d983       0x3c CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001d9bf      0x364 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001dd23       0x10 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001dd33       0x16 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001dd49       0x4a CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001dd93       0x34 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001ddc7       0x10 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001ddd7       0x58 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001de2f      0x1e5 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001e014       0x16 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001e02a       0x16 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001e040      0x170 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001e1b0       0xac CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001e25c       0x22 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_macro   0x0001e27e      0x2e6 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_it.c.obj
- .debug_macro   0x0001e564      0x2dc CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_hal_msp.c.obj
- .debug_macro   0x0001e840      0x103 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
- .debug_macro   0x0001e943       0x10 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
- .debug_macro   0x0001e953       0x75 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
- .debug_macro   0x0001e9c8       0x94 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
- .debug_macro   0x0001ea5c       0x73 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
- .debug_macro   0x0001eacf      0x23c CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
- .debug_macro   0x0001ed0b      0x2f7 CMakeFiles/warehouse_proj.dir/Core/Src/MCP3208.c.obj
- .debug_macro   0x0001f002       0x10 CMakeFiles/warehouse_proj.dir/Core/Src/MCP3208.c.obj
- .debug_macro   0x0001f012      0x333 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
- .debug_macro   0x0001f345       0x16 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
- .debug_macro   0x0001f35b      0x2f9 CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
- .debug_macro   0x0001f654      0x2ef CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
- .debug_macro   0x0001f943      0x317 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
+ .debug_macro   0x0001d529      0x313 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001d83c       0x22 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001d85e       0x7b CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001d8d9       0x2a CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001d903       0x3c CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001d93f       0x34 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001d973       0x16 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001d989       0x3c CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001d9c5      0x364 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001dd29       0x10 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001dd39       0x16 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001dd4f       0x4a CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001dd99       0x34 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001ddcd       0x10 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001dddd       0x58 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001de35      0x1e5 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001e01a       0x16 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001e030       0x16 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001e046      0x170 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001e1b6       0xac CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001e262       0x22 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_macro   0x0001e284      0x2e6 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_it.c.obj
+ .debug_macro   0x0001e56a      0x2dc CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_hal_msp.c.obj
+ .debug_macro   0x0001e846      0x103 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
+ .debug_macro   0x0001e949       0x10 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
+ .debug_macro   0x0001e959       0x75 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
+ .debug_macro   0x0001e9ce       0x94 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
+ .debug_macro   0x0001ea62       0x73 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
+ .debug_macro   0x0001ead5      0x23c CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
+ .debug_macro   0x0001ed11      0x2f7 CMakeFiles/warehouse_proj.dir/Core/Src/MCP3208.c.obj
+ .debug_macro   0x0001f008       0x10 CMakeFiles/warehouse_proj.dir/Core/Src/MCP3208.c.obj
+ .debug_macro   0x0001f018      0x333 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
+ .debug_macro   0x0001f34b       0x16 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
+ .debug_macro   0x0001f361      0x2ff CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
+ .debug_macro   0x0001f660      0x2f5 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+ .debug_macro   0x0001f955      0x317 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
 
 .debug_line     0x00000000    0x14674
  .debug_line    0x00000000      0x6ba cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
@@ -5684,48 +5684,48 @@ LOAD linker stubs
  .debug_line    0x000135bf      0x875 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
  .debug_line    0x00013e34      0x840 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
 
-.debug_str      0x00000000    0xc8719
- .debug_str     0x00000000    0xc8719 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
+.debug_str      0x00000000    0xc8731
+ .debug_str     0x00000000    0xc8731 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
                               0xbf0fa (size before relaxing)
- .debug_str     0x000c8719        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj
+ .debug_str     0x000c8731        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj
                               0xbfc39 (size before relaxing)
- .debug_str     0x000c8719        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj
+ .debug_str     0x000c8731        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj
                               0xbf7f3 (size before relaxing)
- .debug_str     0x000c8719        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c.obj
+ .debug_str     0x000c8731        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c.obj
                               0xbf285 (size before relaxing)
- .debug_str     0x000c8719        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c.obj
+ .debug_str     0x000c8731        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c.obj
                               0xbf5e8 (size before relaxing)
- .debug_str     0x000c8719        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c.obj
+ .debug_str     0x000c8731        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c.obj
                               0xbf8f5 (size before relaxing)
- .debug_str     0x000c8719        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.c.obj
+ .debug_str     0x000c8731        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.c.obj
                               0xbfa2c (size before relaxing)
- .debug_str     0x000c8719        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c.obj
+ .debug_str     0x000c8731        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c.obj
                               0xc05f8 (size before relaxing)
- .debug_str     0x000c8719        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c.obj
+ .debug_str     0x000c8731        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c.obj
                               0xc026c (size before relaxing)
- .debug_str     0x000c8719        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj
+ .debug_str     0x000c8731        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj
                               0xc00b5 (size before relaxing)
- .debug_str     0x000c8719        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32G4xx_Nucleo/stm32g4xx_nucleo.c.obj
+ .debug_str     0x000c8731        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32G4xx_Nucleo/stm32g4xx_nucleo.c.obj
                               0xc0079 (size before relaxing)
- .debug_str     0x000c8719        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
-                              0xc3c6d (size before relaxing)
- .debug_str     0x000c8719        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_it.c.obj
+ .debug_str     0x000c8731        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+                              0xc3c85 (size before relaxing)
+ .debug_str     0x000c8731        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_it.c.obj
                               0xc2afa (size before relaxing)
- .debug_str     0x000c8719        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_hal_msp.c.obj
+ .debug_str     0x000c8731        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_hal_msp.c.obj
                               0xc357a (size before relaxing)
- .debug_str     0x000c8719        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
+ .debug_str     0x000c8731        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
                                0x71d4 (size before relaxing)
- .debug_str     0x000c8719        0x0 CMakeFiles/warehouse_proj.dir/startup_stm32g431xx.s.obj
+ .debug_str     0x000c8731        0x0 CMakeFiles/warehouse_proj.dir/startup_stm32g431xx.s.obj
                                  0x70 (size before relaxing)
- .debug_str     0x000c8719        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/MCP3208.c.obj
+ .debug_str     0x000c8731        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/MCP3208.c.obj
                               0xc30a5 (size before relaxing)
- .debug_str     0x000c8719        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
+ .debug_str     0x000c8731        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
                               0xc34e3 (size before relaxing)
- .debug_str     0x000c8719        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
-                              0xc2c5b (size before relaxing)
- .debug_str     0x000c8719        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
-                              0xc322d (size before relaxing)
- .debug_str     0x000c8719        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
+ .debug_str     0x000c8731        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
+                              0xc2c73 (size before relaxing)
+ .debug_str     0x000c8731        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+                              0xc3245 (size before relaxing)
+ .debug_str     0x000c8731        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
                               0xc34c2 (size before relaxing)
 
 .debug_frame    0x00000000     0x5260

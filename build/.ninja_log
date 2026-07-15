@@ -93,3 +93,13 @@
 1437	2071	8058484120000000	warehouse_proj.elf	a00f56938f90866e
 2072	3016	8058484120000000	CMakeFiles/flash	f0891e6364fb8da5
 2072	3016	8058484120000000	D:/Downloads/warehouse_proj/build/CMakeFiles/flash	f0891e6364fb8da5
+80	1328	8058490300000000	CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj	7e18ca325954047f
+69	1333	8058490300000000	CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj	46382d1d3e492d18
+53	1338	8058490280700000	CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj	7ebeefe0ae99b8fb
+1338	2933	8058490300000000	warehouse_proj.elf	a00f56938f90866e
+67	1290	8058492720000000	CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj	7e18ca325954047f
+58	1295	8058492720000000	CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj	46382d1d3e492d18
+45	1300	8058492715800000	CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj	7ebeefe0ae99b8fb
+1300	2591	8058492740000000	warehouse_proj.elf	a00f56938f90866e
+2591	3895	8058492760000000	CMakeFiles/flash	f0891e6364fb8da5
+2591	3895	8058492760000000	D:/Downloads/warehouse_proj/build/CMakeFiles/flash	f0891e6364fb8da5

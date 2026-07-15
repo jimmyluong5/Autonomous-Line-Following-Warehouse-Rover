@@ -2,8 +2,12 @@
 #include "main.h"
 #include "motor.h"
 
+// Default motor speed / PWM duty cycle (0 to 999)
+// 0 = 0% PWM, 500 = 50% PWM, 999 = 100% PWM
+#define MOTOR_DEFAULT_SPEED 999
+
 static RobotState current_state = robot_idle;
-volatile int16_t robot_speed = 500;
+volatile int16_t robot_speed = MOTOR_DEFAULT_SPEED;
 
 void Robot_Init(void) {
   current_state = robot_idle;
@@ -21,31 +25,31 @@ void Robot_SetState(RobotState new_state) {
 
   // Update motor speeds according to the new robot state
   switch (current_state) {
-    case robot_forward:
-      Motor_Forward(robot_speed);
-      break;
-    case robot_reverse:
-      Motor_Reverse(robot_speed);
-      break;
-    case robot_left:
-      // Spin turn left: left motor backward, right motor forward
-      Motor_Left_SetSpeed(-robot_speed);
-      Motor_Right_SetSpeed(robot_speed);
-      break;
-    case robot_right:
-      // Spin turn right: left motor forward, right motor backward
-      Motor_Left_SetSpeed(robot_speed);
-      Motor_Right_SetSpeed(-robot_speed);
-      break;
-    case robot_idle:
-      Motor_Stop();
-      break;
-    case robot_fault:
-      Motor_Brake();
-      break;
-    default:
-      Motor_Stop();
-      break;
+  case robot_forward:
+    Motor_Forward(robot_speed);
+    break;
+  case robot_reverse:
+    Motor_Reverse(robot_speed);
+    break;
+  case robot_left:
+    // Spin turn left: left motor backward, right motor forward
+    Motor_Left_SetSpeed(-robot_speed);
+    Motor_Right_SetSpeed(robot_speed);
+    break;
+  case robot_right:
+    // Spin turn right: left motor forward, right motor backward
+    Motor_Left_SetSpeed(robot_speed);
+    Motor_Right_SetSpeed(-robot_speed);
+    break;
+  case robot_idle:
+    Motor_Stop();
+    break;
+  case robot_fault:
+    Motor_Brake();
+    break;
+  default:
+    Motor_Stop();
+    break;
   }
 }
 
@@ -53,6 +57,4 @@ void Robot_Update(void) {
   // Add state update logic if needed
 }
 
-RobotState Robot_GetState(void) {
-  return current_state;
-}
+RobotState Robot_GetState(void) { return current_state; }

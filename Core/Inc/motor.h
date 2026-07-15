@@ -1,8 +1,12 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-#include <stdint.h>
 #include <stdbool.h>
+#include <stdint.h>
+
+// Default motor speed / PWM duty cycle (0 to 999)
+// 0 = 0% PWM, 500 = 50% PWM, 999 = 100% PWM
+#define MOTOR_DEFAULT_SPEED 999
 
 void Motor_Init(void);
 void Motor_Left_SetSpeed(int16_t speed);
