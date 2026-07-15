@@ -7,8 +7,8 @@ extern TIM_HandleTypeDef htim17;
 void Motor_Init(void) {
   // Start TIM17 Channel 1 PWM for right motor
   HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
-  // Start TIM2 Channel 2 PWM for left motor
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
+  // Start TIM2 Channel 4 PWM for right motor
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
 
   // Set speeds to 0 initially
   Motor_Left_SetSpeed(0);
@@ -34,17 +34,17 @@ void Motor_Right_SetSpeed(int16_t speed) {
     // BIN1 = High, BIN2 = Low for Forward
     HAL_GPIO_WritePin(Motor_BIN1_GPIO_Port, Motor_BIN1_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(Motor_BIN2_GPIO_Port, Motor_BIN2_Pin, GPIO_PIN_RESET);
-    __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, (uint32_t)speed);
+    __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4, (uint32_t)speed);
   } else if (speed < 0) {
     // BIN1 = Low, BIN2 = High for Reverse
     HAL_GPIO_WritePin(Motor_BIN1_GPIO_Port, Motor_BIN1_Pin, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(Motor_BIN2_GPIO_Port, Motor_BIN2_Pin, GPIO_PIN_SET);
-    __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, (uint32_t)(-speed));
+    __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4, (uint32_t)(-speed));
   } else {
     // Stop: BIN1 = Low, BIN2 = Low
     HAL_GPIO_WritePin(Motor_BIN1_GPIO_Port, Motor_BIN1_Pin, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(Motor_BIN2_GPIO_Port, Motor_BIN2_Pin, GPIO_PIN_RESET);
-    __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, 0);
+    __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4, 0);
   }
 }
 
@@ -102,5 +102,5 @@ void Motor_Brake(void) {
   HAL_GPIO_WritePin(Motor_BIN2_GPIO_Port, Motor_BIN2_Pin, GPIO_PIN_SET);
 
   __HAL_TIM_SET_COMPARE(&htim17, TIM_CHANNEL_1, 0);
-  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, 0);
+  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4, 0);
 }

@@ -5,20 +5,20 @@
 #include <string.h>
 
 extern TIM_HandleTypeDef htim1;
-extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim4;
 extern UART_HandleTypeDef hcom_uart[];
 
 #define ENCODER_PRINT_INTERVAL_MS 250U
 
 void Encoder_Init(void) {
   // Start TIM3 in encoder mode for Right encoder
-  HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
+  HAL_TIM_Encoder_Start(&htim4, TIM_CHANNEL_ALL);
   // Start TIM1 in encoder mode for Left encoder
   HAL_TIM_Encoder_Start(&htim1, TIM_CHANNEL_ALL);
 }
 
 int16_t Encoder_GetRightCount(void) {
-  return (int16_t)__HAL_TIM_GET_COUNTER(&htim3);
+  return (int16_t)__HAL_TIM_GET_COUNTER(&htim4);
 }
 
 int16_t Encoder_GetLeftCount(void) {
@@ -26,7 +26,7 @@ int16_t Encoder_GetLeftCount(void) {
 }
 
 void Encoder_ResetRight(void) {
-  __HAL_TIM_SET_COUNTER(&htim3, 0U);
+  __HAL_TIM_SET_COUNTER(&htim4, 0U);
 }
 
 void Encoder_ResetLeft(void) {

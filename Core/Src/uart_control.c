@@ -14,7 +14,7 @@ typedef enum {
 } UART_ControlMode;
 
 extern UART_HandleTypeDef hcom_uart[];
-extern SPI_HandleTypeDef hspi2;
+extern SPI_HandleTypeDef hspi1;
 
 static uint32_t last_command_time = 0;
 static bool sensor_test_active = false;
@@ -148,7 +148,7 @@ void UART_CONTROL_update(void) {
 
     for (uint8_t ch = 0; ch < 8; ch++) {
       uint16_t raw =
-          MCP3208_ReadChannel(&hspi2, ADC_CS_GPIO_Port, ADC_CS_Pin, ch);
+          MCP3208_ReadChannel(&hspi1, ADC_CS_GPIO_Port, ADC_CS_Pin, ch);
       if (raw == MCP3208_ERROR_VALUE) {
         len += snprintf(buffer + len, sizeof(buffer) - len,
                         "CH%d: ERR                     \r\n", ch);
