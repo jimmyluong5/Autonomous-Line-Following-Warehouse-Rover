@@ -2,6 +2,7 @@
 #define UART_CONTROL_H
 
 #include <stdio.h>
+void UART_CONTROL_init(void);
 void UART_CONTROL_update(void);
 void UART_CONTROL_check_timeout(void);
 

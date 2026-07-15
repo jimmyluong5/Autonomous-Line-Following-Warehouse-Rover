@@ -44,8 +44,7 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
-    Core/Src/blinky.c
-    Core/Src/button.c
+    Core/Src/MCP3208.c
     Core/Src/uart_control.c
     Core/Src/robot.c
     Core/Src/motor.c

@@ -62,6 +62,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define ADC_CS_Pin GPIO_PIN_0
+#define ADC_CS_GPIO_Port GPIOF
 #define Motor_BIN2_Pin GPIO_PIN_0
 #define Motor_BIN2_GPIO_Port GPIOA
 #define Motor_BIN1_Pin GPIO_PIN_1
@@ -72,14 +74,10 @@ void Error_Handler(void);
 #define Motor_AIN2_GPIO_Port GPIOA
 #define Motor_AIN1_Pin GPIO_PIN_6
 #define Motor_AIN1_GPIO_Port GPIOA
-#define Led_Button_Pin GPIO_PIN_12
-#define Led_Button_GPIO_Port GPIOA
 #define T_SWDIO_Pin GPIO_PIN_13
 #define T_SWDIO_GPIO_Port GPIOA
 #define T_SWCLK_Pin GPIO_PIN_14
 #define T_SWCLK_GPIO_Port GPIOA
-#define LED_Pin GPIO_PIN_8
-#define LED_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
