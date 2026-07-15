@@ -53,7 +53,7 @@ build CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj: C_COMPILER__warehouse_p
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = CMakeFiles\warehouse_proj.dir\Core\Src\main.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = CMakeFiles\warehouse_proj.dir
   OBJECT_FILE_DIR = CMakeFiles\warehouse_proj.dir\Core\Src
@@ -63,7 +63,7 @@ build CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_it.c.obj: C_COMPILER__war
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = CMakeFiles\warehouse_proj.dir\Core\Src\stm32g4xx_it.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = CMakeFiles\warehouse_proj.dir
   OBJECT_FILE_DIR = CMakeFiles\warehouse_proj.dir\Core\Src
@@ -73,7 +73,7 @@ build CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_hal_msp.c.obj: C_COMPILER
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = CMakeFiles\warehouse_proj.dir\Core\Src\stm32g4xx_hal_msp.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = CMakeFiles\warehouse_proj.dir
   OBJECT_FILE_DIR = CMakeFiles\warehouse_proj.dir\Core\Src
@@ -83,7 +83,7 @@ build CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj: C_COMPILER__warehouse
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = CMakeFiles\warehouse_proj.dir\Core\Src\sysmem.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = CMakeFiles\warehouse_proj.dir
   OBJECT_FILE_DIR = CMakeFiles\warehouse_proj.dir\Core\Src
@@ -93,7 +93,7 @@ build CMakeFiles/warehouse_proj.dir/Core/Src/syscalls.c.obj: C_COMPILER__warehou
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = CMakeFiles\warehouse_proj.dir\Core\Src\syscalls.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = CMakeFiles\warehouse_proj.dir
   OBJECT_FILE_DIR = CMakeFiles\warehouse_proj.dir\Core\Src
@@ -113,7 +113,7 @@ build CMakeFiles/warehouse_proj.dir/Core/Src/MCP3208.c.obj: C_COMPILER__warehous
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = CMakeFiles\warehouse_proj.dir\Core\Src\MCP3208.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = CMakeFiles\warehouse_proj.dir
   OBJECT_FILE_DIR = CMakeFiles\warehouse_proj.dir\Core\Src
@@ -123,7 +123,7 @@ build CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj: C_COMPILER__war
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = CMakeFiles\warehouse_proj.dir\Core\Src\uart_control.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = CMakeFiles\warehouse_proj.dir
   OBJECT_FILE_DIR = CMakeFiles\warehouse_proj.dir\Core\Src
@@ -133,7 +133,7 @@ build CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj: C_COMPILER__warehouse_
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = CMakeFiles\warehouse_proj.dir\Core\Src\robot.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = CMakeFiles\warehouse_proj.dir
   OBJECT_FILE_DIR = CMakeFiles\warehouse_proj.dir\Core\Src
@@ -143,7 +143,7 @@ build CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj: C_COMPILER__warehouse_
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = CMakeFiles\warehouse_proj.dir\Core\Src\motor.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = CMakeFiles\warehouse_proj.dir
   OBJECT_FILE_DIR = CMakeFiles\warehouse_proj.dir\Core\Src
@@ -153,7 +153,7 @@ build CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj: C_COMPILER__warehous
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = CMakeFiles\warehouse_proj.dir\Core\Src\encoder.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = CMakeFiles\warehouse_proj.dir
   OBJECT_FILE_DIR = CMakeFiles\warehouse_proj.dir\Core\Src
@@ -169,7 +169,7 @@ build CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj: C_COMPILER__warehous
 
 build warehouse_proj.elf: C_EXECUTABLE_LINKER__warehouse_proj_Debug cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi_ex.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32G4xx_Nucleo/stm32g4xx_nucleo.c.obj CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_it.c.obj CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_hal_msp.c.obj CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj CMakeFiles/warehouse_proj.dir/Core/Src/syscalls.c.obj CMakeFiles/warehouse_proj.dir/startup_stm32g431xx.s.obj CMakeFiles/warehouse_proj.dir/Core/Src/MCP3208.c.obj CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj || cmake/stm32cubemx/STM32_Drivers
   CONFIG = Debug
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g
   LINK_FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -T "D:/Downloads/warehouse_proj/STM32G431xx_FLASH.ld" --specs=nano.specs -Wl,-Map=warehouse_proj.map -Wl,--gc-sections -Wl,--print-memory-usage
   LINK_LIBRARIES = -lm
   OBJECT_DIR = CMakeFiles\warehouse_proj.dir
@@ -235,7 +235,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Core\Src\system_stm32g4xx.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Core\Src
@@ -245,7 +245,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -255,7 +255,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_rcc.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -265,7 +265,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_rcc_ex.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -275,7 +275,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_flash.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -285,7 +285,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_flash_ex.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -295,7 +295,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_flash_ramfunc.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -305,7 +305,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_gpio.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -315,7 +315,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_exti.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -325,7 +325,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_dma.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -335,7 +335,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_dma_ex.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -345,7 +345,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_pwr.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -355,7 +355,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_pwr_ex.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -365,7 +365,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_cortex.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -375,7 +375,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_spi.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -385,7 +385,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_spi_ex.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -395,7 +395,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_tim.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -405,7 +405,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_tim_ex.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -415,7 +415,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_usart.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -425,7 +425,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_usart_ex.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -435,7 +435,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_uart_ex.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -445,7 +445,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src\stm32g4xx_hal_uart.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\STM32G4xx_HAL_Driver\Src
@@ -455,7 +455,7 @@ build cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32G4xx
   CONFIG = Debug
   DEFINES = -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -DUSE_NUCLEO_32
   DEP_FILE = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\BSP\STM32G4xx_Nucleo\stm32g4xx_nucleo.c.obj.d
-  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+  FLAGS = -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g -std=gnu11
   INCLUDES = -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Core/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/BSP/STM32G4xx_Nucleo -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -ID:/Downloads/warehouse_proj/cmake/stm32cubemx/../../Drivers/CMSIS/Include
   OBJECT_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir
   OBJECT_FILE_DIR = cmake\stm32cubemx\CMakeFiles\STM32_Drivers.dir\__\__\Drivers\BSP\STM32G4xx_Nucleo

@@ -7,11 +7,6 @@
 #include <uart_control.h>
 
 
-typedef enum {
-  UART_MODE_MENU,
-  UART_MODE_MOTOR,
-  UART_MODE_VOLTAGE
-} UART_ControlMode;
 
 extern UART_HandleTypeDef hcom_uart[];
 extern SPI_HandleTypeDef hspi1;
@@ -171,4 +166,8 @@ void UART_CONTROL_check_timeout(void) {
       UART_SendMessage("TIMEOUT - ROBOT FAULT\r\n");
     }
   }
+}
+
+UART_ControlMode UART_CONTROL_GetMode(void) {
+  return current_mode;
 }
