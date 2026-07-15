@@ -4669,12 +4669,12 @@ LOAD C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../li
                 0x080043cc       0x26 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
                 0x080043cc                Motor_SetStandby
  *fill*         0x080043f2        0x2 
- .text.Motor_Left_SetSpeed
-                0x080043f4       0xb0 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
-                0x080043f4                Motor_Left_SetSpeed
  .text.Motor_Right_SetSpeed
+                0x080043f4       0xb0 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+                0x080043f4                Motor_Right_SetSpeed
+ .text.Motor_Left_SetSpeed
                 0x080044a4       0xb0 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
-                0x080044a4                Motor_Right_SetSpeed
+                0x080044a4                Motor_Left_SetSpeed
  .text.Motor_Forward
                 0x08004554       0x36 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
                 0x08004554                Motor_Forward
@@ -5544,7 +5544,7 @@ LOAD linker stubs
  .debug_macro   0x0001fe05      0x2da CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
  .debug_macro   0x000200df      0x302 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
 
-.debug_line     0x00000000    0x12f93
+.debug_line     0x00000000    0x12f83
  .debug_line    0x00000000      0x689 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
  .debug_line    0x00000689      0xa58 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj
  .debug_line    0x000010e1      0xed8 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj
@@ -5555,18 +5555,18 @@ LOAD linker stubs
  .debug_line    0x0000760a     0x3e6c cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c.obj
  .debug_line    0x0000b476     0x1e74 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c.obj
  .debug_line    0x0000d2ea      0x8ce cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32G4xx_Nucleo/stm32g4xx_nucleo.c.obj
- .debug_line    0x0000dbb8      0xa45 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_line    0x0000e5fd      0x7da CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_it.c.obj
- .debug_line    0x0000edd7      0x86b CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_hal_msp.c.obj
- .debug_line    0x0000f642      0x2fe CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
- .debug_line    0x0000f940      0x622 CMakeFiles/warehouse_proj.dir/Core/Src/syscalls.c.obj
- .debug_line    0x0000ff62       0x7b CMakeFiles/warehouse_proj.dir/startup_stm32g431xx.s.obj
- .debug_line    0x0000ffdd      0x780 CMakeFiles/warehouse_proj.dir/Core/Src/blinky.c.obj
- .debug_line    0x0001075d      0x762 CMakeFiles/warehouse_proj.dir/Core/Src/button.c.obj
- .debug_line    0x00010ebf      0x8b6 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
- .debug_line    0x00011775      0x7b3 CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
- .debug_line    0x00011f28      0x85c CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
- .debug_line    0x00012784      0x80f CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
+ .debug_line    0x0000dbb8      0xa4d CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_line    0x0000e605      0x7da CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_it.c.obj
+ .debug_line    0x0000eddf      0x86b CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_hal_msp.c.obj
+ .debug_line    0x0000f64a      0x2fe CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
+ .debug_line    0x0000f948      0x622 CMakeFiles/warehouse_proj.dir/Core/Src/syscalls.c.obj
+ .debug_line    0x0000ff6a       0x7b CMakeFiles/warehouse_proj.dir/startup_stm32g431xx.s.obj
+ .debug_line    0x0000ffe5      0x780 CMakeFiles/warehouse_proj.dir/Core/Src/blinky.c.obj
+ .debug_line    0x00010765      0x762 CMakeFiles/warehouse_proj.dir/Core/Src/button.c.obj
+ .debug_line    0x00010ec7      0x8b6 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
+ .debug_line    0x0001177d      0x7b3 CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
+ .debug_line    0x00011f30      0x844 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+ .debug_line    0x00012774      0x80f CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
 
 .debug_str      0x00000000    0xc7e93
  .debug_str     0x00000000    0xc7e93 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj

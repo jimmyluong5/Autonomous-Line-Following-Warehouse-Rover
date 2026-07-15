@@ -63,3 +63,15 @@
 2997	4069	8057213860000000	D:/Downloads/warehouse_proj/build/CMakeFiles/flash	f0891e6364fb8da5
 41	2301	8057214890800000	CMakeFiles/flash	f0891e6364fb8da5
 41	2301	8057214890800000	D:/Downloads/warehouse_proj/build/CMakeFiles/flash	f0891e6364fb8da5
+98	2643	8057783870000000	CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj	7ebeefe0ae99b8fb
+2644	4732	8057783900000000	warehouse_proj.elf	ebdb252129973f2c
+4732	6598	8057783920000000	CMakeFiles/flash	f0891e6364fb8da5
+4732	6598	8057783920000000	D:/Downloads/warehouse_proj/build/CMakeFiles/flash	f0891e6364fb8da5
+33	425	8057789829700000	CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj	7e18ca325954047f
+425	983	8057789840000000	warehouse_proj.elf	ebdb252129973f2c
+983	1886	8057789840000000	CMakeFiles/flash	f0891e6364fb8da5
+983	1886	8057789840000000	D:/Downloads/warehouse_proj/build/CMakeFiles/flash	f0891e6364fb8da5
+48	1141	8057790789200000	CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj	7e18ca325954047f
+1142	2410	8057790820000000	warehouse_proj.elf	ebdb252129973f2c
+2410	3670	8057790820000000	CMakeFiles/flash	f0891e6364fb8da5
+2410	3670	8057790820000000	D:/Downloads/warehouse_proj/build/CMakeFiles/flash	f0891e6364fb8da5
