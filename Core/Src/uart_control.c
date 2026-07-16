@@ -27,13 +27,25 @@ static bool led_is_blinking = false;
 void UART_CONTROL_init(void) {
   current_mode = UART_MODE_MENU;
   sensor_test_active = false;
-  UART_SendMessage("\r\n==========================================\r\n"
-                   "       Warehouse Rover Control Menu\r\n"
-                   "==========================================\r\n"
-                   "Select Mode:\r\n"
-                   " [m] - Motor Control Mode\r\n"
-                   " [v] - Voltage / IR Sensor Test Mode\r\n"
-                   "==========================================\r\n");
+
+  char menu_buf[512];
+  int percent = (robot_speed * 100) / 999;
+  snprintf(menu_buf, sizeof(menu_buf),
+           "\r\n==========================================\r\n"
+           "       Warehouse Rover Control Menu\r\n"
+           "==========================================\r\n"
+           "Select Option/Mode:\r\n"
+           " [m] - Motor Control Mode\r\n"
+           " [v] - Voltage / IR Sensor Test Mode\r\n"
+           "------------------------------------------\r\n"
+           "Select Speed (Current: %d%%):\r\n"
+           " [1] - Set Speed to 25%% PWM\r\n"
+           " [2] - Set Speed to 50%% PWM\r\n"
+           " [3] - Set Speed to 75%% PWM\r\n"
+           " [4] - Set Speed to 100%% PWM\r\n"
+           "==========================================\r\n",
+           percent);
+  UART_SendMessage(menu_buf);
 }
 
 void UART_CONTROL_update(void) {
@@ -81,6 +93,7 @@ void UART_CONTROL_update(void) {
                          " [d] - Spin Turn Right\r\n"
                          " [x] - Stop / Idle\r\n"
                          " [f] - Force Fault\r\n"
+                         " [1, 2, 3, 4] - Set Speed to 25%, 50%, 75%, 100% PWM\r\n"
                          " [h] - Return to Main Menu\r\n"
                          "---------------------------------\r\n");
       } else if (received_byte == 'v') {
@@ -89,6 +102,22 @@ void UART_CONTROL_update(void) {
         first_print = true;
         UART_SendMessage("\r\n--- Sensor Test Mode Active (Press 'h' to return "
                          "to Main Menu) ---\r\n");
+      } else if (received_byte == '1') {
+        robot_speed = 250;
+        UART_SendMessage("\r\nSpeed set to 25% PWM (250/999)\r\n");
+        UART_CONTROL_init();
+      } else if (received_byte == '2') {
+        robot_speed = 500;
+        UART_SendMessage("\r\nSpeed set to 50% PWM (500/999)\r\n");
+        UART_CONTROL_init();
+      } else if (received_byte == '3') {
+        robot_speed = 750;
+        UART_SendMessage("\r\nSpeed set to 75% PWM (750/999)\r\n");
+        UART_CONTROL_init();
+      } else if (received_byte == '4') {
+        robot_speed = 999;
+        UART_SendMessage("\r\nSpeed set to 100% PWM (999/999)\r\n");
+        UART_CONTROL_init();
       } else {
         UART_CONTROL_init(); // Reprint menu on invalid key
       }
@@ -115,6 +144,22 @@ void UART_CONTROL_update(void) {
       } else if (received_byte == 'f') {
         Robot_SetState(robot_fault);
         UART_SendMessage("ROBOT FAULT\r\n");
+      } else if (received_byte == '1') {
+        robot_speed = 250;
+        Robot_SetState(Robot_GetState());
+        UART_SendMessage("Speed set to 25% PWM (250/999)\r\n");
+      } else if (received_byte == '2') {
+        robot_speed = 500;
+        Robot_SetState(Robot_GetState());
+        UART_SendMessage("Speed set to 50% PWM (500/999)\r\n");
+      } else if (received_byte == '3') {
+        robot_speed = 750;
+        Robot_SetState(Robot_GetState());
+        UART_SendMessage("Speed set to 75% PWM (750/999)\r\n");
+      } else if (received_byte == '4') {
+        robot_speed = 999;
+        Robot_SetState(Robot_GetState());
+        UART_SendMessage("Speed set to 100% PWM (999/999)\r\n");
       }
     } else if (current_mode == UART_MODE_VOLTAGE) {
       if (received_byte == 'h' || received_byte == 'v' ||
