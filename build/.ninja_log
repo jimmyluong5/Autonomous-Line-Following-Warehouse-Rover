@@ -65,3 +65,11 @@
 15	1021	8058948776400000	D:/Downloads/warehouse_proj/build/CMakeFiles/flash	f0891e6364fb8da5
 63	1419	8058957625000000	CMakeFiles/flash	f0891e6364fb8da5
 63	1419	8058957625000000	D:/Downloads/warehouse_proj/build/CMakeFiles/flash	f0891e6364fb8da5
+89	1592	8059621851200000	CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj	325a79006c2c68be
+1593	2739	8059621880000000	warehouse_proj.elf	20ea05aa72bd0e73
+2739	4468	8059621880000000	CMakeFiles/flash	f0891e6364fb8da5
+2739	4468	8059621880000000	D:/Downloads/warehouse_proj/build/CMakeFiles/flash	f0891e6364fb8da5
+36	940	8059637302000000	CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj	9b7cbca860a725d6
+941	1461	8059637320000000	warehouse_proj.elf	20ea05aa72bd0e73
+1462	2460	8059637320000000	CMakeFiles/flash	f0891e6364fb8da5
+1462	2460	8059637320000000	D:/Downloads/warehouse_proj/build/CMakeFiles/flash	f0891e6364fb8da5

@@ -75,7 +75,7 @@ void Motor_Left_SetSpeed(int16_t speed) {
 
 void Motor_Forward(int16_t speed) {
   // If negative speed is passed, make it positive
-  if (speed > 0)
+  if (speed < 0)
     speed = -speed;
   Motor_Left_SetSpeed(speed);
   Motor_Right_SetSpeed(speed);
@@ -83,7 +83,7 @@ void Motor_Forward(int16_t speed) {
 
 void Motor_Reverse(int16_t speed) {
   // If positive speed is passed, make it negative
-  if (speed < 0)
+  if (speed > 0)
     speed = -speed;
   Motor_Left_SetSpeed(speed);
   Motor_Right_SetSpeed(speed);

@@ -6,8 +6,6 @@
 #include <string.h>
 #include <uart_control.h>
 
-
-
 extern UART_HandleTypeDef hcom_uart[];
 extern SPI_HandleTypeDef hspi1;
 
@@ -85,17 +83,18 @@ void UART_CONTROL_update(void) {
     if (current_mode == UART_MODE_MENU) {
       if (received_byte == 'm') {
         current_mode = UART_MODE_MOTOR;
-        UART_SendMessage("\r\n--- Motor Control Mode Active ---\r\n"
-                         "Commands:\r\n"
-                         " [w] - Forward\r\n"
-                         " [s] - Reverse\r\n"
-                         " [a] - Spin Turn Left\r\n"
-                         " [d] - Spin Turn Right\r\n"
-                         " [x] - Stop / Idle\r\n"
-                         " [f] - Force Fault\r\n"
-                         " [1, 2, 3, 4] - Set Speed to 25%, 50%, 75%, 100% PWM\r\n"
-                         " [h] - Return to Main Menu\r\n"
-                         "---------------------------------\r\n");
+        UART_SendMessage(
+            "\r\n--- Motor Control Mode Active ---\r\n"
+            "Commands:\r\n"
+            " [w] - Forward\r\n"
+            " [s] - Reverse\r\n"
+            " [a] - Spin Turn Left\r\n"
+            " [d] - Spin Turn Right\r\n"
+            " [x] - Stop / Idle\r\n"
+            " [f] - Force Fault\r\n"
+            " [1, 2, 3, 4] - Set Speed to 25%, 50%, 75%, 100% PWM\r\n"
+            " [h] - Return to Main Menu\r\n"
+            "---------------------------------\r\n");
       } else if (received_byte == 'v') {
         current_mode = UART_MODE_VOLTAGE;
         sensor_test_active = true;
@@ -213,6 +212,4 @@ void UART_CONTROL_check_timeout(void) {
   }
 }
 
-UART_ControlMode UART_CONTROL_GetMode(void) {
-  return current_mode;
-}
+UART_ControlMode UART_CONTROL_GetMode(void) { return current_mode; }
