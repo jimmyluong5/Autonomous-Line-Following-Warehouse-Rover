@@ -1728,7 +1728,7 @@ LOAD C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../li
                 0x08000000                g_pfnVectors
                 0x080001d8                        . = ALIGN (0x4)
 
-.text           0x080001e0     0x5fec
+.text           0x080001e0     0x61d0
                 0x080001e0                        . = ALIGN (0x4)
  *(.text)
  .text          0x080001e0       0x30 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
@@ -2070,224 +2070,224 @@ LOAD C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../li
                 0x08004980       0x6c CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
                 0x08004980                UART_CONTROL_init
  .text.UART_CONTROL_update
-                0x080049ec      0x4e0 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
+                0x080049ec      0x6c4 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
                 0x080049ec                UART_CONTROL_update
  .text.UART_CONTROL_check_timeout
-                0x08004ecc       0x44 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
-                0x08004ecc                UART_CONTROL_check_timeout
+                0x080050b0       0x44 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
+                0x080050b0                UART_CONTROL_check_timeout
  .text.UART_CONTROL_GetMode
-                0x08004f10       0x14 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
-                0x08004f10                UART_CONTROL_GetMode
+                0x080050f4       0x14 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
+                0x080050f4                UART_CONTROL_GetMode
  .text.Robot_Init
-                0x08004f24       0x28 CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
-                0x08004f24                Robot_Init
+                0x08005108       0x28 CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
+                0x08005108                Robot_Init
  .text.Robot_SetState
-                0x08004f4c       0xec CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
-                0x08004f4c                Robot_SetState
+                0x08005130       0xec CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
+                0x08005130                Robot_SetState
  .text.Robot_GetState
-                0x08005038       0x14 CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
-                0x08005038                Robot_GetState
+                0x0800521c       0x14 CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
+                0x0800521c                Robot_GetState
  .text.Motor_Init
-                0x0800504c       0x34 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
-                0x0800504c                Motor_Init
+                0x08005230       0x34 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+                0x08005230                Motor_Init
  .text.Motor_SetStandby
-                0x08005080       0x26 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
-                0x08005080                Motor_SetStandby
- *fill*         0x080050a6        0x2 
+                0x08005264       0x26 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+                0x08005264                Motor_SetStandby
+ *fill*         0x0800528a        0x2 
  .text.Motor_Right_SetSpeed
-                0x080050a8       0xb0 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
-                0x080050a8                Motor_Right_SetSpeed
+                0x0800528c       0xb0 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+                0x0800528c                Motor_Right_SetSpeed
  .text.Motor_Left_SetSpeed
-                0x08005158       0xb0 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
-                0x08005158                Motor_Left_SetSpeed
+                0x0800533c       0xb0 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+                0x0800533c                Motor_Left_SetSpeed
  .text.Motor_Forward
-                0x08005208       0x36 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
-                0x08005208                Motor_Forward
+                0x080053ec       0x36 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+                0x080053ec                Motor_Forward
  .text.Motor_Reverse
-                0x0800523e       0x36 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
-                0x0800523e                Motor_Reverse
+                0x08005422       0x36 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+                0x08005422                Motor_Reverse
  .text.Motor_Stop
-                0x08005274       0x14 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
-                0x08005274                Motor_Stop
+                0x08005458       0x14 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+                0x08005458                Motor_Stop
  .text.Motor_Brake
-                0x08005288       0x50 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
-                0x08005288                Motor_Brake
+                0x0800546c       0x50 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+                0x0800546c                Motor_Brake
  .text.Encoder_InitDevice
-                0x080052d8       0x88 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
-                0x080052d8                Encoder_InitDevice
+                0x080054bc       0x88 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
+                0x080054bc                Encoder_InitDevice
  .text.Encoder_UpdateDevice
-                0x08005360      0x114 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
-                0x08005360                Encoder_UpdateDevice
+                0x08005544      0x114 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
+                0x08005544                Encoder_UpdateDevice
  .text.Encoder_Init
-                0x08005474       0x30 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
-                0x08005474                Encoder_Init
+                0x08005658       0x30 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
+                0x08005658                Encoder_Init
  .text.Encoder_Update
-                0x080054a4       0x44 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
-                0x080054a4                Encoder_Update
+                0x08005688       0x44 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
+                0x08005688                Encoder_Update
  .text.Encoder_GetLeftTotal
-                0x080054e8       0x14 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
-                0x080054e8                Encoder_GetLeftTotal
+                0x080056cc       0x14 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
+                0x080056cc                Encoder_GetLeftTotal
  .text.Encoder_GetRightTotal
-                0x080054fc       0x14 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
-                0x080054fc                Encoder_GetRightTotal
+                0x080056e0       0x14 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
+                0x080056e0                Encoder_GetRightTotal
  .text.__udivmoddi4
-                0x08005510      0x320 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
-                0x08005510                __udivmoddi4
+                0x080056f4      0x320 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+                0x080056f4                __udivmoddi4
  .text.snprintf
-                0x08005830       0x64 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-snprintf.o)
-                0x08005830                sniprintf
-                0x08005830                snprintf
- .text.memset   0x08005894       0x10 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-memset.o)
-                0x08005894                memset
- .text.__errno  0x080058a4        0xc C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-errno.o)
-                0x080058a4                __errno
+                0x08005a14       0x64 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-snprintf.o)
+                0x08005a14                sniprintf
+                0x08005a14                snprintf
+ .text.memset   0x08005a78       0x10 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-memset.o)
+                0x08005a78                memset
+ .text.__errno  0x08005a88        0xc C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-errno.o)
+                0x08005a88                __errno
  .text.__libc_init_array
-                0x080058b0       0x48 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-init.o)
-                0x080058b0                __libc_init_array
+                0x08005a94       0x48 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-init.o)
+                0x08005a94                __libc_init_array
  .text.__retarget_lock_acquire_recursive
-                0x080058f8        0x2 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-lock.o)
-                0x080058f8                __retarget_lock_acquire_recursive
+                0x08005adc        0x2 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-lock.o)
+                0x08005adc                __retarget_lock_acquire_recursive
  .text.__retarget_lock_release_recursive
-                0x080058fa        0x2 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-lock.o)
-                0x080058fa                __retarget_lock_release_recursive
- .text._free_r  0x080058fc       0x98 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-freer.o)
-                0x080058fc                _free_r
+                0x08005ade        0x2 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-lock.o)
+                0x08005ade                __retarget_lock_release_recursive
+ .text._free_r  0x08005ae0       0x98 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-freer.o)
+                0x08005ae0                _free_r
  .text.sbrk_aligned
-                0x08005994       0x44 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-mallocr.o)
+                0x08005b78       0x44 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-mallocr.o)
  .text._malloc_r
-                0x080059d8       0xf8 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-mallocr.o)
-                0x080059d8                _malloc_r
+                0x08005bbc       0xf8 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-mallocr.o)
+                0x08005bbc                _malloc_r
  .text.__malloc_lock
-                0x08005ad0        0xc C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-mlock.o)
-                0x08005ad0                __malloc_lock
+                0x08005cb4        0xc C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-mlock.o)
+                0x08005cb4                __malloc_lock
  .text.__malloc_unlock
-                0x08005adc        0xc C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-mlock.o)
-                0x08005adc                __malloc_unlock
+                0x08005cc0        0xc C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-mlock.o)
+                0x08005cc0                __malloc_unlock
  .text.__ssputs_r
-                0x08005ae8       0xc0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-nano-svfprintf.o)
-                0x08005ae8                __ssputs_r
+                0x08005ccc       0xc0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-nano-svfprintf.o)
+                0x08005ccc                __ssputs_r
  .text._svfprintf_r
-                0x08005ba8      0x1f0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-nano-svfprintf.o)
-                0x08005ba8                _svfiprintf_r
-                0x08005ba8                _svfprintf_r
+                0x08005d8c      0x1f0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-nano-svfprintf.o)
+                0x08005d8c                _svfiprintf_r
+                0x08005d8c                _svfprintf_r
  .text._printf_common
-                0x08005d98       0xea C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-nano-vfprintf_i.o)
-                0x08005d98                _printf_common
- *fill*         0x08005e82        0x2 
+                0x08005f7c       0xea C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-nano-vfprintf_i.o)
+                0x08005f7c                _printf_common
+ *fill*         0x08006066        0x2 
  .text._printf_i
-                0x08005e84      0x254 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-nano-vfprintf_i.o)
-                0x08005e84                _printf_i
- .text.memmove  0x080060d8       0x32 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-memmove.o)
-                0x080060d8                memmove
- *fill*         0x0800610a        0x2 
- .text._sbrk_r  0x0800610c       0x20 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-sbrkr.o)
-                0x0800610c                _sbrk_r
- .text.memcpy   0x0800612c       0x1c C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-memcpy-stub.o)
-                0x0800612c                memcpy
+                0x08006068      0x254 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-nano-vfprintf_i.o)
+                0x08006068                _printf_i
+ .text.memmove  0x080062bc       0x32 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-memmove.o)
+                0x080062bc                memmove
+ *fill*         0x080062ee        0x2 
+ .text._sbrk_r  0x080062f0       0x20 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-sbrkr.o)
+                0x080062f0                _sbrk_r
+ .text.memcpy   0x08006310       0x1c C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-memcpy-stub.o)
+                0x08006310                memcpy
  .text._realloc_r
-                0x08006148       0x5c C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-reallocr.o)
-                0x08006148                _realloc_r
+                0x0800632c       0x5c C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-reallocr.o)
+                0x0800632c                _realloc_r
  .text._malloc_usable_size_r
-                0x080061a4       0x10 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-msizer.o)
-                0x080061a4                _malloc_usable_size_r
+                0x08006388       0x10 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-msizer.o)
+                0x08006388                _malloc_usable_size_r
  *(.glue_7)
- .glue_7        0x080061b4        0x0 linker stubs
+ .glue_7        0x08006398        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x080061b4        0x0 linker stubs
+ .glue_7t       0x08006398        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x080061b4        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .eh_frame      0x08006398        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
  *(.init)
- .init          0x080061b4        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crti.o
-                0x080061b4                _init
- .init          0x080061b8        0x8 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtn.o
+ .init          0x08006398        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crti.o
+                0x08006398                _init
+ .init          0x0800639c        0x8 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtn.o
  *(.fini)
- .fini          0x080061c0        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crti.o
-                0x080061c0                _fini
- .fini          0x080061c4        0x8 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtn.o
-                0x080061cc                        . = ALIGN (0x4)
-                0x080061cc                        _etext = .
+ .fini          0x080063a4        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crti.o
+                0x080063a4                _fini
+ .fini          0x080063a8        0x8 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtn.o
+                0x080063b0                        . = ALIGN (0x4)
+                0x080063b0                        _etext = .
 
-.vfp11_veneer   0x080061cc        0x0
- .vfp11_veneer  0x080061cc        0x0 linker stubs
+.vfp11_veneer   0x080063b0        0x0
+ .vfp11_veneer  0x080063b0        0x0 linker stubs
 
-.v4_bx          0x080061cc        0x0
- .v4_bx         0x080061cc        0x0 linker stubs
+.v4_bx          0x080063b0        0x0
+ .v4_bx         0x080063b0        0x0 linker stubs
 
-.iplt           0x080061cc        0x0
- .iplt          0x080061cc        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+.iplt           0x080063b0        0x0
+ .iplt          0x080063b0        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.rodata         0x080061cc      0x5e4
-                0x080061cc                        . = ALIGN (0x4)
+.rodata         0x080063b0      0x790
+                0x080063b0                        . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x080061cc       0x18 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .rodata        0x080061e4      0x568 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
+ .rodata        0x080063b0       0x18 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .rodata        0x080063c8      0x714 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
  *(.rodata*)
  .rodata.AHBPrescTable
-                0x0800674c       0x10 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
-                0x0800674c                AHBPrescTable
+                0x08006adc       0x10 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
+                0x08006adc                AHBPrescTable
  .rodata.APBPrescTable
-                0x0800675c        0x8 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
-                0x0800675c                APBPrescTable
+                0x08006aec        0x8 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
+                0x08006aec                APBPrescTable
  .rodata.UARTPrescTable
-                0x08006764       0x18 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj
-                0x08006764                UARTPrescTable
+                0x08006af4       0x18 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj
+                0x08006af4                UARTPrescTable
  .rodata._svfprintf_r.str1.1
-                0x0800677c       0x33 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-nano-svfprintf.o)
+                0x08006b0c       0x33 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-nano-svfprintf.o)
                                  0x11 (size before relaxing)
  .rodata._printf_i.str1.1
-                0x080067af        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-nano-vfprintf_i.o)
+                0x08006b3f        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-nano-vfprintf_i.o)
                                  0x22 (size before relaxing)
-                0x080067b0                        . = ALIGN (0x4)
- *fill*         0x080067af        0x1 
+                0x08006b40                        . = ALIGN (0x4)
+ *fill*         0x08006b3f        0x1 
 
-.ARM.extab      0x080067b0        0x0
-                0x080067b0                        . = ALIGN (0x4)
+.ARM.extab      0x08006b40        0x0
+                0x08006b40                        . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x080067b0                        . = ALIGN (0x4)
+                0x08006b40                        . = ALIGN (0x4)
 
-.ARM            0x080067b0        0x8
-                0x080067b0                        . = ALIGN (0x4)
-                0x080067b0                        __exidx_start = .
+.ARM            0x08006b40        0x8
+                0x08006b40                        . = ALIGN (0x4)
+                0x08006b40                        __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x080067b0        0x8 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-strlen.o)
- .ARM.exidx     0x080067b8        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-memchr.o)
+ .ARM.exidx     0x08006b40        0x8 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-strlen.o)
+ .ARM.exidx     0x08006b48        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-memchr.o)
                                   0x8 (size before relaxing)
  .ARM.exidx.text.__udivmoddi4
-                0x080067b8        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+                0x08006b48        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
                                   0x8 (size before relaxing)
-                0x080067b8                        __exidx_end = .
-                0x080067b8                        . = ALIGN (0x4)
+                0x08006b48                        __exidx_end = .
+                0x08006b48                        . = ALIGN (0x4)
 
-.preinit_array  0x080067b8        0x0
-                0x080067b8                        . = ALIGN (0x4)
-                0x080067b8                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x08006b48        0x0
+                0x08006b48                        . = ALIGN (0x4)
+                0x08006b48                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x080067b8                        PROVIDE (__preinit_array_end = .)
-                0x080067b8                        . = ALIGN (0x4)
+                0x08006b48                        PROVIDE (__preinit_array_end = .)
+                0x08006b48                        . = ALIGN (0x4)
 
-.init_array     0x080067b8        0x4
-                0x080067b8                        . = ALIGN (0x4)
-                0x080067b8                        PROVIDE (__init_array_start = .)
+.init_array     0x08006b48        0x4
+                0x08006b48                        . = ALIGN (0x4)
+                0x08006b48                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x080067b8        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
-                0x080067bc                        PROVIDE (__init_array_end = .)
-                0x080067bc                        . = ALIGN (0x4)
+ .init_array    0x08006b48        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x08006b4c                        PROVIDE (__init_array_end = .)
+                0x08006b4c                        . = ALIGN (0x4)
 
-.fini_array     0x080067bc        0x4
-                0x080067bc                        . = ALIGN (0x4)
+.fini_array     0x08006b4c        0x4
+                0x08006b4c                        . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x080067bc        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .fini_array    0x08006b4c        0x4 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x080067c0                        . = ALIGN (0x4)
-                0x080067c0                        _sidata = LOADADDR (.data)
+                0x08006b50                        . = ALIGN (0x4)
+                0x08006b50                        _sidata = LOADADDR (.data)
 
-.rel.dyn        0x080067c0        0x0
- .rel.iplt      0x080067c0        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+.rel.dyn        0x08006b50        0x0
+ .rel.iplt      0x08006b50        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.data           0x20000000       0x68 load address 0x080067c0
+.data           0x20000000       0x68 load address 0x08006b50
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -2322,16 +2322,16 @@ LOAD C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../li
                 0x20000068                        . = ALIGN (0x4)
 
 .tm_clone_table
-                0x20000068        0x0 load address 0x08006828
+                0x20000068        0x0 load address 0x08006bb8
  .tm_clone_table
                 0x20000068        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
  .tm_clone_table
                 0x20000068        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtend.o
 
-.igot.plt       0x20000068        0x0 load address 0x08006828
+.igot.plt       0x20000068        0x0 load address 0x08006bb8
  .igot.plt      0x20000068        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.tdata          0x20000068        0x0 load address 0x08006828
+.tdata          0x20000068        0x0 load address 0x08006bb8
  *(.tdata .tdata.* .gnu.linkonce.td.*)
                 0x20000068                        . = ALIGN (0x4)
                 0x20000068                        _edata = .
@@ -2348,7 +2348,7 @@ LOAD C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../li
                 [!provide]                        PROVIDE (__data_source_end = __tdata_source_end)
                 [!provide]                        PROVIDE (__data_source_size = (__data_source_end - __data_source))
 
-.tbss           0x20000068        0x0 load address 0x08006828
+.tbss           0x20000068        0x0 load address 0x08006bb8
                 0x20000068                        _sbss = .
                 0x20000068                        __bss_start__ = _sbss
  *(.tbss .tbss.*)
@@ -2365,7 +2365,7 @@ LOAD C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../li
                 [!provide]                        PROVIDE (__arm32_tls_tcb_offset = MAX (0x8, __tls_align))
                 [!provide]                        PROVIDE (__arm64_tls_tcb_offset = MAX (0x10, __tls_align))
 
-.bss            0x20000068      0x450 load address 0x08006828
+.bss            0x20000068      0x450 load address 0x08006bb8
  *(.bss)
  *(.bss*)
  .bss.completed.1
@@ -2441,7 +2441,7 @@ LOAD C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../li
                 [!provide]                        PROVIDE (__bss_size = (__bss_end - __bss_start))
 
 ._user_heap_stack
-                0x200004b8      0x600 load address 0x08006828
+                0x200004b8      0x600 load address 0x08006bb8
                 0x200004b8                        . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
                 0x200004b8                        PROVIDE (_end = .)
@@ -2599,7 +2599,7 @@ LOAD linker stubs
  .comment       0x00000046        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
                                  0x47 (size before relaxing)
 
-.debug_info     0x00000000    0x15351
+.debug_info     0x00000000    0x153be
  .debug_info    0x00000000      0x58a cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
  .debug_info    0x0000058a      0xad7 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj
  .debug_info    0x00001061      0xb97 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj
@@ -2611,18 +2611,18 @@ LOAD linker stubs
  .debug_info    0x00007ca2     0x1d91 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c.obj
  .debug_info    0x00009a33     0x4850 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj
  .debug_info    0x0000e283     0x114d cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32G4xx_Nucleo/stm32g4xx_nucleo.c.obj
- .debug_info    0x0000f3d0     0x1c4b CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
- .debug_info    0x0001101b      0x116 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_it.c.obj
- .debug_info    0x00011131     0x1102 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_hal_msp.c.obj
- .debug_info    0x00012233      0x164 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
- .debug_info    0x00012397       0x30 CMakeFiles/warehouse_proj.dir/startup_stm32g431xx.s.obj
- .debug_info    0x000123c7      0x8aa CMakeFiles/warehouse_proj.dir/Core/Src/MCP3208.c.obj
- .debug_info    0x00012c71      0xeae CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
- .debug_info    0x00013b1f      0x2d5 CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
- .debug_info    0x00013df4      0xa23 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
- .debug_info    0x00014817      0xb3a CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
+ .debug_info    0x0000f3d0     0x1c51 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+ .debug_info    0x00011021      0x116 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_it.c.obj
+ .debug_info    0x00011137     0x1102 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_hal_msp.c.obj
+ .debug_info    0x00012239      0x164 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
+ .debug_info    0x0001239d       0x30 CMakeFiles/warehouse_proj.dir/startup_stm32g431xx.s.obj
+ .debug_info    0x000123cd      0x8aa CMakeFiles/warehouse_proj.dir/Core/Src/MCP3208.c.obj
+ .debug_info    0x00012c77      0xf15 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
+ .debug_info    0x00013b8c      0x2d5 CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
+ .debug_info    0x00013e61      0xa23 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+ .debug_info    0x00014884      0xb3a CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
 
-.debug_abbrev   0x00000000     0x2c17
+.debug_abbrev   0x00000000     0x2c22
  .debug_abbrev  0x00000000      0x118 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
  .debug_abbrev  0x00000118      0x26f cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj
  .debug_abbrev  0x00000387      0x2c7 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj
@@ -2640,10 +2640,10 @@ LOAD linker stubs
  .debug_abbrev  0x00002120       0xba CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
  .debug_abbrev  0x000021da       0x24 CMakeFiles/warehouse_proj.dir/startup_stm32g431xx.s.obj
  .debug_abbrev  0x000021fe      0x1aa CMakeFiles/warehouse_proj.dir/Core/Src/MCP3208.c.obj
- .debug_abbrev  0x000023a8      0x26d CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
- .debug_abbrev  0x00002615      0x1b1 CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
- .debug_abbrev  0x000027c6      0x1da CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
- .debug_abbrev  0x000029a0      0x277 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
+ .debug_abbrev  0x000023a8      0x278 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
+ .debug_abbrev  0x00002620      0x1b1 CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
+ .debug_abbrev  0x000027d1      0x1da CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+ .debug_abbrev  0x000029ab      0x277 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
 
 .debug_aranges  0x00000000     0x1290
  .debug_aranges
@@ -2734,7 +2734,7 @@ LOAD linker stubs
  .debug_rnglists
                 0x00000e0d       0x63 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
 
-.debug_line     0x00000000     0xf544
+.debug_line     0x00000000     0xf6bc
  .debug_line    0x00000000      0x272 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
  .debug_line    0x00000272      0x6c2 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj
  .debug_line    0x00000934      0xb26 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj
@@ -2752,53 +2752,53 @@ LOAD linker stubs
  .debug_line    0x0000df11      0x1ec CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
  .debug_line    0x0000e0fd       0x7b CMakeFiles/warehouse_proj.dir/startup_stm32g431xx.s.obj
  .debug_line    0x0000e178      0x28a CMakeFiles/warehouse_proj.dir/Core/Src/MCP3208.c.obj
- .debug_line    0x0000e402      0x6b5 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
- .debug_line    0x0000eab7      0x29c CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
- .debug_line    0x0000ed53      0x340 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
- .debug_line    0x0000f093      0x4b1 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
+ .debug_line    0x0000e402      0x82d CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
+ .debug_line    0x0000ec2f      0x29c CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
+ .debug_line    0x0000eecb      0x340 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+ .debug_line    0x0000f20b      0x4b1 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
 
-.debug_str      0x00000000     0x5a08
- .debug_str     0x00000000     0x5a08 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
+.debug_str      0x00000000     0x5a21
+ .debug_str     0x00000000     0x5a21 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
                                 0x3c8 (size before relaxing)
- .debug_str     0x00005a08        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj
+ .debug_str     0x00005a21        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj
                                 0xc6d (size before relaxing)
- .debug_str     0x00005a08        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj
+ .debug_str     0x00005a21        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj
                                 0x830 (size before relaxing)
- .debug_str     0x00005a08        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c.obj
+ .debug_str     0x00005a21        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c.obj
                                 0x541 (size before relaxing)
- .debug_str     0x00005a08        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c.obj
+ .debug_str     0x00005a21        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c.obj
                                 0x7e3 (size before relaxing)
- .debug_str     0x00005a08        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c.obj
+ .debug_str     0x00005a21        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c.obj
                                 0xbc3 (size before relaxing)
- .debug_str     0x00005a08        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.c.obj
+ .debug_str     0x00005a21        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.c.obj
                                 0xce1 (size before relaxing)
- .debug_str     0x00005a08        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c.obj
+ .debug_str     0x00005a21        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c.obj
                                0x18a6 (size before relaxing)
- .debug_str     0x00005a08        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c.obj
+ .debug_str     0x00005a21        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c.obj
                                0x1519 (size before relaxing)
- .debug_str     0x00005a08        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj
+ .debug_str     0x00005a21        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj
                                0x121a (size before relaxing)
- .debug_str     0x00005a08        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32G4xx_Nucleo/stm32g4xx_nucleo.c.obj
+ .debug_str     0x00005a21        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32G4xx_Nucleo/stm32g4xx_nucleo.c.obj
                                 0xc7e (size before relaxing)
- .debug_str     0x00005a08        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
-                               0x1601 (size before relaxing)
- .debug_str     0x00005a08        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_it.c.obj
+ .debug_str     0x00005a21        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/main.c.obj
+                               0x1610 (size before relaxing)
+ .debug_str     0x00005a21        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_it.c.obj
                                 0x231 (size before relaxing)
- .debug_str     0x00005a08        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_hal_msp.c.obj
+ .debug_str     0x00005a21        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/stm32g4xx_hal_msp.c.obj
                                 0xcc3 (size before relaxing)
- .debug_str     0x00005a08        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
+ .debug_str     0x00005a21        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/sysmem.c.obj
                                 0x222 (size before relaxing)
- .debug_str     0x00005a08        0x0 CMakeFiles/warehouse_proj.dir/startup_stm32g431xx.s.obj
+ .debug_str     0x00005a21        0x0 CMakeFiles/warehouse_proj.dir/startup_stm32g431xx.s.obj
                                  0x70 (size before relaxing)
- .debug_str     0x00005a08        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/MCP3208.c.obj
+ .debug_str     0x00005a21        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/MCP3208.c.obj
                                 0x7ae (size before relaxing)
- .debug_str     0x00005a08        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
-                                0xba8 (size before relaxing)
- .debug_str     0x00005a08        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
+ .debug_str     0x00005a21        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj
+                                0xc04 (size before relaxing)
+ .debug_str     0x00005a21        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj
                                 0x34c (size before relaxing)
- .debug_str     0x00005a08        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
+ .debug_str     0x00005a21        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj
                                 0x927 (size before relaxing)
- .debug_str     0x00005a08        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
+ .debug_str     0x00005a21        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
                                 0xa9c (size before relaxing)
 
 .debug_frame    0x00000000     0x5394

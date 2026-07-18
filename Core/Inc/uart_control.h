@@ -6,7 +6,8 @@
 typedef enum {
   UART_MODE_MENU,
   UART_MODE_MOTOR,
-  UART_MODE_VOLTAGE
+  UART_MODE_VOLTAGE,
+  UART_MODE_BOTH
 } UART_ControlMode;
 
 void UART_CONTROL_init(void);
