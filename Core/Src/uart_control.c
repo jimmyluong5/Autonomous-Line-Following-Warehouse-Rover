@@ -11,10 +11,22 @@ extern UART_HandleTypeDef hcom_uart[];
 extern SPI_HandleTypeDef hspi1;
 
 static uint32_t last_command_time = 0;
+
+// flag for sensor test
 static bool sensor_test_active = false;
+
+// flag for the first print in the sensor test mode.
 static bool first_print = true;
+
+// flag for the control mode
 static UART_ControlMode current_mode = UART_MODE_MENU;
 
+// declare max and min variables later to calculate the max and min of each
+// channel.
+static uint16_t min[8];
+static uint16_t max[8];
+
+// function to set a message in UART.
 static void UART_SendMessage(const char *message) {
   HAL_UART_Transmit(&hcom_uart[COM1], (uint8_t *)message, strlen(message),
                     HAL_MAX_DELAY);
@@ -23,9 +35,10 @@ static void UART_SendMessage(const char *message) {
 static uint32_t led_blink_start_time = 0;
 static bool led_is_blinking = false;
 
+// function to initiate the UART.
 void UART_CONTROL_init(void) {
   current_mode = UART_MODE_MENU;
-  sensor_test_active = false;
+  sensor_test_active = false; // have the sensor test off at the
 
   char menu_buf[512];
   int percent = (robot_speed * 100) / 999;
@@ -48,7 +61,9 @@ void UART_CONTROL_init(void) {
   UART_SendMessage(menu_buf);
 }
 
+// function update the UART based on inputs through UART.
 void UART_CONTROL_update(void) {
+  // 8 bit byte to receive the inputs.
   uint8_t received_byte;
 
   // Handle non-blocking keypress LED turn-off after 50ms
@@ -97,84 +112,153 @@ void UART_CONTROL_update(void) {
             " [1, 2, 3, 4] - Set Speed to 25%, 50%, 75%, 100% PWM\r\n"
             " [h] - Return to Main Menu\r\n"
             "---------------------------------\r\n");
-      } else if (received_byte == 'v') {
+      }
+      // voltage mode
+      else if (received_byte == 'v') {
+        // set the current mode as the voltage mode
         current_mode = UART_MODE_VOLTAGE;
+
+        // turn on the sensor test.
         sensor_test_active = true;
+
+        // use a flag to determine whether to print the header or not.
         first_print = true;
+
+        // print the stuff.
         UART_SendMessage("\r\n--- Sensor Test Mode Active (Press 'h' to return "
                          "to Main Menu) ---\r\n");
-      } else if (received_byte == 'b') {
+      }
+
+      else if (received_byte == 'b') {
+        // set the mode to both.
         current_mode = UART_MODE_BOTH;
+
+        // turn on the sensor test.
         sensor_test_active = true;
+
+        // use a flag to print the header or not.
         first_print = true;
+
+        // print the menu in this mode.
         UART_SendMessage(
             "\r\n--- Both Mode Active ---\r\n"
             "Motor Commands:\r\n"
-            " [w] - Forward | [s] - Reverse | [a] - Left | [d] - Right | [x] - Stop\r\n"
+            " [w] - Forward | [s] - Reverse | [a] - Left | [d] - Right | [x] - "
+            "Stop\r\n"
             " [1, 2, 3, 4] - Set Speed to 25%, 50%, 75%, 100% PWM\r\n"
             " [h] - Return to Main Menu\r\n"
             "---------------------------------\r\n");
-      } else if (received_byte == '1') {
+
+      }
+
+      else if (received_byte == '1') {
         robot_speed = 250;
         UART_SendMessage("\r\nSpeed set to 25% PWM (250/999)\r\n");
         UART_CONTROL_init();
-      } else if (received_byte == '2') {
+      }
+
+      else if (received_byte == '2') {
         robot_speed = 500;
         UART_SendMessage("\r\nSpeed set to 50% PWM (500/999)\r\n");
         UART_CONTROL_init();
-      } else if (received_byte == '3') {
+      }
+
+      else if (received_byte == '3') {
         robot_speed = 750;
         UART_SendMessage("\r\nSpeed set to 75% PWM (750/999)\r\n");
         UART_CONTROL_init();
-      } else if (received_byte == '4') {
+      }
+
+      else if (received_byte == '4') {
         robot_speed = 999;
         UART_SendMessage("\r\nSpeed set to 100% PWM (999/999)\r\n");
         UART_CONTROL_init();
-      } else {
+      }
+
+      else {
         UART_CONTROL_init(); // Reprint menu on invalid key
       }
-    } else if (current_mode == UART_MODE_MOTOR || current_mode == UART_MODE_BOTH) {
+
+    }
+
+    else if (current_mode == UART_MODE_MOTOR ||
+             current_mode == UART_MODE_BOTH) {
+
       if (received_byte == 'h') {
         Robot_SetState(robot_idle);
         sensor_test_active = false;
         UART_SendMessage("\r\nExiting Mode. Stopping Robot.\r\n");
         UART_CONTROL_init();
-      } else if (received_byte == 'w') {
+      }
+
+      else if (received_byte == 'w') {
         Robot_SetState(robot_forward);
-        if (current_mode == UART_MODE_MOTOR) UART_SendMessage("ROBOT FORWARD\r\n");
-      } else if (received_byte == 's') {
+        if (current_mode == UART_MODE_MOTOR)
+          UART_SendMessage("ROBOT FORWARD\r\n");
+      }
+
+      else if (received_byte == 's') {
         Robot_SetState(robot_reverse);
-        if (current_mode == UART_MODE_MOTOR) UART_SendMessage("ROBOT REVERSE\r\n");
-      } else if (received_byte == 'x') {
+        if (current_mode == UART_MODE_MOTOR)
+          UART_SendMessage("ROBOT REVERSE\r\n");
+      }
+
+      else if (received_byte == 'x') {
         Robot_SetState(robot_idle);
-        if (current_mode == UART_MODE_MOTOR) UART_SendMessage("ROBOT STOPPED\r\n");
-      } else if (received_byte == 'a') {
+        if (current_mode == UART_MODE_MOTOR)
+          UART_SendMessage("ROBOT STOPPED\r\n");
+      }
+
+      else if (received_byte == 'a') {
         Robot_SetState(robot_left);
-        if (current_mode == UART_MODE_MOTOR) UART_SendMessage("ROBOT LEFT\r\n");
-      } else if (received_byte == 'd') {
+        if (current_mode == UART_MODE_MOTOR)
+          UART_SendMessage("ROBOT LEFT\r\n");
+      }
+
+      else if (received_byte == 'd') {
         Robot_SetState(robot_right);
-        if (current_mode == UART_MODE_MOTOR) UART_SendMessage("ROBOT RIGHT\r\n");
-      } else if (received_byte == 'f') {
+        if (current_mode == UART_MODE_MOTOR)
+          UART_SendMessage("ROBOT RIGHT\r\n");
+      }
+
+      else if (received_byte == 'f') {
         Robot_SetState(robot_fault);
-        if (current_mode == UART_MODE_MOTOR) UART_SendMessage("ROBOT FAULT\r\n");
-      } else if (received_byte == '1') {
+        if (current_mode == UART_MODE_MOTOR)
+          UART_SendMessage("ROBOT FAULT\r\n");
+      }
+
+      else if (received_byte == '1') {
         robot_speed = 250;
         Robot_SetState(Robot_GetState());
-        if (current_mode == UART_MODE_MOTOR) UART_SendMessage("Speed set to 25% PWM (250/999)\r\n");
-      } else if (received_byte == '2') {
+        if (current_mode == UART_MODE_MOTOR)
+          UART_SendMessage("Speed set to 25% PWM (250/999)\r\n");
+      }
+
+      else if (received_byte == '2') {
         robot_speed = 500;
         Robot_SetState(Robot_GetState());
-        if (current_mode == UART_MODE_MOTOR) UART_SendMessage("Speed set to 50% PWM (500/999)\r\n");
-      } else if (received_byte == '3') {
+        if (current_mode == UART_MODE_MOTOR)
+          UART_SendMessage("Speed set to 50% PWM (500/999)\r\n");
+      }
+
+      else if (received_byte == '3') {
         robot_speed = 750;
         Robot_SetState(Robot_GetState());
-        if (current_mode == UART_MODE_MOTOR) UART_SendMessage("Speed set to 75% PWM (750/999)\r\n");
-      } else if (received_byte == '4') {
+        if (current_mode == UART_MODE_MOTOR)
+          UART_SendMessage("Speed set to 75% PWM (750/999)\r\n");
+      }
+
+      else if (received_byte == '4') {
         robot_speed = 999;
         Robot_SetState(Robot_GetState());
-        if (current_mode == UART_MODE_MOTOR) UART_SendMessage("Speed set to 100% PWM (999/999)\r\n");
+        if (current_mode == UART_MODE_MOTOR)
+          UART_SendMessage("Speed set to 100% PWM (999/999)\r\n");
       }
-    } else if (current_mode == UART_MODE_VOLTAGE) {
+
+    }
+
+    else if (current_mode == UART_MODE_VOLTAGE) {
+
       if (received_byte == 'h' || received_byte == 'v' ||
           received_byte == 'x') {
         sensor_test_active = false;
@@ -186,18 +270,33 @@ void UART_CONTROL_update(void) {
 
   // Periodic sensor print
   static uint32_t last_print_time = 0;
-  if ((current_mode == UART_MODE_VOLTAGE || current_mode == UART_MODE_BOTH) && sensor_test_active &&
-      (HAL_GetTick() - last_print_time >= 250)) {
+  if ((current_mode == UART_MODE_VOLTAGE || current_mode == UART_MODE_BOTH) &&
+      sensor_test_active && (HAL_GetTick() - last_print_time >= 250)) {
     last_print_time = HAL_GetTick();
+
+    // this an array to temp store the characters to be sent out.
     char buffer[512];
+
+    // set the buffer length to 0 to start.
     int len = 0;
 
-    // Move cursor up lines if not the first print to keep the display static on rows
+    // Move cursor up lines if not the first print to keep the display static on
+    // rows
     if (!first_print) {
       if (current_mode == UART_MODE_BOTH) {
         len += snprintf(buffer + len, sizeof(buffer) - len, "\x1B[9A");
-      } else {
+      }
+
+      else {
         len += snprintf(buffer + len, sizeof(buffer) - len, "\x1B[8A");
+      }
+    }
+    if (first_print) {
+      for (int i = 0; i < 8; i++) {
+        min[i] = 4095; // set each channel to the value of 3.3V which is a white
+                       // surface.
+        max[i] =
+            0; // set each channel to the value of 0V which is a black surface.
       }
     }
     first_print = false;
@@ -205,39 +304,83 @@ void UART_CONTROL_update(void) {
     if (current_mode == UART_MODE_BOTH) {
       const char *state_str = "UNKNOWN";
       switch (Robot_GetState()) {
-        case robot_idle: state_str = "IDLE"; break;
-        case robot_forward: state_str = "FORWARD"; break;
-        case robot_reverse: state_str = "REVERSE"; break;
-        case robot_left: state_str = "LEFT TURN"; break;
-        case robot_right: state_str = "RIGHT TURN"; break;
-        case robot_fault: state_str = "FAULT"; break;
+      case robot_idle:
+        state_str = "IDLE";
+        break;
+      case robot_forward:
+        state_str = "FORWARD";
+        break;
+      case robot_reverse:
+        state_str = "REVERSE";
+        break;
+      case robot_left:
+        state_str = "LEFT TURN";
+        break;
+      case robot_right:
+        state_str = "RIGHT TURN";
+        break;
+      case robot_fault:
+        state_str = "FAULT";
+        break;
       }
       int percent = (robot_speed * 100) / 999;
       len += snprintf(buffer + len, sizeof(buffer) - len,
-                      "State: %-10s | Speed: %d%% PWM (%d/999) | Enc: L=%ld, R=%ld               \r\n",
-                      state_str, percent, robot_speed, Encoder_GetLeftTotal(), Encoder_GetRightTotal());
+                      "State: %-10s | Speed: %d%% PWM (%d/999) | Enc: L=%ld, "
+                      "R=%ld               \r\n",
+                      state_str, percent, robot_speed, Encoder_GetLeftTotal(),
+                      Encoder_GetRightTotal());
     }
 
-    for (uint8_t ch = 0; ch < 8; ch++) {
+    // Iterate through all 8 channels of the ADC.
+    for (uint8_t ch = 0; ch < 8; ch++) { // where ch is the iterating variable.
+
+      // determine the raw ADC values
       uint16_t raw =
           MCP3208_ReadChannel(&hspi1, ADC_CS_GPIO_Port, ADC_CS_Pin, ch);
+
+      // detection if theres any errors.
       if (raw == MCP3208_ERROR_VALUE) {
         len += snprintf(buffer + len, sizeof(buffer) - len,
                         "CH%d: ERR                     \r\n", ch);
-      } else {
-        uint32_t mv = ((uint32_t)raw * 3300) / 4095;
-        len += snprintf(buffer + len, sizeof(buffer) - len,
-                        "CH%d: %lu.%02luV | ADC: %4u       \r\n", ch, mv / 1000,
-                        (mv % 1000) / 10, raw);
+      }
+
+      // if no errors we can find the max and min
+
+      // by comparing the raw ADC value with the ADC value in the channels.
+      else {
+
+        if (raw < min[ch]) {
+          min[ch] = raw;
+        }
+
+        if (raw > max[ch]) {
+          max[ch] = raw;
+        }
+
+        // after we calculate the max and min values we can calculate the actual
+        // voltage values.
+
+        // convert the raw ADC values from 16 bit to 32 bit.
+        uint32_t actual_voltage = ((uint32_t)raw * 3300) / 4095;
+
+        // then print everything on one line
+        len +=
+            snprintf(buffer + len, sizeof(buffer) - len,
+                     "CH%d: %lu.%02luV | ADC: %4u | min: %u , max: %u  \r\n ",
+                     ch, actual_voltage / 1000, (actual_voltage % 1000) / 10,
+                     raw, min[ch], max[ch]);
       }
     }
     UART_SendMessage(buffer);
   }
 }
 
+// this function checks if we have timeouted or not.
 void UART_CONTROL_check_timeout(void) {
   // If the robot is not idle or fault, check for communication timeout
   if (Robot_GetState() != robot_idle && Robot_GetState() != robot_fault) {
+
+    // check if its been too long since we last got a command.
     if (HAL_GetTick() - last_command_time > 2000) {
       Robot_SetState(robot_fault);
       UART_SendMessage("TIMEOUT - ROBOT FAULT\r\n");
