@@ -3,9 +3,13 @@
 #include <stdio.h>
 #include <string.h>
 
+// Set to 1 to enable hardware timers, or 0 to run encoders in stub mode
+#define ENCODERS_ENABLED 0
+
+#if ENCODERS_ENABLED
 extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim4;
-extern UART_HandleTypeDef hcom_uart[];
+#endif
 
 // Global structures holding state for Left and Right encoders
 Encoder_HandleTypeDef left_encoder = {0};
@@ -18,22 +22,25 @@ Encoder_HandleTypeDef right_encoder = {0};
  * @param direction_multiplier Inversion factor (+1 or -1)
  */
 void Encoder_InitDevice(Encoder_HandleTypeDef *enc, TIM_HandleTypeDef *htim, int16_t direction_multiplier) {
-  if (enc == NULL || htim == NULL) {
+  if (enc == NULL) {
     return;
   }
+#if ENCODERS_ENABLED
   enc->htim = htim;
+  enc->last_timer_value = (uint16_t)__HAL_TIM_GET_COUNTER(htim);
+  HAL_TIM_Encoder_Start(htim, TIM_CHANNEL_ALL);
+#else
+  enc->htim = NULL;
+  enc->last_timer_value = 0;
+#endif
   enc->direction_multiplier = (direction_multiplier < 0) ? -1 : 1;
   enc->total_position = 0;
-  enc->last_timer_value = (uint16_t)__HAL_TIM_GET_COUNTER(htim);
   enc->last_delta = 0;
   enc->last_update_time_ms = HAL_GetTick();
   enc->speed_counts_per_sec = 0.0f;
   enc->speed_rev_per_sec = 0.0f;
   enc->speed_meters_per_sec = 0.0f;
   enc->is_initialized = true;
-
-  // Start the hardware timer in encoder interface mode
-  HAL_TIM_Encoder_Start(htim, TIM_CHANNEL_ALL);
 }
 
 /**
@@ -46,8 +53,11 @@ void Encoder_ResetDevice(Encoder_HandleTypeDef *enc) {
   }
   enc->total_position = 0;
   enc->last_delta = 0;
-  // Sync the previous timer value with the current physical counter value
+#if ENCODERS_ENABLED
   enc->last_timer_value = (uint16_t)__HAL_TIM_GET_COUNTER(enc->htim);
+#else
+  enc->last_timer_value = 0;
+#endif
   enc->last_update_time_ms = HAL_GetTick();
   enc->speed_counts_per_sec = 0.0f;
   enc->speed_rev_per_sec = 0.0f;
@@ -66,15 +76,11 @@ void Encoder_UpdateDevice(Encoder_HandleTypeDef *enc, uint32_t current_time_ms, 
     return;
   }
 
+#if ENCODERS_ENABLED
   // 1. Read current 16-bit hardware timer counter
   uint16_t current_timer = (uint16_t)__HAL_TIM_GET_COUNTER(enc->htim);
 
   // 2. Correctly calculate the count difference even when the hardware timer wraps around.
-  // Casting the subtraction to int16_t handles 16-bit modulo arithmetic wrapping automatically:
-  // e.g. current_timer = 5, last_timer_value = 65530 -> (5 - 65530) = -65525
-  // Cast to uint16_t is 11. Cast to int16_t yields +11 (forward wrap correction).
-  // e.g. current_timer = 65530, last_timer_value = 5 -> (65530 - 5) = 65525
-  // Cast to uint16_t is 65525. Cast to int16_t yields -11 (reverse wrap correction).
   int16_t raw_diff = (int16_t)(current_timer - enc->last_timer_value);
 
   // 3. Apply configurable direction multiplier (+1 or -1)
@@ -110,6 +116,10 @@ void Encoder_UpdateDevice(Encoder_HandleTypeDef *enc, uint32_t current_time_ms, 
     float circumference = 3.14159265f * wheel_diameter_m;
     enc->speed_meters_per_sec = enc->speed_rev_per_sec * circumference;
   }
+#else
+  // Hardware disabled, do nothing
+  enc->last_delta = 0;
+#endif
 }
 
 // =========================================================================
@@ -117,8 +127,13 @@ void Encoder_UpdateDevice(Encoder_HandleTypeDef *enc, uint32_t current_time_ms, 
 // =========================================================================
 
 void Encoder_Init(void) {
+#if ENCODERS_ENABLED
   Encoder_InitDevice(&left_encoder, &htim1, ENCODER_LEFT_POLARITY);
   Encoder_InitDevice(&right_encoder, &htim4, ENCODER_RIGHT_POLARITY);
+#else
+  Encoder_InitDevice(&left_encoder, NULL, ENCODER_LEFT_POLARITY);
+  Encoder_InitDevice(&right_encoder, NULL, ENCODER_RIGHT_POLARITY);
+#endif
 }
 
 void Encoder_ResetLeft(void) {
@@ -159,10 +174,6 @@ int16_t Encoder_GetRightCount(void) {
   return (int16_t)right_encoder.total_position;
 }
 
-/**
- * @brief Calculate approximate forward speed of the robot
- * @return Average of left and right linear speeds in meters/second
- */
 float Encoder_GetRobotSpeed(void) {
   return (left_encoder.speed_meters_per_sec + right_encoder.speed_meters_per_sec) / 2.0f;
 }

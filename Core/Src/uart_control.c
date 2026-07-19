@@ -7,6 +7,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <uart_control.h>
+#include <servo.h>
+
+static uint8_t current_servo_angle = 90;
 
 #define BLACK_THRESHOLD 2359 // 1.90V on 3.3V ADC
 
@@ -57,6 +60,7 @@ void UART_CONTROL_init(void) {
            " [b] - Both Mode (Control + Sensor Prints)\r\n"
            " [n] - Normalized Color Mode\r\n"
            " [a] - Autonomous Line Following Mode\r\n"
+           " [s] - Servo Control Mode\r\n"
            "------------------------------------------\r\n"
            "Select Speed (Current: %d%%):\r\n"
            " [1] - Set Speed to 25%% PWM\r\n"
@@ -154,6 +158,25 @@ void UART_CONTROL_update(void) {
             " [1, 2, 3, 4] - Set Speed (25%, 50%, 75%, 100% PWM)\r\n"
             " [h]          - Stop & Return to Main Menu\r\n"
             "----------------------------------------\r\n");
+      }
+
+      // servo control mode
+      else if (received_byte == 's') {
+        current_mode = UART_MODE_SERVO;
+        first_print = true;
+        sensor_test_active = false;
+        current_servo_angle = 90;
+        Servo_SetAngle(current_servo_angle);
+        UART_SendMessage(
+            "\x1b[2J\x1b[H"
+            "--- Servo Control Mode Active ---\r\n"
+            "Controls:\r\n"
+            " [a] - Decrease angle by 5 deg\r\n"
+            " [d] - Increase angle by 5 deg\r\n"
+            " [1] - Set to 0 deg | [2] - Set to 90 deg | [3] - Set to 180 deg\r\n"
+            " [h] - Return to Main Menu\r\n"
+            "---------------------------------\r\n"
+            "Current Angle:  90 degrees");
       }
 
       // voltage mode
@@ -349,6 +372,41 @@ void UART_CONTROL_update(void) {
       else if (received_byte == '4') {
         robot_speed = 999;
         UART_SendMessage("Speed set to 100% PWM (999/999)\r\n");
+      }
+    }
+
+    else if (current_mode == UART_MODE_SERVO) {
+      bool angle_changed = false;
+      if (received_byte == 'h') {
+        UART_SendMessage("\r\n--- Exited Servo Mode ---\r\n");
+        UART_CONTROL_init();
+      }
+      else if (received_byte == 'a') {
+        current_servo_angle = (current_servo_angle >= 5) ? current_servo_angle - 5 : 0;
+        angle_changed = true;
+      }
+      else if (received_byte == 'd') {
+        current_servo_angle = (current_servo_angle <= 175) ? current_servo_angle + 5 : 180;
+        angle_changed = true;
+      }
+      else if (received_byte == '1') {
+        current_servo_angle = 0;
+        angle_changed = true;
+      }
+      else if (received_byte == '2') {
+        current_servo_angle = 90;
+        angle_changed = true;
+      }
+      else if (received_byte == '3') {
+        current_servo_angle = 180;
+        angle_changed = true;
+      }
+
+      if (angle_changed) {
+        Servo_SetAngle(current_servo_angle);
+        char angle_buf[64];
+        snprintf(angle_buf, sizeof(angle_buf), "\rCurrent Angle: %3d degrees", current_servo_angle);
+        UART_SendMessage(angle_buf);
       }
     }
   }

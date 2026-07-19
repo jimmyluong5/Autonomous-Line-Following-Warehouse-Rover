@@ -11,7 +11,8 @@ typedef enum {
   UART_MODE_VOLTAGE,
   UART_MODE_BOTH,
   UART_MODE_NORMALIZE,
-  UART_MODE_AUTO
+  UART_MODE_AUTO,
+  UART_MODE_SERVO
 } UART_ControlMode;
 
 void UART_CONTROL_init(void);

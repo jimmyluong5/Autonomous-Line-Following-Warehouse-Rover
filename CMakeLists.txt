@@ -50,6 +50,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/motor.c
     Core/Src/encoder.c
     Core/Src/line_following.c
+    Core/Src/servo.c
     # Add user sources here
 )
 
