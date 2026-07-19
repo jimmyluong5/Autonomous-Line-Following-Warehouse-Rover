@@ -139,6 +139,7 @@ int main(void)
     UART_CONTROL_update();
     UART_CONTROL_check_timeout();
     Encoder_Update();
+    Robot_Update();
 
     // Periodically print counts and speeds to PuTTY when in Motor Control Mode
     if (UART_CONTROL_GetMode() == UART_MODE_MOTOR &&

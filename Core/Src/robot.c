@@ -1,6 +1,7 @@
 #include "robot.h"
 #include "main.h"
 #include "motor.h"
+#include "line_following.h"
 
 // Default motor speed / PWM duty cycle (0 to 999)
 // 0 = 0% PWM, 500 = 50% PWM, 999 = 100% PWM
@@ -47,6 +48,9 @@ void Robot_SetState(RobotState new_state) {
   case robot_fault:
     Motor_Brake();
     break;
+  case robot_auto:
+    Motor_Stop();
+    break;
   default:
     Motor_Stop();
     break;
@@ -54,7 +58,9 @@ void Robot_SetState(RobotState new_state) {
 }
 
 void Robot_Update(void) {
-  // Add state update logic if needed
+  if (current_state == robot_auto) {
+    Robot_LineFollow_Update();
+  }
 }
 
 RobotState Robot_GetState(void) { return current_state; }

@@ -55,7 +55,8 @@ void UART_CONTROL_init(void) {
            " [m] - Motor Control Mode\r\n"
            " [v] - Voltage / IR Sensor Test Mode\r\n"
            " [b] - Both Mode (Control + Sensor Prints)\r\n"
-           " [n] - Normalized Color Mode \r\n"
+           " [n] - Normalized Color Mode\r\n"
+           " [a] - Autonomous Line Following Mode\r\n"
            "------------------------------------------\r\n"
            "Select Speed (Current: %d%%):\r\n"
            " [1] - Set Speed to 25%% PWM\r\n"
@@ -138,6 +139,20 @@ void UART_CONTROL_update(void) {
             "--- Normalized Color Mode Active (Press 'h' to return "
             "to Main Menu) ---\r\n");
 
+      }
+
+      // autonomous line following mode
+      else if (received_byte == 'a') {
+        current_mode = UART_MODE_AUTO;
+        first_print = true;
+        sensor_test_active = false;
+        Robot_SetState(robot_auto);
+        UART_SendMessage(
+            "\x1b[2J\x1b[H"
+            "--- Autonomous Line Following Active ---\r\n"
+            "Commands:\r\n"
+            " [h] - Stop & Return to Main Menu\r\n"
+            "----------------------------------------\r\n");
       }
 
       // voltage mode
@@ -311,6 +326,30 @@ void UART_CONTROL_update(void) {
         UART_CONTROL_init();
       }
     }
+
+    else if (current_mode == UART_MODE_AUTO) {
+      if (received_byte == 'h') {
+        Robot_SetState(robot_idle);
+        UART_SendMessage("\r\n--- Exited Autonomous Mode. Stopping Robot. ---\r\n");
+        UART_CONTROL_init();
+      }
+      else if (received_byte == '1') {
+        robot_speed = 250;
+        UART_SendMessage("Speed set to 25% PWM (250/999)\r\n");
+      }
+      else if (received_byte == '2') {
+        robot_speed = 500;
+        UART_SendMessage("Speed set to 50% PWM (500/999)\r\n");
+      }
+      else if (received_byte == '3') {
+        robot_speed = 750;
+        UART_SendMessage("Speed set to 75% PWM (750/999)\r\n");
+      }
+      else if (received_byte == '4') {
+        robot_speed = 999;
+        UART_SendMessage("Speed set to 100% PWM (999/999)\r\n");
+      }
+    }
   }
 
   // Periodic sensor print
@@ -371,6 +410,9 @@ void UART_CONTROL_update(void) {
         break;
       case robot_fault:
         state_str = "FAULT";
+        break;
+      case robot_auto:
+        state_str = "AUTO";
         break;
       }
       int percent = (robot_speed * 100) / 999;
@@ -466,8 +508,8 @@ void UART_CONTROL_update(void) {
 
 // this function checks if we have timeouted or not.
 void UART_CONTROL_check_timeout(void) {
-  // If the robot is not idle or fault, check for communication timeout
-  if (Robot_GetState() != robot_idle && Robot_GetState() != robot_fault) {
+  // If the robot is not idle, fault, or auto, check for communication timeout
+  if (Robot_GetState() != robot_idle && Robot_GetState() != robot_fault && Robot_GetState() != robot_auto) {
 
     // check if its been too long since we last got a command.
     if (HAL_GetTick() - last_command_time > 2000) {

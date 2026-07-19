@@ -1,2 +1,3 @@
-D:/Downloads/warehouse_proj/Core/Src/line_following.c:13:10:Robot_Normalize_ADC	16	static
-D:/Downloads/warehouse_proj/Core/Src/line_following.c:28:6:Robot_Read_Normalized_Sensors	32	static
+D:/Downloads/warehouse_proj/Core/Src/line_following.c:17:10:Robot_Normalize_ADC	16	static
+D:/Downloads/warehouse_proj/Core/Src/line_following.c:32:6:Robot_Read_Normalized_Sensors	32	static
+D:/Downloads/warehouse_proj/Core/Src/line_following.c:46:6:Robot_LineFollow_Update	88	static

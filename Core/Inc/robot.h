@@ -9,7 +9,8 @@ typedef enum {
   robot_reverse,
   robot_left,
   robot_right,
-  robot_fault
+  robot_fault,
+  robot_auto
 } RobotState;
 
 extern volatile int16_t robot_speed;
