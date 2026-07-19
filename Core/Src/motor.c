@@ -1,8 +1,8 @@
 #include "motor.h"
 #include "main.h"
 
-extern TIM_HandleTypeDef htim2;
-extern TIM_HandleTypeDef htim17;
+extern TIM_HandleTypeDef htim2;  // timer 2
+extern TIM_HandleTypeDef htim17; // timer 17
 
 void Motor_Init(void) {
   // Start TIM17 Channel 1 PWM for right motor
@@ -24,23 +24,31 @@ void Motor_SetStandby(bool standby) {
 }
 
 void Motor_Right_SetSpeed(int16_t speed) {
+
   // Constrain speed to -999 to 999
-  if (speed > 999)
+  if (speed > 999) {
     speed = 999;
-  if (speed < -999)
+  }
+
+  if (speed < -999) {
     speed = -999;
+  }
 
   if (speed > 0) {
     // BIN1 = High, BIN2 = Low for Forward
     HAL_GPIO_WritePin(Motor_BIN1_GPIO_Port, Motor_BIN1_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(Motor_BIN2_GPIO_Port, Motor_BIN2_Pin, GPIO_PIN_RESET);
     __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4, (uint32_t)speed);
-  } else if (speed < 0) {
+  }
+
+  else if (speed < 0) {
     // BIN1 = Low, BIN2 = High for Reverse
     HAL_GPIO_WritePin(Motor_BIN1_GPIO_Port, Motor_BIN1_Pin, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(Motor_BIN2_GPIO_Port, Motor_BIN2_Pin, GPIO_PIN_SET);
     __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4, (uint32_t)(-speed));
-  } else {
+  }
+
+  else {
     // Stop: BIN1 = Low, BIN2 = Low
     HAL_GPIO_WritePin(Motor_BIN1_GPIO_Port, Motor_BIN1_Pin, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(Motor_BIN2_GPIO_Port, Motor_BIN2_Pin, GPIO_PIN_RESET);
@@ -50,22 +58,29 @@ void Motor_Right_SetSpeed(int16_t speed) {
 
 void Motor_Left_SetSpeed(int16_t speed) {
   // Constrain speed to -999 to 999
-  if (speed > 999)
+  if (speed > 999) {
     speed = 999;
-  if (speed < -999)
+  }
+
+  if (speed < -999) {
     speed = -999;
+  }
 
   if (speed > 0) {
     // AIN1 = High, AIN2 = Low for Forward
     HAL_GPIO_WritePin(Motor_AIN1_GPIO_Port, Motor_AIN1_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(Motor_AIN2_GPIO_Port, Motor_AIN2_Pin, GPIO_PIN_RESET);
     __HAL_TIM_SET_COMPARE(&htim17, TIM_CHANNEL_1, (uint32_t)speed);
-  } else if (speed < 0) {
+  }
+
+  else if (speed < 0) {
     // AIN1 = Low, AIN2 = High for Reverse
     HAL_GPIO_WritePin(Motor_AIN1_GPIO_Port, Motor_AIN1_Pin, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(Motor_AIN2_GPIO_Port, Motor_AIN2_Pin, GPIO_PIN_SET);
     __HAL_TIM_SET_COMPARE(&htim17, TIM_CHANNEL_1, (uint32_t)(-speed));
-  } else {
+  }
+
+  else {
     // Stop: AIN1 = Low, AIN2 = Low
     HAL_GPIO_WritePin(Motor_AIN1_GPIO_Port, Motor_AIN1_Pin, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(Motor_AIN2_GPIO_Port, Motor_AIN2_Pin, GPIO_PIN_RESET);

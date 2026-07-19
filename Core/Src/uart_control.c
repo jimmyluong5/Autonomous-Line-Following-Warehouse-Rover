@@ -1,6 +1,7 @@
 #include "robot.h"
 #include <MCP3208.h>
 #include <encoder.h>
+#include <line_following.h>
 #include <main.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -50,6 +51,7 @@ void UART_CONTROL_init(void) {
            " [m] - Motor Control Mode\r\n"
            " [v] - Voltage / IR Sensor Test Mode\r\n"
            " [b] - Both Mode (Control + Sensor Prints)\r\n"
+           " [n] - Normalized Color Mode \r\n"
            "------------------------------------------\r\n"
            "Select Speed (Current: %d%%):\r\n"
            " [1] - Set Speed to 25%% PWM\r\n"
@@ -113,6 +115,25 @@ void UART_CONTROL_update(void) {
             " [h] - Return to Main Menu\r\n"
             "---------------------------------\r\n");
       }
+      // just add new modes above here its easier up here
+
+      // normalized mode
+      else if (received_byte == 'n') {
+        // set the current mode to normalize_mode
+        current_mode = UART_MODE_NORMALIZE;
+        // use a flag to determine whether to print the header or not.
+        first_print = true;
+
+        // turn on the sensor
+        sensor_test_active = true;
+
+        // print the message.
+        UART_SendMessage(
+            "\r\n--- Normalized Color Mode Active (Press 'h' to return "
+            "to Main Menu) ---\r\n");
+
+      }
+
       // voltage mode
       else if (received_byte == 'v') {
         // set the current mode as the voltage mode
@@ -266,11 +287,30 @@ void UART_CONTROL_update(void) {
         UART_CONTROL_init();
       }
     }
+
+    else if (current_mode == UART_MODE_NORMALIZE) {
+
+      // add key binds to exit this mode
+      if (received_byte == 'h' || received_byte == 'v' ||
+          received_byte == 'x') {
+        // turn off the sensor
+        sensor_test_active = false;
+
+        // send a message through UART
+        UART_SendMessage("\r\n--- Exited Sensor Test Mode ---\r\n");
+
+        // reset and reinitialize UART
+        UART_CONTROL_init();
+      }
+    }
   }
 
   // Periodic sensor print
   static uint32_t last_print_time = 0;
-  if ((current_mode == UART_MODE_VOLTAGE || current_mode == UART_MODE_BOTH) &&
+
+  // if adding modes you need to add it here.
+  if ((current_mode == UART_MODE_VOLTAGE || current_mode == UART_MODE_BOTH ||
+       current_mode == UART_MODE_NORMALIZE) &&
       sensor_test_active && (HAL_GetTick() - last_print_time >= 250)) {
     last_print_time = HAL_GetTick();
 
@@ -357,18 +397,41 @@ void UART_CONTROL_update(void) {
           max[ch] = raw;
         }
 
+        // for normalized mode, we dont print the actual voltage values.
+        if (current_mode == UART_MODE_NORMALIZE) {
+          // determine the normalized values.
+          uint16_t normalized = Robot_Normalize_ADC(raw, max[ch], min[ch]);
+
+          // thresholds to classify colr
+          const char *color = "Unknown"; // ptr to color.
+          if (normalized < 300) {
+            color = "Black";
+          } else if (normalized >= 300 && normalized < 700) {
+            color = "Brown";
+          }
+
+          else {
+            color = "White";
+          }
+
+          len += snprintf(buffer + len, sizeof(buffer) - len,
+                          "CH%d: Norm: %4u | Color: %-6s                  \r\n",
+                          ch, normalized, color);
+        }
         // after we calculate the max and min values we can calculate the actual
         // voltage values.
+        // if not normalized mode then we just calculate the voltage normally.
+        else {
+          // convert the raw ADC values from 16 bit to 32 bit.
+          uint32_t actual_voltage = ((uint32_t)raw * 3300) / 4095;
 
-        // convert the raw ADC values from 16 bit to 32 bit.
-        uint32_t actual_voltage = ((uint32_t)raw * 3300) / 4095;
-
-        // then print everything on one line
-        len +=
-            snprintf(buffer + len, sizeof(buffer) - len,
-                     "CH%d: %lu.%02luV | ADC: %4u | min: %u , max: %u  \r\n ",
-                     ch, actual_voltage / 1000, (actual_voltage % 1000) / 10,
-                     raw, min[ch], max[ch]);
+          // then print everything on one line
+          len +=
+              snprintf(buffer + len, sizeof(buffer) - len,
+                       "CH%d: %lu.%02luV | ADC: %4u | min: %u , max: %u  \r\n ",
+                       ch, actual_voltage / 1000, (actual_voltage % 1000) / 10,
+                       raw, min[ch], max[ch]);
+        }
       }
     }
     UART_SendMessage(buffer);

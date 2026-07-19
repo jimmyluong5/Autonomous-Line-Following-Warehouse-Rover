@@ -13,10 +13,8 @@ typedef enum {
 } RobotState;
 
 extern volatile int16_t robot_speed;
-
 void Robot_Init(void);
 void Robot_SetState(RobotState new_state);
 void Robot_Update(void);
 RobotState Robot_GetState(void);
 #endif
-

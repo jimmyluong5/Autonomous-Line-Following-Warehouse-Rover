@@ -49,6 +49,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/robot.c
     Core/Src/motor.c
     Core/Src/encoder.c
+    Core/Src/line_following.c
     # Add user sources here
 )
 
