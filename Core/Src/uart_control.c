@@ -8,6 +8,8 @@
 #include <string.h>
 #include <uart_control.h>
 
+#define BLACK_THRESHOLD 2359 // 1.90V on 3.3V ADC
+
 extern UART_HandleTypeDef hcom_uart[];
 extern SPI_HandleTypeDef hspi1;
 
@@ -26,6 +28,7 @@ static UART_ControlMode current_mode = UART_MODE_MENU;
 // channel.
 static uint16_t min[8];
 static uint16_t max[8];
+static uint16_t filtered_adc[8];
 
 // function to set a message in UART.
 static void UART_SendMessage(const char *message) {
@@ -41,10 +44,11 @@ void UART_CONTROL_init(void) {
   current_mode = UART_MODE_MENU;
   sensor_test_active = false; // have the sensor test off at the
 
-  char menu_buf[512];
+  char menu_buf[768];
   int percent = (robot_speed * 100) / 999;
   snprintf(menu_buf, sizeof(menu_buf),
-           "\r\n==========================================\r\n"
+           "\x1b[2J\x1b[H"
+           "==========================================\r\n"
            "       Warehouse Rover Control Menu\r\n"
            "==========================================\r\n"
            "Select Option/Mode:\r\n"
@@ -103,7 +107,8 @@ void UART_CONTROL_update(void) {
       if (received_byte == 'm') {
         current_mode = UART_MODE_MOTOR;
         UART_SendMessage(
-            "\r\n--- Motor Control Mode Active ---\r\n"
+            "\x1b[2J\x1b[H"
+            "--- Motor Control Mode Active ---\r\n"
             "Commands:\r\n"
             " [w] - Forward\r\n"
             " [s] - Reverse\r\n"
@@ -129,7 +134,8 @@ void UART_CONTROL_update(void) {
 
         // print the message.
         UART_SendMessage(
-            "\r\n--- Normalized Color Mode Active (Press 'h' to return "
+            "\x1b[2J\x1b[H"
+            "--- Normalized Color Mode Active (Press 'h' to return "
             "to Main Menu) ---\r\n");
 
       }
@@ -146,7 +152,8 @@ void UART_CONTROL_update(void) {
         first_print = true;
 
         // print the stuff.
-        UART_SendMessage("\r\n--- Sensor Test Mode Active (Press 'h' to return "
+        UART_SendMessage("\x1b[2J\x1b[H"
+                         "--- Sensor Test Mode Active (Press 'h' to return "
                          "to Main Menu) ---\r\n");
       }
 
@@ -162,7 +169,8 @@ void UART_CONTROL_update(void) {
 
         // print the menu in this mode.
         UART_SendMessage(
-            "\r\n--- Both Mode Active ---\r\n"
+            "\x1b[2J\x1b[H"
+            "--- Both Mode Active ---\r\n"
             "Motor Commands:\r\n"
             " [w] - Forward | [s] - Reverse | [a] - Left | [d] - Right | [x] - "
             "Stop\r\n"
@@ -323,7 +331,8 @@ void UART_CONTROL_update(void) {
     // Move cursor up lines if not the first print to keep the display static on
     // rows
     if (!first_print) {
-      if (current_mode == UART_MODE_BOTH) {
+      // Both Mode and Normalize Mode print 9 lines, Voltage Mode prints 8 lines
+      if (current_mode == UART_MODE_BOTH || current_mode == UART_MODE_NORMALIZE) {
         len += snprintf(buffer + len, sizeof(buffer) - len, "\x1B[9A");
       }
 
@@ -337,6 +346,7 @@ void UART_CONTROL_update(void) {
                        // surface.
         max[i] =
             0; // set each channel to the value of 0V which is a black surface.
+        filtered_adc[i] = 0;
       }
     }
     first_print = false;
@@ -366,10 +376,12 @@ void UART_CONTROL_update(void) {
       int percent = (robot_speed * 100) / 999;
       len += snprintf(buffer + len, sizeof(buffer) - len,
                       "State: %-10s | Speed: %d%% PWM (%d/999) | Enc: L=%ld, "
-                      "R=%ld               \r\n",
+                      "R=%ld         \r\n",
                       state_str, percent, robot_speed, Encoder_GetLeftTotal(),
                       Encoder_GetRightTotal());
     }
+
+    uint8_t black_count = 0;
 
     // Iterate through all 8 channels of the ADC.
     for (uint8_t ch = 0; ch < 8; ch++) { // where ch is the iterating variable.
@@ -385,55 +397,69 @@ void UART_CONTROL_update(void) {
       }
 
       // if no errors we can find the max and min
-
-      // by comparing the raw ADC value with the ADC value in the channels.
       else {
+        // Apply Exponential Moving Average (EMA) filter to raw ADC
+        if (filtered_adc[ch] == 0) {
+          filtered_adc[ch] = raw;
+        } else {
+          float alpha = 0.3f;
+          filtered_adc[ch] = (uint16_t)(alpha * raw + (1.0f - alpha) * filtered_adc[ch]);
+        }
+        uint16_t filtered_val = filtered_adc[ch];
 
-        if (raw < min[ch]) {
-          min[ch] = raw;
+        if (filtered_val < min[ch]) {
+          min[ch] = filtered_val;
         }
 
-        if (raw > max[ch]) {
-          max[ch] = raw;
+        if (filtered_val > max[ch]) {
+          max[ch] = filtered_val;
         }
 
         // for normalized mode, we dont print the actual voltage values.
         if (current_mode == UART_MODE_NORMALIZE) {
-          // determine the normalized values.
-          uint16_t normalized = Robot_Normalize_ADC(raw, max[ch], min[ch]);
-
-          // thresholds to classify colr
+          // thresholds to classify color directly using filtered raw ADC
           const char *color = "Unknown"; // ptr to color.
-          if (normalized < 300) {
-            color = "Black";
-          } else if (normalized >= 300 && normalized < 700) {
+          if (filtered_val < BLACK_THRESHOLD) {
             color = "Brown";
-          }
-
-          else {
-            color = "White";
+          } else {
+            color = "Black";
+            black_count++;
           }
 
           len += snprintf(buffer + len, sizeof(buffer) - len,
-                          "CH%d: Norm: %4u | Color: %-6s                  \r\n",
-                          ch, normalized, color);
+                          "CH%d: ADC: %4u | Color: %-6s                  \r\n",
+                          ch, filtered_val, color);
         }
         // after we calculate the max and min values we can calculate the actual
         // voltage values.
         // if not normalized mode then we just calculate the voltage normally.
         else {
           // convert the raw ADC values from 16 bit to 32 bit.
-          uint32_t actual_voltage = ((uint32_t)raw * 3300) / 4095;
-
-          // then print everything on one line
-          len +=
-              snprintf(buffer + len, sizeof(buffer) - len,
-                       "CH%d: %lu.%02luV | ADC: %4u | min: %u , max: %u  \r\n ",
+          uint32_t actual_voltage = ((uint32_t)filtered_val * 3300) / 4095;
+          if (current_mode == UART_MODE_VOLTAGE) {
+            
+            len += snprintf(buffer + len, sizeof(buffer) - len,
+                       "CH%d: %lu.%02luV | ADC: %4u | min: %u , max: %u  \r\n",
                        ch, actual_voltage / 1000, (actual_voltage % 1000) / 10,
-                       raw, min[ch], max[ch]);
+                       filtered_val, min[ch], max[ch]);
+          }
+          else {
+            len +=
+                snprintf(buffer + len, sizeof(buffer) - len,
+                         "CH%d: %lu.%02luV | ADC: %4u                               \r\n",
+                         ch, actual_voltage / 1000, (actual_voltage % 1000) / 10,
+                         filtered_val);
+          }
         }
       }
     }
+
+    if (current_mode == UART_MODE_NORMALIZE) {
+      len += snprintf(buffer + len, sizeof(buffer) - len,
+                      "Line Detected: %s (Black Count: %d)          \r\n",
+                      (black_count >= 3) ? "YES" : "NO ", black_count);
+    }
+
     UART_SendMessage(buffer);
   }
 }
