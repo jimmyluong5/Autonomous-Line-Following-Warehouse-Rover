@@ -6,6 +6,7 @@
 #include "robot.h"
 #include "motor.h"
 
+#define CENTER_THRESHOLD 4
 extern SPI_HandleTypeDef hspi1; // SPI1 for the MCP3208.
 
 // defining the sensor max and min.
@@ -92,6 +93,8 @@ void Robot_LineFollow_Update(void) {
     }
   }
 
+
+
   // 2. Identify consecutive black sensors to find the line position
   int8_t best_start = -1;
   int8_t best_len = 0;
@@ -137,7 +140,7 @@ void Robot_LineFollow_Update(void) {
   int8_t best_end = best_start + best_len - 1;
 
   // Check if we are centered: at least 3 black in a row centered on the middle (CH2, CH3, CH4 or CH3, CH4, CH5)
-  bool centered = (best_len >= 3 && best_start >= 2 && best_end <= 5);
+  bool centered = (best_len >= CENTER_THRESHOLD && best_start >= 2 && best_end <= 5);
 
   if (centered) {
     error = 0;
@@ -147,15 +150,35 @@ void Robot_LineFollow_Update(void) {
     error = position - 3500;
   }
 
-  // 3. PD Control Calculation
-  float Kp = 0.15f; // Proportional gain
-  float Kd = 0.8f;  // Derivative gain
+  // 3. PID Control Calculation
+  float Kp = 0.15f;  // Proportional gain
+  float Ki = 0.001f; // Integral gain (adjust as needed, start small)
+  float Kd = 0.8f;   // Derivative gain
+
+  static int32_t integral = 0;
+
+  // Accumulate the error over time (integral)
+  integral += error;
+
+  // Anti-windup protection: clamp the integral to prevent massive overshoot
+  if (integral > 10000) {
+    integral = 10000;
+  }
+  if (integral < -10000) {
+    integral = -10000;
+  }
+
+  // Clear the accumulated integral when centered to prevent over-correcting
+  if (centered) {
+    integral = 0;
+  }
 
   int32_t p_term = error;
+  int32_t i_term = integral;
   int32_t d_term = error - last_error;
   last_error = error;
 
-  int32_t adjustment = (int32_t)(Kp * p_term + Kd * d_term);
+  int32_t adjustment = (int32_t)(Kp * p_term + Ki * i_term + Kd * d_term);
 
   // 4. Drive Motors
   int16_t base_speed = robot_speed / 2;

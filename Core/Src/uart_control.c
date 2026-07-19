@@ -151,7 +151,8 @@ void UART_CONTROL_update(void) {
             "\x1b[2J\x1b[H"
             "--- Autonomous Line Following Active ---\r\n"
             "Commands:\r\n"
-            " [h] - Stop & Return to Main Menu\r\n"
+            " [1, 2, 3, 4] - Set Speed (25%, 50%, 75%, 100% PWM)\r\n"
+            " [h]          - Stop & Return to Main Menu\r\n"
             "----------------------------------------\r\n");
       }
 
