@@ -471,7 +471,7 @@ void UART_CONTROL_update(void) {
 
       if (angle_changed && target_angle != current_stepper_angle) {
         int16_t diff = target_angle - current_stepper_angle;
-        stepper_move_degrees((float)diff, 1000);
+        stepper_move_degrees((float)diff, 400);
         current_stepper_angle = target_angle;
 
         char angle_buf[64];
