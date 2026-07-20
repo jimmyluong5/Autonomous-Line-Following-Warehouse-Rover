@@ -8,9 +8,10 @@
 #include <string.h>
 #include <uart_control.h>
 #include <servo.h>
+#include <stepper.h>
 
 static uint8_t current_servo_angle = 90;
-
+static int16_t current_stepper_angle = 0; //track current stepper angle starting at 0 deg.
 #define BLACK_THRESHOLD 2359 // 1.90V on 3.3V ADC
 
 extern UART_HandleTypeDef hcom_uart[];
@@ -61,6 +62,7 @@ void UART_CONTROL_init(void) {
            " [n] - Normalized Color Mode\r\n"
            " [a] - Autonomous Line Following Mode\r\n"
            " [s] - Servo Control Mode\r\n"
+           " [t] - Stepper Mode \r\n"
            "------------------------------------------\r\n"
            "Select Speed (Current: %d%%):\r\n"
            " [1] - Set Speed to 25%% PWM\r\n"
@@ -126,6 +128,30 @@ void UART_CONTROL_update(void) {
             "---------------------------------\r\n");
       }
       // just add new modes above here its easier up here
+
+      else if (received_byte == 't') {
+        //set the current mode to stepper mode
+        current_mode = UART_MODE_STEPPER;
+        first_print = true;
+        //reset stepper angle to 0
+        current_stepper_angle = 0;
+        stepper_init();
+        
+
+        //put the custom menu for stepper motor here
+         UART_SendMessage(
+            "\x1b[2J\x1b[H"
+            "--- Stepper Control Mode Active ---\r\n"
+            "Controls:\r\n"
+            " [a] - Decrease angle by 5 deg (CCW)\r\n"
+            " [d] - Increase angle by 5 deg (CW)\r\n"
+            " [1] - Set to 0 deg | [2] - Set to 180 deg | [3] - Set to 360 deg\r\n"
+            " [h] - Return to Main Menu\r\n"
+            "-----------------------------------\r\n"
+            "Current Angle:    0 degrees");
+        
+      }
+
 
       // normalized mode
       else if (received_byte == 'n') {
@@ -409,6 +435,52 @@ void UART_CONTROL_update(void) {
         UART_SendMessage(angle_buf);
       }
     }
+
+    else if (current_mode == UART_MODE_STEPPER) {
+      int16_t target_angle = current_stepper_angle;
+      bool angle_changed = false;
+
+      //head back to menu
+      if (received_byte == 'h') {
+        stepper_stop();
+        UART_SendMessage("\r\n--- Exited Stepper Mode ---\r\n");
+        UART_CONTROL_init();
+      }
+      else if (received_byte == 'a') {
+        target_angle = current_stepper_angle - 5;
+        if (target_angle < 0) target_angle = 0;
+        angle_changed = true;
+      }
+      else if (received_byte == 'd') {
+        target_angle = current_stepper_angle + 5;
+        if (target_angle > 360) target_angle = 360;
+        angle_changed = true;
+      }
+      else if (received_byte == '1') {
+        target_angle = 0;
+        angle_changed = true;
+      }
+      else if (received_byte == '2') {
+        target_angle = 180;
+        angle_changed = true;
+      }
+      else if (received_byte == '3') {
+        target_angle = 360;
+        angle_changed = true;
+      }
+
+      if (angle_changed && target_angle != current_stepper_angle) {
+        int16_t diff = target_angle - current_stepper_angle;
+        stepper_move_degrees((float)diff, 1000);
+        current_stepper_angle = target_angle;
+
+        char angle_buf[64];
+        snprintf(angle_buf, sizeof(angle_buf), "\rCurrent Angle:  %3d degrees", current_stepper_angle);
+        UART_SendMessage(angle_buf);
+      }
+    }
+
+
   }
 
   // Periodic sensor print

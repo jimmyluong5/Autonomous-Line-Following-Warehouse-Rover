@@ -1,0 +1,7 @@
+D:/Downloads/warehouse_proj/build/Debug/CMakeFiles/warehouse_proj.dir
+D:/Downloads/warehouse_proj/build/Debug/CMakeFiles/flash.dir
+D:/Downloads/warehouse_proj/build/Debug/CMakeFiles/edit_cache.dir
+D:/Downloads/warehouse_proj/build/Debug/CMakeFiles/rebuild_cache.dir
+D:/Downloads/warehouse_proj/build/Debug/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir
+D:/Downloads/warehouse_proj/build/Debug/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
+D:/Downloads/warehouse_proj/build/Debug/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir

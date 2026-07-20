@@ -1,0 +1,1319 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineSystem.cmake:213 (message)"
+      - "CMakeLists.txt:28 (project)"
+    message: |
+      The target system is: Generic -  - arm
+      The host system is: Windows - 10.0.26200 - AMD64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompiler.cmake:115 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCCompiler.cmake:67 (_cmake_find_compiler_path)"
+      - "CMakeLists.txt:28 (project)"
+    mode: "program"
+    variable: "CMAKE_C_COMPILER_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "arm-none-eabi-gcc"
+    candidate_directories:
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/MinGW/bin/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/"
+      - "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/"
+      - "C:/Users/jimmy/Downloads/CrossIDE/"
+      - "C:/Users/jimmy/Downloads/elec 291/EFM8/EFM8_Prog/"
+      - "C:/Users/jimmy/Downloads/CrossIDE/Call51/Bin/"
+      - "C:/elec291/"
+      - "C:/Program Files/MATLAB/R2026a/bin/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/"
+      - "C:/Users/jimmy/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/msys64/ucrt64/bin/"
+      - "C:/Users/jimmy/AppData/Local/Python/bin/"
+      - "C:/Users/jimmy/Downloads/PIC32/"
+      - "C:/Users/jimmy/Downloads/XC32_1.42/xc32/v1.42/bin/"
+      - "C:/Users/jimmy/Downloads/Pro32/"
+      - "C:/Users/jimmy/Downloads/PIC32/Pro32/"
+      - "C:/Users/jimmy/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/altera/25.1std/questa_fse/win64/"
+      - "C:/Users/jimmy/AppData/Local/Programs/Antigravity IDE/bin/"
+      - "C:/Users/jimmy/AppData/Local/Microsoft/WinGet/Links/"
+    searched_directories:
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/arm-none-eabi-gcc.com"
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/arm-none-eabi-gcc.exe"
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/arm-none-eabi-gcc"
+      - "C:/Windows/System32/arm-none-eabi-gcc.com"
+      - "C:/Windows/System32/arm-none-eabi-gcc.exe"
+      - "C:/Windows/System32/arm-none-eabi-gcc"
+      - "C:/Windows/arm-none-eabi-gcc.com"
+      - "C:/Windows/arm-none-eabi-gcc.exe"
+      - "C:/Windows/arm-none-eabi-gcc"
+      - "C:/Windows/System32/wbem/arm-none-eabi-gcc.com"
+      - "C:/Windows/System32/wbem/arm-none-eabi-gcc.exe"
+      - "C:/Windows/System32/wbem/arm-none-eabi-gcc"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/arm-none-eabi-gcc.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/arm-none-eabi-gcc.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/arm-none-eabi-gcc"
+      - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc.com"
+      - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc.exe"
+      - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc"
+      - "C:/MinGW/bin/arm-none-eabi-gcc.com"
+      - "C:/MinGW/bin/arm-none-eabi-gcc.exe"
+      - "C:/MinGW/bin/arm-none-eabi-gcc"
+      - "C:/Program Files/dotnet/arm-none-eabi-gcc.com"
+      - "C:/Program Files/dotnet/arm-none-eabi-gcc.exe"
+      - "C:/Program Files/dotnet/arm-none-eabi-gcc"
+      - "C:/Program Files/Git/cmd/arm-none-eabi-gcc.com"
+      - "C:/Program Files/Git/cmd/arm-none-eabi-gcc.exe"
+      - "C:/Program Files/Git/cmd/arm-none-eabi-gcc"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/arm-none-eabi-gcc.com"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/arm-none-eabi-gcc.exe"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/arm-none-eabi-gcc"
+      - "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc.com"
+    found: "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:/Users/jimmy/.gemini/antigravity-ide/bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\VL53L0X_EFM8LB12_Example"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\EFM8\\EFM8_Prog"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\elec291"
+        - "C:\\Program Files\\MATLAB\\R2026a\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Python\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32"
+        - "C:\\Users\\jimmy\\Downloads\\XC32_1.42\\xc32\\v1.42\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\Users\\jimmy\\Downloads\\Pro32"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32\\Pro32"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\altera\\25.1std\\questa_fse\\win64"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/warehouse_proj"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:501 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:538 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:28 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCCompilerId.c.in"
+    candidate_directories:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/"
+    found: "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCCompilerId.c.in"
+    search_context:
+      ENV{PATH}:
+        - "C:/Users/jimmy/.gemini/antigravity-ide/bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\VL53L0X_EFM8LB12_Example"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\EFM8\\EFM8_Prog"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\elec291"
+        - "C:\\Program Files\\MATLAB\\R2026a\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Python\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32"
+        - "C:\\Users\\jimmy\\Downloads\\XC32_1.42\\xc32\\v1.42\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\Users\\jimmy\\Downloads\\Pro32"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32\\Pro32"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\altera\\25.1std\\questa_fse\\win64"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/warehouse_proj"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:28 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+      Compiler: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc.exe 
+      Build flags: -mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-fdata-sections;-ffunction-sections;-fstack-usage;-mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-fdata-sections;-ffunction-sections;-fstack-usage
+      Id flags:  
+      
+      The output was:
+      1
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-exit.o): in function `exit':
+      exit.c:(.text.exit+0x14): undefined reference to `_exit'
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: (_exit): Unknown destination type (ARM/Thumb) in C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-exit.o)
+      exit.c:(.text.exit+0x14): dangerous relocation: unsupported relocation
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-closer.o): in function `_close_r':
+      closer.c:(.text._close_r+0xc): undefined reference to `_close'
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: (_close): Unknown destination type (ARM/Thumb) in C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-closer.o)
+      closer.c:(.text._close_r+0xc): dangerous relocation: unsupported relocation
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-lseekr.o): in function `_lseek_r':
+      lseekr.c:(.text._lseek_r+0x12): undefined reference to `_lseek'
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: (_lseek): Unknown destination type (ARM/Thumb) in C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-lseekr.o)
+      lseekr.c:(.text._lseek_r+0x12): dangerous relocation: unsupported relocation
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-readr.o): in function `_read_r':
+      readr.c:(.text._read_r+0x12): undefined reference to `_read'
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: (_read): Unknown destination type (ARM/Thumb) in C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-readr.o)
+      readr.c:(.text._read_r+0x12): dangerous relocation: unsupported relocation
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-writer.o): in function `_write_r':
+      writer.c:(.text._write_r+0x12): undefined reference to `_write'
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: (_write): Unknown destination type (ARM/Thumb) in C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-writer.o)
+      writer.c:(.text._write_r+0x12): dangerous relocation: unsupported relocation
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-sbrkr.o): in function `_sbrk_r':
+      sbrkr.c:(.text._sbrk_r+0xc): undefined reference to `_sbrk'
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: (_sbrk): Unknown destination type (ARM/Thumb) in C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-sbrkr.o)
+      sbrkr.c:(.text._sbrk_r+0xc): dangerous relocation: unsupported relocation
+      collect2.exe: error: ld returned 1 exit status
+      
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:501 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:538 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:28 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCCompilerId.c.in"
+    candidate_directories:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/"
+    found: "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCCompilerId.c.in"
+    search_context:
+      ENV{PATH}:
+        - "C:/Users/jimmy/.gemini/antigravity-ide/bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\VL53L0X_EFM8LB12_Example"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\EFM8\\EFM8_Prog"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\elec291"
+        - "C:\\Program Files\\MATLAB\\R2026a\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Python\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32"
+        - "C:\\Users\\jimmy\\Downloads\\XC32_1.42\\xc32\\v1.42\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\Users\\jimmy\\Downloads\\Pro32"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32\\Pro32"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\altera\\25.1std\\questa_fse\\win64"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/warehouse_proj"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:28 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc.exe 
+      Build flags: -mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-fdata-sections;-ffunction-sections;-fstack-usage;-mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-fdata-sections;-ffunction-sections;-fstack-usage
+      Id flags: -c 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.su"
+      
+      The C compiler identification is GNU, found in:
+        D:/Downloads/warehouse_proj/build/Debug/CMakeFiles/4.4.0/CompilerIdC/CMakeCCompilerId.o
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:57 (__resolve_tool_path)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:28 (project)"
+    mode: "program"
+    variable: "_CMAKE_TOOL_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "arm-none-eabi-g++"
+    candidate_directories:
+      - "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/"
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/MinGW/bin/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/"
+      - "C:/Users/jimmy/Downloads/CrossIDE/"
+      - "C:/Users/jimmy/Downloads/elec 291/EFM8/EFM8_Prog/"
+      - "C:/Users/jimmy/Downloads/CrossIDE/Call51/Bin/"
+      - "C:/elec291/"
+      - "C:/Program Files/MATLAB/R2026a/bin/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/"
+      - "C:/Users/jimmy/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/msys64/ucrt64/bin/"
+      - "C:/Users/jimmy/AppData/Local/Python/bin/"
+      - "C:/Users/jimmy/Downloads/PIC32/"
+      - "C:/Users/jimmy/Downloads/XC32_1.42/xc32/v1.42/bin/"
+      - "C:/Users/jimmy/Downloads/Pro32/"
+      - "C:/Users/jimmy/Downloads/PIC32/Pro32/"
+      - "C:/Users/jimmy/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/altera/25.1std/questa_fse/win64/"
+      - "C:/Users/jimmy/AppData/Local/Programs/Antigravity IDE/bin/"
+      - "C:/Users/jimmy/AppData/Local/Microsoft/WinGet/Links/"
+    searched_directories:
+      - "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-g++.com"
+    found: "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-g++.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:/Users/jimmy/.gemini/antigravity-ide/bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\VL53L0X_EFM8LB12_Example"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\EFM8\\EFM8_Prog"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\elec291"
+        - "C:\\Program Files\\MATLAB\\R2026a\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Python\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32"
+        - "C:\\Users\\jimmy\\Downloads\\XC32_1.42\\xc32\\v1.42\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\Users\\jimmy\\Downloads\\Pro32"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32\\Pro32"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\altera\\25.1std\\questa_fse\\win64"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/warehouse_proj"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompiler.cmake:115 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:71 (_cmake_find_compiler_path)"
+      - "CMakeLists.txt:28 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "arm-none-eabi-g++"
+    candidate_directories:
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/MinGW/bin/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/"
+      - "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/"
+      - "C:/Users/jimmy/Downloads/CrossIDE/"
+      - "C:/Users/jimmy/Downloads/elec 291/EFM8/EFM8_Prog/"
+      - "C:/Users/jimmy/Downloads/CrossIDE/Call51/Bin/"
+      - "C:/elec291/"
+      - "C:/Program Files/MATLAB/R2026a/bin/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/"
+      - "C:/Users/jimmy/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/msys64/ucrt64/bin/"
+      - "C:/Users/jimmy/AppData/Local/Python/bin/"
+      - "C:/Users/jimmy/Downloads/PIC32/"
+      - "C:/Users/jimmy/Downloads/XC32_1.42/xc32/v1.42/bin/"
+      - "C:/Users/jimmy/Downloads/Pro32/"
+      - "C:/Users/jimmy/Downloads/PIC32/Pro32/"
+      - "C:/Users/jimmy/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/altera/25.1std/questa_fse/win64/"
+      - "C:/Users/jimmy/AppData/Local/Programs/Antigravity IDE/bin/"
+      - "C:/Users/jimmy/AppData/Local/Microsoft/WinGet/Links/"
+    searched_directories:
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/arm-none-eabi-g++.com"
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/arm-none-eabi-g++.exe"
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/arm-none-eabi-g++"
+      - "C:/Windows/System32/arm-none-eabi-g++.com"
+      - "C:/Windows/System32/arm-none-eabi-g++.exe"
+      - "C:/Windows/System32/arm-none-eabi-g++"
+      - "C:/Windows/arm-none-eabi-g++.com"
+      - "C:/Windows/arm-none-eabi-g++.exe"
+      - "C:/Windows/arm-none-eabi-g++"
+      - "C:/Windows/System32/wbem/arm-none-eabi-g++.com"
+      - "C:/Windows/System32/wbem/arm-none-eabi-g++.exe"
+      - "C:/Windows/System32/wbem/arm-none-eabi-g++"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/arm-none-eabi-g++.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/arm-none-eabi-g++.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/arm-none-eabi-g++"
+      - "C:/Windows/System32/OpenSSH/arm-none-eabi-g++.com"
+      - "C:/Windows/System32/OpenSSH/arm-none-eabi-g++.exe"
+      - "C:/Windows/System32/OpenSSH/arm-none-eabi-g++"
+      - "C:/MinGW/bin/arm-none-eabi-g++.com"
+      - "C:/MinGW/bin/arm-none-eabi-g++.exe"
+      - "C:/MinGW/bin/arm-none-eabi-g++"
+      - "C:/Program Files/dotnet/arm-none-eabi-g++.com"
+      - "C:/Program Files/dotnet/arm-none-eabi-g++.exe"
+      - "C:/Program Files/dotnet/arm-none-eabi-g++"
+      - "C:/Program Files/Git/cmd/arm-none-eabi-g++.com"
+      - "C:/Program Files/Git/cmd/arm-none-eabi-g++.exe"
+      - "C:/Program Files/Git/cmd/arm-none-eabi-g++"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/arm-none-eabi-g++.com"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/arm-none-eabi-g++.exe"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/arm-none-eabi-g++"
+      - "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-g++.com"
+    found: "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-g++.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:/Users/jimmy/.gemini/antigravity-ide/bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\VL53L0X_EFM8LB12_Example"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\EFM8\\EFM8_Prog"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\elec291"
+        - "C:\\Program Files\\MATLAB\\R2026a\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Python\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32"
+        - "C:\\Users\\jimmy\\Downloads\\XC32_1.42\\xc32\\v1.42\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\Users\\jimmy\\Downloads\\Pro32"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32\\Pro32"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\altera\\25.1std\\questa_fse\\win64"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/warehouse_proj"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:501 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:538 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:28 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/"
+    found: "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      ENV{PATH}:
+        - "C:/Users/jimmy/.gemini/antigravity-ide/bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\VL53L0X_EFM8LB12_Example"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\EFM8\\EFM8_Prog"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\elec291"
+        - "C:\\Program Files\\MATLAB\\R2026a\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Python\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32"
+        - "C:\\Users\\jimmy\\Downloads\\XC32_1.42\\xc32\\v1.42\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\Users\\jimmy\\Downloads\\Pro32"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32\\Pro32"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\altera\\25.1std\\questa_fse\\win64"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/warehouse_proj"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:28 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+      Compiler: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-g++.exe 
+      Build flags: -mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-fdata-sections;-ffunction-sections;-fstack-usage;-mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-fdata-sections;-ffunction-sections;-fstack-usage;-fno-rtti;-fno-exceptions;-fno-threadsafe-statics
+      Id flags:  
+      
+      The output was:
+      1
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-exit.o): in function `exit':
+      exit.c:(.text.exit+0x14): undefined reference to `_exit'
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: (_exit): Unknown destination type (ARM/Thumb) in C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-exit.o)
+      exit.c:(.text.exit+0x14): dangerous relocation: unsupported relocation
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-closer.o): in function `_close_r':
+      closer.c:(.text._close_r+0xc): undefined reference to `_close'
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: (_close): Unknown destination type (ARM/Thumb) in C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-closer.o)
+      closer.c:(.text._close_r+0xc): dangerous relocation: unsupported relocation
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-lseekr.o): in function `_lseek_r':
+      lseekr.c:(.text._lseek_r+0x12): undefined reference to `_lseek'
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: (_lseek): Unknown destination type (ARM/Thumb) in C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-lseekr.o)
+      lseekr.c:(.text._lseek_r+0x12): dangerous relocation: unsupported relocation
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-readr.o): in function `_read_r':
+      readr.c:(.text._read_r+0x12): undefined reference to `_read'
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: (_read): Unknown destination type (ARM/Thumb) in C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-readr.o)
+      readr.c:(.text._read_r+0x12): dangerous relocation: unsupported relocation
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-writer.o): in function `_write_r':
+      writer.c:(.text._write_r+0x12): undefined reference to `_write'
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: (_write): Unknown destination type (ARM/Thumb) in C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-writer.o)
+      writer.c:(.text._write_r+0x12): dangerous relocation: unsupported relocation
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-sbrkr.o): in function `_sbrk_r':
+      sbrkr.c:(.text._sbrk_r+0xc): undefined reference to `_sbrk'
+      C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/ld.exe: (_sbrk): Unknown destination type (ARM/Thumb) in C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libc.a(libc_a-sbrkr.o)
+      sbrkr.c:(.text._sbrk_r+0xc): dangerous relocation: unsupported relocation
+      collect2.exe: error: ld returned 1 exit status
+      
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:501 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:538 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:28 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/"
+    found: "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      ENV{PATH}:
+        - "C:/Users/jimmy/.gemini/antigravity-ide/bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\VL53L0X_EFM8LB12_Example"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\EFM8\\EFM8_Prog"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\elec291"
+        - "C:\\Program Files\\MATLAB\\R2026a\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Python\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32"
+        - "C:\\Users\\jimmy\\Downloads\\XC32_1.42\\xc32\\v1.42\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\Users\\jimmy\\Downloads\\Pro32"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32\\Pro32"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\altera\\25.1std\\questa_fse\\win64"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/warehouse_proj"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:28 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-g++.exe 
+      Build flags: -mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-fdata-sections;-ffunction-sections;-fstack-usage;-mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-fdata-sections;-ffunction-sections;-fstack-usage;-fno-rtti;-fno-exceptions;-fno-threadsafe-statics
+      Id flags: -c 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.su"
+      
+      The CXX compiler identification is GNU, found in:
+        D:/Downloads/warehouse_proj/build/Debug/CMakeFiles/4.4.0/CompilerIdCXX/CMakeCXXCompilerId.o
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:123 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:28 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "D:/Downloads/warehouse_proj/build/Debug/CMakeFiles/CMakeScratch/TryCompile-gg6lul"
+      binary: "D:/Downloads/warehouse_proj/build/Debug/CMakeFiles/CMakeScratch/TryCompile-gg6lul"
+    cmakeVariables:
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_C_FLAGS: " -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage"
+      CMAKE_C_FLAGS_DEBUG: "-O0 -g"
+      CMAKE_EXE_LINKER_FLAGS: "-mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -T \"D:/Downloads/warehouse_proj/STM32G431xx_FLASH.ld\" --specs=nano.specs -Wl,-Map=warehouse_proj.map -Wl,--gc-sections -Wl,--print-memory-usage"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: false
+      stdout: |
+        Change Dir: 'D:/Downloads/warehouse_proj/build/Debug/CMakeFiles/CMakeScratch/TryCompile-gg6lul'
+        
+        Run Build Command(s): C:/Users/jimmy/AppData/Local/Microsoft/WinGet/Links/ninja.exe -v cmTC_64ac7
+        [1/2] "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-gcc.exe"   -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage  -std=gnu11   -v -o CMakeFiles/cmTC_64ac7.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCCompilerABI.c"
+        Using built-in specs.
+        COLLECT_GCC=C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-gcc.exe
+        Target: arm-none-eabi
+        Configured with: /var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/src/gcc/configure --target=arm-none-eabi --prefix=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/install --with-gmp=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-mpfr=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-mpc=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-isl=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-zstd=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/install/arm-none-eabi --with-bugurl=https://gitlab.arm.com/tooling/gnu-devtools-for-arm/-/issues/ --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-libiconv-prefix=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=x86_64-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)'
+        Thread model: single
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 15.3.1 20260627 (Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)) 
+        COLLECT_GCC_OPTIONS='-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-fstack-usage' '-mcpu=cortex-m4' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-Wall' '-fdata-sections' '-ffunction-sections' '-fstack-usage' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_64ac7.dir/CMakeCCompilerABI.c.obj' '-c' '-mthumb' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'CMakeFiles/cmTC_64ac7.dir/'
+         C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1.exe -quiet -v -imultilib thumb/v7e-m+fp/hard -iprefix C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/ -isysroot C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_64ac7.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -mlibarch=armv7e-m+fp -march=armv7e-m+fp -Wall -std=gnu11 -version -fstack-usage -fdata-sections -ffunction-sections -fstack-usage -o C:\\Users\\jimmy\\AppData\\Local\\Temp\\ccYeoQ9k.s
+        GNU C11 (Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)) version 15.3.1 20260627 (arm-none-eabi)
+        	compiled by GNU C version 13-win32, GMP version 6.2.1, MPFR version 3.1.6, MPC version 1.0.3, isl version isl-0.15-1-g835ea3a-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/include"
+        ignoring nonexistent directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/install/lib/gcc/arm-none-eabi/15.3.1/../../../../include"
+        ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/include-fixed"
+        ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include"
+        ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include
+         C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include-fixed
+         C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include
+        End of search list.
+        Compiler executable checksum: f90d3e0112144dd5b94700173c925ae0
+        COLLECT_GCC_OPTIONS='-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-fstack-usage' '-mcpu=cortex-m4' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-Wall' '-fdata-sections' '-ffunction-sections' '-fstack-usage' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_64ac7.dir/CMakeCCompilerABI.c.obj' '-c' '-mthumb' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'CMakeFiles/cmTC_64ac7.dir/'
+         C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv7e-m+fp -mfloat-abi=hard -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mfpu=fpv4-sp-d16 -meabi=5 -o CMakeFiles/cmTC_64ac7.dir/CMakeCCompilerABI.c.obj C:\\Users\\jimmy\\AppData\\Local\\Temp\\ccYeoQ9k.s
+        GNU assembler version 2.45.1 (arm-none-eabi) using BFD version (Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)) 2.45.1.20260126
+        COMPILER_PATH=C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/15.3.1/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../libexec/gcc/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/
+        LIBRARY_PATH=C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/lib/thumb/v7e-m+fp/hard/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/lib/
+        COLLECT_GCC_OPTIONS='-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-fstack-usage' '-mcpu=cortex-m4' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-Wall' '-fdata-sections' '-ffunction-sections' '-fstack-usage' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_64ac7.dir/CMakeCCompilerABI.c.obj' '-c' '-mthumb' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'CMakeFiles/cmTC_64ac7.dir/CMakeCCompilerABI.c.'
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f libcmTC_64ac7.a && "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-ar.exe" qc libcmTC_64ac7.a  CMakeFiles/cmTC_64ac7.dir/CMakeCCompilerABI.c.obj && "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-ranlib.exe" libcmTC_64ac7.a && cd ."
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:255 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:28 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include]
+          add: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include-fixed]
+          add: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include]
+        end of search list found
+        collapse include dir [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include] ==> [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/15.3.1/include]
+        collapse include dir [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include-fixed] ==> [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/15.3.1/include-fixed]
+        collapse include dir [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include] ==> [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/arm-none-eabi/include]
+        implicit include dirs: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/15.3.1/include;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/15.3.1/include-fixed;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/arm-none-eabi/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:291 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:28 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(arm-none-eabi-g\\+\\+\\.exe|;ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(arm-none-eabi-g\\+\\+\\.exe|;ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild))("|,| |$)]
+        ignore line: [Change Dir: 'D:/Downloads/warehouse_proj/build/Debug/CMakeFiles/CMakeScratch/TryCompile-gg6lul']
+        ignore line: []
+        ignore line: [Run Build Command(s): C:/Users/jimmy/AppData/Local/Microsoft/WinGet/Links/ninja.exe -v cmTC_64ac7]
+        ignore line: [[1/2] "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-gcc.exe"   -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage  -std=gnu11   -v -o CMakeFiles/cmTC_64ac7.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCCompilerABI.c"]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-gcc.exe]
+        ignore line: [Target: arm-none-eabi]
+        ignore line: [Configured with: /var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/src/gcc/configure --target=arm-none-eabi --prefix=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/install --with-gmp=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-mpfr=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-mpc=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-isl=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-zstd=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/install/arm-none-eabi --with-bugurl=https://gitlab.arm.com/tooling/gnu-devtools-for-arm/-/issues/ --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-libiconv-prefix=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=x86_64-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)']
+        ignore line: [Thread model: single]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 15.3.1 20260627 (Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-fstack-usage' '-mcpu=cortex-m4' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-Wall' '-fdata-sections' '-ffunction-sections' '-fstack-usage' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_64ac7.dir/CMakeCCompilerABI.c.obj' '-c' '-mthumb' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'CMakeFiles/cmTC_64ac7.dir/']
+        ignore line: [ C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1.exe -quiet -v -imultilib thumb/v7e-m+fp/hard -iprefix C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/ -isysroot C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_64ac7.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -mlibarch=armv7e-m+fp -march=armv7e-m+fp -Wall -std=gnu11 -version -fstack-usage -fdata-sections -ffunction-sections -fstack-usage -o C:\\Users\\jimmy\\AppData\\Local\\Temp\\ccYeoQ9k.s]
+        ignore line: [GNU C11 (Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)) version 15.3.1 20260627 (arm-none-eabi)]
+        ignore line: [	compiled by GNU C version 13-win32  GMP version 6.2.1  MPFR version 3.1.6  MPC version 1.0.3  isl version isl-0.15-1-g835ea3a-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/include"]
+        ignore line: [ignoring nonexistent directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/install/lib/gcc/arm-none-eabi/15.3.1/../../../../include"]
+        ignore line: [ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/include-fixed"]
+        ignore line: [ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include"]
+        ignore line: [ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include]
+        ignore line: [ C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include-fixed]
+        ignore line: [ C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: f90d3e0112144dd5b94700173c925ae0]
+        ignore line: [COLLECT_GCC_OPTIONS='-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-fstack-usage' '-mcpu=cortex-m4' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-Wall' '-fdata-sections' '-ffunction-sections' '-fstack-usage' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_64ac7.dir/CMakeCCompilerABI.c.obj' '-c' '-mthumb' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'CMakeFiles/cmTC_64ac7.dir/']
+        ignore line: [ C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv7e-m+fp -mfloat-abi=hard -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mfpu=fpv4-sp-d16 -meabi=5 -o CMakeFiles/cmTC_64ac7.dir/CMakeCCompilerABI.c.obj C:\\Users\\jimmy\\AppData\\Local\\Temp\\ccYeoQ9k.s]
+        ignore line: [GNU assembler version 2.45.1 (arm-none-eabi) using BFD version (Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)) 2.45.1.20260126]
+        ignore line: [COMPILER_PATH=C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/15.3.1/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../libexec/gcc/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/]
+        ignore line: [LIBRARY_PATH=C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/lib/thumb/v7e-m+fp/hard/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-fstack-usage' '-mcpu=cortex-m4' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-Wall' '-fdata-sections' '-ffunction-sections' '-fstack-usage' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_64ac7.dir/CMakeCCompilerABI.c.obj' '-c' '-mthumb' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'CMakeFiles/cmTC_64ac7.dir/CMakeCCompilerABI.c.']
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f libcmTC_64ac7.a && "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-ar.exe" qc libcmTC_64ac7.a  CMakeFiles/cmTC_64ac7.dir/CMakeCCompilerABI.c.obj && "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-ranlib.exe" libcmTC_64ac7.a && cd ."]
+        ignore line: []
+        ignore line: []
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:123 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:28 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "D:/Downloads/warehouse_proj/build/Debug/CMakeFiles/CMakeScratch/TryCompile-tyyf4m"
+      binary: "D:/Downloads/warehouse_proj/build/Debug/CMakeFiles/CMakeScratch/TryCompile-tyyf4m"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: " -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -fno-rtti -fno-exceptions -fno-threadsafe-statics"
+      CMAKE_CXX_FLAGS_DEBUG: "-O0 -g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: "-mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -T \"D:/Downloads/warehouse_proj/STM32G431xx_FLASH.ld\" --specs=nano.specs -Wl,-Map=warehouse_proj.map -Wl,--gc-sections -Wl,--print-memory-usage"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: false
+      stdout: |
+        Change Dir: 'D:/Downloads/warehouse_proj/build/Debug/CMakeFiles/CMakeScratch/TryCompile-tyyf4m'
+        
+        Run Build Command(s): C:/Users/jimmy/AppData/Local/Microsoft/WinGet/Links/ninja.exe -v cmTC_fd77d
+        [1/2] "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-g++.exe"   -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -fno-rtti -fno-exceptions -fno-threadsafe-statics    -v -o CMakeFiles/cmTC_fd77d.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCXXCompilerABI.cpp"
+        Using built-in specs.
+        COLLECT_GCC=C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-g++.exe
+        Target: arm-none-eabi
+        Configured with: /var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/src/gcc/configure --target=arm-none-eabi --prefix=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/install --with-gmp=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-mpfr=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-mpc=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-isl=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-zstd=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/install/arm-none-eabi --with-bugurl=https://gitlab.arm.com/tooling/gnu-devtools-for-arm/-/issues/ --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-libiconv-prefix=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=x86_64-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)'
+        Thread model: single
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 15.3.1 20260627 (Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)) 
+        COLLECT_GCC_OPTIONS='-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-fstack-usage' '-mcpu=cortex-m4' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-Wall' '-fdata-sections' '-ffunction-sections' '-fstack-usage' '-fno-rtti' '-fno-exceptions' '-fno-threadsafe-statics' '-v' '-o' 'CMakeFiles/cmTC_fd77d.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mthumb' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'CMakeFiles/cmTC_fd77d.dir/'
+         C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1plus.exe -quiet -v -imultilib thumb/v7e-m+fp/hard -iprefix C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/ -isysroot C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_fd77d.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -mlibarch=armv7e-m+fp -march=armv7e-m+fp -Wall -version -fstack-usage -fdata-sections -ffunction-sections -fstack-usage -fno-rtti -fno-exceptions -fno-threadsafe-statics -o C:\\Users\\jimmy\\AppData\\Local\\Temp\\ccj0UUIn.s
+        GNU C++17 (Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)) version 15.3.1 20260627 (arm-none-eabi)
+        	compiled by GNU C version 13-win32, GMP version 6.2.1, MPFR version 3.1.6, MPC version 1.0.3, isl version isl-0.15-1-g835ea3a-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1"
+        ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1/arm-none-eabi/thumb/v7e-m+fp/hard"
+        ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1/backward"
+        ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/include"
+        ignoring nonexistent directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/install/lib/gcc/arm-none-eabi/15.3.1/../../../../include"
+        ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/include-fixed"
+        ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include"
+        ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1
+         C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1/arm-none-eabi/thumb/v7e-m+fp/hard
+         C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1/backward
+         C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include
+         C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include-fixed
+         C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include
+        End of search list.
+        Compiler executable checksum: a5612ced7e034a58501bf9d692a3b4ba
+        COLLECT_GCC_OPTIONS='-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-fstack-usage' '-mcpu=cortex-m4' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-Wall' '-fdata-sections' '-ffunction-sections' '-fstack-usage' '-fno-rtti' '-fno-exceptions' '-fno-threadsafe-statics' '-v' '-o' 'CMakeFiles/cmTC_fd77d.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mthumb' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'CMakeFiles/cmTC_fd77d.dir/'
+         C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv7e-m+fp -mfloat-abi=hard -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mfpu=fpv4-sp-d16 -meabi=5 -o CMakeFiles/cmTC_fd77d.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\jimmy\\AppData\\Local\\Temp\\ccj0UUIn.s
+        GNU assembler version 2.45.1 (arm-none-eabi) using BFD version (Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)) 2.45.1.20260126
+        COMPILER_PATH=C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/15.3.1/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../libexec/gcc/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/
+        LIBRARY_PATH=C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/lib/thumb/v7e-m+fp/hard/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/lib/
+        COLLECT_GCC_OPTIONS='-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-fstack-usage' '-mcpu=cortex-m4' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-Wall' '-fdata-sections' '-ffunction-sections' '-fstack-usage' '-fno-rtti' '-fno-exceptions' '-fno-threadsafe-statics' '-v' '-o' 'CMakeFiles/cmTC_fd77d.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mthumb' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'CMakeFiles/cmTC_fd77d.dir/CMakeCXXCompilerABI.cpp.'
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f libcmTC_fd77d.a && "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-ar.exe" qc libcmTC_fd77d.a  CMakeFiles/cmTC_fd77d.dir/CMakeCXXCompilerABI.cpp.obj && "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-ranlib.exe" libcmTC_fd77d.a && cd ."
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:255 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:28 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1]
+          add: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1/arm-none-eabi/thumb/v7e-m+fp/hard]
+          add: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1/backward]
+          add: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include]
+          add: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include-fixed]
+          add: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include]
+        end of search list found
+        collapse include dir [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1] ==> [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/arm-none-eabi/include/c++/15.3.1]
+        collapse include dir [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1/arm-none-eabi/thumb/v7e-m+fp/hard] ==> [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/arm-none-eabi/include/c++/15.3.1/arm-none-eabi/thumb/v7e-m+fp/hard]
+        collapse include dir [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1/backward] ==> [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/arm-none-eabi/include/c++/15.3.1/backward]
+        collapse include dir [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include] ==> [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/15.3.1/include]
+        collapse include dir [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include-fixed] ==> [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/15.3.1/include-fixed]
+        collapse include dir [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include] ==> [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/arm-none-eabi/include]
+        implicit include dirs: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/arm-none-eabi/include/c++/15.3.1;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/arm-none-eabi/include/c++/15.3.1/arm-none-eabi/thumb/v7e-m+fp/hard;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/arm-none-eabi/include/c++/15.3.1/backward;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/15.3.1/include;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/15.3.1/include-fixed;C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/arm-none-eabi/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:291 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:28 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(arm-none-eabi-g\\+\\+\\.exe|;ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(arm-none-eabi-g\\+\\+\\.exe|;ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild))("|,| |$)]
+        ignore line: [Change Dir: 'D:/Downloads/warehouse_proj/build/Debug/CMakeFiles/CMakeScratch/TryCompile-tyyf4m']
+        ignore line: []
+        ignore line: [Run Build Command(s): C:/Users/jimmy/AppData/Local/Microsoft/WinGet/Links/ninja.exe -v cmTC_fd77d]
+        ignore line: [[1/2] "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-g++.exe"   -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -fno-rtti -fno-exceptions -fno-threadsafe-statics    -v -o CMakeFiles/cmTC_fd77d.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCXXCompilerABI.cpp"]
+        ignore line: [Using built-in specs.]
+        link line: [COLLECT_GCC=C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-g++.exe] ==> linker [COLLECT_GCC=C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-g++.exe]
+        ignore line: [COLLECT_GCC=C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-g++.exe]
+        ignore line: [Target: arm-none-eabi]
+        ignore line: [Configured with: /var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/src/gcc/configure --target=arm-none-eabi --prefix=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/install --with-gmp=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-mpfr=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-mpc=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-isl=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-zstd=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/install/arm-none-eabi --with-bugurl=https://gitlab.arm.com/tooling/gnu-devtools-for-arm/-/issues/ --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --with-libiconv-prefix=/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=x86_64-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)']
+        ignore line: [Thread model: single]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 15.3.1 20260627 (Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-fstack-usage' '-mcpu=cortex-m4' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-Wall' '-fdata-sections' '-ffunction-sections' '-fstack-usage' '-fno-rtti' '-fno-exceptions' '-fno-threadsafe-statics' '-v' '-o' 'CMakeFiles/cmTC_fd77d.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mthumb' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'CMakeFiles/cmTC_fd77d.dir/']
+        ignore line: [ C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1plus.exe -quiet -v -imultilib thumb/v7e-m+fp/hard -iprefix C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/ -isysroot C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_fd77d.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -mlibarch=armv7e-m+fp -march=armv7e-m+fp -Wall -version -fstack-usage -fdata-sections -ffunction-sections -fstack-usage -fno-rtti -fno-exceptions -fno-threadsafe-statics -o C:\\Users\\jimmy\\AppData\\Local\\Temp\\ccj0UUIn.s]
+        ignore line: [GNU C++17 (Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)) version 15.3.1 20260627 (arm-none-eabi)]
+        ignore line: [	compiled by GNU C version 13-win32  GMP version 6.2.1  MPFR version 3.1.6  MPC version 1.0.3  isl version isl-0.15-1-g835ea3a-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1"]
+        ignore line: [ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1/arm-none-eabi/thumb/v7e-m+fp/hard"]
+        ignore line: [ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1/backward"]
+        ignore line: [ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/include"]
+        ignore line: [ignoring nonexistent directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/var/tmp/jenkins/workspace/gnu_toolchains/arm_builds/arm-15/build-mingw-arm-none-eabi/install/lib/gcc/arm-none-eabi/15.3.1/../../../../include"]
+        ignore line: [ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/include-fixed"]
+        ignore line: [ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include"]
+        ignore line: [ignoring duplicate directory "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1]
+        ignore line: [ C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1/arm-none-eabi/thumb/v7e-m+fp/hard]
+        ignore line: [ C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include/c++/15.3.1/backward]
+        ignore line: [ C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include]
+        ignore line: [ C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/include-fixed]
+        ignore line: [ C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: a5612ced7e034a58501bf9d692a3b4ba]
+        ignore line: [COLLECT_GCC_OPTIONS='-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-fstack-usage' '-mcpu=cortex-m4' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-Wall' '-fdata-sections' '-ffunction-sections' '-fstack-usage' '-fno-rtti' '-fno-exceptions' '-fno-threadsafe-statics' '-v' '-o' 'CMakeFiles/cmTC_fd77d.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mthumb' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'CMakeFiles/cmTC_fd77d.dir/']
+        ignore line: [ C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv7e-m+fp -mfloat-abi=hard -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mfpu=fpv4-sp-d16 -meabi=5 -o CMakeFiles/cmTC_fd77d.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\jimmy\\AppData\\Local\\Temp\\ccj0UUIn.s]
+        ignore line: [GNU assembler version 2.45.1 (arm-none-eabi) using BFD version (Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)) 2.45.1.20260126]
+        ignore line: [COMPILER_PATH=C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/15.3.1/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../libexec/gcc/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/bin/]
+        ignore line: [LIBRARY_PATH=C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/lib/thumb/v7e-m+fp/hard/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/]
+        ignore line: [C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../arm-none-eabi/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-fstack-usage' '-mcpu=cortex-m4' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-Wall' '-fdata-sections' '-ffunction-sections' '-fstack-usage' '-fno-rtti' '-fno-exceptions' '-fno-threadsafe-statics' '-v' '-o' 'CMakeFiles/cmTC_fd77d.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mthumb' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'CMakeFiles/cmTC_fd77d.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f libcmTC_fd77d.a && "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-ar.exe" qc libcmTC_fd77d.a  CMakeFiles/cmTC_fd77d.dir/CMakeCXXCompilerABI.cpp.obj && "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin\\arm-none-eabi-ranlib.exe" libcmTC_fd77d.a && cd ."]
+        ignore line: []
+        ignore line: []
+        linker tool for 'CXX': COLLECT_GCC=C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-g++.exe 
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Internal/CMakeDetermineLinkerId.cmake:41 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:337 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:28 (project)"
+    message: |
+      Running the CXX compiler's linker: "COLLECT_GCC=C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-g++.exe" "-v"
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Internal/CMakeDetermineLinkerId.cmake:41 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:337 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:28 (project)"
+    message: |
+      Running the CXX compiler's linker: "COLLECT_GCC=C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-g++.exe" "-V"
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Internal/CMakeDetermineLinkerId.cmake:41 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:337 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:28 (project)"
+    message: |
+      Running the CXX compiler's linker: "COLLECT_GCC=C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-g++.exe" "--version"
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompiler.cmake:115 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineASMCompiler.cmake:64 (_cmake_find_compiler_path)"
+      - "CMakeLists.txt:32 (enable_language)"
+    mode: "program"
+    variable: "CMAKE_ASM_COMPILER_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "arm-none-eabi-gcc"
+    candidate_directories:
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/MinGW/bin/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/"
+      - "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/"
+      - "C:/Users/jimmy/Downloads/CrossIDE/"
+      - "C:/Users/jimmy/Downloads/elec 291/EFM8/EFM8_Prog/"
+      - "C:/Users/jimmy/Downloads/CrossIDE/Call51/Bin/"
+      - "C:/elec291/"
+      - "C:/Program Files/MATLAB/R2026a/bin/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/"
+      - "C:/Users/jimmy/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/msys64/ucrt64/bin/"
+      - "C:/Users/jimmy/AppData/Local/Python/bin/"
+      - "C:/Users/jimmy/Downloads/PIC32/"
+      - "C:/Users/jimmy/Downloads/XC32_1.42/xc32/v1.42/bin/"
+      - "C:/Users/jimmy/Downloads/Pro32/"
+      - "C:/Users/jimmy/Downloads/PIC32/Pro32/"
+      - "C:/Users/jimmy/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/altera/25.1std/questa_fse/win64/"
+      - "C:/Users/jimmy/AppData/Local/Programs/Antigravity IDE/bin/"
+      - "C:/Users/jimmy/AppData/Local/Microsoft/WinGet/Links/"
+      - "/bin/"
+    searched_directories:
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/arm-none-eabi-gcc.com"
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/arm-none-eabi-gcc.exe"
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/arm-none-eabi-gcc"
+      - "C:/Windows/System32/arm-none-eabi-gcc.com"
+      - "C:/Windows/System32/arm-none-eabi-gcc.exe"
+      - "C:/Windows/System32/arm-none-eabi-gcc"
+      - "C:/Windows/arm-none-eabi-gcc.com"
+      - "C:/Windows/arm-none-eabi-gcc.exe"
+      - "C:/Windows/arm-none-eabi-gcc"
+      - "C:/Windows/System32/wbem/arm-none-eabi-gcc.com"
+      - "C:/Windows/System32/wbem/arm-none-eabi-gcc.exe"
+      - "C:/Windows/System32/wbem/arm-none-eabi-gcc"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/arm-none-eabi-gcc.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/arm-none-eabi-gcc.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/arm-none-eabi-gcc"
+      - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc.com"
+      - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc.exe"
+      - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc"
+      - "C:/MinGW/bin/arm-none-eabi-gcc.com"
+      - "C:/MinGW/bin/arm-none-eabi-gcc.exe"
+      - "C:/MinGW/bin/arm-none-eabi-gcc"
+      - "C:/Program Files/dotnet/arm-none-eabi-gcc.com"
+      - "C:/Program Files/dotnet/arm-none-eabi-gcc.exe"
+      - "C:/Program Files/dotnet/arm-none-eabi-gcc"
+      - "C:/Program Files/Git/cmd/arm-none-eabi-gcc.com"
+      - "C:/Program Files/Git/cmd/arm-none-eabi-gcc.exe"
+      - "C:/Program Files/Git/cmd/arm-none-eabi-gcc"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/arm-none-eabi-gcc.com"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/arm-none-eabi-gcc.exe"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/arm-none-eabi-gcc"
+      - "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc.com"
+    found: "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:/Users/jimmy/.gemini/antigravity-ide/bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\VL53L0X_EFM8LB12_Example"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\EFM8\\EFM8_Prog"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\elec291"
+        - "C:\\Program Files\\MATLAB\\R2026a\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Python\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32"
+        - "C:\\Users\\jimmy\\Downloads\\XC32_1.42\\xc32\\v1.42\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\Users\\jimmy\\Downloads\\Pro32"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32\\Pro32"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\altera\\25.1std\\questa_fse\\win64"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/warehouse_proj"
+      CMAKE_SYSTEM_PROGRAM_PATH:
+        - "/bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:1328 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineASMCompiler.cmake:174 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:32 (enable_language)"
+    message: |
+      Checking whether the ASM compiler is GNU using "--version" matched "(GNU assembler)|(GCC)|(Free Software Foundation)":
+      arm-none-eabi-gcc.exe (Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)) 15.3.1 20260627
+      Copyright (C) 2025 Free Software Foundation, Inc.
+      This is free software; see the source for copying conditions.  There is NO
+      warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "CMakeLists.txt:79 (find_program)"
+    mode: "program"
+    variable: "STM32_PROGRAMMER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "STM32_Programmer_CLI"
+      - "STM32_Programmer_CLI.exe"
+    candidate_directories:
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/MinGW/bin/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/"
+      - "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/"
+      - "C:/Users/jimmy/Downloads/CrossIDE/"
+      - "C:/Users/jimmy/Downloads/elec 291/EFM8/EFM8_Prog/"
+      - "C:/Users/jimmy/Downloads/CrossIDE/Call51/Bin/"
+      - "C:/elec291/"
+      - "C:/Program Files/MATLAB/R2026a/bin/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/"
+      - "C:/Users/jimmy/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/msys64/ucrt64/bin/"
+      - "C:/Users/jimmy/AppData/Local/Python/bin/"
+      - "C:/Users/jimmy/Downloads/PIC32/"
+      - "C:/Users/jimmy/Downloads/XC32_1.42/xc32/v1.42/bin/"
+      - "C:/Users/jimmy/Downloads/Pro32/"
+      - "C:/Users/jimmy/Downloads/PIC32/Pro32/"
+      - "C:/Users/jimmy/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/altera/25.1std/questa_fse/win64/"
+      - "C:/Users/jimmy/AppData/Local/Programs/Antigravity IDE/bin/"
+      - "C:/Users/jimmy/AppData/Local/Microsoft/WinGet/Links/"
+      - "/bin/"
+    searched_directories:
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/STM32_Programmer_CLI.com"
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/STM32_Programmer_CLI.exe"
+      - "C:/Users/jimmy/.gemini/antigravity-ide/bin/STM32_Programmer_CLI"
+      - "C:/Windows/System32/STM32_Programmer_CLI.com"
+      - "C:/Windows/System32/STM32_Programmer_CLI.exe"
+      - "C:/Windows/System32/STM32_Programmer_CLI"
+      - "C:/Windows/STM32_Programmer_CLI.com"
+      - "C:/Windows/STM32_Programmer_CLI.exe"
+      - "C:/Windows/STM32_Programmer_CLI"
+      - "C:/Windows/System32/wbem/STM32_Programmer_CLI.com"
+      - "C:/Windows/System32/wbem/STM32_Programmer_CLI.exe"
+      - "C:/Windows/System32/wbem/STM32_Programmer_CLI"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/STM32_Programmer_CLI.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/STM32_Programmer_CLI.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/STM32_Programmer_CLI"
+      - "C:/Windows/System32/OpenSSH/STM32_Programmer_CLI.com"
+      - "C:/Windows/System32/OpenSSH/STM32_Programmer_CLI.exe"
+      - "C:/Windows/System32/OpenSSH/STM32_Programmer_CLI"
+      - "C:/MinGW/bin/STM32_Programmer_CLI.com"
+      - "C:/MinGW/bin/STM32_Programmer_CLI.exe"
+      - "C:/MinGW/bin/STM32_Programmer_CLI"
+      - "C:/Program Files/dotnet/STM32_Programmer_CLI.com"
+      - "C:/Program Files/dotnet/STM32_Programmer_CLI.exe"
+      - "C:/Program Files/dotnet/STM32_Programmer_CLI"
+      - "C:/Program Files/Git/cmd/STM32_Programmer_CLI.com"
+      - "C:/Program Files/Git/cmd/STM32_Programmer_CLI.exe"
+      - "C:/Program Files/Git/cmd/STM32_Programmer_CLI"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/STM32_Programmer_CLI.com"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/STM32_Programmer_CLI.exe"
+      - "C:/Users/jimmy/Downloads/elec 291/VL53L0X_EFM8LB12_Example/STM32_Programmer_CLI"
+      - "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/STM32_Programmer_CLI.com"
+      - "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/STM32_Programmer_CLI.exe"
+      - "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/STM32_Programmer_CLI"
+      - "C:/Users/jimmy/Downloads/CrossIDE/STM32_Programmer_CLI.com"
+      - "C:/Users/jimmy/Downloads/CrossIDE/STM32_Programmer_CLI.exe"
+      - "C:/Users/jimmy/Downloads/CrossIDE/STM32_Programmer_CLI"
+      - "C:/Users/jimmy/Downloads/elec 291/EFM8/EFM8_Prog/STM32_Programmer_CLI.com"
+      - "C:/Users/jimmy/Downloads/elec 291/EFM8/EFM8_Prog/STM32_Programmer_CLI.exe"
+      - "C:/Users/jimmy/Downloads/elec 291/EFM8/EFM8_Prog/STM32_Programmer_CLI"
+      - "C:/Users/jimmy/Downloads/CrossIDE/Call51/Bin/STM32_Programmer_CLI.com"
+      - "C:/Users/jimmy/Downloads/CrossIDE/Call51/Bin/STM32_Programmer_CLI.exe"
+      - "C:/Users/jimmy/Downloads/CrossIDE/Call51/Bin/STM32_Programmer_CLI"
+      - "C:/elec291/STM32_Programmer_CLI.com"
+      - "C:/elec291/STM32_Programmer_CLI.exe"
+      - "C:/elec291/STM32_Programmer_CLI"
+      - "C:/Program Files/MATLAB/R2026a/bin/STM32_Programmer_CLI.com"
+      - "C:/Program Files/MATLAB/R2026a/bin/STM32_Programmer_CLI.exe"
+      - "C:/Program Files/MATLAB/R2026a/bin/STM32_Programmer_CLI"
+      - "C:/Program Files/CMake/bin/STM32_Programmer_CLI.com"
+      - "C:/Program Files/CMake/bin/STM32_Programmer_CLI.exe"
+      - "C:/Program Files/CMake/bin/STM32_Programmer_CLI"
+      - "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/STM32_Programmer_CLI.com"
+    found: "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/STM32_Programmer_CLI.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:/Users/jimmy/.gemini/antigravity-ide/bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\VL53L0X_EFM8LB12_Example"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\elec 291\\EFM8\\EFM8_Prog"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\elec291"
+        - "C:\\Program Files\\MATLAB\\R2026a\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Arm\\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Python\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32"
+        - "C:\\Users\\jimmy\\Downloads\\XC32_1.42\\xc32\\v1.42\\bin"
+        - "C:\\Users\\jimmy\\Downloads\\CrossIDE\\Call51\\Bin"
+        - "C:\\Users\\jimmy\\Downloads\\Pro32"
+        - "C:\\Users\\jimmy\\Downloads\\PIC32\\Pro32"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\altera\\25.1std\\questa_fse\\win64"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\jimmy\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/warehouse_proj"
+      CMAKE_SYSTEM_PROGRAM_PATH:
+        - "/bin"
+...

@@ -1,0 +1,6 @@
+D:/Downloads/warehouse_proj/Core/Src/stepper.c:12:6:stepper_init	8	static
+D:/Downloads/warehouse_proj/Core/Src/stepper.c:21:6:stepper_set_dir	8	static
+D:/Downloads/warehouse_proj/Core/Src/stepper.c:26:6:stepper_step	8	static
+D:/Downloads/warehouse_proj/Core/Src/stepper.c:31:6:stepper_move_steps	24	static
+D:/Downloads/warehouse_proj/Core/Src/stepper.c:83:6:stepper_move_degrees	24	static
+D:/Downloads/warehouse_proj/Core/Src/stepper.c:94:6:stepper_stop	8	static

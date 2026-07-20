@@ -76,8 +76,14 @@ void Error_Handler(void);
 #define PWMA_GPIO_Port GPIOA
 #define Servo_Suspension_Pin GPIO_PIN_0
 #define Servo_Suspension_GPIO_Port GPIOB
+#define STEP_Pin GPIO_PIN_8
+#define STEP_GPIO_Port GPIOA
+#define DIR_Pin GPIO_PIN_9
+#define DIR_GPIO_Port GPIOA
 #define PWMB_Pin GPIO_PIN_10
 #define PWMB_GPIO_Port GPIOA
+#define ENABLE_Pin GPIO_PIN_11
+#define ENABLE_GPIO_Port GPIOA
 #define T_SWDIO_Pin GPIO_PIN_13
 #define T_SWDIO_GPIO_Port GPIOA
 #define T_SWCLK_Pin GPIO_PIN_14

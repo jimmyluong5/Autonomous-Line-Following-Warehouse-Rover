@@ -5,6 +5,7 @@ extern TIM_HandleTypeDef htim2;  // timer 2
 extern TIM_HandleTypeDef htim17; // timer 17
 
 void Motor_Init(void) {
+  
   // Start TIM17 Channel 1 PWM for right motor
   HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
   // Start TIM2 Channel 4 PWM for right motor

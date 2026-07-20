@@ -51,6 +51,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/encoder.c
     Core/Src/line_following.c
     Core/Src/servo.c
+    Core/Src/stepper.c
     # Add user sources here
 )
 

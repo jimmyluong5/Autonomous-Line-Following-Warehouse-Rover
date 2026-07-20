@@ -22,3 +22,8 @@ void Servo_SetAngle(uint8_t angle) {
     //set the pulse width
     __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, compare_value);
 }
+
+void servo_stop(void) {
+    //turn off pwm
+    HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_3);
+}
