@@ -62,36 +62,45 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define Motor_BIN2_Pin GPIO_PIN_0
-#define Motor_BIN2_GPIO_Port GPIOA
-#define Motor_BIN1_Pin GPIO_PIN_1
-#define Motor_BIN1_GPIO_Port GPIOA
-#define Motor_STBY_Pin GPIO_PIN_4
-#define Motor_STBY_GPIO_Port GPIOA
-#define Motor_AIN2_Pin GPIO_PIN_5
-#define Motor_AIN2_GPIO_Port GPIOA
-#define Motor_AIN1_Pin GPIO_PIN_6
-#define Motor_AIN1_GPIO_Port GPIOA
-#define PWMA_Pin GPIO_PIN_7
-#define PWMA_GPIO_Port GPIOA
+#define DC_Motor_BIN2_Pin GPIO_PIN_0
+#define DC_Motor_BIN2_GPIO_Port GPIOA
+#define DC_Motor_BIN1_Pin GPIO_PIN_1
+#define DC_Motor_BIN1_GPIO_Port GPIOA
+#define DC_Motor_STBY_Pin GPIO_PIN_4
+#define DC_Motor_STBY_GPIO_Port GPIOA
+#define DC_Motor_AIN2_Pin GPIO_PIN_5
+#define DC_Motor_AIN2_GPIO_Port GPIOA
+#define DC_Motor_AIN1_Pin GPIO_PIN_6
+#define DC_Motor_AIN1_GPIO_Port GPIOA
+#define Motor_Driver_PWMA_Pin GPIO_PIN_7
+#define Motor_Driver_PWMA_GPIO_Port GPIOA
 #define Servo_Suspension_Pin GPIO_PIN_0
 #define Servo_Suspension_GPIO_Port GPIOB
-#define STEP_Pin GPIO_PIN_8
-#define STEP_GPIO_Port GPIOA
-#define DIR_Pin GPIO_PIN_9
-#define DIR_GPIO_Port GPIOA
-#define PWMB_Pin GPIO_PIN_10
-#define PWMB_GPIO_Port GPIOA
-#define ENABLE_Pin GPIO_PIN_11
-#define ENABLE_GPIO_Port GPIOA
+#define Stepper_STEP_Pin GPIO_PIN_8
+#define Stepper_STEP_GPIO_Port GPIOA
+#define Stepper_DIR_Pin GPIO_PIN_9
+#define Stepper_DIR_GPIO_Port GPIOA
+#define Motor_Driver_PWMB_Pin GPIO_PIN_10
+#define Motor_Driver_PWMB_GPIO_Port GPIOA
+#define Stepper_ENABLE_Pin GPIO_PIN_11
+#define Stepper_ENABLE_GPIO_Port GPIOA
+#define RFID_RST_Pin GPIO_PIN_12
+#define RFID_RST_GPIO_Port GPIOA
 #define T_SWDIO_Pin GPIO_PIN_13
 #define T_SWDIO_GPIO_Port GPIOA
 #define T_SWCLK_Pin GPIO_PIN_14
 #define T_SWCLK_GPIO_Port GPIOA
+#define RFID_SPI_CS_Pin GPIO_PIN_15
+#define RFID_SPI_CS_GPIO_Port GPIOA
+#define ADC_SPI_CS_Pin GPIO_PIN_6
+#define ADC_SPI_CS_GPIO_Port GPIOB
+#define Speaker_Pin GPIO_PIN_7
+#define Speaker_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
-#define ADC_CS_Pin GPIO_PIN_6
-#define ADC_CS_GPIO_Port GPIOB
+// Map ADC_CS to the newly generated ADC_SPI_CS pin
+#define ADC_CS_Pin ADC_SPI_CS_Pin
+#define ADC_CS_GPIO_Port ADC_SPI_CS_GPIO_Port
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

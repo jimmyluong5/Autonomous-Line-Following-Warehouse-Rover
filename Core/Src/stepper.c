@@ -11,15 +11,15 @@ extern TIM_HandleTypeDef htim1; //timer 1
 //using timer 1
 void stepper_init(void) {
     // Disable driver outputs initially (active high to disable)
-    HAL_GPIO_WritePin(ENABLE_GPIO_Port, ENABLE_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(Stepper_ENABLE_GPIO_Port, Stepper_ENABLE_Pin, GPIO_PIN_SET);
     
     // Set the direction pin low for now (default)
-    HAL_GPIO_WritePin(DIR_GPIO_Port, DIR_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(Stepper_DIR_GPIO_Port, Stepper_DIR_Pin, GPIO_PIN_RESET);
 }
 
 //function to set/toggle the direction of the stepper.
 void stepper_set_dir(void) {
-    HAL_GPIO_TogglePin(DIR_GPIO_Port, DIR_Pin);
+    HAL_GPIO_TogglePin(Stepper_DIR_GPIO_Port, Stepper_DIR_Pin);
 }
 
 //function for moving the stepper motor starting the PWM
@@ -39,11 +39,11 @@ void stepper_move_steps (int32_t steps, uint32_t speed) {
     if (steps > 0) {
         //if steps>0 then we are CW
         //set the dir pin low
-        HAL_GPIO_WritePin(DIR_GPIO_Port, DIR_Pin, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(Stepper_DIR_GPIO_Port, Stepper_DIR_Pin, GPIO_PIN_RESET);
     }
     else {
         //set the dir pin high
-        HAL_GPIO_WritePin(DIR_GPIO_Port, DIR_Pin, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(Stepper_DIR_GPIO_Port, Stepper_DIR_Pin, GPIO_PIN_SET);
         steps = -steps; //make step count positive for the loop/delay
     }
  
@@ -58,7 +58,7 @@ void stepper_move_steps (int32_t steps, uint32_t speed) {
     __HAL_TIM_SET_COUNTER(&htim1, 0);
 
     //enable A4988 outputs (active-low)
-    HAL_GPIO_WritePin(ENABLE_GPIO_Port, ENABLE_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(Stepper_ENABLE_GPIO_Port, Stepper_ENABLE_Pin, GPIO_PIN_RESET);
     HAL_Delay(1); // Small wake-up delay for driver IC
 
     //start the pwm 
@@ -76,7 +76,7 @@ void stepper_move_steps (int32_t steps, uint32_t speed) {
     HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
 
     //disable motor driver again.
-    HAL_GPIO_WritePin(ENABLE_GPIO_Port, ENABLE_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(Stepper_ENABLE_GPIO_Port, Stepper_ENABLE_Pin, GPIO_PIN_SET);
 }
 
 // Rotate the output shaft by a specific angle in degrees (positive = CW, negative = CCW)
@@ -94,5 +94,5 @@ void stepper_move_degrees(float degrees, uint32_t speed) {
 void stepper_stop(void) {
     //just turn off pwm, and set enable high to disable stepper motor
     HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
-    HAL_GPIO_WritePin(ENABLE_GPIO_Port, ENABLE_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(Stepper_ENABLE_GPIO_Port, Stepper_ENABLE_Pin, GPIO_PIN_SET);
 }

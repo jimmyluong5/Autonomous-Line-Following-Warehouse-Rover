@@ -20,7 +20,7 @@ void Motor_Init(void) {
 }
 
 void Motor_SetStandby(bool standby) {
-  HAL_GPIO_WritePin(Motor_STBY_GPIO_Port, Motor_STBY_Pin,
+  HAL_GPIO_WritePin(DC_Motor_STBY_GPIO_Port, DC_Motor_STBY_Pin,
                     standby ? GPIO_PIN_RESET : GPIO_PIN_SET);
 }
 
@@ -37,22 +37,22 @@ void Motor_Right_SetSpeed(int16_t speed) {
 
   if (speed > 0) {
     // BIN1 = High, BIN2 = Low for Forward
-    HAL_GPIO_WritePin(Motor_BIN1_GPIO_Port, Motor_BIN1_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(Motor_BIN2_GPIO_Port, Motor_BIN2_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(DC_Motor_BIN1_GPIO_Port, DC_Motor_BIN1_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(DC_Motor_BIN2_GPIO_Port, DC_Motor_BIN2_Pin, GPIO_PIN_RESET);
     __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4, (uint32_t)speed);
   }
 
   else if (speed < 0) {
     // BIN1 = Low, BIN2 = High for Reverse
-    HAL_GPIO_WritePin(Motor_BIN1_GPIO_Port, Motor_BIN1_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(Motor_BIN2_GPIO_Port, Motor_BIN2_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(DC_Motor_BIN1_GPIO_Port, DC_Motor_BIN1_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(DC_Motor_BIN2_GPIO_Port, DC_Motor_BIN2_Pin, GPIO_PIN_SET);
     __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4, (uint32_t)(-speed));
   }
 
   else {
     // Stop: BIN1 = Low, BIN2 = Low
-    HAL_GPIO_WritePin(Motor_BIN1_GPIO_Port, Motor_BIN1_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(Motor_BIN2_GPIO_Port, Motor_BIN2_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(DC_Motor_BIN1_GPIO_Port, DC_Motor_BIN1_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(DC_Motor_BIN2_GPIO_Port, DC_Motor_BIN2_Pin, GPIO_PIN_RESET);
     __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4, 0);
   }
 }
@@ -69,22 +69,22 @@ void Motor_Left_SetSpeed(int16_t speed) {
 
   if (speed > 0) {
     // AIN1 = High, AIN2 = Low for Forward
-    HAL_GPIO_WritePin(Motor_AIN1_GPIO_Port, Motor_AIN1_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(Motor_AIN2_GPIO_Port, Motor_AIN2_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(DC_Motor_AIN1_GPIO_Port, DC_Motor_AIN1_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(DC_Motor_AIN2_GPIO_Port, DC_Motor_AIN2_Pin, GPIO_PIN_RESET);
     __HAL_TIM_SET_COMPARE(&htim17, TIM_CHANNEL_1, (uint32_t)speed);
   }
 
   else if (speed < 0) {
     // AIN1 = Low, AIN2 = High for Reverse
-    HAL_GPIO_WritePin(Motor_AIN1_GPIO_Port, Motor_AIN1_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(Motor_AIN2_GPIO_Port, Motor_AIN2_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(DC_Motor_AIN1_GPIO_Port, DC_Motor_AIN1_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(DC_Motor_AIN2_GPIO_Port, DC_Motor_AIN2_Pin, GPIO_PIN_SET);
     __HAL_TIM_SET_COMPARE(&htim17, TIM_CHANNEL_1, (uint32_t)(-speed));
   }
 
   else {
     // Stop: AIN1 = Low, AIN2 = Low
-    HAL_GPIO_WritePin(Motor_AIN1_GPIO_Port, Motor_AIN1_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(Motor_AIN2_GPIO_Port, Motor_AIN2_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(DC_Motor_AIN1_GPIO_Port, DC_Motor_AIN1_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(DC_Motor_AIN2_GPIO_Port, DC_Motor_AIN2_Pin, GPIO_PIN_RESET);
     __HAL_TIM_SET_COMPARE(&htim17, TIM_CHANNEL_1, 0);
   }
 }
@@ -112,10 +112,10 @@ void Motor_Stop(void) {
 
 void Motor_Brake(void) {
   // Active Brake: set both direction pins high
-  HAL_GPIO_WritePin(Motor_AIN1_GPIO_Port, Motor_AIN1_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(Motor_AIN2_GPIO_Port, Motor_AIN2_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(Motor_BIN1_GPIO_Port, Motor_BIN1_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(Motor_BIN2_GPIO_Port, Motor_BIN2_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(DC_Motor_AIN1_GPIO_Port, DC_Motor_AIN1_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(DC_Motor_AIN2_GPIO_Port, DC_Motor_AIN2_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(DC_Motor_BIN1_GPIO_Port, DC_Motor_BIN1_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(DC_Motor_BIN2_GPIO_Port, DC_Motor_BIN2_Pin, GPIO_PIN_SET);
 
   __HAL_TIM_SET_COMPARE(&htim17, TIM_CHANNEL_1, 0);
   __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4, 0);

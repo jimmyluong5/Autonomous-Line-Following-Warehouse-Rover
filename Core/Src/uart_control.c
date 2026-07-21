@@ -16,6 +16,7 @@ static int16_t current_stepper_angle = 0; //track current stepper angle starting
 
 extern UART_HandleTypeDef hcom_uart[];
 extern SPI_HandleTypeDef hspi1;
+extern TIM_HandleTypeDef htim4;
 
 static uint32_t last_command_time = 0;
 
@@ -63,6 +64,7 @@ void UART_CONTROL_init(void) {
            " [a] - Autonomous Line Following Mode\r\n"
            " [s] - Servo Control Mode\r\n"
            " [t] - Stepper Mode \r\n"
+           " [p] - Speaker/Buzzer Test Mode\r\n"
            "------------------------------------------\r\n"
            "Select Speed (Current: %d%%):\r\n"
            " [1] - Set Speed to 25%% PWM\r\n"
@@ -128,6 +130,20 @@ void UART_CONTROL_update(void) {
             "---------------------------------\r\n");
       }
       // just add new modes above here its easier up here
+      else if (received_byte == 'p') {
+        current_mode = UART_MODE_SPEAKER;
+        first_print = true;
+        sensor_test_active = false;
+        UART_SendMessage(
+            "\x1b[2J\x1b[H"
+            "--- Speaker/Buzzer Test Mode Active ---\r\n"
+            "Press keys to test:\r\n"
+            " [1] - Play continuous 1 kHz tone\r\n"
+            " [2] - Play 100ms beep\r\n"
+            " [0] - Stop sound\r\n"
+            " [h] - Return to Main Menu\r\n"
+            "---------------------------------------\r\n");
+      }
 
       else if (received_byte == 't') {
         //set the current mode to stepper mode
@@ -477,6 +493,30 @@ void UART_CONTROL_update(void) {
         char angle_buf[64];
         snprintf(angle_buf, sizeof(angle_buf), "\rCurrent Angle:  %3d degrees", current_stepper_angle);
         UART_SendMessage(angle_buf);
+      }
+    }
+
+    else if (current_mode == UART_MODE_SPEAKER) {
+      if (received_byte == 'h') {
+        HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
+        UART_SendMessage("\r\n--- Exited Speaker Test Mode ---\r\n");
+        UART_CONTROL_init();
+      }
+      else if (received_byte == '1') {
+        __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, 500);
+        HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
+        UART_SendMessage("\rPlaying 1 kHz tone... (Press '0' to stop)\r\n");
+      }
+      else if (received_byte == '2') {
+        UART_SendMessage("\rPlaying 100ms beep...\r\n");
+        __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, 500);
+        HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
+        HAL_Delay(100);
+        HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
+      }
+      else if (received_byte == '0') {
+        HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
+        UART_SendMessage("\rTone stopped.\r\n");
       }
     }
 
