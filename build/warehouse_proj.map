@@ -1463,6 +1463,55 @@ Discarded input sections
                 0x00000000       0x14 CMakeFiles/warehouse_proj.dir/Core/Src/stepper.c.obj
  .text.stepper_step
                 0x00000000       0x12 CMakeFiles/warehouse_proj.dir/Core/Src/stepper.c.obj
+ .text          0x00000000        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .data          0x00000000        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .bss           0x00000000        0x0 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_Select
+                0x00000000       0x16 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_Deselect
+                0x00000000       0x16 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_WriteRegister
+                0x00000000       0x44 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_ReadRegister
+                0x00000000       0x54 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_WriteRegisterArray
+                0x00000000       0x5c CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_SetRegisterBits
+                0x00000000       0x36 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_ClearRegisterBits
+                0x00000000       0x3a CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_AntennaOn
+                0x00000000       0x2a CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_CalculateCRC
+                0x00000000       0xa8 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_Transceive
+                0x00000000      0x15e CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_HardwareReset
+                0x00000000       0x34 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_Init
+                0x00000000       0xc2 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_GetVersion
+                0x00000000       0x10 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_IsCardPresent
+                0x00000000       0x4c CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_ReadUID
+                0x00000000       0xb6 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_Poll
+                0x00000000       0x2a CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .text.RFID_Halt
+                0x00000000       0x68 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .debug_info    0x00000000      0xd73 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .debug_abbrev  0x00000000      0x29a CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .debug_aranges
+                0x00000000       0xa0 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .debug_rnglists
+                0x00000000       0x77 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .debug_line    0x00000000      0x6bd CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .debug_str     0x00000000      0x9d5 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .comment       0x00000000       0x47 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .debug_frame   0x00000000      0x260 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
+ .ARM.attributes
+                0x00000000       0x34 CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
  .data          0x00000000        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
  .bss           0x00000000        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
  .text          0x00000000        0x0 C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
@@ -1722,6 +1771,7 @@ LOAD CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
 LOAD CMakeFiles/warehouse_proj.dir/Core/Src/line_following.c.obj
 LOAD CMakeFiles/warehouse_proj.dir/Core/Src/servo.c.obj
 LOAD CMakeFiles/warehouse_proj.dir/Core/Src/stepper.c.obj
+LOAD CMakeFiles/warehouse_proj.dir/Core/Src/RFID.c.obj
 LOAD C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a
 START GROUP
 LOAD C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+fp/hard\libgcc.a

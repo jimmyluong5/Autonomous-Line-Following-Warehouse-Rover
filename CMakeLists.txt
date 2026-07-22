@@ -52,6 +52,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/line_following.c
     Core/Src/servo.c
     Core/Src/stepper.c
+    Core/Src/RFID.c
     # Add user sources here
 )
 
