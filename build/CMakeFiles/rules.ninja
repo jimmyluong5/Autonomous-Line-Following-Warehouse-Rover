@@ -17,7 +17,7 @@
 rule ASM_COMPILER__warehouse_proj_unscanned_Debug
   depfile = $DEP_FILE
   deps = gcc
-  command = ${LAUNCHER}${CODE_CHECK}"C:\Program Files\Arm\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\bin\arm-none-eabi-gcc.exe" $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  command = ${LAUNCHER}${CODE_CHECK}C:\tools\gcc-arm-none-eabi\arm-gnu-toolchain-13.2.Rel1-mingw-w64-i686-arm-none-eabi\bin\arm-none-eabi-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
   description = Building ASM object $out
 
 
@@ -27,7 +27,7 @@ rule ASM_COMPILER__warehouse_proj_unscanned_Debug
 rule C_COMPILER__warehouse_proj_unscanned_Debug
   depfile = $DEP_FILE
   deps = gcc
-  command = ${LAUNCHER}${CODE_CHECK}"C:\Program Files\Arm\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\bin\arm-none-eabi-gcc.exe" $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  command = ${LAUNCHER}${CODE_CHECK}C:\tools\gcc-arm-none-eabi\arm-gnu-toolchain-13.2.Rel1-mingw-w64-i686-arm-none-eabi\bin\arm-none-eabi-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
   description = Building C object $out
 
 
@@ -35,7 +35,7 @@ rule C_COMPILER__warehouse_proj_unscanned_Debug
 # Rule for linking C executable.
 
 rule C_EXECUTABLE_LINKER__warehouse_proj_Debug
-  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && "C:\Program Files\Arm\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\bin\arm-none-eabi-gcc.exe" $FLAGS $LINK_FLAGS $in -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
+  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\tools\gcc-arm-none-eabi\arm-gnu-toolchain-13.2.Rel1-mingw-w64-i686-arm-none-eabi\bin\arm-none-eabi-gcc.exe $FLAGS $LINK_FLAGS $in -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
   description = Linking C executable $TARGET_FILE
   restat = $RESTAT
 
@@ -54,7 +54,7 @@ rule CUSTOM_COMMAND
 rule C_COMPILER__STM32_Drivers_unscanned_Debug
   depfile = $DEP_FILE
   deps = gcc
-  command = ${LAUNCHER}${CODE_CHECK}"C:\Program Files\Arm\GNU Toolchain mingw-w64-x86_64-arm-none-eabi\bin\arm-none-eabi-gcc.exe" $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  command = ${LAUNCHER}${CODE_CHECK}C:\tools\gcc-arm-none-eabi\arm-gnu-toolchain-13.2.Rel1-mingw-w64-i686-arm-none-eabi\bin\arm-none-eabi-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
   description = Building C object $out
 
 
@@ -62,7 +62,7 @@ rule C_COMPILER__STM32_Drivers_unscanned_Debug
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = "C:\Program Files\CMake\bin\cmake.exe" --regenerate-during-build -SD:\Downloads\warehouse_proj -BD:\Downloads\warehouse_proj\build
+  command = "C:\Program Files\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\jimmy\Downloads\warehouse_proj -BC:\Users\jimmy\Downloads\warehouse_proj\build
   description = Re-running CMake...
   generator = 1
 
@@ -79,7 +79,7 @@ rule CLEAN_ADDITIONAL
 # Rule for cleaning all built files.
 
 rule CLEAN
-  command = C:\Users\jimmy\AppData\Local\Microsoft\WinGet\Links\ninja.exe $FILE_ARG -t clean $TARGETS
+  command = C:\Users\jimmy\AppData\Local\Microsoft\WinGet\Packages\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe\ninja.exe $FILE_ARG -t clean $TARGETS
   description = Cleaning all built files...
 
 
@@ -87,6 +87,6 @@ rule CLEAN
 # Rule for printing all primary targets available.
 
 rule HELP
-  command = C:\Users\jimmy\AppData\Local\Microsoft\WinGet\Links\ninja.exe -t targets
+  command = C:\Users\jimmy\AppData\Local\Microsoft\WinGet\Packages\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe\ninja.exe -t targets
   description = All primary targets available:
 

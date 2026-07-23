@@ -1,4 +1,4 @@
-# Install script for directory: D:/Downloads/warehouse_proj
+# Install script for directory: C:/Users/jimmy/Downloads/warehouse_proj
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,18 +34,18 @@ endif()
 
 # Set path to fallback-tool for dependency-resolution.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/Program Files/Arm/GNU Toolchain mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-objdump.exe")
+  set(CMAKE_OBJDUMP "C:/tools/gcc-arm-none-eabi/arm-gnu-toolchain-13.2.Rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-objdump.exe")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("D:/Downloads/warehouse_proj/build/cmake/stm32cubemx/cmake_install.cmake")
+  include("C:/Users/jimmy/Downloads/warehouse_proj/build/cmake/stm32cubemx/cmake_install.cmake")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "D:/Downloads/warehouse_proj/build/install_local_manifest.txt"
+  file(WRITE "C:/Users/jimmy/Downloads/warehouse_proj/build/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -61,6 +61,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "D:/Downloads/warehouse_proj/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "C:/Users/jimmy/Downloads/warehouse_proj/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
