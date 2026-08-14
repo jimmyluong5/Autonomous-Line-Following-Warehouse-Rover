@@ -3,15 +3,16 @@
 #include <encoder.h>
 #include <line_following.h>
 #include <main.h>
+#include <servo.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <stepper.h>
 #include <string.h>
 #include <uart_control.h>
-#include <servo.h>
-#include <stepper.h>
 
 static uint8_t current_servo_angle = 90;
-static int16_t current_stepper_angle = 0; //track current stepper angle starting at 0 deg.
+static int16_t current_stepper_angle =
+    0;                       // track current stepper angle starting at 0 deg.
 #define BLACK_THRESHOLD 2359 // 1.90V on 3.3V ADC
 
 extern UART_HandleTypeDef hcom_uart[];
@@ -134,40 +135,37 @@ void UART_CONTROL_update(void) {
         current_mode = UART_MODE_SPEAKER;
         first_print = true;
         sensor_test_active = false;
-        UART_SendMessage(
-            "\x1b[2J\x1b[H"
-            "--- Speaker/Buzzer Test Mode Active ---\r\n"
-            "Press keys to test:\r\n"
-            " [1] - Play continuous 1 kHz tone\r\n"
-            " [2] - Play 100ms beep\r\n"
-            " [0] - Stop sound\r\n"
-            " [h] - Return to Main Menu\r\n"
-            "---------------------------------------\r\n");
+        UART_SendMessage("\x1b[2J\x1b[H"
+                         "--- Speaker/Buzzer Test Mode Active ---\r\n"
+                         "Press keys to test:\r\n"
+                         " [1] - Play continuous 1 kHz tone\r\n"
+                         " [2] - Play 100ms beep\r\n"
+                         " [0] - Stop sound\r\n"
+                         " [h] - Return to Main Menu\r\n"
+                         "---------------------------------------\r\n");
       }
 
       else if (received_byte == 't') {
-        //set the current mode to stepper mode
+        // set the current mode to stepper mode
         current_mode = UART_MODE_STEPPER;
         first_print = true;
-        //reset stepper angle to 0
+        // reset stepper angle to 0
         current_stepper_angle = 0;
         stepper_init();
-        
 
-        //put the custom menu for stepper motor here
-         UART_SendMessage(
-            "\x1b[2J\x1b[H"
-            "--- Stepper Control Mode Active ---\r\n"
-            "Controls:\r\n"
-            " [a] - Decrease angle by 5 deg (CCW)\r\n"
-            " [d] - Increase angle by 5 deg (CW)\r\n"
-            " [1] - Set to 0 deg | [2] - Set to 180 deg | [3] - Set to 360 deg\r\n"
-            " [h] - Return to Main Menu\r\n"
-            "-----------------------------------\r\n"
-            "Current Angle:    0 degrees");
-        
+        // put the custom menu for stepper motor here
+        UART_SendMessage("\x1b[2J\x1b[H"
+                         "--- Stepper Control Mode Active ---\r\n"
+                         "Controls:\r\n"
+                         " [a] - Decrease angle by 5 deg (CCW)\r\n"
+                         " [d] - Increase angle by 5 deg (CW)\r\n"
+                         " [1] - Set to 0 deg | [2] - Set to 180 deg | [3] - "
+                         "Set to 360 deg\r\n"
+                         " [h] - Return to Main Menu\r\n"
+                         "-----------------------------------\r\n"
+                         "Current Angle:    0 degrees");
+
       }
-
 
       // normalized mode
       else if (received_byte == 'n') {
@@ -209,16 +207,17 @@ void UART_CONTROL_update(void) {
         sensor_test_active = false;
         current_servo_angle = 90;
         Servo_SetAngle(current_servo_angle);
-        UART_SendMessage(
-            "\x1b[2J\x1b[H"
-            "--- Servo Control Mode Active ---\r\n"
-            "Controls:\r\n"
-            " [a] - Decrease angle by 5 deg\r\n"
-            " [d] - Increase angle by 5 deg\r\n"
-            " [1] - Set to 0 deg | [2] - Set to 90 deg | [3] - Set to 180 deg\r\n"
-            " [h] - Return to Main Menu\r\n"
-            "---------------------------------\r\n"
-            "Current Angle:  90 degrees");
+        UART_SendMessage("\x1b[2J\x1b[H"
+                         "--- Servo Control Mode Active ---\r\n"
+                         "Controls:\r\n"
+                         " [a] - Decrease angle by 5 deg\r\n"
+                         " [d] - Increase angle by 5 deg\r\n"
+                         " [1] - Set to 0 deg | [2] - Set to 45 deg | [3] - "
+                         "Set to 90 deg \r\n"
+                         " [4] - Set to 135 deg | [5] - Set to 180 deg\r\n"
+                         " [h] - Return to Main Menu\r\n"
+                         "---------------------------------\r\n"
+                         "Current Angle:  90 degrees");
       }
 
       // voltage mode
@@ -396,22 +395,19 @@ void UART_CONTROL_update(void) {
     else if (current_mode == UART_MODE_AUTO) {
       if (received_byte == 'h') {
         Robot_SetState(robot_idle);
-        UART_SendMessage("\r\n--- Exited Autonomous Mode. Stopping Robot. ---\r\n");
+        UART_SendMessage(
+            "\r\n--- Exited Autonomous Mode. Stopping Robot. ---\r\n");
         UART_CONTROL_init();
-      }
-      else if (received_byte == '1') {
+      } else if (received_byte == '1') {
         robot_speed = 250;
         UART_SendMessage("Speed set to 25% PWM (250/999)\r\n");
-      }
-      else if (received_byte == '2') {
+      } else if (received_byte == '2') {
         robot_speed = 500;
         UART_SendMessage("Speed set to 50% PWM (500/999)\r\n");
-      }
-      else if (received_byte == '3') {
+      } else if (received_byte == '3') {
         robot_speed = 750;
         UART_SendMessage("Speed set to 75% PWM (750/999)\r\n");
-      }
-      else if (received_byte == '4') {
+      } else if (received_byte == '4') {
         robot_speed = 999;
         UART_SendMessage("Speed set to 100% PWM (999/999)\r\n");
       }
@@ -422,24 +418,31 @@ void UART_CONTROL_update(void) {
       if (received_byte == 'h') {
         UART_SendMessage("\r\n--- Exited Servo Mode ---\r\n");
         UART_CONTROL_init();
-      }
-      else if (received_byte == 'a') {
-        current_servo_angle = (current_servo_angle >= 5) ? current_servo_angle - 5 : 0;
+      } else if (received_byte == 'a') {
+        current_servo_angle =
+            (current_servo_angle >= 5) ? current_servo_angle - 5 : 0;
         angle_changed = true;
-      }
-      else if (received_byte == 'd') {
-        current_servo_angle = (current_servo_angle <= 175) ? current_servo_angle + 5 : 180;
+      } else if (received_byte == 'd') {
+        current_servo_angle =
+            (current_servo_angle <= 175) ? current_servo_angle + 5 : 180;
         angle_changed = true;
-      }
-      else if (received_byte == '1') {
+      } else if (received_byte == '1') {
         current_servo_angle = 0;
         angle_changed = true;
-      }
-      else if (received_byte == '2') {
+      } else if (received_byte == '2') {
+        current_servo_angle = 45;
+        angle_changed = true;
+      } else if (received_byte == '3') {
         current_servo_angle = 90;
         angle_changed = true;
       }
-      else if (received_byte == '3') {
+
+      else if (received_byte == '4') {
+        current_servo_angle = 135;
+        angle_changed = true;
+      }
+
+      else if (received_byte == '5') {
         current_servo_angle = 180;
         angle_changed = true;
       }
@@ -447,7 +450,8 @@ void UART_CONTROL_update(void) {
       if (angle_changed) {
         Servo_SetAngle(current_servo_angle);
         char angle_buf[64];
-        snprintf(angle_buf, sizeof(angle_buf), "\rCurrent Angle: %3d degrees", current_servo_angle);
+        snprintf(angle_buf, sizeof(angle_buf), "\rCurrent Angle: %3d degrees",
+                 current_servo_angle);
         UART_SendMessage(angle_buf);
       }
     }
@@ -456,31 +460,28 @@ void UART_CONTROL_update(void) {
       int16_t target_angle = current_stepper_angle;
       bool angle_changed = false;
 
-      //head back to menu
+      // head back to menu
       if (received_byte == 'h') {
         stepper_stop();
         UART_SendMessage("\r\n--- Exited Stepper Mode ---\r\n");
         UART_CONTROL_init();
-      }
-      else if (received_byte == 'a') {
+      } else if (received_byte == 'a') {
         target_angle = current_stepper_angle - 5;
-        if (target_angle < 0) target_angle = 0;
+        if (target_angle < 0)
+          target_angle = 0;
         angle_changed = true;
-      }
-      else if (received_byte == 'd') {
+      } else if (received_byte == 'd') {
         target_angle = current_stepper_angle + 5;
-        if (target_angle > 360) target_angle = 360;
+        if (target_angle > 360)
+          target_angle = 360;
         angle_changed = true;
-      }
-      else if (received_byte == '1') {
+      } else if (received_byte == '1') {
         target_angle = 0;
         angle_changed = true;
-      }
-      else if (received_byte == '2') {
+      } else if (received_byte == '2') {
         target_angle = 180;
         angle_changed = true;
-      }
-      else if (received_byte == '3') {
+      } else if (received_byte == '3') {
         target_angle = 360;
         angle_changed = true;
       }
@@ -491,7 +492,8 @@ void UART_CONTROL_update(void) {
         current_stepper_angle = target_angle;
 
         char angle_buf[64];
-        snprintf(angle_buf, sizeof(angle_buf), "\rCurrent Angle:  %3d degrees", current_stepper_angle);
+        snprintf(angle_buf, sizeof(angle_buf), "\rCurrent Angle:  %3d degrees",
+                 current_stepper_angle);
         UART_SendMessage(angle_buf);
       }
     }
@@ -501,26 +503,21 @@ void UART_CONTROL_update(void) {
         HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
         UART_SendMessage("\r\n--- Exited Speaker Test Mode ---\r\n");
         UART_CONTROL_init();
-      }
-      else if (received_byte == '1') {
+      } else if (received_byte == '1') {
         __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, 500);
         HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
         UART_SendMessage("\rPlaying 1 kHz tone... (Press '0' to stop)\r\n");
-      }
-      else if (received_byte == '2') {
+      } else if (received_byte == '2') {
         UART_SendMessage("\rPlaying 100ms beep...\r\n");
         __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, 500);
         HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
         HAL_Delay(100);
         HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
-      }
-      else if (received_byte == '0') {
+      } else if (received_byte == '0') {
         HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
         UART_SendMessage("\rTone stopped.\r\n");
       }
     }
-
-
   }
 
   // Periodic sensor print
@@ -542,7 +539,8 @@ void UART_CONTROL_update(void) {
     // rows
     if (!first_print) {
       // Both Mode and Normalize Mode print 9 lines, Voltage Mode prints 8 lines
-      if (current_mode == UART_MODE_BOTH || current_mode == UART_MODE_NORMALIZE) {
+      if (current_mode == UART_MODE_BOTH ||
+          current_mode == UART_MODE_NORMALIZE) {
         len += snprintf(buffer + len, sizeof(buffer) - len, "\x1B[9A");
       }
 
@@ -616,7 +614,8 @@ void UART_CONTROL_update(void) {
           filtered_adc[ch] = raw;
         } else {
           float alpha = 0.3f;
-          filtered_adc[ch] = (uint16_t)(alpha * raw + (1.0f - alpha) * filtered_adc[ch]);
+          filtered_adc[ch] =
+              (uint16_t)(alpha * raw + (1.0f - alpha) * filtered_adc[ch]);
         }
         uint16_t filtered_val = filtered_adc[ch];
 
@@ -650,18 +649,18 @@ void UART_CONTROL_update(void) {
           // convert the raw ADC values from 16 bit to 32 bit.
           uint32_t actual_voltage = ((uint32_t)filtered_val * 3300) / 4095;
           if (current_mode == UART_MODE_VOLTAGE) {
-            
+
+            len += snprintf(
+                buffer + len, sizeof(buffer) - len,
+                "CH%d: %lu.%02luV | ADC: %4u | min: %u , max: %u  \r\n", ch,
+                actual_voltage / 1000, (actual_voltage % 1000) / 10,
+                filtered_val, min[ch], max[ch]);
+          } else {
             len += snprintf(buffer + len, sizeof(buffer) - len,
-                       "CH%d: %lu.%02luV | ADC: %4u | min: %u , max: %u  \r\n",
-                       ch, actual_voltage / 1000, (actual_voltage % 1000) / 10,
-                       filtered_val, min[ch], max[ch]);
-          }
-          else {
-            len +=
-                snprintf(buffer + len, sizeof(buffer) - len,
-                         "CH%d: %lu.%02luV | ADC: %4u                               \r\n",
-                         ch, actual_voltage / 1000, (actual_voltage % 1000) / 10,
-                         filtered_val);
+                            "CH%d: %lu.%02luV | ADC: %4u                       "
+                            "        \r\n",
+                            ch, actual_voltage / 1000,
+                            (actual_voltage % 1000) / 10, filtered_val);
           }
         }
       }
@@ -680,7 +679,8 @@ void UART_CONTROL_update(void) {
 // this function checks if we have timeouted or not.
 void UART_CONTROL_check_timeout(void) {
   // If the robot is not idle, fault, or auto, check for communication timeout
-  if (Robot_GetState() != robot_idle && Robot_GetState() != robot_fault && Robot_GetState() != robot_auto) {
+  if (Robot_GetState() != robot_idle && Robot_GetState() != robot_fault &&
+      Robot_GetState() != robot_auto) {
 
     // check if its been too long since we last got a command.
     if (HAL_GetTick() - last_command_time > 2000) {
