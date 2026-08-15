@@ -1,14 +1,20 @@
 #include <stdio.h>
 #include <string.h>
 #include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "esp_system.h"
+#include "freertos/task.h" //includes FreeRTOS task utilities (which provides a function to pause)
+//execution with crashing the CPU
+#include "esp_system.h" //includes core esp32 system functions
 #include "esp_log.h"
 #include "nvs_flash.h"
 #include "esp_wifi.h"
 #include "esp_event.h"
 #include "esp_now.h"
 #include "esp_mac.h"
+
+//before the main.c file had nothing, but the AI added ESP-NOW
+//wireless setup code so that the esp32 can send data over wifi/esp-now to the 
+//receiver esp32
+
 
 static const char *TAG = "ESP32_TRANSMITTER";
 
@@ -60,4 +66,4 @@ void app_main(void) {
     while (1) {
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
-}
+}
