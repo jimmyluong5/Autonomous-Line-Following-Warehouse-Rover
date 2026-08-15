@@ -45,10 +45,13 @@ void init_esp_now(void) {
 
   esp_now_peer_info_t peerInfo = {};
   memcpy(peerInfo.peer_addr, receiver_mac, ESP_NOW_ETH_ALEN);
-  peerInfo.channel = 0;
+  peerInfo.channel = 1;
   peerInfo.encrypt = false;
 
-  if (esp_now_add_peer(&peerInfo) != ESP_OK) {
-    ESP_LOGE(TAG, "Failed to add peer");
+  if (!esp_now_is_peer_exist(receiver_mac)) {
+    if (esp_now_add_peer(&peerInfo) != ESP_OK) {
+      ESP_LOGE(TAG, "Failed to add peer");
+    }
   }
 }
+
