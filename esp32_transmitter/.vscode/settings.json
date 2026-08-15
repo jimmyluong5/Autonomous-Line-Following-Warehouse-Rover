@@ -1,0 +1,6 @@
+{
+    "C_Cpp.default.compilerArgs": [
+        "-Wno-unknown-argument",
+        "-Qunused-arguments"
+    ]
+}

@@ -426,6 +426,7 @@ void UART_CONTROL_update(void) {
         current_servo_angle =
             (current_servo_angle <= 175) ? current_servo_angle + 5 : 180;
         angle_changed = true;
+
       } else if (received_byte == '1') {
         current_servo_angle = 0;
         angle_changed = true;
