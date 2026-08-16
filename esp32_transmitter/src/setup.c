@@ -10,6 +10,11 @@
 static const char *TAG = "ESP32_TRANSMITTER";
 
 // Broadcast address: sends to any nearby receiver
+
+//this should be the mac of the 2nd esp32 (receiver).
+//so basically we need to find it's mac address and put it here.
+//Media Access Control (MAC) - address is a unique 12-digit 
+//code used to identify a device on a network.
 static uint8_t receiver_mac[ESP_NOW_ETH_ALEN] = {0xFF, 0xFF, 0xFF,
                                                  0xFF, 0xFF, 0xFF};
 

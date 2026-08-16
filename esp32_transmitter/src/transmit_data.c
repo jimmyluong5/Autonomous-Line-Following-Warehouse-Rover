@@ -58,23 +58,28 @@ typedef struct {
 //gpio_set_level(GPIO_NUM_2, 0);
 
 
-
+//this file has two jobs
+//1. read the button press
+//2. create the data packet.
 
 void init_button_pin(void) {
     gpio_set_direction(GPIO_NUM_1, GPIO_MODE_INPUT);
 }
 
+uint8_t read_buttons(void) {
+    uint8_t data_packet = 0b00000000;
 
-
-
-
-
-void receive_data(void) {
+    //read the button press
     int button_press = gpio_get_level(GPIO_NUM_1);
-    uint8_t data_packet = 0b00000000; //data we finna send
-    //then depending on what we got set the LSB bit either high or low
-        
+
+    //then if the button_press is 0 then we have a valid button press
     if (button_press == 0) {
-        data_packet |= 1<<0
+        //set the LSB to 1
+        data_packet = data_packet | (1<<0);
     }
+    else {
+        data_packet = 0b00000000;
+    }
+    return data_packet;
 }
+
