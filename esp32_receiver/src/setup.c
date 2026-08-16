@@ -5,13 +5,19 @@
 #include "esp_system.h"
 #include "esp_wifi.h"
 #include "nvs_flash.h"
+#include "receive_data.h"
 
 static const char *TAG = "ESP32_RECEIVER";
 
-static void OnDataRecv(const esp_now_recv_info_t *esp_now_info,
-                       const uint8_t *data, int data_len) {
-  ESP_LOGI(TAG, "Received %d bytes from MAC: " MACSTR, data_len,
-           MAC2STR(esp_now_info->src_addr));
+static void OnDataRecv(const esp_now_recv_info_t *esp_now_info, const uint8_t *data, int data_len) {
+  
+  ESP_LOGI(TAG, "Received %d bytes from MAC: " MACSTR, data_len,MAC2STR(esp_now_info->src_addr));
+
+  //make sure we received at least one byte
+  if (data_len > 0){
+    receive_button_press(data[0]);
+  }
+
 }
 
 void init_wifi(void) {

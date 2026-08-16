@@ -45,18 +45,29 @@ void init_wifi(void) {
 }
 
 void init_esp_now(void) {
-  ESP_ERROR_CHECK(esp_now_init());
-  ESP_ERROR_CHECK(esp_now_register_send_cb(OnDataSent));
+  ESP_ERROR_CHECK(esp_now_init()); //this returns an esp_err_t, which is 
+  //an error code. we use this to check if the function was successful.
+  ESP_ERROR_CHECK(esp_now_register_send_cb(OnDataSent)); //this also returns an esp_err_t.
 
-  esp_now_peer_info_t peerInfo = {};
+  esp_now_peer_info_t peerInfo = {}; //initialize the peer info struct.
+  //it's just a struct that holds the information of the peer.
+
+  //this basically copies the data from the receiver_mac array to the 
+  //peerInfo.peer_addr array.
   memcpy(peerInfo.peer_addr, receiver_mac, ESP_NOW_ETH_ALEN);
+  //we set the channel to 1 because that's what we set the wifi channel to.
   peerInfo.channel = 1;
+  //we set encrypt to false because we're not encrypting the data.
   peerInfo.encrypt = false;
 
+  //we check if the peer exists, if it does not, we add it.
   if (!esp_now_is_peer_exist(receiver_mac)) {
+    //this also returns an esp_err_t.
     if (esp_now_add_peer(&peerInfo) != ESP_OK) {
-      ESP_LOGE(TAG, "Failed to add peer");
+      ESP_LOGE(TAG, "Failed to add peer"); //if it fails to add peer, it'll print this. 
     }
   }
 }
+
+
 

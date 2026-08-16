@@ -10,7 +10,10 @@
 #include <string.h>
 #include <driver/gpio.h>
 #include "transmit_data.h"
+#include "esp_log.h"
 //need to make the data packet struct
+
+static const char *TAG = "TRANSMIT_DATA";
 
 typedef struct {
     //button data for the controls
@@ -20,8 +23,6 @@ typedef struct {
     uint8_t fpga_data;
     uint8_t speed;
     uint16_t sequence;
-
-
 } data_packet;
 
 //later we can declare a general data packet which contains all of these attributes.
@@ -64,6 +65,9 @@ typedef struct {
 
 void init_button_pin(void) {
     gpio_set_direction(GPIO_NUM_1, GPIO_MODE_INPUT);
+
+    //add a pull up resistor so pin stays high until pressed to gnd
+    gpio_set_pull_mode(GPIO_NUM_1, GPIO_PULLUP_ONLY);
 }
 
 uint8_t read_buttons(void) {
@@ -83,3 +87,33 @@ uint8_t read_buttons(void) {
     return data_packet;
 }
 
+//need to send the data packet via esp-now
+esp_err_t transmit_data(uint8_t *receiver_mac, uint8_t data) {
+    //to transmit data, just send the data packet into 
+    //esp_now_send()
+    
+    //we need to pass the address of data into esp_now_send
+
+    //check the return value of esp_now_send() to see if it was successful.
+    //it would be a esp_err_t
+    
+    //esp_err_t is the standard error status type used in every esp32 function.
+
+    
+
+    esp_err_t result;
+    //so we send the receiver_mac into this function, 
+    // the memory address of the data, and the size of the data.
+    result = esp_now_send(receiver_mac, &data, sizeof(data));
+    //print the result if it fails
+    if (result != ESP_OK) { //esp_ok is == 0 which means success, any other number then fail.
+        ESP_LOGE(TAG, "Failed to send data");
+    }   
+    return result; //returns if the data could be sent or not. we can use the OnDataSent callback
+
+    //the OnDataSent callback is called when the data is sent.
+    //which is a function that prints a message to the console.
+    //it gives us feedback on whether the data was sent successfully or not.
+
+
+}
