@@ -15,8 +15,7 @@ static const char *TAG = "ESP32_TRANSMITTER";
 //so basically we need to find it's mac address and put it here.
 //Media Access Control (MAC) - address is a unique 12-digit 
 //code used to identify a device on a network.
-static uint8_t receiver_mac[ESP_NOW_ETH_ALEN] = {0xFF, 0xFF, 0xFF,
-                                                 0xFF, 0xFF, 0xFF};
+uint8_t receiver_mac[ESP_NOW_ETH_ALEN] = {0xAC, 0x27, 0x6E, 0xA2, 0x87, 0x5C};
 
 static void OnDataSent(const esp_now_send_info_t *tx_info,
                        esp_now_send_status_t status) {

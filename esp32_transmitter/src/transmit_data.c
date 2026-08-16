@@ -5,12 +5,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <esp_now.h>
-#include <transmit.data.h>
 #include <stdint.h>
 #include <string.h>
 #include <driver/gpio.h>
-#include "transmit_data.h"
 #include "esp_log.h"
+#include "setup.h"
+#include "transmit_data.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 //need to make the data packet struct
 
 static const char *TAG = "TRANSMIT_DATA";
@@ -73,16 +75,15 @@ void init_button_pin(void) {
 uint8_t read_buttons(void) {
     uint8_t data_packet = 0b00000000;
 
-    //read the button press
+    //read the initial button state
     int button_press = gpio_get_level(GPIO_NUM_1);
 
-    //then if the button_press is 0 then we have a valid button press
+    //if pin is 0 (active-low button pressed), debounce with a 20ms delay
     if (button_press == 0) {
-        //set the LSB to 1
-        data_packet = data_packet | (1<<0);
-    }
-    else {
-        data_packet = 0b00000000;
+        vTaskDelay(pdMS_TO_TICKS(20)); // wait 20ms for mechanical bouncing to settle
+        if (gpio_get_level(GPIO_NUM_1) == 0) { // confirm it is still pressed
+            data_packet |= (1 << 0); // set LSB to 1
+        }
     }
     return data_packet;
 }
