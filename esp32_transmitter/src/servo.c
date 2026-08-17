@@ -22,7 +22,7 @@ static uint32_t last_step_tick = 0;
 static uint32_t last_move_tick = 0;
 static bool pwm_active = false;
 static uint16_t step_interval_ms = 10;       // 10ms update step
-static float step_size_deg = 5.0f;           // 5.0° per step
+static float step_size_deg = 5.0f;           // 7.0° per step
 static uint16_t auto_detach_delay_ms = 500;
 static bool auto_detach_enabled = false;    // Keep continuous PWM to hold position
 

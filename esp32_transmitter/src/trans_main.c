@@ -9,21 +9,23 @@
 
 void app_main(void)
 {
-    // 1. Initialize hardware
-    servo_init();
-    UART_CONTROL_init();
+    // 1. Peripherals, NVS, WiFi & ESP-NOW initialization
     init_led();
     init_esp_nvs();
     init_wifi();
     init_esp_now();
     init_button_pin();
 
+#if ENABLE_SERVO_MODE
+    // 2. Servo & UART control initialization (if ENABLE_SERVO_MODE == 1)
+    servo_init();
+    UART_CONTROL_init();
+
     printf("\r\n==========================================\r\n");
     printf("   ESP32 SERVO CONTROLLER (%d°-%d° SAFE) \r\n", SERVO_MIN_ANGLE, SERVO_MAX_ANGLE);
     printf("   Servo Pin: GPIO 14 (50Hz PWM)          \r\n");
     printf("==========================================\r\n");
 
-    // Dynamic sweep angles calculated directly from servo.h limits
     uint8_t sweep_angles[] = {
         SERVO_MIN_ANGLE,
         SERVO_MIN_ANGLE + (SERVO_MAX_ANGLE - SERVO_MIN_ANGLE) / 4,
@@ -34,16 +36,25 @@ void app_main(void)
     };
     uint8_t sweep_idx = 0;
     uint32_t last_sweep_time = 0;
+#else
+    printf("\r\n==========================================\r\n");
+    printf("   ESP32 TRANSMITTER (SERVO MODE DISABLED) \r\n");
+    printf("   Pure ESP-NOW Button Transmission Ready \r\n");
+    printf("==========================================\r\n");
+#endif
+
+    static uint8_t last_sent_packet = 0xFF;
 
     while (1)
     {
-        // 1. Check for manual interactive commands from Serial Monitor
+#if ENABLE_SERVO_MODE
+        // Check for manual interactive commands from Serial Monitor
         UART_CONTROL_update();
 
-        // 2. Continuous 50Hz PWM update
+        // Continuous 50Hz PWM update
         Servo_Update();
 
-        // 3. If not in manual mode or stopped, run auto sweep
+        // Safe auto sweep when manual mode is not active
         if (!UART_CONTROL_IsManualActive())
         {
             uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
@@ -54,17 +65,20 @@ void app_main(void)
                 sweep_idx = (sweep_idx + 1) % 6;
 
                 Servo_SetAngle(next_angle);
-                blink_led();
                 printf("[SAFE SWEEP] Target: %d deg | Current: %d deg\r\n",
                        next_angle, Servo_GetCurrentAngle());
             }
         }
+#endif
 
-        // 4. Read button and transmit over ESP-NOW
+        // Read button and transmit state changes (0x01 on press, 0x00 on release) over ESP-NOW
         uint8_t packet = read_buttons();
-        if (packet != 0)
+        if (packet != last_sent_packet)
         {
+            last_sent_packet = packet;
             transmit_data(receiver_mac, packet);
+            printf("[ESP-NOW] Transmitted packet: 0x%02X (Receiver LED %s)\r\n",
+                   packet, (packet & 0x01) ? "ON" : "OFF");
         }
 
         vTaskDelay(pdMS_TO_TICKS(10));
