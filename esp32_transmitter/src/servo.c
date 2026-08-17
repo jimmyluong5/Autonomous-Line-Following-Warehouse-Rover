@@ -146,6 +146,7 @@ void Servo_SetAutoDetach(bool enable, uint16_t delay_ms) {
 }
 
 void servo_stop(void) {
+    target_angle = (uint8_t)current_angle;
     ledc_stop(SERVO_MODE, SERVO_CHANNEL, 0);
     pwm_active = false;
 }
