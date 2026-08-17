@@ -19,9 +19,8 @@ uint8_t receiver_mac[ESP_NOW_ETH_ALEN] = {0xAC, 0x27, 0x6E, 0xA2, 0x87, 0x5C};
 
 static void OnDataSent(const esp_now_send_info_t *tx_info,
                        esp_now_send_status_t status) {
-  ESP_LOGI(TAG, "Packet send status to MAC " MACSTR ": %s",
-           MAC2STR(tx_info->des_addr),
-           status == ESP_NOW_SEND_SUCCESS ? "Success" : "Fail");
+  if (tx_info == NULL) return;
+  // Silenced log to avoid flooding UART terminal output
 }
 
 void init_esp_nvs(void) {

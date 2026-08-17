@@ -83,7 +83,7 @@ uint8_t read_buttons(void) {
         vTaskDelay(pdMS_TO_TICKS(20)); // wait 20ms for mechanical bouncing to settle
         if (gpio_get_level(GPIO_NUM_1) == 0) { // confirm it is still pressed
             data_packet |= (1 << 0); // set LSB to 1
-            ESP_LOGI(TAG, "Button PRESSED! Sending packet: 0x%02X", data_packet);
+            // Silenced log to prevent UART console spam
         }
     }
     return data_packet;
@@ -104,14 +104,8 @@ esp_err_t transmit_data(uint8_t *receiver_mac, uint8_t data) {
     
 
     esp_err_t result;
-    //so we send the receiver_mac into this function, 
-    // the memory address of the data, and the size of the data.
     result = esp_now_send(receiver_mac, &data, sizeof(data));
-    //print the result if it fails
-    if (result != ESP_OK) { //esp_ok is == 0 which means success, any other number then fail.
-        ESP_LOGE(TAG, "Failed to send data");
-    }   
-    return result; //returns if the data could be sent or not. we can use the OnDataSent callback
+    return result;
 
     //the OnDataSent callback is called when the data is sent.
     //which is a function that prints a message to the console.
