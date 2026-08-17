@@ -21,10 +21,10 @@ static uint8_t target_angle = 90;
 static uint32_t last_step_tick = 0;
 static uint32_t last_move_tick = 0;
 static bool pwm_active = false;
-static uint16_t step_interval_ms = 3;       // 3ms interval for fast, responsive movement
-static float step_size_deg = 2.0f;           // 2.0° per step -> 180° full turn in ~270ms
-static uint16_t auto_detach_delay_ms = 500; // Turn off PWM after delay if auto detach enabled
-static bool auto_detach_enabled = false;    // Keep continuous 50Hz PWM active for servo testing
+static uint16_t step_interval_ms = 10;       // 10ms update step
+static float step_size_deg = 5.0f;           // 5.0° per step for fast movement
+static uint16_t auto_detach_delay_ms = 500;
+static bool auto_detach_enabled = false;    // Keep continuous PWM to hold position
 
 static uint32_t get_tick_ms(void) {
     return pdTICKS_TO_MS(xTaskGetTickCount());

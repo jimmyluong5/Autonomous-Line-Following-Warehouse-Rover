@@ -5,25 +5,38 @@
 #include "setup.h"
 #include "transmit_data.h"
 #include "uart_control.h"
+#include <stdio.h>
 
-void app_main() {
-  // Initialize UART console & Servo FIRST before any network/WiFi setup
-  UART_CONTROL_init();
-  servo_init();
+void app_main(void)
+{
+    // 1. Initialize Servo on Pin 14
+    servo_init();
 
-  init_led();
-  init_esp_nvs();
-  init_wifi();
-  init_esp_now();
-  init_button_pin();
+    // 2. Initialize Interactive UART / Serial Controller
+    UART_CONTROL_init();
 
-  while (1) {
-    UART_CONTROL_update();
-    Servo_Update();
+    // 3. Initialize peripherals & ESP-NOW
+    init_led();
+    init_esp_nvs();
+    init_wifi();
+    init_esp_now();
+    init_button_pin();
 
-    uint8_t packet = read_buttons();
-    transmit_data(receiver_mac, packet);
+    while (1)
+    {
+        // Interactive UART / Serial Monitor command processor
+        UART_CONTROL_update();
 
-    vTaskDelay(pdMS_TO_TICKS(10));
-  }
+        // 50Hz Servo PWM angle stepping
+        Servo_Update();
+
+        // ESP-NOW button transmission
+        uint8_t packet = read_buttons();
+        if (packet != 0)
+        {
+            transmit_data(receiver_mac, packet);
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(10));
+    }
 }
