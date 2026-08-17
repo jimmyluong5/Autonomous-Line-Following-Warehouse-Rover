@@ -16,13 +16,13 @@
 
 static const char *TAG = "SERVO";
 
-static float current_angle = 90.0f;
-static uint8_t target_angle = 90;
+static float current_angle = (float)SERVO_CENTER_ANGLE;
+static uint8_t target_angle = SERVO_CENTER_ANGLE;
 static uint32_t last_step_tick = 0;
 static uint32_t last_move_tick = 0;
 static bool pwm_active = false;
 static uint16_t step_interval_ms = 10;       // 10ms update step
-static float step_size_deg = 5.0f;           // 5.0° per step for fast movement
+static float step_size_deg = 5.0f;           // 5.0° per step
 static uint16_t auto_detach_delay_ms = 500;
 static bool auto_detach_enabled = false;    // Keep continuous PWM to hold position
 
@@ -30,10 +30,19 @@ static uint32_t get_tick_ms(void) {
     return pdTICKS_TO_MS(xTaskGetTickCount());
 }
 
-static void update_compare_value(uint8_t angle) {
-    if (angle > 180) {
-        angle = 180;
+static uint8_t clamp_angle(uint8_t angle) {
+    if (angle < SERVO_MIN_ANGLE) {
+        return SERVO_MIN_ANGLE;
     }
+    if (angle > SERVO_MAX_ANGLE) {
+        return SERVO_MAX_ANGLE;
+    }
+    return angle;
+}
+
+static void update_compare_value(uint8_t angle) {
+    angle = clamp_angle(angle);
+
     // Map 0 - 180 degrees to 500 - 2500 microseconds pulse width
     // 13-bit timer at 50 Hz -> 20ms period = 8191 counts
     uint32_t pulse_us = 500 + ((uint32_t)angle * 2000) / 180;
@@ -64,28 +73,23 @@ void servo_init(void) {
     };
     ESP_ERROR_CHECK(ledc_channel_config(&ledc_channel));
 
-    current_angle = 90.0f;
-    target_angle = 90;
+    current_angle = (float)SERVO_CENTER_ANGLE;
+    target_angle = SERVO_CENTER_ANGLE;
     last_step_tick = get_tick_ms();
     last_move_tick = get_tick_ms();
-    update_compare_value(90);
+    update_compare_value(SERVO_CENTER_ANGLE);
     pwm_active = true;
-    ESP_LOGI(TAG, "Servo initialized on GPIO %d (50Hz PWM)", SERVO_PIN);
+    ESP_LOGI(TAG, "Servo initialized on GPIO %d (Clamped %d° - %d°)", SERVO_PIN, SERVO_MIN_ANGLE, SERVO_MAX_ANGLE);
 }
 
 void Servo_SetAngle(uint8_t angle) {
-    if (angle > 180) {
-        angle = 180;
-    }
-    target_angle = angle;
+    target_angle = clamp_angle(angle);
     last_move_tick = get_tick_ms();
     pwm_active = true;
 }
 
 void Servo_SetAngleImmediate(uint8_t angle) {
-    if (angle > 180) {
-        angle = 180;
-    }
+    angle = clamp_angle(angle);
     target_angle = angle;
     current_angle = (float)angle;
     last_move_tick = get_tick_ms();
@@ -103,17 +107,21 @@ void Servo_Update(void) {
             last_move_tick = now;
             pwm_active = true;
 
-            if (current_angle < target_angle) {
+            if (current_angle < (float)target_angle) {
                 current_angle += step_size_deg;
-                if (current_angle > target_angle) {
+                if (current_angle > (float)target_angle) {
                     current_angle = (float)target_angle;
                 }
             } else {
                 current_angle -= step_size_deg;
-                if (current_angle < target_angle) {
+                if (current_angle < (float)target_angle) {
                     current_angle = (float)target_angle;
                 }
             }
+
+            // Ensure floating current_angle stays within bounds
+            if (current_angle < (float)SERVO_MIN_ANGLE) current_angle = (float)SERVO_MIN_ANGLE;
+            if (current_angle > (float)SERVO_MAX_ANGLE) current_angle = (float)SERVO_MAX_ANGLE;
 
             update_compare_value((uint8_t)current_angle);
         }

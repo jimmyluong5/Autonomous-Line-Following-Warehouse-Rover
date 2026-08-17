@@ -9,28 +9,51 @@
 
 void app_main(void)
 {
-    // 1. Initialize Servo on Pin 14
+    // 1. Initialize hardware
     servo_init();
-
-    // 2. Initialize Interactive UART / Serial Controller
     UART_CONTROL_init();
-
-    // 3. Initialize peripherals & ESP-NOW
     init_led();
     init_esp_nvs();
     init_wifi();
     init_esp_now();
     init_button_pin();
 
+    printf("\r\n==========================================\r\n");
+    printf("   ESP32 SERVO CONTROLLER (45°-135° SAFE) \r\n");
+    printf("   Servo Pin: GPIO 14 (50Hz PWM)          \r\n");
+    printf("==========================================\r\n");
+
+    // Safe sweep angles within physical 45° - 135° limits
+    uint8_t sweep_angles[] = {45, 67, 90, 112, 135, 90};
+    uint8_t sweep_idx = 0;
+    uint32_t last_sweep_time = 0;
+
     while (1)
     {
-        // Interactive UART / Serial Monitor command processor
+        // 1. Check for manual interactive commands from Serial Monitor
         UART_CONTROL_update();
 
-        // 50Hz Servo PWM angle stepping
+        // 2. Continuous 50Hz PWM update
         Servo_Update();
 
-        // ESP-NOW button transmission
+        // 3. If no manual command is active, run safe auto sweep (45° to 135°)
+        if (!UART_CONTROL_IsManualActive())
+        {
+            uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
+            if (now - last_sweep_time >= 2000)
+            {
+                last_sweep_time = now;
+                uint8_t next_angle = sweep_angles[sweep_idx];
+                sweep_idx = (sweep_idx + 1) % 6;
+
+                Servo_SetAngle(next_angle);
+                blink_led();
+                printf("[SAFE SWEEP] Target: %d deg | Current: %d deg\r\n",
+                       next_angle, Servo_GetCurrentAngle());
+            }
+        }
+
+        // 4. Read button and transmit over ESP-NOW
         uint8_t packet = read_buttons();
         if (packet != 0)
         {
