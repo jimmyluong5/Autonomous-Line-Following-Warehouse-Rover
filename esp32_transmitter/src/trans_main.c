@@ -19,12 +19,19 @@ void app_main(void)
     init_button_pin();
 
     printf("\r\n==========================================\r\n");
-    printf("   ESP32 SERVO CONTROLLER (40°-140° SAFE) \r\n");
+    printf("   ESP32 SERVO CONTROLLER (%d°-%d° SAFE) \r\n", SERVO_MIN_ANGLE, SERVO_MAX_ANGLE);
     printf("   Servo Pin: GPIO 14 (50Hz PWM)          \r\n");
     printf("==========================================\r\n");
 
-    // Safe sweep angles within 40° - 140°
-    uint8_t sweep_angles[] = {40, 65, 90, 115, 140, 90};
+    // Dynamic sweep angles calculated directly from servo.h limits
+    uint8_t sweep_angles[] = {
+        SERVO_MIN_ANGLE,
+        SERVO_MIN_ANGLE + (SERVO_MAX_ANGLE - SERVO_MIN_ANGLE) / 4,
+        SERVO_CENTER_ANGLE,
+        SERVO_MAX_ANGLE - (SERVO_MAX_ANGLE - SERVO_MIN_ANGLE) / 4,
+        SERVO_MAX_ANGLE,
+        SERVO_CENTER_ANGLE
+    };
     uint8_t sweep_idx = 0;
     uint32_t last_sweep_time = 0;
 
@@ -36,7 +43,7 @@ void app_main(void)
         // 2. Continuous 50Hz PWM update
         Servo_Update();
 
-        // 3. If no manual command or stop is active, run safe auto sweep (40° to 140°)
+        // 3. If not in manual mode or stopped, run auto sweep
         if (!UART_CONTROL_IsManualActive())
         {
             uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());

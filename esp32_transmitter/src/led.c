@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 
-static const gpio_num_t LED_PINS[] = {GPIO_NUM_1, GPIO_NUM_2, GPIO_NUM_21,
+static const gpio_num_t LED_PINS[] = {GPIO_NUM_2, GPIO_NUM_21,
                                       GPIO_NUM_38, GPIO_NUM_47};
 #define NUM_LEDS (sizeof(LED_PINS) / sizeof(LED_PINS[0]))
 

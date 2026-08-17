@@ -29,22 +29,34 @@ static void UART_SendMessage(const char *message) {
 }
 
 void print_main_menu(void) {
-    UART_SendMessage(
+    uint8_t p1 = SERVO_MIN_ANGLE;
+    uint8_t p2 = SERVO_MIN_ANGLE + (SERVO_MAX_ANGLE - SERVO_MIN_ANGLE) / 4;
+    uint8_t p3 = SERVO_CENTER_ANGLE;
+    uint8_t p4 = SERVO_MAX_ANGLE - (SERVO_MAX_ANGLE - SERVO_MIN_ANGLE) / 4;
+    uint8_t p5 = SERVO_MAX_ANGLE;
+
+    char menu_buf[512];
+    snprintf(menu_buf, sizeof(menu_buf),
         "\r\n==========================================\r\n"
-        "   SUSPENSION ARM SERVO CONTROLLER (40°-140°)\r\n"
+        "   SUSPENSION ARM SERVO (%d° - %d°)\r\n"
         "==========================================\r\n"
-        "Commands (Tap key in Monitor):\r\n"
-        " [1]        : 40 degrees  (Min Safety Limit)\r\n"
-        " [2]        : 65 degrees\r\n"
-        " [3]        : 90 degrees  (Center)\r\n"
-        " [4]        : 115 degrees\r\n"
-        " [5]        : 140 degrees (Max Safety Limit)\r\n"
-        " [a] / [d]  : Step -5 deg / +5 deg (40° - 140°)\r\n"
-        " [t]        : STOP / HOLD Servo Motion\r\n"
+        "Commands:\r\n"
+        " [1]        : %d deg  (Min Safety Limit)\r\n"
+        " [2]        : %d deg\r\n"
+        " [3]        : %d deg  (Center)\r\n"
+        " [4]        : %d deg\r\n"
+        " [5]        : %d deg  (Max Safety Limit)\r\n"
+        " [a] / [d]  : Step -5 deg / +5 deg (%d° - %d°)\r\n"
+        " [t]        : TURN OFF / STOP Servo Motor\r\n"
         " [h]        : Show this Help menu\r\n"
         "==========================================\r\n"
-        "Current Servo Angle: 90 degrees\r\n"
+        "Current Servo Angle: %d degrees\r\n",
+        SERVO_MIN_ANGLE, SERVO_MAX_ANGLE,
+        p1, p2, p3, p4, p5,
+        SERVO_MIN_ANGLE, SERVO_MAX_ANGLE,
+        Servo_GetCurrentAngle()
     );
+    UART_SendMessage(menu_buf);
 }
 
 void UART_CONTROL_init(void) {
@@ -92,50 +104,57 @@ void UART_CONTROL_update(void) {
             return;
         }
 
-        // Any command cancels the STOP state and engages manual override
         manual_override_active = true;
         last_manual_command_time = get_time_ms();
 
+        // [t] - Turn OFF servo completely until next input
         if (ch == 't' || ch == 'T') {
             is_stopped = true;
             servo_stop();
-            char buf[80];
-            snprintf(buf, sizeof(buf), "\r\n>>> [STOP] Servo Motion STOPPED at %d deg!\r\n", Servo_GetCurrentAngle());
+            char buf[96];
+            snprintf(buf, sizeof(buf), "\r\n>>> [STOPPED] Servo motor TURNED OFF at %d deg! (Paused until next input)\r\n", Servo_GetCurrentAngle());
             UART_SendMessage(buf);
             return;
         }
 
+        // Any other movement command cancels STOP and re-enables PWM
         is_stopped = false;
 
+        uint8_t p1 = SERVO_MIN_ANGLE;
+        uint8_t p2 = SERVO_MIN_ANGLE + (SERVO_MAX_ANGLE - SERVO_MIN_ANGLE) / 4;
+        uint8_t p3 = SERVO_CENTER_ANGLE;
+        uint8_t p4 = SERVO_MAX_ANGLE - (SERVO_MAX_ANGLE - SERVO_MIN_ANGLE) / 4;
+        uint8_t p5 = SERVO_MAX_ANGLE;
+
         if (ch == '1') {
-            current_servo_angle = 40;
-            Servo_SetAngleImmediate(40);
+            current_servo_angle = p1;
+            Servo_SetAngleImmediate(p1);
             char buf[80];
-            snprintf(buf, sizeof(buf), "\r\n>>> [MANUAL] Preset 1 -> Min Angle: 40 deg\r\n");
+            snprintf(buf, sizeof(buf), "\r\n>>> [MANUAL] Preset 1 -> Min Angle: %d deg\r\n", p1);
             UART_SendMessage(buf);
         } else if (ch == '2') {
-            current_servo_angle = 65;
-            Servo_SetAngleImmediate(65);
+            current_servo_angle = p2;
+            Servo_SetAngleImmediate(p2);
             char buf[80];
-            snprintf(buf, sizeof(buf), "\r\n>>> [MANUAL] Preset 2 -> Angle: 65 deg\r\n");
+            snprintf(buf, sizeof(buf), "\r\n>>> [MANUAL] Preset 2 -> Angle: %d deg\r\n", p2);
             UART_SendMessage(buf);
         } else if (ch == '3' || ch == 's' || ch == 'S') {
-            current_servo_angle = 90;
-            Servo_SetAngleImmediate(90);
+            current_servo_angle = p3;
+            Servo_SetAngleImmediate(p3);
             char buf[80];
-            snprintf(buf, sizeof(buf), "\r\n>>> [MANUAL] Preset 3 -> Center Angle: 90 deg\r\n");
+            snprintf(buf, sizeof(buf), "\r\n>>> [MANUAL] Preset 3 -> Center Angle: %d deg\r\n", p3);
             UART_SendMessage(buf);
         } else if (ch == '4') {
-            current_servo_angle = 115;
-            Servo_SetAngleImmediate(115);
+            current_servo_angle = p4;
+            Servo_SetAngleImmediate(p4);
             char buf[80];
-            snprintf(buf, sizeof(buf), "\r\n>>> [MANUAL] Preset 4 -> Angle: 115 deg\r\n");
+            snprintf(buf, sizeof(buf), "\r\n>>> [MANUAL] Preset 4 -> Angle: %d deg\r\n", p4);
             UART_SendMessage(buf);
         } else if (ch == '5') {
-            current_servo_angle = 140;
-            Servo_SetAngleImmediate(140);
+            current_servo_angle = p5;
+            Servo_SetAngleImmediate(p5);
             char buf[80];
-            snprintf(buf, sizeof(buf), "\r\n>>> [MANUAL] Preset 5 -> Max Angle: 140 deg\r\n");
+            snprintf(buf, sizeof(buf), "\r\n>>> [MANUAL] Preset 5 -> Max Angle: %d deg\r\n", p5);
             UART_SendMessage(buf);
         } else if (ch == 'a' || ch == 'A') {
             current_servo_angle = (current_servo_angle >= SERVO_MIN_ANGLE + 5) ? current_servo_angle - 5 : SERVO_MIN_ANGLE;
@@ -154,15 +173,17 @@ void UART_CONTROL_update(void) {
         }
     }
 
-    // If stopped, keep manual override active indefinitely until a new key is pressed
+    // While stopped, hold indefinite pause until user gives new command
     if (is_stopped) {
         last_manual_command_time = get_time_ms();
     }
 
-    // After 10 seconds of no manual commands, resume safe auto sweep (40°-140°)
+    // After 10 seconds of no manual commands, resume safe auto sweep
     if (!is_stopped && manual_override_active && (get_time_ms() - last_manual_command_time > 10000)) {
         manual_override_active = false;
-        UART_SendMessage("\r\n[IDLE] Resuming Safe Auto-Sweep (40°-140°)...\r\n");
+        char buf[80];
+        snprintf(buf, sizeof(buf), "\r\n[IDLE] Resuming Safe Auto-Sweep (%d°-%d°)...\r\n", SERVO_MIN_ANGLE, SERVO_MAX_ANGLE);
+        UART_SendMessage(buf);
     }
 }
 
