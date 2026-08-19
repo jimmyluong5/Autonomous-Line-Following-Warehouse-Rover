@@ -1,7 +1,5 @@
 # Reflectance-Sensing Autonomous Rover
-
-
-https://github.com/user-attachments/assets/b688fa75-3ef8-4d2e-a115-36bea7cde520
+![IMG_4136](https://github.com/user-attachments/assets/359ca75a-d679-4cfe-8827-766547c80d05)
 
 
 
@@ -33,6 +31,7 @@ The power system uses **LM2596 buck converters** to provide regulated voltages t
 
 Once reliable bidirectional motor control was established, the drivetrain was mounted onto a rough cardboard chassis for early testing.
 
+![IMG_4955](https://github.com/user-attachments/assets/519cf531-f2ee-4f39-ac4a-19f8bff37e55)
 
 
 
@@ -50,7 +49,11 @@ This prototype made it possible to verify
 
 The prototype successfully demonstrated that the embedded control system and drivetrain could operate together before the mechanical design was finalized.
 
-### 3. Reflectance Sensor Integration
+![IMG_4129](https://github.com/user-attachments/assets/93ae4b24-8360-4ae7-aaad-985c02b63149)
+
+
+### 3. Reflectance Sensor Integration and UART Sensor Calibration and Diagnostics
+
 
 The next stage introduced the **QTRX-MD-08A 8-channel reflectance array** for line detection.
 
@@ -65,9 +68,7 @@ During testing
 
 The STM32 reads the MCP3208 measurements and uses the eight sensor values to determine the rover's position relative to the line.
 
-### 4. UART Sensor Calibration and Diagnostics
-
-A UART-based diagnostic interface was created using **PuTTY** to assist with sensor calibration and subsystem testing.
+A UART-based diagnostic interface was also created using **PuTTY** to assist with sensor calibration and subsystem testing.
 
 The interface displays both the measured voltage and raw ADC value for each reflectance channel.
 
@@ -96,6 +97,14 @@ The UART interface also provides multiple operating and diagnostic modes includi
 * Autonomous line-following mode
 
 This made it possible to test individual subsystems without repeatedly modifying the firmware.
+
+
+
+<img width="520" height="355" alt="image" src="https://github.com/user-attachments/assets/7266f23a-6372-4940-9bef-93d4786f03ce" />
+<img width="492" height="395" alt="image" src="https://github.com/user-attachments/assets/38084f03-c8ef-4abd-8d70-750e41a66246" />
+
+
+
 
 ### 5. Autonomous Line Following
 
@@ -135,6 +144,8 @@ The chassis provides mounting for
 * Additional mechanical components
 
 This provided a much more rigid and repeatable platform for continued development.
+<img width="960" height="1280" alt="image" src="https://github.com/user-attachments/assets/c35e2f71-1075-40d3-a830-de78924b504b" />
+<img width="960" height="1280" alt="image" src="https://github.com/user-attachments/assets/773da8c9-128c-478e-ad3e-9cb9869b7452" />
 
 
 ### 7. Servo-Based Suspension Testing
@@ -144,10 +155,8 @@ After transferring the rover to the 3D-printed chassis, I tested a **servo-actua
 The servo was used to adjust the front of the chassis and verify that the suspension mechanism could move reliably under control from the STM32.
 
 A short demonstration clip is included below.
+![IMG_4956](https://github.com/user-attachments/assets/27524851-3d93-432b-abe7-19a209b7ef80)
 
-```markdown
-![Servo Suspension Test](docs/servo-suspension-demo.gif)
-```
 
 The test helped validate the mechanical design before continuing with wireless control and additional rover integration.
 
@@ -175,6 +184,10 @@ Packet Decoding
     ↓
 Command Execution
 ```
+
+
+![IMG_4954](https://github.com/user-attachments/assets/83da1aee-d7a5-41db-89df-d42d0f40c685)
+
 
 The receiving ESP32-S3 unpacks the command byte and executes actions depending on which bits are active.
 
@@ -240,4 +253,3 @@ Future work will include
 * Additional hardware-accelerated control or peripheral logic
 * Improved autonomous navigation
 * Expanded wireless command functionality
-* More robust sensor and fault handling
