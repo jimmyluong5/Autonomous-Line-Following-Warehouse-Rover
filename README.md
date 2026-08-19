@@ -1,5 +1,6 @@
 # Reflectance-Sensing Autonomous Rover
-![IMG_4136](https://github.com/user-attachments/assets/359ca75a-d679-4cfe-8827-766547c80d05)
+<img width="480" height="853" alt="line_following_github" src="https://github.com/user-attachments/assets/8277d7d8-333a-4ad6-8d29-b165df40b6e0" />
+
 
 
 
@@ -31,7 +32,8 @@ The power system uses **LM2596 buck converters** to provide regulated voltages t
 
 Once reliable bidirectional motor control was established, the drivetrain was mounted onto a rough cardboard chassis for early testing.
 
-![IMG_4955](https://github.com/user-attachments/assets/519cf531-f2ee-4f39-ac4a-19f8bff37e55)
+<img width="480" height="853" alt="motors_github" src="https://github.com/user-attachments/assets/ca83976e-c8b5-4a69-80d2-1aaa2ccd849a" />
+
 
 
 
@@ -49,7 +51,8 @@ This prototype made it possible to verify
 
 The prototype successfully demonstrated that the embedded control system and drivetrain could operate together before the mechanical design was finalized.
 
-![IMG_4129](https://github.com/user-attachments/assets/93ae4b24-8360-4ae7-aaad-985c02b63149)
+<img width="480" height="853" alt="first_drive_github" src="https://github.com/user-attachments/assets/3769e857-5dfd-4aa8-bf13-f9b57ea0bf7f" />
+
 
 
 ### 3. Reflectance Sensor Integration and UART Sensor Calibration and Diagnostics
@@ -155,7 +158,7 @@ After transferring the rover to the 3D-printed chassis, I tested a **servo-actua
 The servo was used to adjust the front of the chassis and verify that the suspension mechanism could move reliably under control from the STM32.
 
 A short demonstration clip is included below.
-![IMG_4956](https://github.com/user-attachments/assets/27524851-3d93-432b-abe7-19a209b7ef80)
+<img width="480" height="853" alt="sensor_github" src="https://github.com/user-attachments/assets/9212897a-4fb7-46e2-af77-010e2313b5a3" />
 
 
 The test helped validate the mechanical design before continuing with wireless control and additional rover integration.
@@ -186,7 +189,8 @@ Command Execution
 ```
 
 
-![IMG_4954](https://github.com/user-attachments/assets/83da1aee-d7a5-41db-89df-d42d0f40c685)
+<img width="480" height="853" alt="esp32_github" src="https://github.com/user-attachments/assets/15d5e751-9ac8-4944-949a-a5fd62a3ef1e" />
+
 
 
 The receiving ESP32-S3 unpacks the command byte and executes actions depending on which bits are active.
