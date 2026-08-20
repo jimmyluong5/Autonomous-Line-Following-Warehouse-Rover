@@ -42,7 +42,7 @@ void init_button_pin(void) {
 }
 
 uint8_t read_buttons(void) {
-    uint8_t data_packet = 0b00000000;
+    uint8_t data_packet = 0x00; //each 0 is half a byte
 /* 
  // Active-low button: 0 when pressed to GND, 1 when released (pull-up)
     int button_press = gpio_get_level(GPIO_NUM_1);
@@ -62,8 +62,8 @@ uint8_t read_buttons(void) {
 //where we sample once and see the state of the buttons, then we wait 20ms later and sample again,
 //in the end we return the bitwise and between the two samples to ensure that a proper button click happened
 
-    uint8_t sample1;
-    uint8_t sample2;
+    uint8_t sample1 = 0x00; //8 bit
+    uint8_t sample2 = 0x00;
     
     //populate sample1 with the data from the buttons
     for (int i = 0; i<5; i++) {
@@ -83,20 +83,30 @@ uint8_t read_buttons(void) {
         vTaskDelay(pdMS_TO_TICKS(20)); // debounce 20ms
     }
 
-    
+    //then we sample again and place the bits into sample2
 
 
-    //this is for the buttons for the controller
+   
     for (int i = 0; i < 5; i++) {
         if (gpio_get_level(button_pins[i]) == 0) {
             //then we need to shift the data packet according to the index
-            data_packet = data_packet | (1 << (i)); //its i because we need the 0th index, 
+            sample2 = sample2 | (1 << (i)); //its i because we need the 0th index, 
             //i+1 would be if something is occupying bit 0 
         }
     }
-
+    //we need to do this to actually get a complete and clean button press.
+    //eg if sample1 = 0000 0010
+    // sample2 = 0000, 0001, then there must be a mistake and data_packet will be zero
+    
+    //but if
+    //sample1 = 0000 0010
+    //sample2 = 0000 0010 then 
+    //data_packet = 0000 0010 and we return this.
+    data_packet = sample1 & sample2; 
     return data_packet;
 }
+
+
 //making comments
 //if bit 0 gets set then its pin 10
 
