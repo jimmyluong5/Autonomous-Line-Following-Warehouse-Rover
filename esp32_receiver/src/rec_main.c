@@ -10,6 +10,7 @@ void app_main() {
   init_led();
   init_esp_nvs();
   init_wifi();
+  init_pins();
 
   //need to get the MAC address of this esp32 and put it in the transmitter's esp32.
   uint8_t mac[6];

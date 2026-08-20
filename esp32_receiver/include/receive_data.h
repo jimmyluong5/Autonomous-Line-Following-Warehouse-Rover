@@ -4,5 +4,6 @@
 #include <stdint.h>
 
 void receive_button_press(uint8_t data);
+void init_pins(void);
 
 #endif

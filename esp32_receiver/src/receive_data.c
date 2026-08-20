@@ -16,7 +16,7 @@ int button_pins[] = {
     GPIO_NUM_10, //0
     GPIO_NUM_11, //idx 1
     GPIO_NUM_12, //idx 2
-    GPIO_NUM_14, //idx 3
+    GPIO_NUM_13, //idx 3
     GPIO_NUM_14 //idx 4
 };
 
@@ -30,12 +30,20 @@ typedef struct{
 
 //need to initialize pin
 
+void init_pins() {
+    for (int i = 0; i < 5; i++) {
+        gpio_set_direction(button_pins[i], GPIO_MODE_OUTPUT);
+        //then set all of the off at the beginning
+        gpio_set_level(button_pins[i], 0);
+    }
+}
 
 
 
 
 
-static uint8_t s_last_state = 0xFF; // track previous button state
+
+//static uint8_t s_last_state = 0xFF; // track previous button state
 
 //we receive input data in the form of the data packet, then output a 1 or 0 and give it to the LED
 void receive_button_press(uint8_t data) {
@@ -51,8 +59,19 @@ void receive_button_press(uint8_t data) {
             gpio_set_level(LED_PIN, 0); // Turn LED OFF
         }
     } */
+    //just unpack the data
+    for (int i = 0; i < 5; i++ ) {
+        //bitwise and to ensure that we have the correct button data, or 1s in the correct spot.
+        if (data & (1<<i)) {
+            //if the data has a 1 in it, then set the bit to turn on the led
+            gpio_set_level(button_pins[i], 1);
+        }
+        else {
+            gpio_set_level(button_pins[i], 0);
+        }
+    }
 
-    
+
 
 }
 
