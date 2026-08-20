@@ -43,7 +43,7 @@ void init_button_pin(void) {
 
 uint8_t read_buttons(void) {
     uint8_t data_packet = 0b00000000;
-/* 
+ 
     // Active-low button: 0 when pressed to GND, 1 when released (pull-up)
     int button_press = gpio_get_level(GPIO_NUM_1);
 
@@ -54,11 +54,11 @@ uint8_t read_buttons(void) {
             data_packet |= (1 << 0);
             //set_led(true);  // Turn LED ON when button is pressed
         }
-    }*/
+    }
 
     //this is for the buttons for the controller
     for (int i = 0; i < 5; i++) {
-        if (gpio_get_level(button_pins[i] == 0)) {
+        if (gpio_get_level(button_pins[i]) == 0) {
             vTaskDelay(pdMS_TO_TICKS(20)); // debounce 20ms
             //then we need to shift the data packet according to the index
             data_packet = data_packet | (1 << (i)); //its i because we need the 0th index, 
@@ -68,7 +68,7 @@ uint8_t read_buttons(void) {
 
     return data_packet;
 }
-
+//making comments
 //if bit 0 gets set then its pin 10
 
 //0000 0001 - pin 10
