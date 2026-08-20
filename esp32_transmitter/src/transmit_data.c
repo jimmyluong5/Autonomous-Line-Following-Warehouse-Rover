@@ -43,8 +43,8 @@ void init_button_pin(void) {
 
 uint8_t read_buttons(void) {
     uint8_t data_packet = 0b00000000;
- 
-    // Active-low button: 0 when pressed to GND, 1 when released (pull-up)
+/* 
+ // Active-low button: 0 when pressed to GND, 1 when released (pull-up)
     int button_press = gpio_get_level(GPIO_NUM_1);
 
     //button press is for the random button in the middle of the board
@@ -55,11 +55,40 @@ uint8_t read_buttons(void) {
             //set_led(true);  // Turn LED ON when button is pressed
         }
     }
+*/ 
+
+
+//we are going to try a debouncing method with sampling
+//where we sample once and see the state of the buttons, then we wait 20ms later and sample again,
+//in the end we return the bitwise and between the two samples to ensure that a proper button click happened
+
+    uint8_t sample1;
+    uint8_t sample2;
+    
+    //populate sample1 with the data from the buttons
+    for (int i = 0; i<5; i++) {
+        if (gpio_get_level(button_pins[i]) == 0) {
+            //then just shift the bits and place it into sample1
+            sample1 = sample1 | (1<<i);
+        }
+    }
+
+    //sample1 has the data from the first sampling of the button states
+
+    //now we check if sample1 contains any 1s, which means we have a button press, if not then
+    //we just move to the 2nd sample
+    
+    //if it does then we have to delay by 20ms to allow the physical button to go back up
+    if (sample1 != 0) {
+        vTaskDelay(pdMS_TO_TICKS(20)); // debounce 20ms
+    }
+
+    
+
 
     //this is for the buttons for the controller
     for (int i = 0; i < 5; i++) {
         if (gpio_get_level(button_pins[i]) == 0) {
-            vTaskDelay(pdMS_TO_TICKS(20)); // debounce 20ms
             //then we need to shift the data packet according to the index
             data_packet = data_packet | (1 << (i)); //its i because we need the 0th index, 
             //i+1 would be if something is occupying bit 0 
