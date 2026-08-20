@@ -10,6 +10,17 @@
 
 #define LED_PIN GPIO_NUM_1
 
+//make array for the button pins
+
+int button_pins[] = {
+    GPIO_NUM_10, //0
+    GPIO_NUM_11, //idx 1
+    GPIO_NUM_12, //idx 2
+    GPIO_NUM_14, //idx 3
+    GPIO_NUM_14 //idx 4
+};
+
+
 typedef struct{
     uint8_t button_data;
     uint8_t fpga_data;
@@ -19,7 +30,6 @@ typedef struct{
 
 //need to initialize pin
 
-//this file has 
 
 
 
@@ -29,7 +39,7 @@ static uint8_t s_last_state = 0xFF; // track previous button state
 
 //we receive input data in the form of the data packet, then output a 1 or 0 and give it to the LED
 void receive_button_press(uint8_t data) {
-    uint8_t current_state = (data & (1 << 0));
+    /* uint8_t current_state = (data & (1 << 0));
 
     // only update GPIO level if state actually changed
     if (current_state != s_last_state) {
@@ -40,7 +50,10 @@ void receive_button_press(uint8_t data) {
         } else {
             gpio_set_level(LED_PIN, 0); // Turn LED OFF
         }
-    }
+    } */
+
+    
+
 }
 
 
