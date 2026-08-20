@@ -72,15 +72,19 @@ void app_main(void)
 #endif
 
         // Read button and transmit state changes (0x01 on press, 0x00 on release) over ESP-NOW
-        uint8_t packet = read_buttons();
-        if (packet != last_sent_packet)
+        uint8_t packet = read_buttons(); //reads the pins
+        if (packet != last_sent_packet) //if the packet changes, transmit it, like if the button state changes 
+
         {
-            last_sent_packet = packet;
+            //so if packet is not equal to the last packet sent, then our button state has changed.
+            last_sent_packet = packet; //so we update the last sent packet
+
+            //then we send the next packet.
             transmit_data(receiver_mac, packet);
-            printf("[ESP-NOW] Transmitted packet: 0x%02X (Receiver LED %s)\r\n",
-                   packet, (packet & 0x01) ? "ON" : "OFF");
+            //prints in putty/uart?
+            //printf("[ESP-NOW] Transmitted packet: 0x%02X (Receiver LED %s)\r\n",packet, (packet & 0x01) ? "ON" : "OFF");
         }
 
-        vTaskDelay(pdMS_TO_TICKS(10));
+        vTaskDelay(pdMS_TO_TICKS(10)); //this is like the debounce time 
     }
 }

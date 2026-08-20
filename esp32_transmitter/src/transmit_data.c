@@ -11,7 +11,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-static const char *TAG = "TRANSMIT_DATA";
+//static const char *TAG = "TRANSMIT_DATA";
 
 // Array for the GPIO pins to loop through and read
 int button_pins[5] = {
