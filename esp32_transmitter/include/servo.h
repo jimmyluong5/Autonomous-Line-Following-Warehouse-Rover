@@ -4,6 +4,14 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+// Master Servo Mode Switch: Set to 1 for ON, 0 for OFF (completely disables servo PWM & tasks)
+#define ENABLE_SERVO_MODE   1
+
+// Physical hardware limit constraints for suspension system arm
+#define SERVO_MIN_ANGLE     34   // Min angle limit (deg)
+#define SERVO_MAX_ANGLE     145  // Max angle limit (deg)
+#define SERVO_CENTER_ANGLE  90   // Center resting angle (deg)
+
 void servo_init(void);
 void Servo_SetAngle(uint8_t angle);
 void Servo_SetAngleImmediate(uint8_t angle);
