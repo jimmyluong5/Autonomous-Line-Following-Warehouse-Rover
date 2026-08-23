@@ -24,11 +24,11 @@ static const char *TAG = "ESP_RECEIVER";
 //make array for the button pins
 
 int button_pins[] = {
-    GPIO_NUM_10, //0 (left)
-    GPIO_NUM_11, //idx 1 (down)
-    GPIO_NUM_12, //idx 2 (up)
-    GPIO_NUM_13, //idx 3 (Stop)
-    GPIO_NUM_14 //idx 4 (right)
+    GPIO_NUM_10, //0 (left) //manual mode
+    GPIO_NUM_11, //idx 1 (down) //decrease speed by 10 % (0-255 then its by 25 counts or 5% = 13 counts)
+    GPIO_NUM_12, //idx 2 (up) //increase speed by 10% or 5%
+    GPIO_NUM_13, //idx 3 (Stop) //just stop
+    GPIO_NUM_14 //idx 4 (right) //autonomous mode.
 };
 
 
@@ -70,22 +70,22 @@ void receive_button_press(uint8_t data) {
                 case LEFT_BTN:
                     //turn the led on
                     gpio_set_level(button_pins[LEFT_BTN], 1);
-                    ESP_LOGI(TAG, "LEFT");
+                    ESP_LOGI(TAG, "MANUAL MODE");
                     break;
 
                 case RIGHT_BTN:
                     gpio_set_level(button_pins[RIGHT_BTN], 1);
-                    ESP_LOGI(TAG, "RIGHT");
+                    ESP_LOGI(TAG, "AUTONOMOUS MODE");
                     break;
 
                 case UP_BTN:
                     gpio_set_level(button_pins[UP_BTN], 1);
-                    ESP_LOGI(TAG, "UP");
+                    ESP_LOGI(TAG, "INCREASING SPEED");
                     break;
 
                 case DOWN_BTN:
                     gpio_set_level(button_pins[DOWN_BTN], 1);
-                    ESP_LOGI(TAG, "DOWN");
+                    ESP_LOGI(TAG, "DECREASING SPEED");
                     break;
 
                 case STOP_BTN:
