@@ -197,6 +197,63 @@ The receiving ESP32-S3 unpacks the command byte and executes actions depending o
 
 Initial testing has successfully demonstrated wireless command transmission and execution using LEDs.
 
+
+### 9. Wireless Button Controller Prototype
+
+After successfully establishing ESP-NOW communication between the two ESP32-S3 modules, I built a physical **button controller prototype** to provide direct wireless input to the rover.
+
+The controller uses an **ESP32-S3** connected to multiple push buttons. Each button represents a different rover command and is read as an active-low GPIO input.
+
+When a button is pressed, the ESP32-S3 updates the corresponding bit in the **8-bit command packet** and transmits the packet wirelessly using ESP-NOW.
+
+The initial controller was assembled on breadboards to allow the button layout, wiring, and firmware to be tested and modified easily.
+
+The prototype successfully demonstrated
+
+* Reliable detection of multiple button inputs
+* Active-low GPIO input handling
+* Generation of the 8-bit command packet
+* ESP-NOW transmission from the handheld controller
+* Wireless reception and command decoding on the second ESP32-S3
+* LED-based verification of transmitted commands
+* Simultaneous handling of multiple command inputs
+
+```text
+Push Buttons
+     ↓
+ESP32-S3 GPIO
+     ↓
+8-Bit Command Packet
+     ↓
+   ESP-NOW
+     ↓
+Receiver ESP32-S3
+     ↓
+Command Decoding
+     ↓
+Rover Control
+```
+
+<img width="1920" height="2560" alt="photo_2026-08-21_12-02-11" src="https://github.com/user-attachments/assets/2219012e-3b85-4ee7-a2c4-481e44adae1c" />
+
+
+This prototype confirms that the wireless controller architecture works as intended and provides a functional input device for the next stage of rover integration.
+
+The next step is to connect the receiver ESP32-S3 to the rover control system so that button commands can directly control functions such as driving, operating modes, and additional rover mechanisms.
+
+#### Current Status Update
+
+Add the following under **Completed**
+
+* Wireless button controller prototype
+* 8-bit button command packet transmission
+* Multi-button input testing
+
+The wireless controller can now be used as the basis for full manual rover control alongside the autonomous line-following system.
+
+
+
+
 The goal is to expand this system into full wireless rover control.
 
 ## Hardware
@@ -245,15 +302,3 @@ In progress
 * Integration of additional autonomous behaviors
 * Further mechanical and control-system refinement
 
-## Planned Development
-
-The final project is intended to incorporate an FPGA-based control subsystem using a **Terasic DE10-Lite**.
-
-The FPGA portion has not yet been integrated and is therefore not part of the rover's current control architecture.
-
-Future work will include
-
-* FPGA integration
-* Additional hardware-accelerated control or peripheral logic
-* Improved autonomous navigation
-* Expanded wireless command functionality
