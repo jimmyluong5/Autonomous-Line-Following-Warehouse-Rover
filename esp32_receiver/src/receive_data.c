@@ -21,6 +21,8 @@
 //"ESP_RECEIEVER: LEFT IS PRESSED"
 static const char *TAG = "ESP_RECEIVER";
 
+//make global variable speed (8bit)
+uint8_t speed = 0;
 //make array for the button pins
 
 int button_pins[] = {
@@ -34,8 +36,7 @@ int button_pins[] = {
 
 typedef struct{
     uint8_t button_data;
-    uint8_t fpga_data;
-    uint8_t speed;
+    uint8_t speed; //(0-255 8 bit integer.)
     uint16_t sequence;
 } data_packet;
 
@@ -67,6 +68,10 @@ void receive_button_press(uint8_t data) {
             
             //use a switch statement to keep track of all of this
             switch(i) {
+                //left_btn will be a number and you just left shift that bit into a 1, and if its actually a 1 there
+                //then we have a valid press
+
+                //because if data = 0000_0001 and 1<<0 turns into this 0000_0001 so & turns into bitwise and.
                 case LEFT_BTN:
                     //turn the led on
                     gpio_set_level(button_pins[LEFT_BTN], 1);
@@ -79,13 +84,16 @@ void receive_button_press(uint8_t data) {
                     break;
 
                 case UP_BTN:
+                    update_speed(data);
+                    ESP_LOGI(TAG, "Speed: %u \n", speed);
                     gpio_set_level(button_pins[UP_BTN], 1);
-                    ESP_LOGI(TAG, "INCREASING SPEED");
                     break;
 
                 case DOWN_BTN:
+                    update_speed(data);
+                    ESP_LOGI(TAG, "Speed: %u \n", speed);
                     gpio_set_level(button_pins[DOWN_BTN], 1);
-                    ESP_LOGI(TAG, "DECREASING SPEED");
+
                     break;
 
                 case STOP_BTN:
@@ -93,8 +101,6 @@ void receive_button_press(uint8_t data) {
                     ESP_LOGI(TAG, "STOP");
                     break;
             }
-
-            
         }
         else {
             gpio_set_level(button_pins[i], 0);
@@ -103,20 +109,36 @@ void receive_button_press(uint8_t data) {
 }
 
 
-//left_btn will be a number and you just left shift that bit into a 1, and if its actually a 1 there
-//then we have a valid press
+void update_speed(uint8_t data){
+    //we receive speed and analyze the bits, 
 
-//because if data = 0000_0001 and 1<<0 turns into this 0000_0001 so & turns into bitwise and.
-/* void left_button_press(uint8_t data) {
-    if (data & (1<<LEFT_BTN)){
-        //we have a valid press so just turn on the led and print to putty through the serial cable
-        gpio_set_level(button_pins[LEFT_BTN], 1);
-        ESP_LOGI(TAG, "LEFT");
+    //each time we see a set bit in the locations of the data packets where up and down are
+    //then decrease by 5% or 13 counts
+    //since we will receive valid data, we only need to look at the bits
+    if (data & (1<<UP_BTN)) {
+        if (speed > 255-13) {
+            speed = 255;
+            ESP_LOGI(TAG, "MAX SPEED ACHIEVED\n");
+        }
+        else {
+            speed += 13;
+            ESP_LOGI(TAG, "INCREASING SPEED BY 5%% \n");
+        }
+    }
+    
+    else if (data & (1<<DOWN_BTN)) {
+        if (speed < 13){
+            speed = 0;
+            ESP_LOGI(TAG, "LOWEST SPEED ACHIEVED\n");
+            gpio_set_level(button_pins[DOWN_BTN], 1);
+        }
+        else {
+            speed -=13;
+            ESP_LOGI(TAG, "DECREASING SPEED BY 5%% \n");
+            gpio_set_level(button_pins[DOWN_BTN], 0);
+        }
+
     }
 
-    //if left is not pressed just keep the led off
-    else {
-        gpio_set_level(button_pins[LEFT_BTN], 0);
-    }
+    //we don't need an else if statement because the data we getting is guaranteed to be valid.
 }
-*/
