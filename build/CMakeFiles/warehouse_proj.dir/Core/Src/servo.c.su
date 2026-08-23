@@ -1,0 +1,11 @@
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/servo.c:17:13:update_compare_value	24	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/servo.c:26:6:servo_init	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/servo.c:36:6:Servo_SetAngle	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/servo.c:50:6:Servo_SetAngleImmediate	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/servo.c:65:6:Servo_Update	24	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/servo.c:102:6:Servo_SetSpeed	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/servo.c:109:6:Servo_SetAutoDetach	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/servo.c:114:6:servo_stop	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/servo.c:119:9:Servo_GetTargetAngle	4	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/servo.c:123:9:Servo_GetCurrentAngle	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/servo.c:127:6:Servo_IsMoving	16	static

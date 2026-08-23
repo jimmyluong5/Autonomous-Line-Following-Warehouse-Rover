@@ -1,0 +1,14 @@
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/encoder.c:24:6:Encoder_InitDevice	24	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/encoder.c:50:6:Encoder_ResetDevice	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/encoder.c:74:6:Encoder_UpdateDevice	24	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/encoder.c:129:6:Encoder_Init	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/encoder.c:139:6:Encoder_ResetLeft	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/encoder.c:143:6:Encoder_ResetRight	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/encoder.c:147:6:Encoder_Update	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/encoder.c:153:9:Encoder_GetLeftTotal	4	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/encoder.c:157:9:Encoder_GetRightTotal	4	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/encoder.c:161:9:Encoder_GetLeftDelta	4	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/encoder.c:165:9:Encoder_GetRightDelta	4	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/encoder.c:169:9:Encoder_GetLeftCount	4	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/encoder.c:173:9:Encoder_GetRightCount	4	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/encoder.c:177:7:Encoder_GetRobotSpeed	4	static

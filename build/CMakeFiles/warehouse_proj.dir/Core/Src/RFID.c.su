@@ -1,0 +1,17 @@
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:64:13:RFID_Select	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:67:13:RFID_Deselect	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:71:13:RFID_WriteRegister	24	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:96:16:RFID_ReadRegister	32	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:125:13:RFID_WriteRegisterArray	24	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:160:13:RFID_SetRegisterBits	24	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:167:13:RFID_ClearRegisterBits	24	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:174:13:RFID_AntennaOn	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:183:20:RFID_CalculateCRC	40	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:233:20:RFID_Transceive	48	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:358:6:RFID_HardwareReset	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:379:13:RFID_Init	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:458:9:RFID_GetVersion	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:463:13:RFID_IsCardPresent	24	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:502:13:RFID_ReadUID	40	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:576:13:RFID_Poll	24	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/RFID.c:590:13:RFID_Halt	32	static

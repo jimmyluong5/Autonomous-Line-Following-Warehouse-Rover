@@ -1,0 +1,8 @@
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/motor.c:7:6:Motor_Init	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/motor.c:22:6:Motor_SetStandby	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/motor.c:27:6:Motor_Right_SetSpeed	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/motor.c:60:6:Motor_Left_SetSpeed	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/motor.c:92:6:Motor_Forward	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/motor.c:100:6:Motor_Reverse	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/motor.c:108:6:Motor_Stop	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/motor.c:113:6:Motor_Brake	8	static
