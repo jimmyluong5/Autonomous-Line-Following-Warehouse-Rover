@@ -252,9 +252,61 @@ Add the following under **Completed**
 The wireless controller can now be used as the basis for full manual rover control alongside the autonomous line-following system.
 
 
+10. UART Command Monitoring and Serial Debugging
+
+After completing the wireless button controller prototype, I added UART serial monitoring on the receiver ESP32-S3 to verify that transmitted rover commands were being received and decoded correctly.
+
+The transmitter ESP32-S3 continues to send the 8-bit command packet over ESP-NOW. On the receiver side, each received packet is decoded by checking the individual command bits. When a valid command is detected, the receiver outputs the corresponding direction through the ESP32-S3 serial console.
+
+Using PuTTY, I was able to monitor the receiver ESP32-S3 in real time and confirm commands such as
+
+LEFT
+RIGHT
+UP
+DOWN
+STOP
+
+This provides an additional debugging layer beyond the original LED-based verification and confirms that the receiver can correctly interpret the wireless command packet.
+
+Push Button
+     ↓
+Transmitter ESP32-S3
+     ↓
+8-Bit Command Packet
+     ↓
+   ESP-NOW
+     ↓
+Receiver ESP32-S3
+     ↓
+Command Decoding
+     ↓
+Serial / USB Output
+     ↓
+PuTTY
+     ↓
+LEFT / RIGHT / UP / DOWN / STOP
+
+The receiver checks the appropriate command bit in the incoming packet and maps that bit to its corresponding rover action. This makes it possible to verify the actual decoded command rather than relying only on LEDs.
+
+The serial interface will also be useful during later stages of development for debugging wireless communication, monitoring rover commands, and verifying communication between the ESP32-S3 receiver and the main rover controller.
+
+<img width="1920" alt="ESP32-S3 UART command monitoring through PuTTY" src="d96aebd8-6ca0-4b5d-8e9e-dc99c9ea0bd0.png" />
+Current Status Update
+
+Add the following under Completed
+
+ESP32-S3 serial command monitoring
+Wireless command decoding
+PuTTY-based receiver debugging
+LEFT, RIGHT, UP, DOWN, and STOP command verification
+
+The wireless controller now supports both LED-based command verification and real-time serial debugging, providing a more reliable way to confirm that ESP-NOW packets are being received and interpreted correctly.
 
 
-The goal is to expand this system into full wireless rover control.
+
+
+
+The eventual goal is to expand this system into full wireless rover control.
 
 ## Hardware
 
