@@ -302,15 +302,3 @@ In progress
 * Integration of additional autonomous behaviors
 * Further mechanical and control-system refinement
 
-## Planned Development
-
-The final project is intended to incorporate an FPGA-based control subsystem using a **Terasic DE10-Lite**.
-
-The FPGA portion has not yet been integrated and is therefore not part of the rover's current control architecture.
-
-Future work will include
-
-* FPGA integration
-* Additional hardware-accelerated control or peripheral logic
-* Improved autonomous navigation
-* Expanded wireless command functionality
