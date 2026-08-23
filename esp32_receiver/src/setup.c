@@ -9,15 +9,18 @@
 
 static const char *TAG = "ESP32_RECEIVER";
 
+//this is the esp-now callback, which is called automatically whenever the receiver esp32 
+//gets an esp-now packet.
 static void OnDataRecv(const esp_now_recv_info_t *esp_now_info, const uint8_t *data, int data_len) {
   
-  ESP_LOGI(TAG, "Received %d bytes from MAC: " MACSTR, data_len,MAC2STR(esp_now_info->src_addr));
+  //ion even need this hoe.
+  //ESP_LOGI(TAG, "Received %d bytes from MAC: " MACSTR, data_len,MAC2STR(esp_now_info->src_addr));
 
   //make sure we received at least one byte
-  if (data_len > 0){
+  if (data_len > 0) {
+    //then place the data into this function.
     receive_button_press(data[0]);
   }
-
 }
 
 void init_wifi(void) {
@@ -43,5 +46,6 @@ void init_esp_nvs(void) {
   }
   ESP_ERROR_CHECK(ret);
 }
+
 
 
