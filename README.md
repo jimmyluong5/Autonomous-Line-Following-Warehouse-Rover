@@ -252,7 +252,7 @@ Add the following under **Completed**
 The wireless controller can now be used as the basis for full manual rover control alongside the autonomous line-following system.
 
 
-10. UART Command Monitoring and Serial Debugging
+### 10. UART Command Monitoring and Serial Debugging
 
 After completing the wireless button controller prototype, I added UART serial monitoring on the receiver ESP32-S3 to verify that transmitted rover commands were being received and decoded correctly.
 
@@ -290,7 +290,8 @@ The receiver checks the appropriate command bit in the incoming packet and maps 
 
 The serial interface will also be useful during later stages of development for debugging wireless communication, monitoring rover commands, and verifying communication between the ESP32-S3 receiver and the main rover controller.
 
-<img width="1920" alt="ESP32-S3 UART command monitoring through PuTTY" src="d96aebd8-6ca0-4b5d-8e9e-dc99c9ea0bd0.png" />
+<img width="987" height="726" alt="photo_2026-08-23_20-24-49" src="https://github.com/user-attachments/assets/f57871b0-3ed2-4805-978f-858f2236b0fb" />
+
 Current Status Update
 
 Add the following under Completed
