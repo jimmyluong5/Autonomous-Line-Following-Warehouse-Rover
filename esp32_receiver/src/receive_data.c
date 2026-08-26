@@ -26,9 +26,9 @@ uint8_t speed = 0;
 //make array for the button pins
 
 int button_pins[] = {
-    GPIO_NUM_48, //0 (left) //manual mode
+    GPIO_NUM_10, //0 (left) //manual mode
     GPIO_NUM_11, //idx 1 (down) //decrease speed by 10 % (0-255 then its by 25 counts or 5% = 13 counts)
-    GPIO_NUM_21, //idx 2 (up) //increase speed by 10% or 5%
+    GPIO_NUM_12, //idx 2 (up) //increase speed by 10% or 5%
     GPIO_NUM_13, //idx 3 (Stop) //just stop
     GPIO_NUM_14 //idx 4 (right) //autonomous mode.
 };
