@@ -15,9 +15,9 @@
 
 // Array for the GPIO pins to loop through and read
 int button_pins[5] = {
-    GPIO_NUM_10, // idx 0
+    GPIO_NUM_48, // i
     GPIO_NUM_11, // idx 1
-    GPIO_NUM_12, // idx 2
+    GPIO_NUM_21, // idx 2
     GPIO_NUM_13, // idx 3
     GPIO_NUM_14  // idx 4
 };
@@ -43,20 +43,6 @@ void init_button_pin(void) {
 
 uint8_t read_buttons(void) {
     uint8_t data_packet = 0x00; //each 0 is half a byte
-/* 
- // Active-low button: 0 when pressed to GND, 1 when released (pull-up)
-    int button_press = gpio_get_level(GPIO_NUM_1);
-
-    //button press is for the random button in the middle of the board
-    if (button_press == 0) {
-        vTaskDelay(pdMS_TO_TICKS(20)); // debounce 20ms
-        if (gpio_get_level(GPIO_NUM_1) == 0) {
-            data_packet |= (1 << 0);
-            //set_led(true);  // Turn LED ON when button is pressed
-        }
-    }
-*/ 
-
 
 //we are going to try a debouncing method with sampling
 //where we sample once and see the state of the buttons, then we wait 20ms later and sample again,
@@ -84,8 +70,6 @@ uint8_t read_buttons(void) {
     }
 
     //then we sample again and place the bits into sample2
-
-
    
     for (int i = 0; i < 5; i++) {
         if (gpio_get_level(button_pins[i]) == 0) {
