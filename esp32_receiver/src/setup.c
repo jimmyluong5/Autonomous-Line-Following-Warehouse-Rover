@@ -7,7 +7,7 @@
 #include "nvs_flash.h"
 #include "receive_data.h"
 
-static const char *TAG = "ESP32_RECEIVER";
+//static const char *TAG = "ESP32_RECEIVER";
 
 //this is the esp-now callback, which is called automatically whenever the receiver esp32 
 //gets an esp-now packet.

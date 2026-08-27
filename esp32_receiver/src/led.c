@@ -6,11 +6,11 @@
 #include "esp_log.h"
 
 static const gpio_num_t LED_PINS[] = {
-    GPIO_NUM_1,
-    GPIO_NUM_2,
-    GPIO_NUM_21,
-    GPIO_NUM_38,
-    GPIO_NUM_47
+    GPIO_NUM_10,
+    GPIO_NUM_11,
+    GPIO_NUM_12,
+    GPIO_NUM_13,
+    GPIO_NUM_14
 };
 #define NUM_LEDS (sizeof(LED_PINS) / sizeof(LED_PINS[0]))
 
@@ -31,3 +31,6 @@ void blink_led(void) {
         gpio_set_level(LED_PINS[i], s_led_state);
     }
 }
+
+
+

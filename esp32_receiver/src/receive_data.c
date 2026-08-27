@@ -18,7 +18,7 @@
 #define RIGHT_BTN 4
 
 //its just a label we use that appears in the log when we do messages
-//"ESP_RECEIEVER: LEFT IS PRESSED"
+//"ESP_RECEIVER: LEFT IS PRESSED"
 static const char *TAG = "ESP_RECEIVER";
 
 //make global variable speed (8bit)
@@ -44,6 +44,10 @@ typedef struct{
 
 void init_pins() {
     for (int i = 0; i < 5; i++) {
+        //need to reset the pins first because the pins have multiple uses
+        gpio_reset_pin(button_pins[i]);
+
+        //set the pins as outputs.
         gpio_set_direction(button_pins[i], GPIO_MODE_OUTPUT);
 
         //then set all of the off at the beginning
@@ -130,15 +134,17 @@ void update_speed(uint8_t data){
         if (speed < 13){
             speed = 0;
             ESP_LOGI(TAG, "LOWEST SPEED ACHIEVED\n");
-            gpio_set_level(button_pins[DOWN_BTN], 1);
+            //gpio_set_level(button_pins[DOWN_BTN], 1);
+            //not needed because we already do it in the loop above/
         }
         else {
             speed -=13;
             ESP_LOGI(TAG, "DECREASING SPEED BY 5%% \n");
-            gpio_set_level(button_pins[DOWN_BTN], 0);
+
         }
 
     }
 
-    //we don't need an else if statement because the data we getting is guaranteed to be valid.
+    //we don't need an else if statement because the data we getting 
+    // is guaranteed to be valid.
 }
