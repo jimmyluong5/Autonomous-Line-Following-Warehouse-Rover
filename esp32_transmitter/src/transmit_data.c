@@ -30,12 +30,15 @@ int led_pins[]= {
     GPIO_NUM_3, //up (green)
     GPIO_NUM_46, //stop (red)
     GPIO_NUM_9, //right (white)
+};
 
+int joystick_pins[] = {
+    GPIO_NUM_5, //horizontal
+    GPIO_NUM_4 //vertical
 };
 
 typedef struct {
     uint8_t button_data;
-    uint8_t fpga_data;
     uint8_t speed;
     uint16_t sequence;
     uint8_t joystick_x;
@@ -51,6 +54,7 @@ void init_button_pin(void) {
     }
 }
 
+
 void init_led_pin(void){
     for (int i = 0; i < 5; i++){
         gpio_set_direction(led_pins[i], GPIO_MODE_OUTPUT);
@@ -58,6 +62,14 @@ void init_led_pin(void){
         gpio_set_level(led_pins[i], 0);
     }
     
+}
+
+void init_joystick_pins(void) {
+
+    for (int i = 0; i < 2; i++) {
+        gpio_set_direction(joystick_pins[i],  
+    }
+
 }
 
 
@@ -141,6 +153,7 @@ uint8_t read_buttons(void) {
 //if we click two buttons at the same time like pin 10 and pin 11
 //0000 0011 and both leds should turn on. need to write the code for the receiver too.
 
+//instead of sending just 8 bit data, it's gonna be an entire data packet.
 esp_err_t transmit_data(uint8_t *receiver_mac, uint8_t data) {
     esp_err_t result = esp_now_send(receiver_mac, &data, sizeof(data));
     return result;
