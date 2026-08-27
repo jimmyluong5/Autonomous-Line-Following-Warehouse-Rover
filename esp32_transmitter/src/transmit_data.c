@@ -38,6 +38,8 @@ typedef struct {
     uint8_t fpga_data;
     uint8_t speed;
     uint16_t sequence;
+    uint8_t joystick_x;
+    uint8_t joystick_y;
 } data_packet_t;
 
 void init_button_pin(void) {
