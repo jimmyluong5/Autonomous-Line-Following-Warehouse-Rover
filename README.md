@@ -252,25 +252,33 @@ Add the following under **Completed**
 The wireless controller can now be used as the basis for full manual rover control alongside the autonomous line-following system.
 
 
-### 10. UART Command Monitoring and Serial Debugging
+10. Bidirectional Serial Monitoring and Wireless Command Debugging
 
-After completing the wireless button controller prototype, I added UART serial monitoring on the receiver ESP32-S3 to verify that transmitted rover commands were being received and decoded correctly.
+After completing the wireless button controller prototype, I expanded the debugging interface so that both the transmitter and receiver ESP32-S3 modules can display controller activity through their respective serial connections.
 
-The transmitter ESP32-S3 continues to send the 8-bit command packet over ESP-NOW. On the receiver side, each received packet is decoded by checking the individual command bits. When a valid command is detected, the receiver outputs the corresponding direction through the ESP32-S3 serial console.
+On the transmitter side, button presses are detected from the active-low GPIO inputs, encoded into the 8-bit command packet, and displayed through the serial console. This makes it possible to verify that the correct command is being generated before it is transmitted wirelessly.
 
-Using PuTTY, I was able to monitor the receiver ESP32-S3 in real time and confirm commands such as
+The packet is then sent over ESP-NOW to the receiver ESP32-S3. The receiver decodes the individual command bits and independently displays the interpreted rover command through its own serial console.
 
-LEFT
-RIGHT
-UP
-DOWN
+Using PuTTY, I can therefore monitor either side of the wireless connection and verify commands such as
+
+MANUAL MODE
+AUTONOMOUS MODE
+INCREASING SPEED
+DECREASING SPEED
 STOP
 
-This provides an additional debugging layer beyond the original LED-based verification and confirms that the receiver can correctly interpret the wireless command packet.
+<img width="987" height="726" alt="photo_2026-08-23_20-24-49" src="https://github.com/user-attachments/assets/f57871b0-3ed2-4805-978f-858f2236b0fb" />
 
-Push Button
+
+The controller also supports an 8-bit speed value ranging from 0–255, with the UP and DOWN buttons adjusting the requested rover speed in approximately 5% increments.
+Push Buttons
      ↓
 Transmitter ESP32-S3
+     ↓
+Button Detection
+     ↓
+Serial Debug Output
      ↓
 8-Bit Command Packet
      ↓
@@ -280,17 +288,17 @@ Receiver ESP32-S3
      ↓
 Command Decoding
      ↓
-Serial / USB Output
+Serial Debug Output
      ↓
-PuTTY
-     ↓
-LEFT / RIGHT / UP / DOWN / STOP
+MANUAL / AUTO / SPEED / STOP
 
-The receiver checks the appropriate command bit in the incoming packet and maps that bit to its corresponding rover action. This makes it possible to verify the actual decoded command rather than relying only on LEDs.
+Having serial output available on both ESP32-S3 modules provides visibility into both sides of the communication system. The transmitter output verifies that controller inputs are being correctly detected and encoded, while the receiver output verifies that the same commands are successfully transmitted, received, and decoded.
 
-The serial interface will also be useful during later stages of development for debugging wireless communication, monitoring rover commands, and verifying communication between the ESP32-S3 receiver and the main rover controller.
+This significantly simplifies debugging because communication problems can be isolated to either the controller input stage, ESP-NOW transmission, or receiver-side command decoding.
 
-<img width="987" height="726" alt="photo_2026-08-23_20-24-49" src="https://github.com/user-attachments/assets/f57871b0-3ed2-4805-978f-858f2236b0fb" />
+
+
+<img width="600" height="1078" alt="photo_2026-08-27_13-42-37" src="https://github.com/user-attachments/assets/8dab71af-80e4-4deb-b765-b0bcc2b9e5ed" />
 
 Current Status Update
 
@@ -332,21 +340,22 @@ The eventual goal is to expand this system into full wireless rover control.
 * ESP-NOW
 * PuTTY
 * 8-bit command packet protocol
+  
+**<img width="600" height="1078" alt="photo_2026-08-27_13-42-37" src="https://github.com/user-attachments/assets/578f2eab-91a1-4405-87fc-f377c593d2a2" />
 
-## Current Status
+Current Status Update
 
-Completed
+Add the following under Completed
 
-* Motor control
-* Power regulation
-* Cardboard drivetrain prototype
-* Reflectance sensor acquisition
-* MCP3208 ADC integration
-* UART diagnostic interface
-* Reflectance sensor calibration
-* Autonomous line following
-* 3D-printed chassis integration
-* Initial ESP-NOW communication
+Transmitter-side serial command monitoring
+Receiver-side serial command monitoring
+Wireless command transmission and decoding
+Manual and autonomous mode command selection
+8-bit adjustable speed control
+STOP command verification
+End-to-end ESP-NOW controller debugging
+
+The wireless controller can now be monitored from both sides of the communication link and provides the foundation for forwarding the decoded commands to the STM32 rover controller.
 
 In progress
 
