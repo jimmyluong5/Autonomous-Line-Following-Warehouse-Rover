@@ -1,6 +1,7 @@
 #include "esp_adc/adc_oneshot.h"
 #include "esp_err.h"
 #include "esp_log.h"
+#include "driver/gpio.h"
 #include "joystick.h"
 #include "adc.h"
 #include "freertos/FreeRTOS.h"
@@ -12,12 +13,16 @@ static const char *TAG = "JOYSTICK";
 
 void init_joystick(void){
     init_adc();
+
+    //initialize gpio pin 6
+    gpio_reset_pin(GPIO_NUM_6);
+    gpio_set_direction(GPIO_NUM_6, GPIO_MODE_OUTPUT);
 }
 
 
 uint16_t read_joystick_horizontal(void) {
     uint16_t value_x = read_joystick_x();
-    return value_x;
+    return 4095-value_x;
 }
 
 uint16_t read_joystick_vertical(void) {

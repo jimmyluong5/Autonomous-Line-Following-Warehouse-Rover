@@ -9,7 +9,6 @@
 #include "adc.h"
 #include "joystick.h"
 
-static const char *TAG = "MAIN";
 void app_main(void)
 {
     // 1. Peripherals, NVS, WiFi & ESP-NOW initialization
@@ -19,7 +18,6 @@ void app_main(void)
     init_esp_now();
     init_button_pin();
     init_led_pin();
-    init_adc();
     init_joystick();
     
 
