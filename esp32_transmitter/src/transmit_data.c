@@ -14,13 +14,15 @@
 //static const char *TAG = "TRANSMIT_DATA";
 
 // Array for the GPIO pins to loop through and read
-int button_pins[5] = {
-    GPIO_NUM_48, // i
-    GPIO_NUM_11, // idx 1
-    GPIO_NUM_21, // idx 2
-    GPIO_NUM_13, // idx 3
-    GPIO_NUM_14  // idx 4
+
+int button_pins[] = {
+    GPIO_NUM_10, //0 (left) //manual mode
+    GPIO_NUM_11, //idx 1 (down) //decrease speed by 10 % (0-255 then its by 25 counts or 5% = 13 counts)
+    GPIO_NUM_12, //idx 2 (up) //increase speed by 10% or 5%
+    GPIO_NUM_13, //idx 3 (Stop) //just stop
+    GPIO_NUM_14 //idx 4 (right) //autonomous mode.
 };
+
 
 typedef struct {
     uint8_t button_data;
@@ -30,8 +32,6 @@ typedef struct {
 } data_packet_t;
 
 void init_button_pin(void) {
-    gpio_set_direction(GPIO_NUM_1, GPIO_MODE_INPUT);
-    gpio_set_pull_mode(GPIO_NUM_1, GPIO_PULLUP_ONLY);
 
     //we need to initialize all the pins to input
     for (int i = 0; i < 5; i++) {
@@ -52,7 +52,7 @@ uint8_t read_buttons(void) {
     uint8_t sample2 = 0x00;
     
     //populate sample1 with the data from the buttons
-    for (int i = 0; i<5; i++) {
+    for (int i = 0; i < 5; i++) {
         if (gpio_get_level(button_pins[i]) == 0) {
             //then just shift the bits and place it into sample1
             sample1 = sample1 | (1<<i);
