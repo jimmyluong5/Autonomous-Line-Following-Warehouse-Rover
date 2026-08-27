@@ -106,9 +106,14 @@ uint8_t read_buttons(void) {
     //sample2 = 0000 0010 then 
     //data_packet = 0000 0010 and we return this.
 
-    //so our data packet contains info of the buttons
-    for (int i = 0; i<5; i++){
-        if ((data_packet & (1<<i)) == 1) {
+   
+
+    
+    data_packet = sample1 & sample2; 
+
+     //so our data packet contains info of the buttons
+    for (int i = 0; i < 5; i++){
+        if ((data_packet & (1<<i)) != 0) {
             //turn on the led
             gpio_set_level(led_pins[i], 1);
         }
@@ -117,9 +122,7 @@ uint8_t read_buttons(void) {
             gpio_set_level(led_pins[i], 0);
         }
     }
-
     //return the data packet.
-    data_packet = sample1 & sample2; 
     return data_packet;
 }
 
