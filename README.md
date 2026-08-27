@@ -298,16 +298,9 @@ This significantly simplifies debugging because communication problems can be is
 
 
 
-<img width="600" height="1078" alt="photo_2026-08-27_13-42-37" src="https://github.com/user-attachments/assets/8dab71af-80e4-4deb-b765-b0bcc2b9e5ed" />
+<img width="538" height="956" alt="Adobe Express - IMG_5109" src="https://github.com/user-attachments/assets/989fd5d0-0708-4b79-a95e-a0d8b2106800" />
 
-Current Status Update
 
-Add the following under Completed
-
-ESP32-S3 serial command monitoring
-Wireless command decoding
-PuTTY-based receiver debugging
-LEFT, RIGHT, UP, DOWN, and STOP command verification
 
 The wireless controller now supports both LED-based command verification and real-time serial debugging, providing a more reliable way to confirm that ESP-NOW packets are being received and interpreted correctly.
 
@@ -341,11 +334,8 @@ The eventual goal is to expand this system into full wireless rover control.
 * PuTTY
 * 8-bit command packet protocol
   
-**<img width="600" height="1078" alt="photo_2026-08-27_13-42-37" src="https://github.com/user-attachments/assets/578f2eab-91a1-4405-87fc-f377c593d2a2" />
 
 Current Status Update
-
-Add the following under Completed
 
 Transmitter-side serial command monitoring
 Receiver-side serial command monitoring
@@ -354,6 +344,9 @@ Manual and autonomous mode command selection
 8-bit adjustable speed control
 STOP command verification
 End-to-end ESP-NOW controller debugging
+Wireless button controller prototype
+8-bit button command packet transmission
+Multi-button input testing
 
 The wireless controller can now be monitored from both sides of the communication link and provides the foundation for forwarding the decoded commands to the STM32 rover controller.
 
