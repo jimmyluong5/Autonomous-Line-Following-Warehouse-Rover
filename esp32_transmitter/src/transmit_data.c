@@ -24,6 +24,15 @@ int button_pins[] = {
 };
 
 
+int led_pins[]= {
+    GPIO_NUM_18, //left (yellow)
+    GPIO_NUM_8, //down (blue)
+    GPIO_NUM_3, //up (green)
+    GPIO_NUM_46, //stop (red)
+    GPIO_NUM_9, //right (white)
+
+};
+
 typedef struct {
     uint8_t button_data;
     uint8_t fpga_data;
@@ -38,8 +47,18 @@ void init_button_pin(void) {
         gpio_set_direction(button_pins[i], GPIO_MODE_INPUT);
         gpio_set_pull_mode(button_pins[i], GPIO_PULLUP_ONLY);
     }
-
 }
+
+void init_led_pin(void){
+    for (int i = 0; i < 5; i++){
+        gpio_set_direction(led_pins[i], GPIO_MODE_OUTPUT);
+        //set them off at first
+        gpio_set_level(led_pins[i], 0);
+    }
+    
+}
+
+
 
 uint8_t read_buttons(void) {
     uint8_t data_packet = 0x00; //each 0 is half a byte
@@ -75,7 +94,7 @@ uint8_t read_buttons(void) {
         if (gpio_get_level(button_pins[i]) == 0) {
             //then we need to shift the data packet according to the index
             sample2 = sample2 | (1 << (i)); //its i because we need the 0th index, 
-            //i+1 would be if something is occupying bit 0 
+            //i+1 would be if something is occupying bit 0      
         }
     }
     //we need to do this to actually get a complete and clean button press.
@@ -86,6 +105,20 @@ uint8_t read_buttons(void) {
     //sample1 = 0000 0010
     //sample2 = 0000 0010 then 
     //data_packet = 0000 0010 and we return this.
+
+    //so our data packet contains info of the buttons
+    for (int i = 0; i<5; i++){
+        if ((data_packet & (1<<i)) == 1) {
+            //turn on the led
+            gpio_set_level(led_pins[i], 1);
+        }
+        else {
+            //turn off led
+            gpio_set_level(led_pins[i], 0);
+        }
+    }
+
+    //return the data packet.
     data_packet = sample1 & sample2; 
     return data_packet;
 }

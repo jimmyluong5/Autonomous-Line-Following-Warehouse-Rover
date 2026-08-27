@@ -15,6 +15,7 @@ void app_main(void)
     init_wifi();
     init_esp_now();
     init_button_pin();
+    init_led_pin();
 
 #if ENABLE_SERVO_MODE
     // 2. Servo & UART control initialization (if ENABLE_SERVO_MODE == 1)
