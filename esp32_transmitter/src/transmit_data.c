@@ -110,7 +110,7 @@ uint8_t read_buttons(void) {
 
     
     data_packet = sample1 & sample2; 
-
+    //this is the code for the led button clicking.
      //so our data packet contains info of the buttons
     for (int i = 0; i < 5; i++){
         if ((data_packet & (1<<i)) != 0) {
