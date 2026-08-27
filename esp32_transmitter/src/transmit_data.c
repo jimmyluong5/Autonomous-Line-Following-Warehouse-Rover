@@ -32,17 +32,14 @@ int led_pins[]= {
     GPIO_NUM_9, //right (white)
 };
 
-int joystick_pins[] = {
-    GPIO_NUM_5, //horizontal
-    GPIO_NUM_4 //vertical
-};
 
+//4 byte rn
 typedef struct {
     uint8_t button_data;
     uint8_t speed;
-    uint16_t sequence;
-    uint8_t joystick_x;
-    uint8_t joystick_y;
+    //uint16_t sequence;
+    uint16_t joystick_x;
+    uint16_t joystick_y;
 } data_packet_t;
 
 void init_button_pin(void) {
@@ -64,13 +61,6 @@ void init_led_pin(void){
     
 }
 
-void init_joystick_pins(void) {
-
-    for (int i = 0; i < 2; i++) {
-        gpio_set_direction(joystick_pins[i],  
-    }
-
-}
 
 
 

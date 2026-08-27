@@ -70,5 +70,13 @@ int read_joystick_x(void) {
 
     //then just use the function to read the pins from earlier.
     //use the error to check if its success then read
-    ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, ))
+    ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, joystick_x, &raw_val));
+    return raw_val;
+}
+
+int read_joystick_y(void) {
+    int raw_val = 0;
+
+    ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, joystick_y, &raw_val ));
+    return raw_val;
 }
