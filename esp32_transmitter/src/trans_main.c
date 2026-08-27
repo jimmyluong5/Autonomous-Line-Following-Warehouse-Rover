@@ -7,7 +7,9 @@
 #include "uart_control.h"
 #include <stdio.h>
 #include "adc.h"
+#include "joystick.h"
 
+static const char *TAG = "MAIN";
 void app_main(void)
 {
     // 1. Peripherals, NVS, WiFi & ESP-NOW initialization
@@ -18,6 +20,8 @@ void app_main(void)
     init_button_pin();
     init_led_pin();
     init_adc();
+    init_joystick();
+    
 
 #if ENABLE_SERVO_MODE
     // 2. Servo & UART control initialization (if ENABLE_SERVO_MODE == 1)
@@ -73,7 +77,7 @@ void app_main(void)
             }
         }
 #endif
-
+        print_joystick_values();
         // Read button and transmit state changes (0x01 on press, 0x00 on release) over ESP-NOW
         uint8_t packet = read_buttons(); //reads the pins
         if (packet != last_sent_packet) //if the packet changes, transmit it, like if the button state changes 

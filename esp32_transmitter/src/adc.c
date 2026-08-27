@@ -77,6 +77,8 @@ int read_joystick_x(void) {
 int read_joystick_y(void) {
     int raw_val = 0;
 
-    ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, joystick_y, &raw_val ));
+    ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, joystick_y, &raw_val));
     return raw_val;
 }
+
+

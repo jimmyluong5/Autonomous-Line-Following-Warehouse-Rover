@@ -8,5 +8,7 @@
 void init_joystick(void);
 uint16_t read_joystick_horizontal(void);
 uint16_t read_joystick_vertical(void);
+void print_joystick_values(void);
+
 
 #endif
