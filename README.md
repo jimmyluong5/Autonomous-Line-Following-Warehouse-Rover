@@ -298,7 +298,7 @@ This significantly simplifies debugging because communication problems can be is
 
 
 
-<img width="600" height="1078" alt="photo_2026-08-27_13-42-37" src="https://github.com/user-attachments/assets/8dab71af-80e4-4deb-b765-b0bcc2b9e5ed" />
+<img width="538" height="956" alt="Adobe Express - IMG_5109" src="https://github.com/user-attachments/assets/989fd5d0-0708-4b79-a95e-a0d8b2106800" />
 
 
 
@@ -334,7 +334,6 @@ The eventual goal is to expand this system into full wireless rover control.
 * PuTTY
 * 8-bit command packet protocol
   
-**<img width="600" height="1078" alt="photo_2026-08-27_13-42-37" src="https://github.com/user-attachments/assets/578f2eab-91a1-4405-87fc-f377c593d2a2" />
 
 Current Status Update
 
