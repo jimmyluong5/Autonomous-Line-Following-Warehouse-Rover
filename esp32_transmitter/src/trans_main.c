@@ -6,6 +6,7 @@
 #include "transmit_data.h"
 #include "uart_control.h"
 #include <stdio.h>
+#include "adc.h"
 
 void app_main(void)
 {
@@ -16,7 +17,8 @@ void app_main(void)
     init_esp_now();
     init_button_pin();
     init_led_pin();
-
+    init_joystick_pins();
+    
 #if ENABLE_SERVO_MODE
     // 2. Servo & UART control initialization (if ENABLE_SERVO_MODE == 1)
     servo_init();
