@@ -4,7 +4,6 @@
 #include <stdbool.h>
 
 void init_speaker(void);
-
 void speaker_update(void);
 
 
