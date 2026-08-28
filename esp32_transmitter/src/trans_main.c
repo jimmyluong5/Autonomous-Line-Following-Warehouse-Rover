@@ -9,7 +9,10 @@
 #include "adc.h"
 #include "joystick.h"
 #include "speaker.h"
+#include "stdint.h"
 
+
+static const char *TAG = "MAIN";
 void app_main(void)
 {
     // 1. Peripherals, NVS, WiFi & ESP-NOW initialization
@@ -21,6 +24,7 @@ void app_main(void)
     init_led_pin();
     init_joystick();
     init_speaker();
+   
     
     
 
@@ -51,7 +55,7 @@ void app_main(void)
     printf("==========================================\r\n");
 #endif
 
-    static uint8_t last_sent_packet = 0xFF;
+    static data_packet_t last_sent_packet = {0};
 
     while (1)
     {
@@ -78,22 +82,30 @@ void app_main(void)
             }
         }
 #endif
+
+        data_packet_t packet;
+
+
         print_joystick_values();
         // Read button and transmit state changes (0x01 on press, 0x00 on release) over ESP-NOW
-        uint8_t packet = read_buttons(); //reads the pins
-        speaker_update(packet);
-        if (packet != last_sent_packet) //if the packet changes, transmit it, like if the button state changes 
+        packet.button_data = read_buttons();
+        packet.joystick_x = read_joystick_horizontal();
+        packet.joystick_y = read_joystick_vertical(); //reads the pins
+        packet.speed = 100; //initialize the packet speed.
+        speaker_update(packet.button_data);
 
-        {
-            //so if packet is not equal to the last packet sent, then our button state has changed.
-            last_sent_packet = packet; //so we update the last sent packet
+        //check if any data in the packet changed using memcpy()
+        if ((memcmp(&packet, &last_sent_packet, sizeof(data_packet_t))) !=0) {
+            //update the last sent packet
+            last_sent_packet = packet;
 
-            //then we send the next packet.
-            transmit_data(receiver_mac, packet);
-            //prints in putty/uart?
-            //printf("[ESP-NOW] Transmitted packet: 0x%02X (Receiver LED %s)\r\n",packet, (packet & 0x01) ? "ON" : "OFF");
+            //transmit the address of the struct over esp-now so the receiver can 
+            //access it 
+            transmit_data(receiver_mac, &packet);
+            ESP_LOGI(TAG, "[ESP-NOW] Sent packet - Buttons: 0x%02X | Speed: %d | JoyX: %u | JoyY: %u\r\n",
+            packet.button_data, packet.speed, packet.joystick_x, packet.joystick_y);
         }
-
+        
         vTaskDelay(pdMS_TO_TICKS(10)); //this is like the debounce time 
     }
 }

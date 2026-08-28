@@ -34,15 +34,6 @@ int led_pins[]= {
 };
 
 
-//4 byte rn
-typedef struct {
-    uint8_t button_data;
-    uint8_t speed;
-    //uint16_t sequence;
-    uint16_t joystick_x;
-    uint16_t joystick_y;
-} data_packet_t;
-
 void init_button_pin(void) {
 
     //we need to initialize all the pins to input
@@ -152,7 +143,7 @@ uint8_t read_buttons(void) {
 //0000 0011 and both leds should turn on. need to write the code for the receiver too.
 
 //instead of sending just 8 bit data, it's gonna be an entire data packet.
-esp_err_t transmit_data(uint8_t *receiver_mac, uint8_t data) {
-    esp_err_t result = esp_now_send(receiver_mac, &data, sizeof(data));
+esp_err_t transmit_data(const uint8_t *receiver_mac, const data_packet_t *packet) {
+    esp_err_t result = esp_now_send(receiver_mac, (const uint8_t*) packet, sizeof(data_packet_t));
     return result;
 }
