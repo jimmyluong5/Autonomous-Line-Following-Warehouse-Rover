@@ -18,7 +18,15 @@
 #define STOP_BTN 3
 #define RIGHT_BTN 4
 
+#define MANUAL_MODE 0
+#define AUTO_MODE 1
+#define IMU_MODE 2
+#define PHONE_MODE 3
+
 static const char *TAG = "TRANSMIT_DATA";
+// mode_selections array definition
+
+
 
 // Array for the GPIO pins to loop through and read
 
@@ -39,6 +47,12 @@ int led_pins[]= {
     GPIO_NUM_9, //right (white)
 };
 
+int modes_selection[] = {
+    LEFT_BTN,   // Index 0: MANUAL_MODE (Left Button = 0)
+    RIGHT_BTN,  // Index 1: AUTO_MODE (Right Button = 4)
+    IMU_MODE,   // Index 2: IMU_MODE (Placeholder)
+    PHONE_MODE, // Index 3: PHONE_MODE (Placeholder)
+};
 
 void init_button_pin(void) {
 
@@ -136,7 +150,7 @@ uint8_t read_buttons(void) {
                         ESP_LOGI(TAG, "AUTONOMOUS MODE");
                         break;
                     case STOP_BTN:
-                        ESP_LOGI(TAG, "STOP");
+                        //ESP_LOGI(TAG, "STOP | Speed = %u", packet->speed);
                         break;
                     case UP_BTN:
                     case DOWN_BTN:
@@ -154,53 +168,117 @@ uint8_t read_buttons(void) {
 }
 uint8_t update_speed(data_packet_t *packet){
     static uint8_t last_button_state = 0x00;
+    static uint32_t last_speed_trigger = 0;
 
     //we need to detect newly pressed buttons
     //detects on rising edge.
     uint8_t new_presses = packet->button_data & (~last_button_state);
     last_button_state = packet->button_data;
 
+    uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
+
+    //debounce lockout: ignore fast contact bounce triggers within 150ms of last press
+    if (new_presses != 0 && (now - last_speed_trigger < 150)) {
+        return packet->speed;
+    }
+
     //we receive the data packet and need to extract the data. 
     
     //each time we see a set bit in the locations of the data packets where up and down are
     //then decrease by 5% or 13 counts
     //since we will receive valid data, we only need to look at the bits
-    if (new_presses & (1<<STOP_BTN)) {
-        packet->speed = 0;
-    }
-    
-    if (new_presses & (1<<UP_BTN)) { //packet->button_data we access
-        //the button data and check if its valid data.
-        if (packet->speed > 255-13) { //we access speed using packet->speed.
-            packet->speed = 255;
-            ESP_LOGI(TAG, "MAX SPEED ACHIEVED (%u)\n", packet->speed);
-        }
+    for (int i = 0; i < 5; i++) {
+        if (new_presses & (1 << i)) {
+            last_speed_trigger = now;
+            switch(i) {
+                case STOP_BTN:
+                    packet->speed = 0;
+                    ESP_LOGI(TAG, "STOP | Speed = %u\n", packet->speed);
+                    break;
 
-        else {
-            packet->speed += 13;
-            ESP_LOGI(TAG, "INCREASING SPEED BY 5%% ->Speed: %u\n", packet->speed);
-        }
-    }
-    
-    else if (new_presses & (1<<DOWN_BTN)) {
-        if (packet->speed < 13){
-            packet->speed = 0;
-            ESP_LOGI(TAG, "LOWEST SPEED ACHIEVED (%u)\n", packet->speed);
-            //gpio_set_level(button_pins[DOWN_BTN], 1);
-            //not needed because we already do it in the loop above/
-        }
+                case UP_BTN: //packet->button_data we access
+                    //the button data and check if its valid data.
+                    if (packet->speed > 255-13) { //we access speed using packet->speed.
+                        packet->speed = 255;
+                        ESP_LOGI(TAG, "MAX SPEED ACHIEVED (%u)\n", packet->speed);
+                    }
 
-        else {
-            packet->speed -=13;
-            ESP_LOGI(TAG, "DECREASING SPEED BY 5%% ->Speed: %u\n", packet->speed);
+                    else {
+                        packet->speed += 13;
+                        ESP_LOGI(TAG, "INCREASING SPEED BY 5%% ->Speed: %u\n", packet->speed);
+                    }
+                    break;
 
+                case DOWN_BTN:
+                    if (packet->speed < 13){
+                        packet->speed = 0;
+                        ESP_LOGI(TAG, "LOWEST SPEED ACHIEVED (%u)\n", packet->speed);
+                        //gpio_set_level(button_pins[DOWN_BTN], 1);
+                        //not needed because we already do it in the loop above/
+                    }
+
+                    else {
+                        packet->speed -= 13;
+                        ESP_LOGI(TAG, "DECREASING SPEED BY 5%% ->Speed: %u\n", packet->speed);
+                    }
+                    break;
+            }
         }
-
     }
 
     //we don't need an else if statement because the data we getting 
     // is guaranteed to be valid.
     return packet->speed;
+}
+
+uint8_t update_mode(data_packet_t *packet) {
+    static uint8_t current_mode = MANUAL_MODE; // default mode
+    static uint8_t last_button_state = 0x00;   // debouncing / rising edge detection
+    static uint32_t last_mode_trigger = 0;
+
+    uint8_t new_presses = packet->button_data & (~last_button_state); // register on rising edge
+    last_button_state = packet->button_data;
+
+    uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
+
+    //debounce lockout: ignore contact bounce triggers within 150ms
+    if (new_presses != 0 && (now - last_mode_trigger < 150)) {
+        packet->mode = current_mode;
+        return current_mode;
+    }
+
+    // Loop through assigned mode buttons (i=0: MANUAL_MODE/LEFT_BTN, i=1: AUTO_MODE/RIGHT_BTN)
+    for (int i = 0; i < 2; i++) {
+        if (new_presses & (1 << modes_selection[i])) {
+            last_mode_trigger = now;
+            switch (i) {
+                case MANUAL_MODE:
+                    current_mode = MANUAL_MODE;
+                    ESP_LOGI(TAG, "Mode Updated -> MANUAL MODE (%u)\n", current_mode);
+                    break;
+
+                case AUTO_MODE:
+                    current_mode = AUTO_MODE;
+                    ESP_LOGI(TAG, "Mode Updated -> AUTONOMOUS MODE (%u)\n", current_mode);
+                    break;
+                /*
+                case IMU_MODE:
+                    current_mode = IMU_MODE;
+                    ESP_LOGI(TAG, "Mode Updated -> IMU MODE (%u)\n", current_mode);
+                    break;
+                
+                case PHONE_MODE:
+                    current_mode = PHONE_MODE;
+                    ESP_LOGI(TAG, "Mode Updated -> PHONE MODE (%u)\n", current_mode);
+                    break;
+                */
+                
+            }
+        }
+    }
+    
+    packet->mode = current_mode;
+    return current_mode;
 }
 
 

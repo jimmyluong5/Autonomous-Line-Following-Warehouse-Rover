@@ -61,6 +61,7 @@ void app_main(void)
     static data_packet_t last_sent_packet = {0};
     static uint32_t last_time = 0;
     static uint8_t current_speed = 0;
+    static uint8_t current_mode = MANUAL_MODE;
     while (1)
     {
 #if ENABLE_SERVO_MODE
@@ -87,7 +88,7 @@ void app_main(void)
         }
 #endif
         //initialize the packet with all the attributes.
-        data_packet_t packet;
+        data_packet_t packet = {0};
         print_joystick_values();
 
         // Read button and transmit state changes (0x01 on press, 0x00 on release) over ESP-NOW
@@ -96,9 +97,11 @@ void app_main(void)
         uint16_t raw_y= read_joystick_vertical(); //reads the pins
         //put the variable of speed from the data packet into this 8 bit variable
         packet.speed = current_speed;
+        packet.mode = current_mode;
         
-        //update the speed 
+        //update the speed and mode
         current_speed = update_speed(&packet);
+        current_mode = update_mode(&packet);
         
 
         //implement deadband where < X counts compared to last packets 
@@ -111,13 +114,13 @@ void app_main(void)
             packet.joystick_x = raw_x;
         }
 
-        if (abs( (int)raw_y - (int)last_sent_packet.joystick_y < 25 )) {
-            //set the packet.joystick_x to last_sent packet
+        if (abs((int)raw_y - (int)last_sent_packet.joystick_y) < 25) {
+            //set the packet.joystick_y to last_sent packet
             packet.joystick_y = last_sent_packet.joystick_y;
         }
 
         else {
-            //set the packet of joystick x to the raw value.
+            //set the packet of joystick y to the raw value.
             packet.joystick_y = raw_y;
         }
 
