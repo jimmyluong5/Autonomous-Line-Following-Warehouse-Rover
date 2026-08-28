@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include "adc.h"
 #include "joystick.h"
+#include "speaker.h"
 
 void app_main(void)
 {
@@ -19,6 +20,8 @@ void app_main(void)
     init_button_pin();
     init_led_pin();
     init_joystick();
+    init_speaker();
+    
     
 
 #if ENABLE_SERVO_MODE
@@ -76,6 +79,7 @@ void app_main(void)
         }
 #endif
         print_joystick_values();
+        speaker_update();
         // Read button and transmit state changes (0x01 on press, 0x00 on release) over ESP-NOW
         uint8_t packet = read_buttons(); //reads the pins
         if (packet != last_sent_packet) //if the packet changes, transmit it, like if the button state changes 
