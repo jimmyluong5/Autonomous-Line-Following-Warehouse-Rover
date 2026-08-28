@@ -64,6 +64,10 @@ void init_pins() {
 //we receive input data in the form of the data packet, then output a 1 or 0 and give it to the LED
 void receive_button_press(data_packet_t* packet) {
 
+    //since we have our packet now, we don't have to make shit to print shit
+    //like we can just print the joystick values because its already done once
+    ESP_LOGI(TAG, "Joystick X: %u Joystick Y: %u", packet->joystick_x, packet->joystick_y);
+
     //so my data contains all that information
     //esp_logi inputs are 
     for (int i = 0; i < 5; i++) {
@@ -108,7 +112,7 @@ void receive_button_press(data_packet_t* packet) {
             }
         }
         else {
-            gpio_set_level(button_pins[i], 0);
+            gpio_set_level(led_pins[i], 0);
         }
     }
 }
