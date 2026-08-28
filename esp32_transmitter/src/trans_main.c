@@ -79,9 +79,9 @@ void app_main(void)
         }
 #endif
         print_joystick_values();
-        speaker_update();
         // Read button and transmit state changes (0x01 on press, 0x00 on release) over ESP-NOW
         uint8_t packet = read_buttons(); //reads the pins
+        speaker_update(packet);
         if (packet != last_sent_packet) //if the packet changes, transmit it, like if the button state changes 
 
         {

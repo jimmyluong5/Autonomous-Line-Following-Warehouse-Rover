@@ -35,7 +35,7 @@ void print_joystick_values(void) {
     static uint32_t last_print_time = 0; 
     uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount()); //current time in milliseconds
 
-    if (now - last_print_time >= 200) { //has 200ms has passed?
+    if (now - last_print_time >= 400) { //has 200ms has passed?
         last_print_time = now; //remember when we last printed.
 
         uint16_t x = read_joystick_horizontal();

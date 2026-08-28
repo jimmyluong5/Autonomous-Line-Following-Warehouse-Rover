@@ -10,6 +10,7 @@
 #include "led.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "speaker.h"
 
 //static const char *TAG = "TRANSMIT_DATA";
 
@@ -99,6 +100,8 @@ uint8_t read_buttons(void) {
             //then we need to shift the data packet according to the index
             sample2 = sample2 | (1 << (i)); //its i because we need the 0th index, 
             //i+1 would be if something is occupying bit 0      
+
+            //make the speaker sound.
         }
     }
     //we need to do this to actually get a complete and clean button press.
@@ -116,6 +119,11 @@ uint8_t read_buttons(void) {
     data_packet = sample1 & sample2; 
     //this is the code for the led button clicking.
      //so our data packet contains info of the buttons
+
+
+
+   
+
     for (int i = 0; i < 5; i++){
         if ((data_packet & (1<<i)) != 0) {
             //turn on the led

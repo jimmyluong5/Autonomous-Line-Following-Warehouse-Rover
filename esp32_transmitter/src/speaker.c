@@ -3,6 +3,8 @@
 #include "driver/ledc.h"
 #include "stdbool.h"
 #include "esp_log.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
 #define joystick_button GPIO_NUM_6
 #define speaker_pin     GPIO_NUM_21
@@ -11,7 +13,7 @@
 #define LEDC_MODE       LEDC_LOW_SPEED_MODE
 #define LEDC_CHANNEL    LEDC_CHANNEL_0
 #define LEDC_DUTY_RES   LEDC_TIMER_10_BIT // 10-bit timer (0 to 1023 max)
-#define LEDC_FREQUENCY  2048              // 2048 Hz tone
+#define LEDC_FREQUENCY  3072              // either 3072 or 1024 Hz
 
 static const char *TAG = "SPEAKER";
 
@@ -51,22 +53,51 @@ void init_speaker(void) {
 
 }
 
-void speaker_update(void) {
+void speaker_update(uint8_t button_packet) {
     //check if the button is pressed
-    if (gpio_get_level(joystick_button) == 0 ) {
-        //set this true is_beeping = true;
-        is_beeping = true;
-        //turn on the 2048 HZ tone generator for GPIO 20
-        ledc_set_duty(LEDC_MODE, LEDC_CHANNEL, 512); //set the duty cycle to 50%
-        //because our 100% is 2^10-1. or 1023. because its a 10 bit timer.
-        ledc_update_duty(LEDC_MODE, LEDC_CHANNEL);
-        ESP_LOGI(TAG, "Speaker activated");
-
+    int sample1 = 0;
+    int sample2 = 0; //make the debouncing logic with this.
+    
+    if (gpio_get_level(joystick_button) == 0) {
+        sample1 = 1;
+    }
+    
+    //if the sample is actually valid then pause for 20ms to let the button
+    //bounce back up
+    if (sample1 == 1) {
+        vTaskDelay(pdMS_TO_TICKS(50)); // debounce 20ms
     }
 
+    if (gpio_get_level(joystick_button) == 0) {
+        sample2 = 1;
+    }
+
+    bool joystick_pressed = (sample1 == 1 && sample2 == 1);
+    bool normal_button_pressed = (button_packet != 0);
+
+    if (joystick_pressed || normal_button_pressed) {
+        //turn on the is beeping flag
+        speaker_on();
+    }
+    
     else {
         //turn off the speaker and set the flag false.
             //stop the tone and the set output pin high to keep pnp transistor off.
+        speaker_off();
+    }
+}
+
+void speaker_on(void){
+    if (!is_beeping) {
+        is_beeping = true;
+        ledc_set_duty(LEDC_MODE, LEDC_CHANNEL, 512);
+        ledc_update_duty(LEDC_MODE, LEDC_CHANNEL);
+        ESP_LOGI(TAG, "Speaker activated");
+    }
+}
+
+void speaker_off(void){
+    if (is_beeping) {
         ledc_stop(LEDC_MODE, LEDC_CHANNEL, 1);
         is_beeping = false; //set the flag off.
     }
