@@ -49,8 +49,8 @@ void init_adc(void) {
         .bitwidth = ADC_BITWIDTH_DEFAULT, //12 BIT RESOLUTION (from 0-4095)
         .atten = ADC_ATTEN_DB_12, //12 db attentuation which measures from 0-3.3V
     };
-    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, joystick_x, &config));
-    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, joystick_y, &config));
+    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, JOYSTICK_X_CHANNEL, &config));
+    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, JOYSTICK_Y_CHANNEL, &config));
 
 
     //after the above initializations, the ADC is ready measure the analog signals
@@ -70,14 +70,14 @@ int read_joystick_x(void) {
 
     //then just use the function to read the pins from earlier.
     //use the error to check if its success then read
-    ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, joystick_x, &raw_val));
+    ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, JOYSTICK_X_CHANNEL, &raw_val));
     return raw_val;
 }
 
 int read_joystick_y(void) {
     int raw_val = 0;
 
-    ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, joystick_y, &raw_val));
+    ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, JOYSTICK_Y_CHANNEL, &raw_val));
     return raw_val;
 }
 

@@ -10,6 +10,9 @@
 #include "joystick.h"
 #include "speaker.h"
 #include "stdint.h"
+#include <string.h>
+#include "esp_log.h"
+#include "math.h"
 
 
 static const char *TAG = "MAIN";
@@ -56,7 +59,7 @@ void app_main(void)
 #endif
 
     static data_packet_t last_sent_packet = {0};
-
+    static uint32_t last_time = 0;
     while (1)
     {
 #if ENABLE_SERVO_MODE
@@ -89,9 +92,31 @@ void app_main(void)
         print_joystick_values();
         // Read button and transmit state changes (0x01 on press, 0x00 on release) over ESP-NOW
         packet.button_data = read_buttons();
-        packet.joystick_x = read_joystick_horizontal();
-        packet.joystick_y = read_joystick_vertical(); //reads the pins
+        uint16_t raw_x = read_joystick_horizontal();
+        uint16_t raw_y= read_joystick_vertical(); //reads the pins
         packet.speed = 100; //initialize the packet speed.
+        
+
+        //implement deadband where < X counts compared to last packets 
+        if (abs( (int)raw_x - (int)last_sent_packet.joystick_x) < 25 ) {
+            //set the packet.joystick_x to last_sent packet
+            packet.joystick_x = last_sent_packet.joystick_x;
+        }
+        else {
+            //set the packet of joystick x to the raw value.
+            packet.joystick_x = raw_x;
+        }
+
+        if (abs( (int)raw_y - (int)last_sent_packet.joystick_y < 25 )) {
+            //set the packet.joystick_x to last_sent packet
+            packet.joystick_y = last_sent_packet.joystick_y;
+        }
+
+        else {
+            //set the packet of joystick x to the raw value.
+            packet.joystick_y = raw_y;
+        }
+
         speaker_update(packet.button_data);
 
         //check if any data in the packet changed using memcpy()
@@ -102,10 +127,20 @@ void app_main(void)
             //transmit the address of the struct over esp-now so the receiver can 
             //access it 
             transmit_data(receiver_mac, &packet);
-            ESP_LOGI(TAG, "[ESP-NOW] Sent packet - Buttons: 0x%02X | Speed: %d | JoyX: %u | JoyY: %u\r\n",
-            packet.button_data, packet.speed, packet.joystick_x, packet.joystick_y);
+
+            //need to slow down putty sending messages
+            uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
+
+            if (now - last_time > 250) { //if the difference between these times is 250ms
+                //set the last time to current time
+                last_time = now;
+
+                //print the messages
+                ESP_LOGI(TAG, "[ESP-NOW] Sent packet - Buttons: 0x%02X | Speed: %d | JoyX: %u | JoyY: %u\r\n",
+                packet.button_data, packet.speed, packet.joystick_x, packet.joystick_y);
+            }
         }
         
-        vTaskDelay(pdMS_TO_TICKS(10)); //this is like the debounce time 
+        vTaskDelay(pdMS_TO_TICKS(10));  
     }
 }
