@@ -60,6 +60,7 @@ void app_main(void)
 
     static data_packet_t last_sent_packet = {0};
     static uint32_t last_time = 0;
+    static uint8_t current_speed = 0;
     while (1)
     {
 #if ENABLE_SERVO_MODE
@@ -85,16 +86,19 @@ void app_main(void)
             }
         }
 #endif
-
+        //initialize the packet with all the attributes.
         data_packet_t packet;
-
-
         print_joystick_values();
+
         // Read button and transmit state changes (0x01 on press, 0x00 on release) over ESP-NOW
         packet.button_data = read_buttons();
         uint16_t raw_x = read_joystick_horizontal();
         uint16_t raw_y= read_joystick_vertical(); //reads the pins
-        packet.speed = 100; //initialize the packet speed.
+        //put the variable of speed from the data packet into this 8 bit variable
+        packet.speed = current_speed;
+        
+        //update the speed 
+        current_speed = update_speed(&packet);
         
 
         //implement deadband where < X counts compared to last packets 
