@@ -16,4 +16,5 @@ void init_button_pin(void);
 uint8_t read_buttons(void);
 esp_err_t transmit_data(const uint8_t *receiver_mac, const data_packet_t *packet);
 void init_led_pin(void);
+uint8_t update_speed(data_packet_t *packet);
 #endif /* TRANSMIT_DATA_H */

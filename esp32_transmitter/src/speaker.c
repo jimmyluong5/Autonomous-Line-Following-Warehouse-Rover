@@ -13,7 +13,7 @@
 #define LEDC_MODE       LEDC_LOW_SPEED_MODE
 #define LEDC_CHANNEL    LEDC_CHANNEL_0
 #define LEDC_DUTY_RES   LEDC_TIMER_10_BIT // 10-bit timer (0 to 1023 max)
-#define LEDC_FREQUENCY  3072              // either 3072 or 1024 Hz
+#define LEDC_FREQUENCY  1024              // either 3072 or 1024 Hz
 
 static const char *TAG = "SPEAKER";
 
@@ -92,7 +92,7 @@ void speaker_on(void){
         is_beeping = true;
         ledc_set_duty(LEDC_MODE, LEDC_CHANNEL, 512);
         ledc_update_duty(LEDC_MODE, LEDC_CHANNEL);
-        ESP_LOGI(TAG, "Speaker activated");
+        //ESP_LOGI(TAG, "Speaker activated");
     }
 }
 

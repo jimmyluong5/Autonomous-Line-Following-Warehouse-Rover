@@ -12,7 +12,13 @@
 #include "freertos/task.h"
 #include "speaker.h"
 
-//static const char *TAG = "TRANSMIT_DATA";
+#define LEFT_BTN 0
+#define DOWN_BTN 1
+#define UP_BTN 2
+#define STOP_BTN 3
+#define RIGHT_BTN 4
+
+static const char *TAG = "TRANSMIT_DATA";
 
 // Array for the GPIO pins to loop through and read
 
@@ -110,16 +116,39 @@ uint8_t read_buttons(void) {
     data_packet = sample1 & sample2; 
     //this is the code for the led button clicking.
      //so our data packet contains info of the buttons
-
-
-
-   
-
-    for (int i = 0; i < 5; i++){
+    uint8_t speed = 0;
+    for (int i = 0; i < 5; i++) {
         if ((data_packet & (1<<i)) != 0) {
             //turn on the led
-            gpio_set_level(led_pins[i], 1);
+            //gpio_set_level(led_pins[i], 1); you can factor it out,
+            //but i don't want to.
+            switch(i) {
+                case LEFT_BTN:
+                    gpio_set_level(button_pins[LEFT_BTN], 1);
+                    ESP_LOGI(TAG, "MANUAL MODE");
+                    break;
+                case RIGHT_BTN:
+                    gpio_set_level(button_pins[RIGHT_BTN], 1);
+                    ESP_LOGI(TAG, "AUTONOMOUS MODE");
+                    break;
+                case UP_BTN:
+                    speed = update_speed(&packet);
+                    ESP_LOGI(TAG, "Speed: %u \n", speed);
+                    gpio_set_level(button_pins[UP_BTN], 1);
+                    break;
+                case DOWN_BTN:
+                    speed = update_speed(&packet);
+                    ESP_LOGI(TAG, "Speed: %u \n", speed);
+                    gpio_set_level(button_pins[DOWN_BTN], 1);
+                    break;
+                case STOP_BTN:
+                    gpio_set_level(button_pins[STOP_BTN], 1);
+                    ESP_LOGI(TAG, "STOP");
+                    break;
+
+            }
         }
+        
         else {
             //turn off led
             gpio_set_level(led_pins[i], 0);
@@ -127,6 +156,43 @@ uint8_t read_buttons(void) {
     }
     //return the data packet.
     return data_packet;
+}
+uint8_t update_speed(data_packet_t packet){
+    //we receive the data packet and need to extract the data. 
+    
+    //each time we see a set bit in the locations of the data packets where up and down are
+    //then decrease by 5% or 13 counts
+    //since we will receive valid data, we only need to look at the bits
+    if (packet->button_data & (1<<UP_BTN)) { //packet->button_data we access
+        //the button data and check if its valid data.
+        if (packet->speed > 255-13) { //we access speed using packet->speed.
+            packet->speed = 255;
+            ESP_LOGI(TAG, "MAX SPEED ACHIEVED\n");
+        }
+        else {
+            packet->speed += 13;
+            ESP_LOGI(TAG, "INCREASING SPEED BY 5%% \n");
+        }
+    }
+    
+    else if (packet->button_data & (1<<DOWN_BTN)) {
+        if (packet->speed < 13){
+            packet->speed = 0;
+            ESP_LOGI(TAG, "LOWEST SPEED ACHIEVED\n");
+            //gpio_set_level(button_pins[DOWN_BTN], 1);
+            //not needed because we already do it in the loop above/
+        }
+        else {
+            packet->speed -=13;
+            ESP_LOGI(TAG, "DECREASING SPEED BY 5%% \n");
+
+        }
+
+    }
+
+    //we don't need an else if statement because the data we getting 
+    // is guaranteed to be valid.
+    return packet->speed;
 }
 
 
