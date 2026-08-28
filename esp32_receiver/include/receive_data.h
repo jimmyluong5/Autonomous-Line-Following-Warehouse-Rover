@@ -9,6 +9,7 @@ typedef struct {
     //uint16_t sequence;
     uint16_t joystick_x;
     uint16_t joystick_y;
+    uint8_t mode;
 } data_packet_t;
 
 
