@@ -165,6 +165,10 @@ uint8_t update_speed(data_packet_t *packet){
     //each time we see a set bit in the locations of the data packets where up and down are
     //then decrease by 5% or 13 counts
     //since we will receive valid data, we only need to look at the bits
+    if (new_presses & (1<<STOP_BTN)) {
+        packet->speed = 0;
+    }
+    
     if (new_presses & (1<<UP_BTN)) { //packet->button_data we access
         //the button data and check if its valid data.
         if (packet->speed > 255-13) { //we access speed using packet->speed.
