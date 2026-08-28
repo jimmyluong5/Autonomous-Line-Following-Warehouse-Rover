@@ -19,7 +19,8 @@ void app_main() {
   //esp_read_mac(mac, ESP_MAC_WIFI_STA);
   //ESP_LOGI("MAC_ADDRESS", "Receiver MAC: " MACSTR, MAC2STR(mac)); //prints this in the serial 
 
-  
+  //set up the data packet
+  data_packet_t packet;
   init_esp_now(); //registers the OnDataRecv callback
   while (1) {
     //gpio_set_direction(GPIO_NUM_5, GPIO_MODE_OUTPUT);
