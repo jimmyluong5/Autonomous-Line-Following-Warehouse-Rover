@@ -115,42 +115,37 @@ uint8_t read_buttons(void) {
     
     data_packet = sample1 & sample2; 
     //this is the code for the led button clicking.
-     //so our data packet contains info of the buttons
-    for (int i = 0; i < 5; i++) {
-        if ((data_packet & (1<<i)) != 0) {
-            //turn on the led
-            //gpio_set_level(led_pins[i], 1); you can factor it out,
-            //but i don't want to.
-            switch(i) {
-                case LEFT_BTN:
-                    gpio_set_level(led_pins[LEFT_BTN], 1);
-                    ESP_LOGI(TAG, "MANUAL MODE");
-                    break;
-                case RIGHT_BTN:
-                    gpio_set_level(led_pins[RIGHT_BTN], 1);
-                    ESP_LOGI(TAG, "AUTONOMOUS MODE");
-                    break;
-                case UP_BTN:
-                    //speed = update_speed(&packet); not needed anymore since
-                    //in main function we do current_speed = update_speed(&packet)
-                    //ESP_LOGI(TAG, "Speed: %u \n", speed);
-                    gpio_set_level(led_pins[UP_BTN], 1);
-                    break;
-                case DOWN_BTN:
-                    //speed = update_speed(&packet);
-                    //ESP_LOGI(TAG, "Speed: %u \n", speed);
-                    gpio_set_level(led_pins[DOWN_BTN], 1);
-                    break;
-                case STOP_BTN:
-                    gpio_set_level(led_pins[STOP_BTN], 1);
-                    ESP_LOGI(TAG, "STOP");
-                    break;
+    //so our data packet contains info of the buttons
 
+    static uint8_t last_buttons = 0x00;
+    uint8_t new_presses = data_packet & (~last_buttons);
+    last_buttons = data_packet;
+
+    for (int i = 0; i < 5; i++) {
+        if ((data_packet & (1 << i)) != 0) {
+            // Keep LED ON while button is physically pressed
+            gpio_set_level(led_pins[i], 1);
+
+            // Log Putty message ONLY ONCE per click on new press
+            if ((new_presses & (1 << i)) != 0) {
+                switch(i) {
+                    case LEFT_BTN:
+                        ESP_LOGI(TAG, "MANUAL MODE");
+                        break;
+                    case RIGHT_BTN:
+                        ESP_LOGI(TAG, "AUTONOMOUS MODE");
+                        break;
+                    case STOP_BTN:
+                        ESP_LOGI(TAG, "STOP");
+                        break;
+                    case UP_BTN:
+                    case DOWN_BTN:
+                        break;
+                }
             }
         }
-        
         else {
-            //turn off led
+            // Turn OFF LED when button is released
             gpio_set_level(led_pins[i], 0);
         }
     }
@@ -158,12 +153,19 @@ uint8_t read_buttons(void) {
     return data_packet;
 }
 uint8_t update_speed(data_packet_t *packet){
+    static uint8_t last_button_state = 0x00;
+
+    //we need to detect newly pressed buttons
+    //detects on rising edge.
+    uint8_t new_presses = packet->button_data & (~last_button_state);
+    last_button_state = packet->button_data;
+
     //we receive the data packet and need to extract the data. 
     
     //each time we see a set bit in the locations of the data packets where up and down are
     //then decrease by 5% or 13 counts
     //since we will receive valid data, we only need to look at the bits
-    if (packet->button_data & (1<<UP_BTN)) { //packet->button_data we access
+    if (new_presses & (1<<UP_BTN)) { //packet->button_data we access
         //the button data and check if its valid data.
         if (packet->speed > 255-13) { //we access speed using packet->speed.
             packet->speed = 255;
@@ -172,11 +174,11 @@ uint8_t update_speed(data_packet_t *packet){
 
         else {
             packet->speed += 13;
-            ESP_LOGI(TAG, "INCREASING SPEED BY 5%% -> New Speed: %u\n", packet->speed);
+            ESP_LOGI(TAG, "INCREASING SPEED BY 5%% ->Speed: %u\n", packet->speed);
         }
     }
     
-    else if (packet->button_data & (1<<DOWN_BTN)) {
+    else if (new_presses & (1<<DOWN_BTN)) {
         if (packet->speed < 13){
             packet->speed = 0;
             ESP_LOGI(TAG, "LOWEST SPEED ACHIEVED (%u)\n", packet->speed);
@@ -186,7 +188,7 @@ uint8_t update_speed(data_packet_t *packet){
 
         else {
             packet->speed -=13;
-            ESP_LOGI(TAG, "DECREASING SPEED BY 5%% -> New Speed: %u\n", packet->speed);
+            ESP_LOGI(TAG, "DECREASING SPEED BY 5%% ->Speed: %u\n", packet->speed);
 
         }
 

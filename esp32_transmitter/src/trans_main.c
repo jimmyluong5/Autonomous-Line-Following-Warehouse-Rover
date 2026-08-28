@@ -140,8 +140,7 @@ void app_main(void)
                 last_time = now;
 
                 //print the messages
-                ESP_LOGI(TAG, "[ESP-NOW] Sent packet - Buttons: 0x%02X | Speed: %d | JoyX: %u | JoyY: %u\r\n",
-                packet.button_data, packet.speed, packet.joystick_x, packet.joystick_y);
+                //ESP_LOGI(TAG, "[ESP-NOW] Sent packet - Buttons: 0x%02X | Speed: %d | JoyX: %u | JoyY: %u\r\n", packet.button_data, packet.speed, packet.joystick_x, packet.joystick_y);
             }
         }
         
