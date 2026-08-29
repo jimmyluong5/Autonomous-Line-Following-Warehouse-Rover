@@ -84,14 +84,10 @@ void Error_Handler(void);
 #define Motor_Driver_PWMB_GPIO_Port GPIOA
 #define Stepper_ENABLE_Pin GPIO_PIN_11
 #define Stepper_ENABLE_GPIO_Port GPIOA
-#define RFID_RST_Pin GPIO_PIN_12
-#define RFID_RST_GPIO_Port GPIOA
 #define T_SWDIO_Pin GPIO_PIN_13
 #define T_SWDIO_GPIO_Port GPIOA
 #define T_SWCLK_Pin GPIO_PIN_14
 #define T_SWCLK_GPIO_Port GPIOA
-#define RFID_SPI_CS_Pin GPIO_PIN_15
-#define RFID_SPI_CS_GPIO_Port GPIOA
 #define ADC_SPI_CS_Pin GPIO_PIN_6
 #define ADC_SPI_CS_GPIO_Port GPIOB
 #define Speaker_Pin GPIO_PIN_7
@@ -101,6 +97,11 @@ void Error_Handler(void);
 // Map ADC_CS to the newly generated ADC_SPI_CS pin
 #define ADC_CS_Pin ADC_SPI_CS_Pin
 #define ADC_CS_GPIO_Port ADC_SPI_CS_GPIO_Port
+
+#define RFID_RST_Pin GPIO_PIN_12
+#define RFID_RST_GPIO_Port GPIOA
+#define RFID_SPI_CS_Pin GPIO_PIN_15
+#define RFID_SPI_CS_GPIO_Port GPIOA
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
