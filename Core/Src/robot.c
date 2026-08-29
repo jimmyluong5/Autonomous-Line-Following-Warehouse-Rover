@@ -37,13 +37,13 @@ void Robot_SetState(RobotState new_state) {
     break;
   case robot_left:
     // Spin turn left: left motor backward, right motor forward
-    Motor_Left_SetSpeed(-robot_speed);
-    Motor_Right_SetSpeed(robot_speed);
+    Motor_Left_SetSpeed(robot_speed);
+    Motor_Right_SetSpeed(-robot_speed);
     break;
   case robot_right:
     // Spin turn right: left motor forward, right motor backward
-    Motor_Left_SetSpeed(robot_speed);
-    Motor_Right_SetSpeed(-robot_speed);
+    Motor_Left_SetSpeed(-robot_speed);
+    Motor_Right_SetSpeed(robot_speed);
     break;
   case robot_idle:
     Motor_Stop();

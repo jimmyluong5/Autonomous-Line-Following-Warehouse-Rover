@@ -359,8 +359,8 @@ void UART_CONTROL_update(void) {
       else if (received_byte == 'a') {
         Robot_SetState(robot_left);
         if (current_mode == UART_MODE_COMBINED) {
-          if (current_servo_angle < 180) {
-            current_servo_angle = (current_servo_angle + 10 > 180) ? 180 : (current_servo_angle + 10);
+          if (current_servo_angle > 0) {
+            current_servo_angle = (current_servo_angle < 10) ? 0 : (current_servo_angle - 10);
           }
           Servo_SetAngle(current_servo_angle);
           char angle_msg[64];
@@ -374,8 +374,8 @@ void UART_CONTROL_update(void) {
       else if (received_byte == 'd') {
         Robot_SetState(robot_right);
         if (current_mode == UART_MODE_COMBINED) {
-          if (current_servo_angle > 0) {
-            current_servo_angle = (current_servo_angle < 10) ? 0 : (current_servo_angle - 10);
+          if (current_servo_angle < 180) {
+            current_servo_angle = (current_servo_angle + 10 > 180) ? 180 : (current_servo_angle + 10);
           }
           Servo_SetAngle(current_servo_angle);
           char angle_msg[64];
