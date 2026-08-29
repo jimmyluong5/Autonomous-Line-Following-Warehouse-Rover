@@ -2902,7 +2902,7 @@ LOAD linker stubs
  .debug_rnglists
                 0x00000edd       0x32 CMakeFiles/warehouse_proj.dir/Core/Src/stepper.c.obj
 
-.debug_line     0x00000000    0x10dd4
+.debug_line     0x00000000    0x10dcc
  .debug_line    0x00000000      0x2ba cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj
  .debug_line    0x000002ba      0x713 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj
  .debug_line    0x000009cd      0xb6e cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj
@@ -2926,7 +2926,7 @@ LOAD linker stubs
  .debug_line    0x0000fc0d      0x49b CMakeFiles/warehouse_proj.dir/Core/Src/encoder.c.obj
  .debug_line    0x000100a8      0x52a CMakeFiles/warehouse_proj.dir/Core/Src/line_following.c.obj
  .debug_line    0x000105d2      0x469 CMakeFiles/warehouse_proj.dir/Core/Src/servo.c.obj
- .debug_line    0x00010a3b      0x399 CMakeFiles/warehouse_proj.dir/Core/Src/stepper.c.obj
+ .debug_line    0x00010a3b      0x391 CMakeFiles/warehouse_proj.dir/Core/Src/stepper.c.obj
 
 .debug_str      0x00000000     0x5fbe
  .debug_str     0x00000000     0x5fbe cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj

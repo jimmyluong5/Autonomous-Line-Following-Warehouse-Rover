@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "robot.h"
 #include "motor.h"
+#include "servo.h"
 
 #define CENTER_THRESHOLD 4
 extern SPI_HandleTypeDef hspi1; // SPI1 for the MCP3208.
@@ -128,10 +129,12 @@ void Robot_LineFollow_Update(void) {
       // Line was to the left, spin left in place
       Motor_Left_SetSpeed(-150);
       Motor_Right_SetSpeed(150);
+      Servo_SetAngle(SERVO_ANGLE_LEFT);
     } else {
       // Line was to the right, spin right in place
       Motor_Left_SetSpeed(150);
       Motor_Right_SetSpeed(-150);
+      Servo_SetAngle(SERVO_ANGLE_RIGHT);
     }
     return;
   }
@@ -198,4 +201,10 @@ void Robot_LineFollow_Update(void) {
 
   Motor_Left_SetSpeed(left_motor_speed);
   Motor_Right_SetSpeed(right_motor_speed);
+
+  // 5. Update Servo Steering Angle (Dynamic Proportional Steering)
+  int16_t target_servo_angle = SERVO_ANGLE_CENTER + (int16_t)((error * 45) / 3500);
+  if (target_servo_angle < SERVO_ANGLE_LEFT) target_servo_angle = SERVO_ANGLE_LEFT;
+  if (target_servo_angle > SERVO_ANGLE_RIGHT) target_servo_angle = SERVO_ANGLE_RIGHT;
+  Servo_SetAngle((uint8_t)target_servo_angle);
 }

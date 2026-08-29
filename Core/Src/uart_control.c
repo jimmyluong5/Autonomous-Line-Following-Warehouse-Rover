@@ -116,14 +116,16 @@ void UART_CONTROL_update(void) {
     if (current_mode == UART_MODE_MENU) {
       if (received_byte == 'm') {
         current_mode = UART_MODE_MOTOR;
+        current_servo_angle = 90;
+        Servo_SetAngle(90);
         UART_SendMessage(
             "\x1b[2J\x1b[H"
             "--- Motor Control Mode Active ---\r\n"
             "Commands:\r\n"
             " [w] - Forward\r\n"
             " [s] - Reverse\r\n"
-            " [a] - Spin Turn Left\r\n"
-            " [d] - Spin Turn Right\r\n"
+            " [a] - Spin Turn Left (Hold for full 180 turn)\r\n"
+            " [d] - Spin Turn Right (Hold for full 0 turn)\r\n"
             " [x] - Stop / Idle\r\n"
             " [f] - Force Fault\r\n"
             " [1, 2, 3, 4] - Set Speed to 25%, 50%, 75%, 100% PWM\r\n"
@@ -240,6 +242,8 @@ void UART_CONTROL_update(void) {
       else if (received_byte == 'b') {
         // set the mode to both.
         current_mode = UART_MODE_BOTH;
+        current_servo_angle = 90;
+        Servo_SetAngle(90);
 
         // turn on the sensor test.
         sensor_test_active = true;
@@ -302,32 +306,52 @@ void UART_CONTROL_update(void) {
 
       else if (received_byte == 'w') {
         Robot_SetState(robot_forward);
+        current_servo_angle = 90;
+        Servo_SetAngle(90);
         if (current_mode == UART_MODE_MOTOR)
           UART_SendMessage("ROBOT FORWARD\r\n");
       }
 
       else if (received_byte == 's') {
         Robot_SetState(robot_reverse);
+        current_servo_angle = 90;
+        Servo_SetAngle(90);
         if (current_mode == UART_MODE_MOTOR)
           UART_SendMessage("ROBOT REVERSE\r\n");
       }
 
       else if (received_byte == 'x') {
         Robot_SetState(robot_idle);
+        current_servo_angle = 90;
+        Servo_SetAngle(90);
         if (current_mode == UART_MODE_MOTOR)
           UART_SendMessage("ROBOT STOPPED\r\n");
       }
 
       else if (received_byte == 'a') {
         Robot_SetState(robot_left);
-        if (current_mode == UART_MODE_MOTOR)
-          UART_SendMessage("ROBOT LEFT\r\n");
+        if (current_servo_angle < 180) {
+          current_servo_angle = (current_servo_angle + 10 > 180) ? 180 : (current_servo_angle + 10);
+        }
+        Servo_SetAngle(current_servo_angle);
+        if (current_mode == UART_MODE_MOTOR) {
+          char angle_msg[64];
+          snprintf(angle_msg, sizeof(angle_msg), "ROBOT LEFT (Servo: %d deg)\r\n", current_servo_angle);
+          UART_SendMessage(angle_msg);
+        }
       }
 
       else if (received_byte == 'd') {
         Robot_SetState(robot_right);
-        if (current_mode == UART_MODE_MOTOR)
-          UART_SendMessage("ROBOT RIGHT\r\n");
+        if (current_servo_angle > 0) {
+          current_servo_angle = (current_servo_angle < 10) ? 0 : (current_servo_angle - 10);
+        }
+        Servo_SetAngle(current_servo_angle);
+        if (current_mode == UART_MODE_MOTOR) {
+          char angle_msg[64];
+          snprintf(angle_msg, sizeof(angle_msg), "ROBOT RIGHT (Servo: %d deg)\r\n", current_servo_angle);
+          UART_SendMessage(angle_msg);
+        }
       }
 
       else if (received_byte == 'f') {

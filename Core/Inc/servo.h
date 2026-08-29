@@ -5,6 +5,11 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+// Steering Servo Angles (degrees)
+#define SERVO_ANGLE_CENTER 90
+#define SERVO_ANGLE_LEFT   45
+#define SERVO_ANGLE_RIGHT  135
+
 void servo_init(void);
 void Servo_SetAngle(uint8_t angle);
 void Servo_SetAngleImmediate(uint8_t angle);

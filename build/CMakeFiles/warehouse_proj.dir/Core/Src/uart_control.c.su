@@ -1,5 +1,5 @@
 C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:40:13:UART_SendMessage	16	static
 C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:49:6:UART_CONTROL_init	784	static
 C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:81:6:UART_CONTROL_update	624	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:680:6:UART_CONTROL_check_timeout	8	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:693:18:UART_CONTROL_GetMode	4	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:681:6:UART_CONTROL_check_timeout	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:694:18:UART_CONTROL_GetMode	4	static

@@ -84,3 +84,11 @@
 369	686	8084236534105980	warehouse_proj.elf	62e37d8c8131cbab
 686	2005	8084236537278724	CMakeFiles/flash	29d278b80edd985f
 686	2005	8084236537278724	C:/Users/jimmy/Downloads/warehouse_proj/build/CMakeFiles/flash	29d278b80edd985f
+413	2475	8097184888980280	CMakeFiles/warehouse_proj.dir/Core/Src/stepper.c.obj	8fb09698ae1b7e0a
+124	2477	8097184886090605	CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj	9b7a0a95c465e3fc
+392	2478	8097184888767104	CMakeFiles/warehouse_proj.dir/Core/Src/motor.c.obj	59b68b2e12544590
+2478	3781	8097184909621167	warehouse_proj.elf	62e37d8c8131cbab
+3781	6005	8097184922658503	CMakeFiles/flash	29d278b80edd985f
+3781	6005	8097184922658503	C:/Users/jimmy/Downloads/warehouse_proj/build/CMakeFiles/flash	29d278b80edd985f
+8	1361	8097201603641559	CMakeFiles/flash	29d278b80edd985f
+8	1361	8097201603641559	C:/Users/jimmy/Downloads/warehouse_proj/build/CMakeFiles/flash	29d278b80edd985f

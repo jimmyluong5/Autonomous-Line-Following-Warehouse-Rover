@@ -2,6 +2,7 @@
 #include "main.h"
 #include "motor.h"
 #include "line_following.h"
+#include "servo.h"
 
 // Default motor speed / PWM duty cycle (0 to 999)
 // 0 = 0% PWM, 500 = 50% PWM, 999 = 100% PWM
@@ -24,13 +25,15 @@ void Robot_SetState(RobotState new_state) {
     HAL_GPIO_WritePin(LED2_GPIO_PORT, LED2_PIN, GPIO_PIN_SET);
   }
 
-  // Update motor speeds according to the new robot state
+  // Update motor speeds and steering servo according to the new robot state
   switch (current_state) {
   case robot_forward:
     Motor_Forward(robot_speed);
+    Servo_SetAngle(SERVO_ANGLE_CENTER);
     break;
   case robot_reverse:
     Motor_Reverse(robot_speed);
+    Servo_SetAngle(SERVO_ANGLE_CENTER);
     break;
   case robot_left:
     // Spin turn left: left motor backward, right motor forward
@@ -44,15 +47,19 @@ void Robot_SetState(RobotState new_state) {
     break;
   case robot_idle:
     Motor_Stop();
+    Servo_SetAngle(SERVO_ANGLE_CENTER);
     break;
   case robot_fault:
     Motor_Brake();
+    Servo_SetAngle(SERVO_ANGLE_CENTER);
     break;
   case robot_auto:
     Motor_Stop();
+    Servo_SetAngle(SERVO_ANGLE_CENTER);
     break;
   default:
     Motor_Stop();
+    Servo_SetAngle(SERVO_ANGLE_CENTER);
     break;
   }
 }
@@ -63,4 +70,6 @@ void Robot_Update(void) {
   }
 }
 
-RobotState Robot_GetState(void) { return current_state; }
+RobotState Robot_GetState(void) { 
+  return current_state; 
+}
