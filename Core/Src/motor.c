@@ -20,8 +20,7 @@ void Motor_Init(void) {
 }
 
 void Motor_SetStandby(bool standby) {
-  HAL_GPIO_WritePin(DC_Motor_STBY_GPIO_Port, DC_Motor_STBY_Pin,
-                    standby ? GPIO_PIN_RESET : GPIO_PIN_SET);
+  HAL_GPIO_WritePin(DC_Motor_STBY_GPIO_Port, DC_Motor_STBY_Pin, standby ? GPIO_PIN_RESET : GPIO_PIN_SET);
 }
 
 void Motor_Right_SetSpeed(int16_t speed) {
