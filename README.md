@@ -272,24 +272,33 @@ STOP
 
 
 The controller also supports an 8-bit speed value ranging from 0–255, with the UP and DOWN buttons adjusting the requested rover speed in approximately 5% increments.
+
 Push Buttons
      ↓
+     
 Transmitter ESP32-S3
      ↓
 Button Detection
      ↓
+     
 Serial Debug Output
      ↓
+     
 8-Bit Command Packet
      ↓
+     
    ESP-NOW
      ↓
+     
 Receiver ESP32-S3
      ↓
+     
 Command Decoding
      ↓
+     
 Serial Debug Output
      ↓
+     
 MANUAL / AUTO / SPEED / STOP
 
 Having serial output available on both ESP32-S3 modules provides visibility into both sides of the communication system. The transmitter output verifies that controller inputs are being correctly detected and encoded, while the receiver output verifies that the same commands are successfully transmitted, received, and decoded.
