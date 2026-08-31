@@ -96,6 +96,7 @@ void menu_combined(void) {
             " [h] - Return to Main Menu\r\n"
             "--------------------------------------------------\r\n");
 }
+
 void menu_speaker(void) {
   UART_SendMessage("\x1b[2J\x1b[H"
                          "--- Speaker/Buzzer Test Mode Active ---\r\n"
@@ -106,25 +107,72 @@ void menu_speaker(void) {
                          " [h] - Return to Main Menu\r\n"
                          "---------------------------------------\r\n");
 }
+
 void menu_stepper(void) {
-
+  // put the custom menu for stepper motor here
+        UART_SendMessage("\x1b[2J\x1b[H"
+                         "--- Stepper Control Mode Active ---\r\n"
+                         "Controls:\r\n"
+                         " [a] - Decrease angle by 5 deg (CCW)\r\n"
+                         " [d] - Increase angle by 5 deg (CW)\r\n"
+                         " [1] - Set to 0 deg | [2] - Set to 180 deg | [3] - "
+                         "Set to 360 deg\r\n"
+                         " [h] - Return to Main Menu\r\n"
+                         "-----------------------------------\r\n"
+                         "Current Angle:    0 degrees");
 }
-void menu_normalize(void) {
 
+void menu_normalized(void) {
+  // print the message.
+        UART_SendMessage(
+            "\x1b[2J\x1b[H"
+            "--- Normalized Color Mode Active (Press 'h' to return "
+            "to Main Menu) ---\r\n");
 }
+
 void menu_autonomous(void) {
-
+  UART_SendMessage(
+            "\x1b[2J\x1b[H"
+            "--- Autonomous Line Following Active ---\r\n"
+            "Commands:\r\n"
+            " [1, 2, 3, 4] - Set Speed (25%, 50%, 75%, 100% PWM)\r\n"
+            " [h]          - Stop & Return to Main Menu\r\n"
+            "----------------------------------------\r\n");
 }
+
 void menu_servo(void) {
-
+  UART_SendMessage("\x1b[2J\x1b[H"
+                         "--- Servo Control Mode Active ---\r\n"
+                         "Controls:\r\n"
+                         " [a] - Decrease angle by 5 deg\r\n"
+                         " [d] - Increase angle by 5 deg\r\n"
+                         " [1] - Set to 0 deg | [2] - Set to 45 deg | [3] - "
+                         "Set to 90 deg \r\n"
+                         " [4] - Set to 135 deg | [5] - Set to 180 deg\r\n"
+                         " [h] - Return to Main Menu\r\n"
+                         "---------------------------------\r\n"
+                         "Current Angle:  90 degrees");
 }
+
 void menu_voltage(void)  {
-
+  // print the stuff.
+        UART_SendMessage("\x1b[2J\x1b[H"
+                         "--- Sensor Test Mode Active (Press 'h' to return "
+                         "to Main Menu) ---\r\n");
 }
+
 void menu_both(void) {
-
+  // print the menu in this mode.
+        UART_SendMessage(
+            "\x1b[2J\x1b[H"
+            "--- Both Mode Active ---\r\n"
+            "Motor Commands:\r\n"
+            " [w] - Forward | [s] - Reverse | [a] - Left | [d] - Right | [x] - "
+            "Stop\r\n"
+            " [1, 2, 3, 4] - Set Speed to 25%, 50%, 75%, 100% PWM\r\n"
+            " [h] - Return to Main Menu\r\n"
+            "---------------------------------\r\n");
 }
-
 
 
 
@@ -183,280 +231,222 @@ void UART_CONTROL_update(void) {
 
     // Update the last command timestamp
     last_command_time = HAL_GetTick();
-
+    
     if (current_mode == UART_MODE_MENU) {
-      if (received_byte == 'm') {
-        current_mode = UART_MODE_MOTOR;
-        menu_motor();
+      
+        switch(received_byte) {
+          case 'm':
+            current_mode = UART_MODE_MOTOR;
+            menu_motor();
+            break;
 
-      else if (received_byte == 'c') {
-        current_mode = UART_MODE_COMBINED;
-        current_servo_angle = 90;
-        Servo_SetAngle(90);
-        menu_combined();
-      }
-      // just add new modes above here its easier up here
-      else if (received_byte == 'p') {
-        current_mode = UART_MODE_SPEAKER;
-        first_print = true;
-        sensor_test_active = false;
-        menu_speaker();
-      }
+          case 'c':
+            current_mode = UART_MODE_COMBINED;
+            current_servo_angle = 90; //set the default angle to 90
+          
+            //call the function
+            Servo_SetAngle(90);
+            //menu
+            menu_combined();
+            break;
 
-      else if (received_byte == 't') {
-        // set the current mode to stepper mode
-        current_mode = UART_MODE_STEPPER;
-        first_print = true;
-        // reset stepper angle to 0
-        current_stepper_angle = 0;
-        stepper_init();
+          case 'p':
+            current_mode = UART_MODE_SPEAKER;
+            first_print = true; 
+            sensor_test_active = false;
+            menu_speaker;
+            break;
 
-        // put the custom menu for stepper motor here
-        UART_SendMessage("\x1b[2J\x1b[H"
-                         "--- Stepper Control Mode Active ---\r\n"
-                         "Controls:\r\n"
-                         " [a] - Decrease angle by 5 deg (CCW)\r\n"
-                         " [d] - Increase angle by 5 deg (CW)\r\n"
-                         " [1] - Set to 0 deg | [2] - Set to 180 deg | [3] - "
-                         "Set to 360 deg\r\n"
-                         " [h] - Return to Main Menu\r\n"
-                         "-----------------------------------\r\n"
-                         "Current Angle:    0 degrees");
+          case 't':
+            current_mode = UART_MODE_STEPPER;
+            first_print = true;
 
-      }
+            //reset stepper angle to 0
+            current_stepper_angle = 0;
+            stepper_init;
+            menu_stepper();
+            break;
+            
+            case 'n':
+              current_mode = UART_MODE_NORMALIZE;
 
-      // normalized mode
-      else if (received_byte == 'n') {
-        // set the current mode to normalize_mode
-        current_mode = UART_MODE_NORMALIZE;
-        // use a flag to determine whether to print the header or not.
-        first_print = true;
+              //flag to determine whether to print the header or not
+              first_print = true;
 
-        // turn on the sensor
-        sensor_test_active = true;
+              //turn on sensor
+              sensor_test_active = true;
+              menu_normalized();
+              break;
 
-        // print the message.
-        UART_SendMessage(
-            "\x1b[2J\x1b[H"
-            "--- Normalized Color Mode Active (Press 'h' to return "
-            "to Main Menu) ---\r\n");
+          case 'a':
+            current_mode = UART_MODE_AUTO;
+            first_print = true;
+            sensor_test_active = false;
+            
+            //default state for the robot
+            RobotSetState(robot_auto);
+            
+            //call the menu
+            menu_autonomous();
+            break;
 
-      }
+          case 's':
+            current_mode = UART_MODE_SERVO;
+            first_print = true;
+            sensor_true_active = false;
+            //default angle.
+            current_servo_angle = 90;
 
-      // autonomous line following mode
-      else if (received_byte == 'a') {
-        current_mode = UART_MODE_AUTO;
-        first_print = true;
-        sensor_test_active = false;
-        Robot_SetState(robot_auto);
-        UART_SendMessage(
-            "\x1b[2J\x1b[H"
-            "--- Autonomous Line Following Active ---\r\n"
-            "Commands:\r\n"
-            " [1, 2, 3, 4] - Set Speed (25%, 50%, 75%, 100% PWM)\r\n"
-            " [h]          - Stop & Return to Main Menu\r\n"
-            "----------------------------------------\r\n");
-      }
+            //call the function then print the menu
+            ServoSetAngle(90);
+            menu_servo();
+            break;
 
-      // servo control mode
-      else if (received_byte == 's') {
-        current_mode = UART_MODE_SERVO;
-        first_print = true;
-        sensor_test_active = false;
-        current_servo_angle = 90;
-        Servo_SetAngle(current_servo_angle);
-        UART_SendMessage("\x1b[2J\x1b[H"
-                         "--- Servo Control Mode Active ---\r\n"
-                         "Controls:\r\n"
-                         " [a] - Decrease angle by 5 deg\r\n"
-                         " [d] - Increase angle by 5 deg\r\n"
-                         " [1] - Set to 0 deg | [2] - Set to 45 deg | [3] - "
-                         "Set to 90 deg \r\n"
-                         " [4] - Set to 135 deg | [5] - Set to 180 deg\r\n"
-                         " [h] - Return to Main Menu\r\n"
-                         "---------------------------------\r\n"
-                         "Current Angle:  90 degrees");
-      }
+          case 'v':
+            current_mode = UART_MODE_VOLTAGE;
+            sensor_test_active = true;
+            first_print = true;
+            menu_voltage();
+            break;
 
-      // voltage mode
-      else if (received_byte == 'v') {
-        // set the current mode as the voltage mode
-        current_mode = UART_MODE_VOLTAGE;
+          case 'b':
+            current_mode = UART_MODE_BOTH;
+            current_servo_angle = 90;
+            Servo_SetAngle(90);
+            sensor_test_active = true;
+            first_print = true;
+            menu_both();
+            break;
 
-        // turn on the sensor test.
-        sensor_test_active = true;
+            //setting a pre-speed in the menu, probably not needed.
+        
+            case 1:
+              robot_speed = 250;
+              UART_SendMessage("\r\nSpeed set to 25% PWM (250/999)\r\n");
+              UART_CONTROL_init();
+            
+            case 2:
+              robot_speed = 500;
+              UART_SendMessage("\r\nSpeed set to 50% PWM (500/999)\r\n");
+              UART_CONTROL_init();
 
-        // use a flag to determine whether to print the header or not.
-        first_print = true;
+            case 3:
+              robot_speed = 750;
+              UART_SendMessage("\r\nSpeed set to 75% PWM (750/999)\r\n");
+              UART_CONTROL_init();
 
-        // print the stuff.
-        UART_SendMessage("\x1b[2J\x1b[H"
-                         "--- Sensor Test Mode Active (Press 'h' to return "
-                         "to Main Menu) ---\r\n");
-      }
-
-      else if (received_byte == 'b') {
-        // set the mode to both.
-        current_mode = UART_MODE_BOTH;
-        current_servo_angle = 90;
-        Servo_SetAngle(90);
-
-        // turn on the sensor test.
-        sensor_test_active = true;
-
-        // use a flag to print the header or not.
-        first_print = true;
-
-        // print the menu in this mode.
-        UART_SendMessage(
-            "\x1b[2J\x1b[H"
-            "--- Both Mode Active ---\r\n"
-            "Motor Commands:\r\n"
-            " [w] - Forward | [s] - Reverse | [a] - Left | [d] - Right | [x] - "
-            "Stop\r\n"
-            " [1, 2, 3, 4] - Set Speed to 25%, 50%, 75%, 100% PWM\r\n"
-            " [h] - Return to Main Menu\r\n"
-            "---------------------------------\r\n");
-
-      }
-
-      else if (received_byte == '1') {
-        robot_speed = 250;
-        UART_SendMessage("\r\nSpeed set to 25% PWM (250/999)\r\n");
-        UART_CONTROL_init();
-      }
-
-      else if (received_byte == '2') {
-        robot_speed = 500;
-        UART_SendMessage("\r\nSpeed set to 50% PWM (500/999)\r\n");
-        UART_CONTROL_init();
-      }
-
-      else if (received_byte == '3') {
-        robot_speed = 750;
-        UART_SendMessage("\r\nSpeed set to 75% PWM (750/999)\r\n");
-        UART_CONTROL_init();
-      }
-
-      else if (received_byte == '4') {
-        robot_speed = 999;
-        UART_SendMessage("\r\nSpeed set to 100% PWM (999/999)\r\n");
-        UART_CONTROL_init();
-      }
-
-      else {
+            case 4:
+              robot_speed = 999;
+              UART_SendMessage("\r\nSpeed set to 100% PWM (999/999)\r\n");
+              UART_CONTROL_init();
+        }
         UART_CONTROL_init(); // Reprint menu on invalid key
       }
 
+  
     }
 
-    else if (current_mode == UART_MODE_MOTOR ||
-             current_mode == UART_MODE_BOTH ||
-             current_mode == UART_MODE_COMBINED) {
+    //lots of ORs because we use the motor in all of these modes
+    else if (current_mode == UART_MODE_MOTOR ||current_mode == UART_MODE_BOTH || current_mode == UART_MODE_COMBINED) {
+      switch(received_byte) {
+        case 'h':
+          Robot_SetState(robot_idle);
+          sensor_test_active = false;
+          UART_SendMessage("\r\nExiting Mode. Stopping Robot.\r\n");
+          UART_CONTROL_init();
 
-      if (received_byte == 'h') {
-        Robot_SetState(robot_idle);
-        sensor_test_active = false;
-        UART_SendMessage("\r\nExiting Mode. Stopping Robot.\r\n");
-        UART_CONTROL_init();
-      }
-
-      else if (received_byte == 'w') {
-        Robot_SetState(robot_forward);
-        if (current_mode == UART_MODE_COMBINED) {
-          current_servo_angle = 90;
-          Servo_SetAngle(90);
-          UART_SendMessage("COMBINED FORWARD (Servo: 90 deg)\r\n");
-        } else if (current_mode == UART_MODE_MOTOR) {
-          UART_SendMessage("ROBOT FORWARD\r\n");
-        }
-      }
-
-      else if (received_byte == 's') {
-        Robot_SetState(robot_reverse);
-        if (current_mode == UART_MODE_COMBINED) {
-          current_servo_angle = 90;
-          Servo_SetAngle(90);
-          UART_SendMessage("COMBINED REVERSE (Servo: 90 deg)\r\n");
-        } else if (current_mode == UART_MODE_MOTOR) {
-          UART_SendMessage("ROBOT REVERSE\r\n");
-        }
-      }
-
-      else if (received_byte == 'x') {
-        Robot_SetState(robot_idle);
-        if (current_mode == UART_MODE_COMBINED) {
-          current_servo_angle = 90;
-          Servo_SetAngle(90);
-          UART_SendMessage("COMBINED STOPPED (Servo: 90 deg)\r\n");
-        } else if (current_mode == UART_MODE_MOTOR) {
-          UART_SendMessage("ROBOT STOPPED\r\n");
-        }
-      }
-
-      else if (received_byte == 'a') {
-        Robot_SetState(robot_left);
-        if (current_mode == UART_MODE_COMBINED) {
-          if (current_servo_angle > 0) {
-            current_servo_angle = (current_servo_angle < 10) ? 0 : (current_servo_angle - 10);
+        case 'w':
+          Robot_SetState(robot_forward);
+          if (current_mode == UART_MODE_COMBINED) {
+            current_servo_angle = 90;
+            Servo_SetAngle(90);
+            UART_SendMessage("COMBINED FORWARD (Servo: 90 deg)\r\n");
+          } 
+          else if (current_mode == UART_MODE_MOTOR) {
+            UART_SendMessage("ROBOT FORWARD\r\n");
           }
-          Servo_SetAngle(current_servo_angle);
-          char angle_msg[64];
-          snprintf(angle_msg, sizeof(angle_msg), "COMBINED LEFT (Servo: %d deg)\r\n", current_servo_angle);
-          UART_SendMessage(angle_msg);
-        } else if (current_mode == UART_MODE_MOTOR) {
-          UART_SendMessage("ROBOT LEFT\r\n");
-        }
-      }
 
-      else if (received_byte == 'd') {
-        Robot_SetState(robot_right);
-        if (current_mode == UART_MODE_COMBINED) {
-          if (current_servo_angle < 180) {
-            current_servo_angle = (current_servo_angle + 10 > 180) ? 180 : (current_servo_angle + 10);
+        case 's':
+          Robot_SetState(robot_reverse);
+          if (current_mode == UART_MODE_COMBINED) {
+            current_servo_angle = 90;
+            Servo_SetAngle(90);
+            UART_SendMessage("COMBINED REVERSE (Servo: 90 deg)\r\n");
+          } 
+          else if (current_mode == UART_MODE_MOTOR) {
+            UART_SendMessage("ROBOT REVERSE\r\n");
           }
-          Servo_SetAngle(current_servo_angle);
-          char angle_msg[64];
-          snprintf(angle_msg, sizeof(angle_msg), "COMBINED RIGHT (Servo: %d deg)\r\n", current_servo_angle);
-          UART_SendMessage(angle_msg);
-        } else if (current_mode == UART_MODE_MOTOR) {
-          UART_SendMessage("ROBOT RIGHT\r\n");
-        }
+          
+          case 'x':
+          Robot_SetState(robot_idle);
+            if (current_mode == UART_MODE_COMBINED) {
+              current_servo_angle = 90;
+              Servo_SetAngle(90);
+              UART_SendMessage("COMBINED STOPPED (Servo: 90 deg)\r\n");
+          } 
+          else if (current_mode == UART_MODE_MOTOR) {
+            UART_SendMessage("ROBOT STOPPED\r\n");
+          }
+
+          case 'a':
+          Robot_SetState(robot_left);
+            if (current_mode == UART_MODE_COMBINED) {
+              if (current_servo_angle > 0) {
+                current_servo_angle = (current_servo_angle < 10) ? 0 : (current_servo_angle - 10);
+              }
+              Servo_SetAngle(current_servo_angle);
+              char angle_msg[64];
+              snprintf(angle_msg, sizeof(angle_msg), "COMBINED LEFT (Servo: %d deg)\r\n", current_servo_angle);
+              UART_SendMessage(angle_msg);
+            } 
+
+            else if (current_mode == UART_MODE_MOTOR) {
+              UART_SendMessage("ROBOT LEFT\r\n");
+            }
+
+            case 'd':
+            Robot_SetState(robot_right);
+            if (current_mode == UART_MODE_COMBINED) {
+                if (current_servo_angle < 180) {
+                  current_servo_angle = (current_servo_angle + 10 > 180) ? 180 : (current_servo_angle + 10);
+                }
+                Servo_SetAngle(current_servo_angle);
+                char angle_msg[64];
+                snprintf(angle_msg, sizeof(angle_msg), "COMBINED RIGHT (Servo: %d deg)\r\n", current_servo_angle);
+                UART_SendMessage(angle_msg);
+              } 
+            else if (current_mode == UART_MODE_MOTOR) {
+              UART_SendMessage("ROBOT RIGHT\r\n");
+            }
+
+            case 'f':
+            Robot_SetState(robot_fault);
+            if (current_mode == UART_MODE_MOTOR || current_mode == UART_MODE_COMBINED){
+              UART_SendMessage("ROBOT FAULT\r\n");
+            }
+            
+             case 1:
+              robot_speed = 250;
+              UART_SendMessage("\r\nSpeed set to 25% PWM (250/999)\r\n");
+              UART_CONTROL_init();
+            
+            case 2:
+              robot_speed = 500;
+              UART_SendMessage("\r\nSpeed set to 50% PWM (500/999)\r\n");
+              UART_CONTROL_init();
+
+            case 3:
+              robot_speed = 750;
+              UART_SendMessage("\r\nSpeed set to 75% PWM (750/999)\r\n");
+              UART_CONTROL_init();
+
+            case 4:
+              robot_speed = 999;
+              UART_SendMessage("\r\nSpeed set to 100% PWM (999/999)\r\n");
+              UART_CONTROL_init();
       }
 
-      else if (received_byte == 'f') {
-        Robot_SetState(robot_fault);
-        if (current_mode == UART_MODE_MOTOR || current_mode == UART_MODE_COMBINED)
-          UART_SendMessage("ROBOT FAULT\r\n");
-      }
-
-      else if (received_byte == '1') {
-        robot_speed = 250;
-        Robot_SetState(Robot_GetState());
-        if (current_mode == UART_MODE_MOTOR)
-          UART_SendMessage("Speed set to 25% PWM (250/999)\r\n");
-      }
-
-      else if (received_byte == '2') {
-        robot_speed = 500;
-        Robot_SetState(Robot_GetState());
-        if (current_mode == UART_MODE_MOTOR)
-          UART_SendMessage("Speed set to 50% PWM (500/999)\r\n");
-      }
-
-      else if (received_byte == '3') {
-        robot_speed = 750;
-        Robot_SetState(Robot_GetState());
-        if (current_mode == UART_MODE_MOTOR)
-          UART_SendMessage("Speed set to 75% PWM (750/999)\r\n");
-      }
-
-      else if (received_byte == '4') {
-        robot_speed = 999;
-        Robot_SetState(Robot_GetState());
-        if (current_mode == UART_MODE_MOTOR)
-          UART_SendMessage("Speed set to 100% PWM (999/999)\r\n");
-      }
+  
 
     }
 
@@ -774,8 +764,7 @@ void UART_CONTROL_update(void) {
 // this function checks if we have timeouted or not.
 void UART_CONTROL_check_timeout(void) {
   // If the robot is not idle, fault, or auto, check for communication timeout
-  if (Robot_GetState() != robot_idle && Robot_GetState() != robot_fault &&
-      Robot_GetState() != robot_auto) {
+  if (Robot_GetState() != robot_idle && Robot_GetState() != robot_fault && Robot_GetState() != robot_auto) {
 
     // check if its been too long since we last got a command.
     if (HAL_GetTick() - last_command_time > 2000) {
@@ -785,4 +774,6 @@ void UART_CONTROL_check_timeout(void) {
   }
 }
 
-UART_ControlMode UART_CONTROL_GetMode(void) { return current_mode; }
+UART_ControlMode UART_CONTROL_GetMode(void) { 
+  return current_mode; 
+}
