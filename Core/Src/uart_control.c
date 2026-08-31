@@ -540,42 +540,41 @@ void UART_CONTROL_update(void) {
           UART_CONTROL_init();
           break;
 
+        case 'a':
+          current_servo_angle = (current_servo_angle >= 5) ? current_servo_angle - 5 : 0;
+          angle_changed = true;
+          break;
 
-
-
-
-
-      }
-      if (received_byte == 'h') {
+        case 'd':
+          current_servo_angle = (current_servo_angle <= 175) ? current_servo_angle + 5 : 180;
+          angle_changed = true;
+          break;
         
-      } else if (received_byte == 'a') {
-        current_servo_angle =
-            (current_servo_angle >= 5) ? current_servo_angle - 5 : 0;
-        angle_changed = true;
-      } else if (received_byte == 'd') {
-        current_servo_angle =
-            (current_servo_angle <= 175) ? current_servo_angle + 5 : 180;
-        angle_changed = true;
+        case '1':
+          current_servo_angle = 0;
+          angle_changed = true;
 
-      } else if (received_byte == '1') {
-        current_servo_angle = 0;
-        angle_changed = true;
-      } else if (received_byte == '2') {
-        current_servo_angle = 45;
-        angle_changed = true;
-      } else if (received_byte == '3') {
-        current_servo_angle = 90;
-        angle_changed = true;
-      }
+        case '2':
+          current_servo_angle = 45;
+          angle_changed = true;
+          break;
+        case '3':
+          current_servo_angle = 90;
+          angle_changed = true;
+          break;
 
-      else if (received_byte == '4') {
-        current_servo_angle = 135;
-        angle_changed = true;
-      }
+        case '4':
+          current_servo_angle = 135;
+          angle_changed = true;
+          break;
 
-      else if (received_byte == '5') {
-        current_servo_angle = 180;
-        angle_changed = true;
+        case '5':
+          current_servo_angle = 180;
+          angle_changed = true;
+          break;
+
+        default:
+          break;
       }
 
       if (angle_changed) {
@@ -591,31 +590,44 @@ void UART_CONTROL_update(void) {
     case UART_MODE_STEPPER: {
       int16_t target_angle = current_stepper_angle;
       bool angle_changed = false;
+      switch(received_byte) {
+        case 'h':
+          stepper_stop();
+          UART_SendMessage("\r\n--- Exited Stepper Mode ---\r\n");
+          UART_CONTROL_init();
+          break;
 
-      // head back to menu
-      if (received_byte == 'h') {
-        stepper_stop();
-        UART_SendMessage("\r\n--- Exited Stepper Mode ---\r\n");
-        UART_CONTROL_init();
-      } else if (received_byte == 'a') {
-        target_angle = current_stepper_angle - 5;
-        if (target_angle < 0)
+        case 'a':
+          target_angle = current_stepper_angle - 5;
+          if (target_angle < 0)
+            target_angle = 0;
+          angle_changed = true;
+          break;
+
+        case 'd':
+          target_angle = current_stepper_angle + 5;
+          if (target_angle > 360)
+            target_angle = 360;
+          angle_changed = true;
+          break;
+
+        case '1':
           target_angle = 0;
-        angle_changed = true;
-      } else if (received_byte == 'd') {
-        target_angle = current_stepper_angle + 5;
-        if (target_angle > 360)
+          angle_changed = true;
+          break;
+
+        case '2':
+          target_angle = 180;
+          angle_changed = true;
+          break;
+
+        case '3':
           target_angle = 360;
-        angle_changed = true;
-      } else if (received_byte == '1') {
-        target_angle = 0;
-        angle_changed = true;
-      } else if (received_byte == '2') {
-        target_angle = 180;
-        angle_changed = true;
-      } else if (received_byte == '3') {
-        target_angle = 360;
-        angle_changed = true;
+          angle_changed = true;
+          break;
+
+        default:
+          break;
       }
 
       if (angle_changed && target_angle != current_stepper_angle) {
@@ -632,23 +644,34 @@ void UART_CONTROL_update(void) {
     }
 
     case UART_MODE_SPEAKER:
-      if (received_byte == 'h') {
-        HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
-        UART_SendMessage("\r\n--- Exited Speaker Test Mode ---\r\n");
-        UART_CONTROL_init();
-      } else if (received_byte == '1') {
-        __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, 500);
-        HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
-        UART_SendMessage("\rPlaying 1 kHz tone... (Press '0' to stop)\r\n");
-      } else if (received_byte == '2') {
-        UART_SendMessage("\rPlaying 100ms beep...\r\n");
-        __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, 500);
-        HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
-        HAL_Delay(100);
-        HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
-      } else if (received_byte == '0') {
-        HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
-        UART_SendMessage("\rTone stopped.\r\n");
+      switch(received_byte) { 
+        case 'h':
+          HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
+          UART_SendMessage("\r\n--- Exited Speaker Test Mode ---\r\n");
+          UART_CONTROL_init();
+          break;
+
+        case '1':
+          __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, 500);
+          HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
+          UART_SendMessage("\rPlaying 1 kHz tone... (Press '0' to stop)\r\n");
+          break;
+
+        case '2':
+          UART_SendMessage("\rPlaying 100ms beep...\r\n");
+          __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, 500);
+          HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
+          HAL_Delay(100);
+          HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
+          break;
+
+        case '0':
+          HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
+          UART_SendMessage("\rTone stopped.\r\n");
+          break;
+
+        default:
+          break;
       }
       break;
 
