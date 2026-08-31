@@ -92,8 +92,8 @@ void menu_combined(void) {
             "Commands:\r\n"
             " [w] - Drive Forward (Servo Center)\r\n"
             " [s] - Drive Reverse (Servo Center)\r\n"
-            " [a] - Steer Left (Hold for full 180 turn)\r\n"
-            " [d] - Steer Right (Hold for full 0 turn)\r\n"
+            " [a] - Steer Left (Hold for 45 deg turn)\r\n"
+            " [d] - Steer Right (Hold for 135 deg turn)\r\n"
             " [x] - Stop / Idle (Servo Center)\r\n"
             " [f] - Force Fault\r\n"
             " [1, 2, 3, 4] - Set Speed (25%, 50%, 75%, 100% PWM)\r\n"
@@ -148,11 +148,9 @@ void menu_servo(void) {
   UART_SendMessage("\x1b[2J\x1b[H"
                          "--- Servo Control Mode Active ---\r\n"
                          "Controls:\r\n"
-                         " [a] - Decrease angle by 5 deg\r\n"
-                         " [d] - Increase angle by 5 deg\r\n"
-                         " [1] - Set to 0 deg | [2] - Set to 45 deg | [3] - "
-                         "Set to 90 deg \r\n"
-                         " [4] - Set to 135 deg | [5] - Set to 180 deg\r\n"
+                         " [a] - Decrease angle by 5 deg (min 45 deg)\r\n"
+                         " [d] - Increase angle by 5 deg (max 135 deg)\r\n"
+                         " [1] - Set to 45 deg | [2] - Set to 90 deg | [3] - Set to 135 deg\r\n"
                          " [h] - Return to Main Menu\r\n"
                          "---------------------------------\r\n"
                          "Current Angle:  90 degrees");
@@ -366,9 +364,9 @@ void UART_CONTROL_update(void) {
         case 'w':
           Robot_SetState(robot_forward);
           if (current_mode == UART_MODE_COMBINED) {
-            current_servo_angle = 90;
-            Servo_SetAngle(90);
-            UART_SendMessage("COMBINED FORWARD (Servo: 90 deg)\r\n");
+            char fwd_msg[64];
+            snprintf(fwd_msg, sizeof(fwd_msg), "COMBINED FORWARD (Servo: %d deg)\r\n", current_servo_angle);
+            UART_SendMessage(fwd_msg);
           } 
 
           else if (current_mode == UART_MODE_MOTOR) {
@@ -379,9 +377,9 @@ void UART_CONTROL_update(void) {
         case 's':
           Robot_SetState(robot_reverse);
           if (current_mode == UART_MODE_COMBINED) {
-            current_servo_angle = 90;
-            Servo_SetAngle(90);
-            UART_SendMessage("COMBINED REVERSE (Servo: 90 deg)\r\n");
+            char rev_msg[64];
+            snprintf(rev_msg, sizeof(rev_msg), "COMBINED REVERSE (Servo: %d deg)\r\n", current_servo_angle);
+            UART_SendMessage(rev_msg);
           } 
 
           else if (current_mode == UART_MODE_MOTOR) {
@@ -406,8 +404,8 @@ void UART_CONTROL_update(void) {
             Robot_SetState(robot_left);
             if (current_mode == UART_MODE_COMBINED) {
 
-              if (current_servo_angle > 0) {
-                current_servo_angle = (current_servo_angle < 10) ? 0 : (current_servo_angle - 10);
+              if (current_servo_angle > SERVO_ANGLE_MIN) {
+                current_servo_angle = (current_servo_angle < SERVO_ANGLE_MIN + 10) ? SERVO_ANGLE_MIN : (current_servo_angle - 10);
               }
               Servo_SetAngle(current_servo_angle);
               char angle_msg[64];
@@ -425,8 +423,8 @@ void UART_CONTROL_update(void) {
               Robot_SetState(robot_right);
               if (current_mode == UART_MODE_COMBINED) {
 
-                  if (current_servo_angle < 180) {
-                    current_servo_angle = (current_servo_angle + 10 > 180) ? 180 : (current_servo_angle + 10);
+                  if (current_servo_angle < SERVO_ANGLE_MAX) {
+                    current_servo_angle = (current_servo_angle + 10 > SERVO_ANGLE_MAX) ? SERVO_ANGLE_MAX : (current_servo_angle + 10);
                   }
                   Servo_SetAngle(current_servo_angle);
                   char angle_msg[64];
@@ -541,35 +539,27 @@ void UART_CONTROL_update(void) {
           break;
 
         case 'a':
-          current_servo_angle = (current_servo_angle >= 5) ? current_servo_angle - 5 : 0;
+          current_servo_angle = (current_servo_angle >= SERVO_ANGLE_MIN + 5) ? current_servo_angle - 5 : SERVO_ANGLE_MIN;
           angle_changed = true;
           break;
 
         case 'd':
-          current_servo_angle = (current_servo_angle <= 175) ? current_servo_angle + 5 : 180;
+          current_servo_angle = (current_servo_angle <= SERVO_ANGLE_MAX - 5) ? current_servo_angle + 5 : SERVO_ANGLE_MAX;
           angle_changed = true;
           break;
-        
+
         case '1':
-          current_servo_angle = 0;
+          current_servo_angle = SERVO_ANGLE_LEFT; // 45 deg
           angle_changed = true;
+          break;
 
         case '2':
-          current_servo_angle = 45;
+          current_servo_angle = SERVO_ANGLE_CENTER; // 90 deg
           angle_changed = true;
           break;
+
         case '3':
-          current_servo_angle = 90;
-          angle_changed = true;
-          break;
-
-        case '4':
-          current_servo_angle = 135;
-          angle_changed = true;
-          break;
-
-        case '5':
-          current_servo_angle = 180;
+          current_servo_angle = SERVO_ANGLE_RIGHT; // 135 deg
           angle_changed = true;
           break;
 

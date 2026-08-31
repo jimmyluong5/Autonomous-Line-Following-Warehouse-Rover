@@ -6,6 +6,8 @@
 #include <stdint.h>
 
 // Steering Servo Angles (degrees)
+#define SERVO_ANGLE_MIN    45
+#define SERVO_ANGLE_MAX    135
 #define SERVO_ANGLE_CENTER 90
 #define SERVO_ANGLE_LEFT   45
 #define SERVO_ANGLE_RIGHT  135

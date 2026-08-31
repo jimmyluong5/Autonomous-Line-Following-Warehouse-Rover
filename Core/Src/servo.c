@@ -15,8 +15,10 @@ static uint16_t auto_detach_delay_ms = 500; // Turn off PWM 500ms after reaching
 static bool auto_detach_enabled = true;
 
 static void update_compare_value(uint8_t angle) {
-    if (angle > 180) {
-        angle = 180;
+    if (angle < SERVO_ANGLE_MIN) {
+        angle = SERVO_ANGLE_MIN;
+    } else if (angle > SERVO_ANGLE_MAX) {
+        angle = SERVO_ANGLE_MAX;
     }
     // Map 0 - 180 degrees to 500 - 2500 microseconds (compare value)
     uint32_t compare_value = 500 + ((uint32_t)angle * 2000) / 180;
@@ -34,8 +36,10 @@ void servo_init(void) {
 }
 
 void Servo_SetAngle(uint8_t angle) {
-    if (angle > 180) {
-        angle = 180;
+    if (angle < SERVO_ANGLE_MIN) {
+        angle = SERVO_ANGLE_MIN;
+    } else if (angle > SERVO_ANGLE_MAX) {
+        angle = SERVO_ANGLE_MAX;
     }
     target_angle = angle;
     last_move_tick = HAL_GetTick();
@@ -48,8 +52,10 @@ void Servo_SetAngle(uint8_t angle) {
 }
 
 void Servo_SetAngleImmediate(uint8_t angle) {
-    if (angle > 180) {
-        angle = 180;
+    if (angle < SERVO_ANGLE_MIN) {
+        angle = SERVO_ANGLE_MIN;
+    } else if (angle > SERVO_ANGLE_MAX) {
+        angle = SERVO_ANGLE_MAX;
     }
     target_angle = angle;
     current_angle = (float)angle;

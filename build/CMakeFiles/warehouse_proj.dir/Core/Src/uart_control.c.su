@@ -6,10 +6,10 @@ C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:115:6:menu_stepp
 C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:129:6:menu_normalized	8	static
 C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:137:6:menu_autonomous	8	static
 C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:147:6:menu_servo	8	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:161:6:menu_voltage	8	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:168:6:menu_both	8	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:185:13:UART_SendMessage	16	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:194:6:UART_CONTROL_init	8	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:201:6:UART_CONTROL_update	624	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:840:6:UART_CONTROL_check_timeout	8	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:852:18:UART_CONTROL_GetMode	4	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:159:6:menu_voltage	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:166:6:menu_both	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:183:13:UART_SendMessage	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:192:6:UART_CONTROL_init	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:199:6:UART_CONTROL_update	624	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:830:6:UART_CONTROL_check_timeout	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:842:18:UART_CONTROL_GetMode	4	static

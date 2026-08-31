@@ -29,22 +29,19 @@ void Robot_SetState(RobotState new_state) {
   switch (current_state) {
   case robot_forward:
     Motor_Forward(robot_speed);
-    Servo_SetAngle(SERVO_ANGLE_CENTER);
     break;
   case robot_reverse:
     Motor_Reverse(robot_speed);
-    Servo_SetAngle(SERVO_ANGLE_CENTER);
     break;
   case robot_left:
-    // Spin turn left: left motor backward, right motor forward
-    Motor_Left_SetSpeed(-robot_speed);
-    Motor_Right_SetSpeed(robot_speed);
+    // Spin turn left with full 100% power (999 PWM) to overcome vehicle weight
+    Motor_Left_SetSpeed(-999);
+    Motor_Right_SetSpeed(999);
     break;
   case robot_right:
-    // Spin turn right: left motor forward, right motor backward
-    Motor_Left_SetSpeed(robot_speed);
-    Motor_Right_SetSpeed(-robot_speed);
-
+    // Spin turn right with full 100% power (999 PWM) to overcome vehicle weight
+    Motor_Left_SetSpeed(999);
+    Motor_Right_SetSpeed(-999);
     break;
   case robot_idle:
     Motor_Stop();
