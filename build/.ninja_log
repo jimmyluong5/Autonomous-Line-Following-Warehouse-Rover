@@ -92,3 +92,6 @@
 398	599	8097250377741485	warehouse_proj.elf	62e37d8c8131cbab
 41	1260	8097250552701760	CMakeFiles/flash	29d278b80edd985f
 41	1260	8097250552701760	C:/Users/jimmy/Downloads/warehouse_proj/build/CMakeFiles/flash	29d278b80edd985f
+153	1198	8098537387119295	CMakeFiles/warehouse_proj.dir/Core/Src/robot.c.obj	e23058ae7f3d713f
+21	139	8098537536729359	CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj	9b7a0a95c465e3fc
+140	936	8098537537919042	warehouse_proj.elf	62e37d8c8131cbab
