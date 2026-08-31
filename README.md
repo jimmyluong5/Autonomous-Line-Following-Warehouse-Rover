@@ -252,7 +252,7 @@ Add the following under **Completed**
 The wireless controller can now be used as the basis for full manual rover control alongside the autonomous line-following system.
 
 
-10. Bidirectional Serial Monitoring and Wireless Command Debugging
+### 10. Bidirectional Serial Monitoring and Wireless Command Debugging
 
 After completing the wireless button controller prototype, I expanded the debugging interface so that both the transmitter and receiver ESP32-S3 modules can display controller activity through their respective serial connections.
 
