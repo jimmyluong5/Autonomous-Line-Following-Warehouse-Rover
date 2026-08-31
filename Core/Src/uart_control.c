@@ -36,22 +36,8 @@ static uint16_t min[8];
 static uint16_t max[8];
 static uint16_t filtered_adc[8];
 
-// function to set a message in UART.
-static void UART_SendMessage(const char *message) {
-  HAL_UART_Transmit(&hcom_uart[COM1], (uint8_t *)message, strlen(message),
-                    HAL_MAX_DELAY);
-}
 
-static uint32_t led_blink_start_time = 0;
-static bool led_is_blinking = false;
-
-// function to initiate the UART.
-void UART_CONTROL_init(void) {
-  current_mode = UART_MODE_MENU;
-  sensor_test_active = false; // have the sensor test off at the
-
-  char menu_buf[768];
-  int percent = (robot_speed * 100) / 999;
+void menu_main(void){
   snprintf(menu_buf, sizeof(menu_buf),
            "\x1b[2J\x1b[H"
            "==========================================\r\n"
@@ -76,6 +62,90 @@ void UART_CONTROL_init(void) {
            "==========================================\r\n",
            percent);
   UART_SendMessage(menu_buf);
+}
+
+void menu_motor(void){
+  UART_SendMessage(
+            "\x1b[2J\x1b[H"
+            "--- Motor Control Mode Active ---\r\n"
+            "Commands:\r\n"
+            " [w] - Forward\r\n"
+            " [s] - Reverse\r\n"
+            " [a] - Spin Turn Left\r\n"
+            " [d] - Spin Turn Right\r\n"
+            " [x] - Stop / Idle\r\n"
+            " [f] - Force Fault\r\n"
+            " [1, 2, 3, 4] - Set Speed to 25%, 50%, 75%, 100% PWM\r\n"
+            " [h] - Return to Main Menu\r\n"
+            "---------------------------------\r\n");
+}
+
+
+void menu_combined(void) {
+  UART_SendMessage(
+            "\x1b[2J\x1b[H"
+            "--- Combined Control System Active (Mode 'c') ---\r\n"
+            "Commands:\r\n"
+            " [w] - Drive Forward (Servo Center)\r\n"
+            " [s] - Drive Reverse (Servo Center)\r\n"
+            " [a] - Steer Left (Hold for full 180 turn)\r\n"
+            " [d] - Steer Right (Hold for full 0 turn)\r\n"
+            " [x] - Stop / Idle (Servo Center)\r\n"
+            " [f] - Force Fault\r\n"
+            " [1, 2, 3, 4] - Set Speed (25%, 50%, 75%, 100% PWM)\r\n"
+            " [h] - Return to Main Menu\r\n"
+            "--------------------------------------------------\r\n");
+}
+void menu_speaker(void) {
+  UART_SendMessage("\x1b[2J\x1b[H"
+                         "--- Speaker/Buzzer Test Mode Active ---\r\n"
+                         "Press keys to test:\r\n"
+                         " [1] - Play continuous 1 kHz tone\r\n"
+                         " [2] - Play 100ms beep\r\n"
+                         " [0] - Stop sound\r\n"
+                         " [h] - Return to Main Menu\r\n"
+                         "---------------------------------------\r\n");
+}
+void menu_stepper(void) {
+
+}
+void menu_normalize(void) {
+
+}
+void menu_autonomous(void) {
+
+}
+void menu_servo(void) {
+
+}
+void menu_voltage(void)  {
+
+}
+void menu_both(void) {
+
+}
+
+
+
+
+
+// function to set a message in UART.
+static void UART_SendMessage(const char *message) {
+  HAL_UART_Transmit(&hcom_uart[COM1], (uint8_t *)message, strlen(message),
+                    HAL_MAX_DELAY);
+}
+
+static uint32_t led_blink_start_time = 0;
+static bool led_is_blinking = false;
+
+// function to initiate the UART.
+void UART_CONTROL_init(void) {
+  current_mode = UART_MODE_MENU;
+  sensor_test_active = false; // have the sensor test off at the
+
+  char menu_buf[768];
+  int percent = (robot_speed * 100) / 999;
+  menu_main();
 }
 
 // function update the UART based on inputs through UART.
@@ -117,52 +187,20 @@ void UART_CONTROL_update(void) {
     if (current_mode == UART_MODE_MENU) {
       if (received_byte == 'm') {
         current_mode = UART_MODE_MOTOR;
-        UART_SendMessage(
-            "\x1b[2J\x1b[H"
-            "--- Motor Control Mode Active ---\r\n"
-            "Commands:\r\n"
-            " [w] - Forward\r\n"
-            " [s] - Reverse\r\n"
-            " [a] - Spin Turn Left\r\n"
-            " [d] - Spin Turn Right\r\n"
-            " [x] - Stop / Idle\r\n"
-            " [f] - Force Fault\r\n"
-            " [1, 2, 3, 4] - Set Speed to 25%, 50%, 75%, 100% PWM\r\n"
-            " [h] - Return to Main Menu\r\n"
-            "---------------------------------\r\n");
-      }
+        menu_motor();
 
       else if (received_byte == 'c') {
         current_mode = UART_MODE_COMBINED;
         current_servo_angle = 90;
         Servo_SetAngle(90);
-        UART_SendMessage(
-            "\x1b[2J\x1b[H"
-            "--- Combined Control System Active (Mode 'c') ---\r\n"
-            "Commands:\r\n"
-            " [w] - Drive Forward (Servo Center)\r\n"
-            " [s] - Drive Reverse (Servo Center)\r\n"
-            " [a] - Steer Left (Hold for full 180 turn)\r\n"
-            " [d] - Steer Right (Hold for full 0 turn)\r\n"
-            " [x] - Stop / Idle (Servo Center)\r\n"
-            " [f] - Force Fault\r\n"
-            " [1, 2, 3, 4] - Set Speed (25%, 50%, 75%, 100% PWM)\r\n"
-            " [h] - Return to Main Menu\r\n"
-            "--------------------------------------------------\r\n");
+        menu_combined();
       }
       // just add new modes above here its easier up here
       else if (received_byte == 'p') {
         current_mode = UART_MODE_SPEAKER;
         first_print = true;
         sensor_test_active = false;
-        UART_SendMessage("\x1b[2J\x1b[H"
-                         "--- Speaker/Buzzer Test Mode Active ---\r\n"
-                         "Press keys to test:\r\n"
-                         " [1] - Play continuous 1 kHz tone\r\n"
-                         " [2] - Play 100ms beep\r\n"
-                         " [0] - Stop sound\r\n"
-                         " [h] - Return to Main Menu\r\n"
-                         "---------------------------------------\r\n");
+        menu_speaker();
       }
 
       else if (received_byte == 't') {
