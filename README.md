@@ -24,13 +24,13 @@ The project began as a basic motor-control prototype and has gradually evolved i
 
 ### 1. Motor Control
 
-The first stage of the project focused on getting the drivetrain working.
+The first stage of the project focused on getting the prototype working.
 
 Two **FIT0484 DC motors** were controlled through a **TB6612FNG dual motor driver**, with the STM32G431KB acting as the main controller.
 
 The power system uses **LM2596 buck converters** to provide regulated voltages to the motors and embedded electronics.
 
-Once reliable bidirectional motor control was established, the drivetrain was mounted onto a rough cardboard chassis for early testing.
+Once reliable bidirectional motor control was established, the prototype was mounted onto a rough cardboard chassis for early testing.
 
 <img width="480" height="853" alt="motors_github" src="https://github.com/user-attachments/assets/ca83976e-c8b5-4a69-80d2-1aaa2ccd849a" />
 
@@ -39,7 +39,7 @@ Once reliable bidirectional motor control was established, the drivetrain was mo
 
 ### 2. Cardboard Prototype
 
-A temporary cardboard rover was constructed to test the complete drivetrain before moving to a permanent chassis.
+A temporary cardboard rover was constructed to test the complete prototype before moving to a permanent chassis.
 
 This prototype made it possible to verify
 
@@ -49,7 +49,7 @@ This prototype made it possible to verify
 * Initial sensor placement
 * Basic autonomous movement
 
-The prototype successfully demonstrated that the embedded control system and drivetrain could operate together before the mechanical design was finalized.
+The prototype successfully demonstrated that the embedded control system and prototype could operate together before the mechanical design was finalized.
 
 <img width="480" height="853" alt="first_drive_github" src="https://github.com/user-attachments/assets/3769e857-5dfd-4aa8-bf13-f9b57ea0bf7f" />
 
