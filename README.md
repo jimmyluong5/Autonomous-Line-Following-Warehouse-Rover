@@ -304,11 +304,19 @@ This significantly simplifies debugging because communication problems can be is
 
 The wireless controller now supports both LED-based command verification and real-time serial debugging, providing a more reliable way to confirm that ESP-NOW packets are being received and interpreted correctly.
 
+### 11. Full Rover Integration & Multi-Subsystem Control
 
+With the 3D-printed chassis, power distribution, and core firmware validated, the rover has progressed to a **fully integrated, multi-mode platform**. All critical subsystems are now orchestrated directly by the STM32G431KB state machine:
 
-
-
-The eventual goal is to expand this system into full wireless rover control.
+* **Integrated Steering & Suspension**: The front servo suspension and steering mechanism is directly integrated into the drive loop, enforcing calibrated limits (45° to 135°) with dedicated combined driving modes (front active steering + rear differential motor thrust).
+* **Unified UART Telemetry & Diagnostic Interface**: An interactive, non-blocking serial dashboard allows on-the-fly mode switching between:
+  * `[m]` Motor Control Mode (Differential Drive)
+  * `[c]` Combined Control System (Active Steering + Rear Motors)
+  * `[a]` Autonomous PID Line Following
+  * `[s]` Steering Servo Calibration (45°–135°)
+  * `[t]` Stepper Motor Positioning
+  * `[p]` Piezo Speaker / Buzzer Frequency Testing
+  * `[v]` / `[n]` Real-Time ADC Reflectance & Surface Classification
 
 ## Hardware
 
@@ -333,27 +341,48 @@ The eventual goal is to expand this system into full wireless rover control.
 * ESP-NOW
 * PuTTY
 * 8-bit command packet protocol
-  
 
-Current Status Update
+## Roadmap & Next Steps
 
-Transmitter-side serial command monitoring
-Receiver-side serial command monitoring
-Wireless command transmission and decoding
-Manual and autonomous mode command selection
-8-bit adjustable speed control
-STOP command verification
-End-to-end ESP-NOW controller debugging
-Wireless button controller prototype
-8-bit button command packet transmission
-Multi-button input testing
+```text
+Current: Full Rover + UART Telemetry
+                ↓
+Phase 1: ESP32-to-STM32 Bridge & Wireless Joystick Control
+                ↓
+Phase 2: IMU Orientation & Heading Stabilization
+                ↓
+Phase 3: Time-of-Flight (ToF) Collision Detection & Auto-Braking
+```
 
-The wireless controller can now be monitored from both sides of the communication link and provides the foundation for forwarding the decoded commands to the STM32 rover controller.
+### Phase 1: ESP32-to-STM32 Bridge & Wireless Joystick Controller
+* **Inter-MCU Communication**: Bridge the receiver ESP32-S3 directly to the STM32G431KB via hardware UART, forwarding decoded wireless packets into real-time drive and mode commands.
+* **Analog Joystick Transmitter**: Upgrade the handheld controller with a 2-axis analog joystick to provide smooth, continuous proportional throttle and steering rather than discrete button presses.
 
-In progress
+### Phase 2: IMU Integration & Dynamic Heading Stabilization
+* Integrate a 6-DOF / 9-DOF **Inertial Measurement Unit (IMU)** via I2C/SPI on the STM32.
+* Implement closed-loop attitude estimation and yaw-rate compensation to maintain straight-line tracking, prevent drift, and detect chassis tilt over uneven terrain.
 
-* Expanding ESP-NOW command functionality
-* Wireless rover control
-* Integration of additional autonomous behaviors
-* Further mechanical and control-system refinement
+### Phase 3: Time-of-Flight (ToF) Collision Detection
+* Integrate forward-facing **Time-of-Flight (ToF) distance sensors** (e.g., VL53L0X / VL53L1X).
+* Implement real-time proximity sensing with dynamic speed reduction and autonomous emergency braking (AEB) to avoid obstacles during both manual and autonomous line-following modes.
+
+## Current Status Summary
+
+### Completed
+- [x] Bidirectional DC motor control with TB6612FNG & PWM
+- [x] 8-Channel reflectance array acquisition via MCP3208 SPI ADC
+- [x] Autonomous line-following navigation with PID control
+- [x] 3D-printed chassis assembly and mechanical integration
+- [x] Servo-actuated steering & suspension control (45°–135° limits)
+- [x] Multi-subsystem UART diagnostic & control dashboard
+- [x] Dual ESP32-S3 ESP-NOW wireless link with 8-bit command packet protocol
+- [x] Handheld wireless button controller prototype with serial debugging
+
+### In Progress
+- [ ] Direct UART communication bridge between receiver ESP32-S3 and STM32G431KB
+- [ ] Analog 2-axis joystick integration on wireless transmitter
+
+### Planned
+- [ ] IMU sensor integration & closed-loop heading stabilization
+- [ ] Time-of-Flight (ToF) sensor integration for forward collision avoidance
 
