@@ -1,0 +1,5 @@
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/LSM6DS3.c:8:6:LSM6DS3_Init	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/LSM6DS3.c:13:9:LSM6DS3_ReadReg	32	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/LSM6DS3.c:27:6:LSM6DS3_WriteReg	24	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/LSM6DS3.c:38:9:LSM6DS3_GetWhoAmI	8	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/LSM6DS3.c:42:6:LSM6DS3_DumpRegisters	568	static

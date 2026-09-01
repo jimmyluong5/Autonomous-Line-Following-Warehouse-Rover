@@ -147,7 +147,8 @@ void Robot_LineFollow_Update(void) {
 
   if (centered) {
     error = 0;
-  } else {
+  } 
+  else {
     // Calculate center position of the consecutive black run (range 0 to 7000)
     int32_t position = (int32_t)((best_start + best_end) * 500);
     error = position - 3500;

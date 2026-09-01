@@ -9,6 +9,7 @@
 #include <stepper.h>
 #include <string.h>
 #include <uart_control.h>
+#include "LSM6DS3.h"
 
 static uint8_t current_servo_angle = 90;
 static int16_t current_stepper_angle =
@@ -57,6 +58,7 @@ void menu_main(void){
            " [s] - Servo Control Mode\r\n"
            " [t] - Stepper Mode \r\n"
            " [p] - Speaker/Buzzer Test Mode\r\n"
+           " [i] - LSM6DS3 IMU Test Mode\r\n"
            "------------------------------------------\r\n"
            "Select Speed (Current: %d%%):\r\n"
            " [1] - Set Speed to 25%% PWM\r\n"
@@ -66,6 +68,17 @@ void menu_main(void){
            "==========================================\r\n",
            percent);
   UART_SendMessage(menu_buf);
+}
+
+void menu_imu(void) {
+  UART_SendMessage(
+      "\x1b[2J\x1b[H"
+      "--- LSM6DS3 IMU Test Mode Active (Mode 'i') ---\r\n"
+      "Commands:\r\n"
+      " [r] - Read WHO_AM_I Register\r\n"
+      " [d] - Dump / Scan Sensor Registers (0x00 - 0x3F)\r\n"
+      " [h] - Return to Main Menu\r\n"
+      "-----------------------------------------------\r\n");
 }
 
 void menu_motor(void){
@@ -78,6 +91,7 @@ void menu_motor(void){
             " [a] - Spin Turn Left\r\n"
             " [d] - Spin Turn Right\r\n"
             " [x] - Stop / Idle\r\n"
+            " [z] - Reset Encoder Counts (L=0, R=0)\r\n"
             " [f] - Force Fault\r\n"
             " [1, 2, 3, 4] - Set Speed to 25%, 50%, 75%, 100% PWM\r\n"
             " [h] - Return to Main Menu\r\n"
@@ -95,6 +109,7 @@ void menu_combined(void) {
             " [a] - Steer Left (Hold for 45 deg turn)\r\n"
             " [d] - Steer Right (Hold for 135 deg turn)\r\n"
             " [x] - Stop / Idle (Servo Center)\r\n"
+            " [z] - Reset Encoder Counts (L=0, R=0)\r\n"
             " [f] - Force Fault\r\n"
             " [1, 2, 3, 4] - Set Speed (25%, 50%, 75%, 100% PWM)\r\n"
             " [h] - Return to Main Menu\r\n"
@@ -317,6 +332,13 @@ void UART_CONTROL_update(void) {
             menu_both();
             break;
 
+          case 'i':
+            current_mode = UART_MODE_IMU;
+            first_print = true;
+            sensor_test_active = false;
+            menu_imu();
+            break;
+
             //setting a pre-speed in the menu, probably not needed.
         
             case '1':
@@ -443,6 +465,12 @@ void UART_CONTROL_update(void) {
               if (current_mode == UART_MODE_MOTOR || current_mode == UART_MODE_COMBINED){
                 UART_SendMessage("ROBOT FAULT\r\n");
               }
+              break;
+
+            case 'z':
+              Encoder_ResetLeft();
+              Encoder_ResetRight();
+              UART_SendMessage("\r\n[Encoders Reset: L=0, R=0]\r\n");
               break;
             
             case '1':
@@ -658,6 +686,31 @@ void UART_CONTROL_update(void) {
         case '0':
           HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
           UART_SendMessage("\rTone stopped.\r\n");
+          break;
+
+        default:
+          break;
+      }
+      break;
+
+    case UART_MODE_IMU:
+      switch(received_byte) {
+        case 'h':
+        case 'x':
+          UART_SendMessage("\r\n--- Exited IMU Mode ---\r\n");
+          UART_CONTROL_init();
+          break;
+
+        case 'r': {
+          uint8_t id = LSM6DS3_GetWhoAmI();
+          char id_buf[64];
+          snprintf(id_buf, sizeof(id_buf), "\r[LSM6DS3] WHO_AM_I = 0x%02X\r\n", id);
+          UART_SendMessage(id_buf);
+          break;
+        }
+
+        case 'd':
+          LSM6DS3_DumpRegisters();
           break;
 
         default:

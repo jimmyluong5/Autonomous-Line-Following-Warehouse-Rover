@@ -4,7 +4,7 @@
 #include <string.h>
 
 // Set to 1 to enable hardware timers, or 0 to run encoders in stub mode
-#define ENCODERS_ENABLED 0
+#define ENCODERS_ENABLED 1
 
 #if ENCODERS_ENABLED
 extern TIM_HandleTypeDef htim1;
