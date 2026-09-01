@@ -1,6 +1,5 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "led.h"
 #include "servo.h"
 #include "setup.h"
 #include "transmit_data.h"
@@ -19,12 +18,10 @@ static const char *TAG = "MAIN";
 void app_main(void)
 {
     // 1. Peripherals, NVS, WiFi & ESP-NOW initialization
-    init_led();
     init_esp_nvs();
     init_wifi();
     init_esp_now();
     init_button_pin();
-    init_led_pin();
     init_joystick();
     init_speaker();
    

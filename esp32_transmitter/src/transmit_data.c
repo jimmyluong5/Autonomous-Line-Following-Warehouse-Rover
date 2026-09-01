@@ -7,7 +7,6 @@
 #include "esp_log.h"
 #include "setup.h"
 #include "transmit_data.h"
-#include "led.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "speaker.h"
@@ -38,15 +37,6 @@ int button_pins[] = {
     GPIO_NUM_14 //idx 4 (right) //autonomous mode.
 };
 
-
-int led_pins[]= {
-    GPIO_NUM_18, //left (yellow)
-    GPIO_NUM_8, //down (blue)
-    GPIO_NUM_3, //up (green)
-    GPIO_NUM_46, //stop (red)
-    GPIO_NUM_9, //right (white)
-};
-
 int modes_selection[] = {
     LEFT_BTN,   // Index 0: MANUAL_MODE (Left Button = 0)
     RIGHT_BTN,  // Index 1: AUTO_MODE (Right Button = 4)
@@ -62,19 +52,6 @@ void init_button_pin(void) {
         gpio_set_pull_mode(button_pins[i], GPIO_PULLUP_ONLY);
     }
 }
-
-
-void init_led_pin(void){
-    for (int i = 0; i < 5; i++){
-        gpio_set_direction(led_pins[i], GPIO_MODE_OUTPUT);
-        //set them off at first
-        gpio_set_level(led_pins[i], 0);
-    }
-    
-}
-
-
-
 
 uint8_t read_buttons(void) {
     uint8_t data_packet = 0x00; //each 0 is half a byte
@@ -128,7 +105,6 @@ uint8_t read_buttons(void) {
 
     
     data_packet = sample1 & sample2; 
-    //this is the code for the led button clicking.
     //so our data packet contains info of the buttons
 
     static uint8_t last_buttons = 0x00;
@@ -137,9 +113,6 @@ uint8_t read_buttons(void) {
 
     for (int i = 0; i < 5; i++) {
         if ((data_packet & (1 << i)) != 0) {
-            // Keep LED ON while button is physically pressed
-            gpio_set_level(led_pins[i], 1);
-
             // Log Putty message ONLY ONCE per click on new press
             if ((new_presses & (1 << i)) != 0) {
                 switch(i) {
@@ -157,10 +130,6 @@ uint8_t read_buttons(void) {
                         break;
                 }
             }
-        }
-        else {
-            // Turn OFF LED when button is released
-            gpio_set_level(led_pins[i], 0);
         }
     }
     //return the data packet.

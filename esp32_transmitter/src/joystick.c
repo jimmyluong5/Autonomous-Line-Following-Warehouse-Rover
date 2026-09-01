@@ -13,10 +13,6 @@ static const char *TAG = "JOYSTICK";
 
 void init_joystick(void){
     init_adc();
-
-    //initialize gpio pin 6
-    gpio_reset_pin(GPIO_NUM_6);
-    gpio_set_direction(GPIO_NUM_6, GPIO_MODE_OUTPUT);
 }
 
 
