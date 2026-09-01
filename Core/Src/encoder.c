@@ -128,8 +128,10 @@ void Encoder_UpdateDevice(Encoder_HandleTypeDef *enc, uint32_t current_time_ms, 
 
 void Encoder_Init(void) {
 #if ENCODERS_ENABLED
-  Encoder_InitDevice(&left_encoder, &htim1, ENCODER_LEFT_POLARITY);
-  Encoder_InitDevice(&right_encoder, &htim4, ENCODER_RIGHT_POLARITY);
+  // PA11 & PA12 (TIM4) are wired to the LEFT motor
+  Encoder_InitDevice(&left_encoder, &htim4, ENCODER_LEFT_POLARITY);
+  // PA8 & PA9 (TIM1) are wired to the RIGHT motor
+  Encoder_InitDevice(&right_encoder, &htim1, ENCODER_RIGHT_POLARITY);
 #else
   Encoder_InitDevice(&left_encoder, NULL, ENCODER_LEFT_POLARITY);
   Encoder_InitDevice(&right_encoder, NULL, ENCODER_RIGHT_POLARITY);

@@ -36,7 +36,7 @@
 #define WHEEL_DIAMETER_M    0.0286f  // Wheel diameter in meters (28.6 mm)
 
 // Configuration direction multipliers for left/right encoders (+1 or -1)
-#define ENCODER_LEFT_POLARITY    1
+#define ENCODER_LEFT_POLARITY   -1
 #define ENCODER_RIGHT_POLARITY  -1
 
 typedef struct {
