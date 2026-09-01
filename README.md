@@ -24,13 +24,13 @@ The project began as a basic motor-control prototype and has gradually evolved i
 
 ### 1. Motor Control
 
-The first stage of the project focused on getting the drivetrain working.
+The first stage of the project focused on getting the prototype working.
 
 Two **FIT0484 DC motors** were controlled through a **TB6612FNG dual motor driver**, with the STM32G431KB acting as the main controller.
 
 The power system uses **LM2596 buck converters** to provide regulated voltages to the motors and embedded electronics.
 
-Once reliable bidirectional motor control was established, the drivetrain was mounted onto a rough cardboard chassis for early testing.
+Once reliable bidirectional motor control was established, the prototype was mounted onto a rough cardboard chassis for early testing.
 
 <img width="480" height="853" alt="motors_github" src="https://github.com/user-attachments/assets/ca83976e-c8b5-4a69-80d2-1aaa2ccd849a" />
 
@@ -39,7 +39,7 @@ Once reliable bidirectional motor control was established, the drivetrain was mo
 
 ### 2. Cardboard Prototype
 
-A temporary cardboard rover was constructed to test the complete drivetrain before moving to a permanent chassis.
+A temporary cardboard rover was constructed to test the complete prototype before moving to a permanent chassis.
 
 This prototype made it possible to verify
 
@@ -49,7 +49,7 @@ This prototype made it possible to verify
 * Initial sensor placement
 * Basic autonomous movement
 
-The prototype successfully demonstrated that the embedded control system and drivetrain could operate together before the mechanical design was finalized.
+The prototype successfully demonstrated that the embedded control system and prototype could operate together before the mechanical design was finalized.
 
 <img width="480" height="853" alt="first_drive_github" src="https://github.com/user-attachments/assets/3769e857-5dfd-4aa8-bf13-f9b57ea0bf7f" />
 
@@ -252,7 +252,7 @@ Add the following under **Completed**
 The wireless controller can now be used as the basis for full manual rover control alongside the autonomous line-following system.
 
 
-10. Bidirectional Serial Monitoring and Wireless Command Debugging
+### 10. Bidirectional Serial Monitoring and Wireless Command Debugging
 
 After completing the wireless button controller prototype, I expanded the debugging interface so that both the transmitter and receiver ESP32-S3 modules can display controller activity through their respective serial connections.
 
@@ -272,24 +272,33 @@ STOP
 
 
 The controller also supports an 8-bit speed value ranging from 0–255, with the UP and DOWN buttons adjusting the requested rover speed in approximately 5% increments.
+
 Push Buttons
      ↓
+     
 Transmitter ESP32-S3
      ↓
 Button Detection
      ↓
+     
 Serial Debug Output
      ↓
+     
 8-Bit Command Packet
      ↓
+     
    ESP-NOW
      ↓
+     
 Receiver ESP32-S3
      ↓
+     
 Command Decoding
      ↓
+     
 Serial Debug Output
      ↓
+     
 MANUAL / AUTO / SPEED / STOP
 
 Having serial output available on both ESP32-S3 modules provides visibility into both sides of the communication system. The transmitter output verifies that controller inputs are being correctly detected and encoded, while the receiver output verifies that the same commands are successfully transmitted, received, and decoded.
