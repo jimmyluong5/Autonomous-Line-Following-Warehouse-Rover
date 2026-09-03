@@ -144,11 +144,8 @@ The front steering assembly was designed as a separate mechanical system before 
 
 The assembly was modeled in CAD to verify the movement of the steering components, wheel alignment, and clearance between moving parts.
 
-<p align="center">
-  <img src="images/front_steering_assembly.gif" width="700">
-</p>
+<img width="900" height="203" alt="front_assembly_zoomed" src="https://github.com/user-attachments/assets/be88c435-6175-4b57-9284-9151091c387f" />
 
-<p align="center">
   <i>CAD model demonstrating the rover's front steering assembly.</i>
 </p>
 
@@ -164,11 +161,8 @@ After designing the individual mechanical components, they were combined into a 
 
 The completed assembly was used to check wheel placement, steering clearance, chassis dimensions, and the positioning of the rover's electrical and mechanical components.
 
-<p align="center">
-  <img src="images/complete_rover_cad.png" width="800">
-</p>
+<img width="532" height="301" alt="whole car" src="https://github.com/user-attachments/assets/edb7affe-be3b-4195-935e-133e81508760" />
 
-<p align="center">
   <i>Complete CAD assembly of the autonomous warehouse rover.</i>
 </p>
 
