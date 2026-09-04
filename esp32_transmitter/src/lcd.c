@@ -5,11 +5,10 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_system.h"
-#include "driver/spi_master.h"
 #include "driver/gpio.h"
-
+#include "esp_log.h"
 #include "pretty_effect.h"
-
+#include "lcd.h"
 
 //this code is from the esp32 expressif github for this type of display 
 
@@ -24,7 +23,6 @@
  before the transaction is sent, the callback will set this line to the correct state.
 */
 
-//this is different for me
 
 //SCK - GPIO7
 //SDI/MOSI - GPIO8
@@ -61,6 +59,7 @@
 // and can improve drawing speed, but requires a larger memory buffer.
 // Keep this as a factor of 240 so the screen height divides evenly.
 //240/16 = 15 lines each SPI transfer.
+
 
 
 //the lcd needs a bunch of command/argument values to be initialized. they stored in this struct/.
@@ -114,39 +113,7 @@ typedef enum {
 // to handle every single piece of data. 
 
 
-DRAM_ATTR static const lcd_init_cmd_t st_init_cmds[] = {
-    /* Memory Data Access Control, MX=MV=1, MY=ML=MH=0, RGB=0 */
-    {0x36, {(1 << 5) | (1 << 6)}, 1},
-    /* Interface Pixel Format, 16bits/pixel for RGB/MCU interface */
-    {0x3A, {0x55}, 1},
-    /* Porch Setting */
-    {0xB2, {0x0c, 0x0c, 0x00, 0x33, 0x33}, 5},
-    /* Gate Control, Vgh=13.65V, Vgl=-10.43V */
-    {0xB7, {0x45}, 1},
-    /* VCOM Setting, VCOM=1.175V */
-    {0xBB, {0x2B}, 1},
-    /* LCM Control, XOR: BGR, MX, MH */
-    {0xC0, {0x2C}, 1},
-    /* VDV and VRH Command Enable, enable=1 */
-    {0xC2, {0x01, 0xff}, 2},
-    /* VRH Set, Vap=4.4+... */
-    {0xC3, {0x11}, 1},
-    /* VDV Set, VDV=0 */
-    {0xC4, {0x20}, 1},
-    /* Frame Rate Control, 60Hz, inversion=0 */
-    {0xC6, {0x0f}, 1},
-    /* Power Control 1, AVDD=6.8V, AVCL=-4.8V, VDDS=2.3V */
-    {0xD0, {0xA4, 0xA1}, 2},
-    /* Positive Voltage Gamma Control */
-    {0xE0, {0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19}, 14},
-    /* Negative Voltage Gamma Control */
-    {0xE1, {0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19}, 14},
-    /* Sleep Out */
-    {0x11, {0}, 0x80},
-    /* Display On */
-    {0x29, {0}, 0x80},
-    {0, {0}, 0xff}
-};
+
 
 DRAM_ATTR static const lcd_init_cmd_t ili_init_cmds[] = {
     /* Power control B, power control = 0, DC_ENA = 1 */
@@ -245,8 +212,6 @@ DRAM_ATTR static const lcd_init_cmd_t ili_init_cmds[] = {
     assert(ret == ESP_OK); //see if we have no issues.
     //if successful then we get back ESP_OK.
     //if fail, then assert() will crash so you know what goes wrong.
-
-
  }
 
 //spi_transaction_t struct.
@@ -277,8 +242,7 @@ DRAM_ATTR static const lcd_init_cmd_t ili_init_cmds[] = {
  * mode for higher speed. The overhead of interrupt transactions is more than
  * just waiting for the transaction to complete.
  */
-void lcd_data(spi_device_handle_t spi, const uint8_t *data, int len)
-{
+void lcd_data(spi_device_handle_t spi, const uint8_t *data, int len) {
     esp_err_t ret;
     spi_transaction_t t;
     if (len == 0) { //length of data is 0 then we ain't send nun.
@@ -295,8 +259,7 @@ void lcd_data(spi_device_handle_t spi, const uint8_t *data, int len)
 
 //This function is called (in irq context!) just before a transmission starts. It will
 //set the D/C line to the value indicated in the user field.
-void lcd_spi_pre_transfer_callback(spi_transaction_t *t)
-{
+void lcd_spi_pre_transfer_callback(spi_transaction_t *t) {
     int dc = (int)t->user;
     gpio_set_level(PIN_NUM_DC, dc);
 }
@@ -305,8 +268,7 @@ void lcd_spi_pre_transfer_callback(spi_transaction_t *t)
 //this function asks the lcd for its ID, to actually prove its an ILI9341
 //the screen will respond with a unique identification code, then this function 
 //reads it back.
-uint32_t lcd_get_id(spi_device_handle_t spi)
-{
+uint32_t lcd_get_id(spi_device_handle_t spi) {
     // When using SPI_TRANS_CS_KEEP_ACTIVE, bus must be locked/acquired
     spi_device_acquire_bus(spi, portMAX_DELAY); //lock the SPI path so that 
     //other tasks don't interrupt us.
@@ -334,7 +296,7 @@ uint32_t lcd_get_id(spi_device_handle_t spi)
 }
 
 //initialize the display 
-void lcd_init(spi_device_handle_t spi) {
+void init_lcd(spi_device_handle_t spi) {
     int cmd = 0; //initialize our cmd to nothing.
 
     const lcd_init_cmd_t* lcd_init_cmds; //pointer to the struct lcd_init_cmd_t
@@ -354,29 +316,9 @@ void lcd_init(spi_device_handle_t spi) {
     gpio_set_level(PIN_NUM_RST, 1);
     vTaskDelay(100/ portTICK_PERIOD_MS);
 
-    //detect LCD type
-    uint32_t lcd_id = lcd_get_id(spi);
-    int lcd_detected_type = 0;
-    int lcd_type;
-
-    printf("LCD ID: %08"PRIx32"\n", lcd_id);
-    if (lcd_id == 0) {
-        //zero, ili
-        lcd_detected_type = LCD_TYPE_ILI;
-        printf("ILI9341 detected.\n");
-    } 
-
-    #ifdef CONFIG_LCD_TYPE_AUTO
-    lcd_type = lcd_detected_type;
-#elif defined( CONFIG_LCD_TYPE_ILI9341 )
-    printf("kconfig: force CONFIG_LCD_TYPE_ILI9341.\n");
-    lcd_type = LCD_TYPE_ILI;
-#endif
-
-    if (lcd_type == LCD_TYPE_ILI) {
-         printf("LCD ILI9341 initialization.\n");
-        lcd_init_cmds = ili_init_cmds;
-    } 
+       // Set command list for ILI9341
+    printf("LCD ILI9341 initialization.\n");
+    lcd_init_cmds = ili_init_cmds;
 
         //Send all the commands
     while (lcd_init_cmds[cmd].databytes != 0xFF) {
@@ -397,8 +339,7 @@ void lcd_init(spi_device_handle_t spi) {
  * the mean while the lines for next transactions can get calculated.
  */
 
- static void send_lines(spi_device_handle_t spi, int ypos, uint16_t *linedata)
-{
+ static void send_lines(spi_device_handle_t spi, int ypos, uint16_t *linedata) {
     esp_err_t ret;
     int x;
     //Transaction descriptors. Declared static so they're not allocated on the stack; we need this memory even when this
@@ -466,8 +407,7 @@ static void send_line_finish(spi_device_handle_t spi)
 //Simple routine to generate some patterns and send them to the LCD. Don't expect anything too
 //impressive. Because the SPI driver handles transactions in the background, we can calculate the next line
 //while the previous one is being sent.
-static void display_pretty_colors(spi_device_handle_t spi)
-{
+static void display_pretty_colors(spi_device_handle_t spi) {
     uint16_t *lines[2];
 #if CONFIG_LCD_BUFFER_IN_PSRAM
     uint32_t mem_cap = MALLOC_CAP_SPIRAM | MALLOC_CAP_DMA;
@@ -508,10 +448,74 @@ static void display_pretty_colors(spi_device_handle_t spi)
     }
 }
 
-void app_main(void)
-{
+//initialize touch screen
+static const char *TAG = "TOUCHSCREEN";
+
+//global handle for touch spi interface
+static spi_device_handle_t touch_spi;
+
+//read a single 12 bit channel from the touch screen
+static uint16_t xpt2046_read_raw(spi_device_handle_t spi, uint8_t command) {
+    // Transaction buffer: 1 byte command + 2 bytes for the 12-bit response
+    uint8_t tx_buf[3] = { command, 0x00, 0x00 };
+    uint8_t rx_buf[3] = { 0 };
+
+    spi_transaction_t t;
+    memset(&t, 0, sizeof(t));
+    t.length = 8 * 3;          // 24 bits total transfer
+    t.tx_buffer = tx_buf;
+    t.rx_buffer = rx_buf;
+
+    esp_err_t ret = spi_device_polling_transmit(spi, &t);
+    assert(ret == ESP_OK);
+
+    // XPT2046 returns 12-bit data across bytes rx_buf[1] and rx_buf[2]
+    // Bit layout: [rx_buf[1] (bits 11-4)] and [upper 4 bits of rx_buf[2] (bits 3-0)]
+    uint16_t raw_val = ((uint16_t)rx_buf[1] << 4) | (rx_buf[2] >> 4);
+    return raw_val;
+}
+
+// Check if screen is currently touched and fetch raw coordinates
+// Returns 1 if pressed, 0 if not pressed
+int xpt2046_get_touch(spi_device_handle_t spi, uint16_t *x, uint16_t *y) {
+    // If using the IRQ pin: pin goes LOW when a touch is physically detected
+    if (gpio_get_level(PIN_NUM_T_IRQ) != 0) {
+        return 0; // didn't touch the screen.
+    }
+
+    // 0xD0 = Read X-position (12-bit resolution, differential)
+    // 0x90 = Read Y-position (12-bit resolution, differential)
+    *x = xpt2046_read_raw(spi, 0xD0);
+    *y = xpt2046_read_raw(spi, 0x90);
+
+    return 1; // Touched the screen.
+}
+
+static void touch_task(void *pvParameters) {
+    uint16_t raw_x = 0;
+    uint16_t raw_y = 0;
+
+    while (1) {
+        if (xpt2046_get_touch(touch_spi, &raw_x, &raw_y)) {
+            ESP_LOGI(TAG, "Touch detected -> Raw X: %u, Raw Y: %u", raw_x, raw_y);
+        }
+        // Check touch status every 50 ms
+        vTaskDelay(pdMS_TO_TICKS(50));
+    }
+}
+
+
+
+
+static spi_device_handle_t spi;
+
+static void lcd_anim_task(void *pvParameters) {
+    display_pretty_colors(spi);
+}
+
+void init_lcd_driver(void) {
     esp_err_t ret;
-    spi_device_handle_t spi;
+    
     spi_bus_config_t buscfg = {
         .miso_io_num = PIN_NUM_MISO,
         .mosi_io_num = PIN_NUM_MOSI,
@@ -534,16 +538,49 @@ void app_main(void)
     //Initialize the SPI bus
     ret = spi_bus_initialize(LCD_HOST, &buscfg, SPI_DMA_CH_AUTO);
     ESP_ERROR_CHECK(ret);
-    //Attach the LCD to the SPI bus
-    ret = spi_bus_add_device(LCD_HOST, &devcfg, &spi);
-    ESP_ERROR_CHECK(ret);
-    //Initialize the LCD
-    lcd_init(spi);
-    //Initialize the effect displayed
-    ret = pretty_effect_init();
+
+
+    // 1. Configure the T_IRQ pin as input with pull-up enabled
+    gpio_config_t irq_conf = {
+        .pin_bit_mask = (1ULL << PIN_NUM_T_IRQ),
+        .mode = GPIO_MODE_INPUT,
+        .pull_up_en = GPIO_PULLUP_ENABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        .intr_type = GPIO_INTR_DISABLE,
+    };
+    gpio_config(&irq_conf);
+
+    // 2. Configure the SPI interface for the XPT2046
+    spi_device_interface_config_t touch_devcfg = {
+        .clock_speed_hz = 2 * 1000 * 1000,    // 2 MHz maximum for XPT2046
+        .mode = 0,                            // SPI mode 0
+        .spics_io_num = PIN_NUM_T_CS,         // GPIO 18
+        .queue_size = 1,
+    };
+
+    // 3. Attach the touch controller to the shared SPI bus
+    ret = spi_bus_add_device(LCD_HOST, &touch_devcfg, &touch_spi);
     ESP_ERROR_CHECK(ret);
 
-    //Go do nice stuff.
-    display_pretty_colors(spi);
+    //Attach the LCD to the SPI bus
+    ret = spi_bus_add_device(LCD_HOST, &devcfg, &spi);
+    //Initialize the LCD
+    init_lcd(spi);
+
+
+    //Initialize the effect displayed
+    //ret = pretty_effect_init();
+    //ESP_ERROR_CHECK(ret);
+
+    pretty_effect_init();
+    
+    // Inside init_lcd_driver():
+    xTaskCreate(lcd_anim_task, "lcd_anim", 4096, NULL, 5, NULL);
+
+    // Launch the touch reader as a FreeRTOS background task
+    xTaskCreate(touch_task, "touch_task", 2048, NULL, 5, NULL);
+
+
+
 }
 
