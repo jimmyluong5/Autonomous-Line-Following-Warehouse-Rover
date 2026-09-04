@@ -406,9 +406,7 @@ static void send_line_finish(spi_device_handle_t spi)
     }
 }
 
-//Simple routine to generate some patterns and send them to the LCD. Don't expect anything too
-//impressive. Because the SPI driver handles transactions in the background, we can calculate the next line
-//while the previous one is being sent.
+// Routine to draw the clean decoded image to the LCD once.
 static void display_pretty_colors(spi_device_handle_t spi) {
     uint16_t *lines[2];
 #if CONFIG_LCD_BUFFER_IN_PSRAM
@@ -419,34 +417,32 @@ static void display_pretty_colors(spi_device_handle_t spi) {
     printf("Get LCD buffer from internal\n");
 #endif
 
-    //Allocate memory for the pixel buffers
+    // Allocate memory for the pixel buffers
     for (int i = 0; i < 2; i++) {
         lines[i] = spi_bus_dma_memory_alloc(LCD_HOST, X_MAX * PARALLEL_LINES * sizeof(uint16_t), mem_cap);
         assert(lines[i] != NULL);
     }
-    int frame = 0;
-    //Indexes of the line currently being sent to the LCD and the line we're calculating.
+
     int sending_line = -1;
     int calc_line = 0;
 
-    while (1) {
-        frame++;
-        for (int y = 0; y < Y_MAX; y += PARALLEL_LINES) {
-            //Calculate a line.
-            pretty_effect_calc_lines(lines[calc_line], y, frame, PARALLEL_LINES);
-            //Finish up the sending process of the previous line, if any
-            if (sending_line != -1) {
-                send_line_finish(spi);
-            }
-            //Swap sending_line and calc_line
-            sending_line = calc_line;
-            calc_line = (calc_line == 1) ? 0 : 1;
-            //Send the line we currently calculated.
-            send_lines(spi, y, lines[sending_line]);
-            //The line set is queued up for sending now; the actual sending happens in the
-            //background. We can go on to calculate the next line set as long as we do not
-            //touch line[sending_line]; the SPI sending process is still reading from that.
+    // Render the entire image once across all 320 vertical lines
+    for (int y = 0; y < Y_MAX; y += PARALLEL_LINES) {
+        pretty_effect_calc_lines(lines[calc_line], y, 0, PARALLEL_LINES);
+        if (sending_line != -1) {
+            send_line_finish(spi);
         }
+        sending_line = calc_line;
+        calc_line = (calc_line == 1) ? 0 : 1;
+        send_lines(spi, y, lines[sending_line]);
+    }
+    if (sending_line != -1) {
+        send_line_finish(spi);
+    }
+
+    // Free pixel buffers to return memory
+    for (int i = 0; i < 2; i++) {
+        free(lines[i]);
     }
 }
 
@@ -506,14 +502,7 @@ static void touch_task(void *pvParameters) {
     }
 }
 
-
-
-
 static spi_device_handle_t spi;
-
-static void lcd_anim_task(void *pvParameters) {
-    display_pretty_colors(spi);
-}
 
 void init_lcd_driver(void) {
     esp_err_t ret;
@@ -540,7 +529,6 @@ void init_lcd_driver(void) {
     //Initialize the SPI bus
     ret = spi_bus_initialize(LCD_HOST, &buscfg, SPI_DMA_CH_AUTO);
     ESP_ERROR_CHECK(ret);
-
 
     // 1. Configure the T_IRQ pin as input with pull-up enabled
     gpio_config_t irq_conf = {
@@ -569,20 +557,13 @@ void init_lcd_driver(void) {
     //Initialize the LCD
     init_lcd(spi);
 
-
-    //Initialize the effect displayed
-    //ret = pretty_effect_init();
-    //ESP_ERROR_CHECK(ret);
-
+    // Initialize & decode image
     pretty_effect_init();
     
-    // Inside init_lcd_driver():
-    xTaskCreate(lcd_anim_task, "lcd_anim", 4096, NULL, 5, NULL);
+    // Draw the static image once to the screen
+    display_pretty_colors(spi);
 
     // Launch the touch reader as a FreeRTOS background task
     xTaskCreate(touch_task, "touch_task", 2048, NULL, 5, NULL);
-
-
-
 }
 
