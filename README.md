@@ -1,4 +1,4 @@
-# Reflectance-Sensing Autonomous Rover
+# Multi-mode Rover
 <img width="480" height="853" alt="line_following_github" src="https://github.com/user-attachments/assets/8277d7d8-333a-4ad6-8d29-b165df40b6e0" />
 
 
