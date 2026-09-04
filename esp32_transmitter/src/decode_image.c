@@ -9,8 +9,12 @@
 #include <stdlib.h>
 
 // Binary included JPEG file in flash
-extern const uint8_t image_jpg_start[] asm("_binary_image_jpg_start");
-extern const uint8_t image_jpg_end[] asm("_binary_image_jpg_end");
+//just change frame1 to whatever the img file is called to change the image.
+
+//change in this file, platformio.ini and CMakeLists.TXT
+// Note: hyphens '-' and dots '.' in filenames are automatically converted to underscores '_' in assembly symbols
+extern const uint8_t image_jpg_start[] asm("_binary_frame1_240x320_jpg_start");
+extern const uint8_t image_jpg_end[]   asm("_binary_frame1_240x320_jpg_end");
 
 static const char *TAG = "ImageDec";
 

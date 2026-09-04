@@ -17,7 +17,7 @@
 #define JOYSTICK_FREQ 2048 //or 2731 for loud
 #define BUTTON_FREQ 1024
 
-static const char *TAG = "SPEAKER";
+//static const char *TAG = "SPEAKER";
 
 bool is_beeping = false;
 
