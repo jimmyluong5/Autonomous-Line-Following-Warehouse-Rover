@@ -11,7 +11,7 @@ extern "C" {
 #endif
 
 esp_err_t decode_image(uint16_t **pixels);
-
+void decode_all_frames(void);
 #ifdef __cplusplus
 }
 #endif
