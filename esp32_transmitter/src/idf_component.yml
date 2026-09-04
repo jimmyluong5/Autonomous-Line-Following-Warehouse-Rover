@@ -1,0 +1,2 @@
+dependencies:
+  espressif/esp_jpeg: "^1.0.5"

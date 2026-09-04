@@ -61,6 +61,8 @@
 //240/16 = 15 lines each SPI transfer.
 
 
+#define Y_MAX 320
+#define X_MAX 240
 
 //the lcd needs a bunch of command/argument values to be initialized. they stored in this struct/.
 
@@ -144,8 +146,8 @@ DRAM_ATTR static const lcd_init_cmd_t ili_init_cmds[] = {
     {0xC5, {0x35, 0x3E}, 2},
     /* VCOM control 2, VCOMH=VMH-2, VCOML=VML-2 */
     {0xC7, {0xBE}, 1},
-    /* Memory access control, MX=MY=0, MV=1, ML=0, BGR=1, MH=0 */
-    {0x36, {0x28}, 1},
+    /* Memory access control, MX=0, MY=1, MV=0, ML=0, BGR=1, MH=0 (Portrait 240x320) */
+    {0x36, {0x48}, 1},
     /* Pixel format, 16bits/pixel for RGB/MCU interface */
     {0x3A, {0x55}, 1},
     /* Frame rate control, f=fosc, 70Hz fps */
@@ -364,8 +366,8 @@ void init_lcd(spi_device_handle_t spi) {
     trans[0].tx_data[0] = 0x2A;         //Column Address Set
     trans[1].tx_data[0] = 0;            //Start Col High
     trans[1].tx_data[1] = 0;            //Start Col Low
-    trans[1].tx_data[2] = (320 - 1) >> 8;   //End Col High
-    trans[1].tx_data[3] = (320 - 1) & 0xff; //End Col Low
+    trans[1].tx_data[2] = (X_MAX - 1) >> 8;   //End Col High
+    trans[1].tx_data[3] = (X_MAX - 1) & 0xff; //End Col Low
     trans[2].tx_data[0] = 0x2B;         //Page address set
     trans[3].tx_data[0] = ypos >> 8;    //Start page high
     trans[3].tx_data[1] = ypos & 0xff;  //start page low
@@ -373,7 +375,7 @@ void init_lcd(spi_device_handle_t spi) {
     trans[3].tx_data[3] = (ypos + PARALLEL_LINES - 1) & 0xff; //end page low
     trans[4].tx_data[0] = 0x2C;         //memory write
     trans[5].tx_buffer = linedata;      //finally send the line data
-    trans[5].length = 320 * 2 * 8 * PARALLEL_LINES;  //Data length, in bits
+    trans[5].length = X_MAX * 2 * 8 * PARALLEL_LINES;  //Data length, in bits
 #if CONFIG_LCD_BUFFER_IN_PSRAM
     trans[5].flags = SPI_TRANS_DMA_USE_PSRAM; //using PSRAM
 #else
@@ -419,7 +421,7 @@ static void display_pretty_colors(spi_device_handle_t spi) {
 
     //Allocate memory for the pixel buffers
     for (int i = 0; i < 2; i++) {
-        lines[i] = spi_bus_dma_memory_alloc(LCD_HOST, 320 * PARALLEL_LINES * sizeof(uint16_t), mem_cap);
+        lines[i] = spi_bus_dma_memory_alloc(LCD_HOST, X_MAX * PARALLEL_LINES * sizeof(uint16_t), mem_cap);
         assert(lines[i] != NULL);
     }
     int frame = 0;
@@ -429,7 +431,7 @@ static void display_pretty_colors(spi_device_handle_t spi) {
 
     while (1) {
         frame++;
-        for (int y = 0; y < 240; y += PARALLEL_LINES) {
+        for (int y = 0; y < Y_MAX; y += PARALLEL_LINES) {
             //Calculate a line.
             pretty_effect_calc_lines(lines[calc_line], y, frame, PARALLEL_LINES);
             //Finish up the sending process of the previous line, if any
@@ -522,7 +524,7 @@ void init_lcd_driver(void) {
         .sclk_io_num = PIN_NUM_CLK,
         .quadwp_io_num = -1,
         .quadhd_io_num = -1,
-        .max_transfer_sz = PARALLEL_LINES * 320 * 2 + 8
+        .max_transfer_sz = PARALLEL_LINES * X_MAX * 2 + 8
     };
     spi_device_interface_config_t devcfg = {
 #ifdef CONFIG_LCD_OVERCLOCK
