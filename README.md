@@ -7,6 +7,8 @@
 An autonomous line-following rover built around the **STM32G431KB**, using an 8-channel reflectance sensor array for navigation, UART for diagnostics and control, and ESP-NOW for wireless communication.
 
 The project began as a basic motor-control prototype and has gradually evolved into a full rover platform with autonomous navigation, sensor monitoring, multiple operating modes, and wireless control.
+<img width="1920" height="2560" alt="photo_2026-09-03_23-19-50" src="https://github.com/user-attachments/assets/a8743f6e-6503-4095-bb05-f7fdd0e41f4b" /> <img width="1920" height="2560" alt="photo_2026-09-03_23-20-23" src="https://github.com/user-attachments/assets/1136528b-bf2d-42e9-91b3-132347ca7aca" /> <img width="1920" height="2560" alt="photo_2026-09-03_23-20-46" src="https://github.com/user-attachments/assets/8ce91f7d-2d42-44e9-8486-3224fbb3c6df" /> <img width="1920" height="2560" alt="photo_2026-09-03_23-21-12" src="https://github.com/user-attachments/assets/ef135034-5aff-4634-a7c1-6e8d8ae37eac" />
+
 
 ## Features
 
