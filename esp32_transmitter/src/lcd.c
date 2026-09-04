@@ -63,3 +63,36 @@
 //240/16 = 15 lines each SPI transfer.
 
 
+//the lcd needs a bunch of command/argument values to be initialized. they stored in this struct/.
+
+typedef struct {
+    uint8_t cmd;        // The command byte sent to the LCD controller (e.g., 0x11 for Sleep Out)
+    uint8_t data[16];   // Array of argument/parameter bytes that accompany the command (up to 16 bytes)
+    uint8_t databytes;  // Multi-purpose control byte:
+                        // - Lower bits (0-6): Number of valid bytes being used in the 'data' array
+                        // - Bit 7 (MSB): If set, tells the driver to pause/delay after sending this command
+                        // - 0xFF: Sentinel value used to signal the absolute end of the command list
+} lcd_init_cmd_t;
+// cmd is the byte that tells the lcd what to do
+// for example: 0x29 means turn the screen on, or 0x11 means exit sleep mode.
+
+// data[16] is a 16-byte array where each index is 1 byte large.
+// It acts like a workspace to hold extra settings/parameters for the command.
+// Reads the command, then checks how many bytes are needed.
+// Grabs the settings from the active bytes in data[16] and sends them right after cmd.
+// Checks if Bit 7 of the 'databytes' variable is flipped (HIGH); if it is, 
+// the code pauses for a brief delay.
+// A 'databytes' value of 0xFF is the signal to end the entire command list.
+
+//databytes 
+//the first 6 bits tells you the length or number of data bytes/arguments that need to be sent
+//which is located in data[16], for example: how many of those 16 slots do i need to actually send?
+//if databytes = 0x00, then I don't need to send any extra settings after command.
+//if databytes = 0xFF, or 1111_1111, then we are at the end of the commmand list so stop updating the screen.
+//if databytes = 0x03, it tells the program to read the first 3 items of the data array
+//data[0], data[1], data[2] and send them right after the command. 
+
+//if the 7th bit in databytes is set, then the code pauses for a brief moment then sends the command.
+//this is so that the display/screen has a break to catch up with the instructions
+//if you MCU sends the instructions too fast, the screen may not catch all the instructions.
+
