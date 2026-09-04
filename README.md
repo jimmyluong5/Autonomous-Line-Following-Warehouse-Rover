@@ -7,6 +7,13 @@
 An autonomous line-following rover built around the **STM32G431KB**, using an 8-channel reflectance sensor array for navigation, UART for diagnostics and control, and ESP-NOW for wireless communication.
 
 The project began as a basic motor-control prototype and has gradually evolved into a full rover platform with autonomous navigation, sensor monitoring, multiple operating modes, and wireless control.
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a8743f6e-6503-4095-bb05-f7fdd0e41f4b" width="24%" />
+  <img src="https://github.com/user-attachments/assets/1136528b-bf2d-42e9-91b3-132347ca7aca" width="24%" />
+  <img src="https://github.com/user-attachments/assets/8ce91f7d-2d42-44e9-8486-3224fbb3c6df" width="24%" />
+  <img src="https://github.com/user-attachments/assets/ef135034-5aff-4634-a7c1-6e8d8ae37eac" width="24%" />
+</p>
+
 
 ## Features
 
@@ -132,8 +139,43 @@ Line-Following Logic
       ↓
  FIT0484 Motors
 ```
+### 6. CAD Design
 
-### 6. 3D-Printed Chassis
+After validating the rover's electronics and autonomous navigation on the initial prototype, the mechanical components for the final rover were designed in CAD.
+
+The CAD design focused on creating a rigid and modular platform for the drivetrain, electronics, steering system, and other mechanical components. Designing the rover as an assembly also made it possible to verify component placement, mechanical clearances, and overall dimensions before fabrication.
+
+#### Front Steering Mechanism
+
+The front steering assembly was designed as a separate mechanical system before being integrated into the complete rover. The mechanism allows both front wheels to steer together while maintaining a compact geometry at the front of the chassis.
+
+The assembly was modeled in CAD to verify the movement of the steering components, wheel alignment, and clearance between moving parts.
+
+<img width="900" height="203" alt="front_assembly_zoomed" src="https://github.com/user-attachments/assets/be88c435-6175-4b57-9284-9151091c387f" />
+
+  <i>CAD model demonstrating the rover's front steering assembly.</i>
+</p>
+
+#### Main Chassis and Component Layout
+
+The main chassis provides the structural foundation for the rover and supports the motors, wheels, electronics, power system, and cargo platform.
+
+Component placement was considered during the design process to keep the rover compact while maintaining enough space for wiring, assembly, and access to the electrical hardware.
+
+#### Complete Rover Assembly
+
+After designing the individual mechanical components, they were combined into a complete CAD assembly. This allowed the overall rover geometry to be evaluated before the parts were manufactured.
+
+The completed assembly was used to check wheel placement, steering clearance, chassis dimensions, and the positioning of the rover's electrical and mechanical components.
+
+<img width="532" height="301" alt="whole car" src="https://github.com/user-attachments/assets/edb7affe-be3b-4195-935e-133e81508760" />
+
+  <i>Complete CAD assembly of the autonomous warehouse rover.</i>
+</p>
+
+The CAD models used for the rover can be found in the [`CAD Models`](./CAD%20Models) directory.
+
+### 7. 3D-Printed Chassis
 
 After validating the electronics and navigation system on the cardboard prototype, the rover was transferred to a custom **3D-printed chassis**.
 
@@ -151,7 +193,7 @@ This provided a much more rigid and repeatable platform for continued developmen
 <img width="960" height="1280" alt="image" src="https://github.com/user-attachments/assets/773da8c9-128c-478e-ad3e-9cb9869b7452" />
 
 
-### 7. Servo-Based Suspension Testing
+### 8. Servo-Based Suspension Testing
 
 After transferring the rover to the 3D-printed chassis, I tested a **servo-actuated front suspension system** using an SG90 servo.
 
@@ -164,7 +206,7 @@ A short demonstration clip is included below.
 The test helped validate the mechanical design before continuing with wireless control and additional rover integration.
 
 
-### 8. ESP-NOW Wireless Communication
+### 9. ESP-NOW Wireless Communication
 
 The current stage of the project focuses on wireless communication between two **ESP32-S3 modules**.
 
@@ -198,7 +240,7 @@ The receiving ESP32-S3 unpacks the command byte and executes actions depending o
 Initial testing has successfully demonstrated wireless command transmission and execution using LEDs.
 
 
-### 9. Wireless Button Controller Prototype
+### 10. Wireless Button Controller Prototype
 
 After successfully establishing ESP-NOW communication between the two ESP32-S3 modules, I built a physical **button controller prototype** to provide direct wireless input to the rover.
 
@@ -252,7 +294,7 @@ Add the following under **Completed**
 The wireless controller can now be used as the basis for full manual rover control alongside the autonomous line-following system.
 
 
-### 10. Bidirectional Serial Monitoring and Wireless Command Debugging
+### 11. Bidirectional Serial Monitoring and Wireless Command Debugging
 
 After completing the wireless button controller prototype, I expanded the debugging interface so that both the transmitter and receiver ESP32-S3 modules can display controller activity through their respective serial connections.
 
@@ -313,7 +355,7 @@ This significantly simplifies debugging because communication problems can be is
 
 The wireless controller now supports both LED-based command verification and real-time serial debugging, providing a more reliable way to confirm that ESP-NOW packets are being received and interpreted correctly.
 
-### 11. Full Rover Integration & Multi-Subsystem Control
+### 12. Full Rover Integration & Multi-Subsystem Control
 
 With the 3D-printed chassis, power distribution, and core firmware validated, the rover has progressed to a **fully integrated, multi-mode platform**. All critical subsystems are now orchestrated directly by the STM32G431KB state machine:
 
