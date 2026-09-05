@@ -8,51 +8,76 @@
 #include <string.h>
 #include <stdlib.h>
 
+#define TOTAL_FRAMES 8
+
 // Binary included JPEG file in flash
 //just change frame1 to whatever the img file is called to change the image.
 
 //change in this file, platformio.ini and CMakeLists.TXT
 // Note: hyphens '-' and dots '.' in filenames are automatically converted to underscores '_' in assembly symbols
-extern const uint8_t image_jpg_start[] 
+extern const uint8_t f1_start[] 
 asm("_binary_frame1_jpg_start");
-extern const uint8_t image_jpg_end[]   
+extern const uint8_t f1_end[]   
 asm("_binary_frame1_jpg_end");
 
-extern const uint8_t image_jpg_start[]
+extern const uint8_t f2_start[]
 asm("_binary_frame2_jpg_start");
-extern const uint8_t image_jpg_end[]   
+extern const uint8_t f2_end[]   
 asm("_binary_frame2_jpg_end");
 
-extern const uint8_t image_jpg_start[] 
+extern const uint8_t f3_start[] 
 asm("_binary_frame3_jpg_start");
-extern const uint8_t image_jpg_end[]   
+extern const uint8_t f3_end[]   
 asm("_binary_frame3_jpg_end");
 
-extern const uint8_t image_jpg_start[]
+extern const uint8_t f4_start[]
 asm("_binary_frame4_jpg_start");
-extern const uint8_t image_jpg_end[]   
+extern const uint8_t f4_end[]   
 asm("_binary_frame4_jpg_end");
 
-extern const uint8_t image_jpg_start[] 
+extern const uint8_t f5_start[] 
 asm("_binary_frame5_jpg_start");
-extern const uint8_t image_jpg_end[]   
+extern const uint8_t f5_end[]   
 asm("_binary_frame5_jpg_end");
 
-extern const uint8_t image_jpg_start[]
+extern const uint8_t f6_start[]
 asm("_binary_frame6_jpg_start");
-extern const uint8_t image_jpg_end[]   
+extern const uint8_t f6_end[]   
 asm("_binary_frame6_jpg_end");
 
-extern const uint8_t image_jpg_start[] 
+extern const uint8_t f7_start[] 
 asm("_binary_frame7_jpg_start");
-extern const uint8_t image_jpg_end[]   
+extern const uint8_t f7_end[]   
 asm("_binary_frame7_jpg_end");
 
-extern const uint8_t image_jpg_start[]
+extern const uint8_t f8_start[]
 asm("_binary_frame8_jpg_start");
-extern const uint8_t image_jpg_end[]   
+extern const uint8_t f8_end[]   
 asm("_binary_frame8_jpg_end");
 
+//create array with ptrs to the images
+static const uint8_t *frame_starts[TOTAL_FRAMES] = {
+    f1_start,
+    f2_start,
+    f3_start,
+    f4_start,
+    f5_start,
+    f6_start,
+    f7_start,
+    f8_start
+};
+
+// the endings
+static const uint8_t *frame_ends[TOTAL_FRAMES] = {
+    f1_end,
+    f2_end,
+    f3_end,
+    f4_end,
+    f5_end,
+    f6_end,
+    f7_end,
+    f8_end
+};
 
 
 static const char *TAG = "ImageDec";

@@ -504,9 +504,35 @@ static void touch_task(void *pvParameters) {
 
 static spi_device_handle_t spi;
 
+static void animation_task(void *pvParameters) {
+    int current_frame = 0;
+
+    while(1) {
+        //draw the current frame, decode it then send to the screen
+        current_frame++;
+
+        if (current_frame >= TOTAL_FRAMES) {
+            //set the frame to 0
+            current_frame = 0;
+        }
+
+        //frame delay
+        vTaskDelay(pdMS_TO_TICKS(150));
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 void init_lcd_driver(void) {
     esp_err_t ret;
-    
     spi_bus_config_t buscfg = {
         .miso_io_num = PIN_NUM_MISO,
         .mosi_io_num = PIN_NUM_MOSI,
@@ -554,6 +580,7 @@ void init_lcd_driver(void) {
 
     //Attach the LCD to the SPI bus
     ret = spi_bus_add_device(LCD_HOST, &devcfg, &spi);
+
     //Initialize the LCD
     init_lcd(spi);
 
@@ -564,6 +591,49 @@ void init_lcd_driver(void) {
     display_pretty_colors(spi);
 
     // Launch the touch reader as a FreeRTOS background task
+    
     xTaskCreate(touch_task, "touch_task", 2048, NULL, 5, NULL);
+    //touch_task is the function, 2048 bytes allocated in memory for this task, priority is 5 so its a high priority.
+    //launch the animation task in the background on core 1
+
+    xTaskCreatePinnedToCore(animation_task, "anim_task", 4096, NULL, 2, NULL, 1);
+    //using core 1 because core 0 is the esp-now/wifi
+    //4096 is the number of bytes allocated for this task.
 }
+
+/*
+BaseType_t xTaskCreatePinnedToCore(
+    TaskFunction_t pvTaskCode,        // 1. Task function pointer, the function to run.
+    const char * const pcName,        // 2. Descriptive text name
+    const uint32_t usStackDepth,      // 3. Stack size (in bytes) allocated for this task
+    void * const pvParameters,        // 4. Arguments passed to task, pointers you want to pass into the function.
+
+    NULL means no parameters
+
+
+    UBaseType_t uxPriority,           // 5. Priority level, higher level is a higher priority, 2 is a gentle priority.
+    TaskHandle_t * const pvCreatedTask,// 6. Task handle pointer (output) //how you want to control the task or end the task later.
+    const BaseType_t xCoreID          // 7. Core ID to pin to (0 or 1) which core to use.
+
+    0 - Core 0 (runs wifi and the esp-now)
+    1 - Core 1 (APP CPU)
+);
+
+BaseType_t xTaskCreate(
+    TaskFunction_t pvTaskCode,         // 1. Function to run
+    const char * const pcName,         // 2. Descriptive text name
+    const uint32_t usStackDepth,       // 3. Stack size (in bytes) allocated for the task.
+    void * const pvParameters,         // 4. Arguments passed to task (or NULL)
+    UBaseType_t uxPriority,            // 5. Priority level (e.g. 1 to 5)
+    TaskHandle_t * const pvCreatedTask // 6. Task handle pointer (or NULL)
+);
+
+when to use whic, 
+
+xTaskCreate for quick, lightweight tasks
+xTaskCreatePinnedToCore for heavy or timing sensitive tasks like animation_task or motor control, where you 
+can guarantee it doesn't fight wifi/radio on core 0
+
+
+*/
 
