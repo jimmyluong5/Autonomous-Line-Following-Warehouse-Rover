@@ -13,8 +13,47 @@
 
 //change in this file, platformio.ini and CMakeLists.TXT
 // Note: hyphens '-' and dots '.' in filenames are automatically converted to underscores '_' in assembly symbols
-extern const uint8_t image_jpg_start[] asm("_binary_frame1_240x320_jpg_start");
-extern const uint8_t image_jpg_end[]   asm("_binary_frame1_240x320_jpg_end");
+extern const uint8_t image_jpg_start[] 
+asm("_binary_frame1_jpg_start");
+extern const uint8_t image_jpg_end[]   
+asm("_binary_frame1_jpg_end");
+
+extern const uint8_t image_jpg_start[]
+asm("_binary_frame2_jpg_start");
+extern const uint8_t image_jpg_end[]   
+asm("_binary_frame2_jpg_end");
+
+extern const uint8_t image_jpg_start[] 
+asm("_binary_frame3_jpg_start");
+extern const uint8_t image_jpg_end[]   
+asm("_binary_frame3_jpg_end");
+
+extern const uint8_t image_jpg_start[]
+asm("_binary_frame4_jpg_start");
+extern const uint8_t image_jpg_end[]   
+asm("_binary_frame4_jpg_end");
+
+extern const uint8_t image_jpg_start[] 
+asm("_binary_frame5_jpg_start");
+extern const uint8_t image_jpg_end[]   
+asm("_binary_frame5_jpg_end");
+
+extern const uint8_t image_jpg_start[]
+asm("_binary_frame6_jpg_start");
+extern const uint8_t image_jpg_end[]   
+asm("_binary_frame6_jpg_end");
+
+extern const uint8_t image_jpg_start[] 
+asm("_binary_frame7_jpg_start");
+extern const uint8_t image_jpg_end[]   
+asm("_binary_frame7_jpg_end");
+
+extern const uint8_t image_jpg_start[]
+asm("_binary_frame8_jpg_start");
+extern const uint8_t image_jpg_end[]   
+asm("_binary_frame8_jpg_end");
+
+
 
 static const char *TAG = "ImageDec";
 
