@@ -7,6 +7,7 @@
 #include "esp_log.h"
 #include <string.h>
 #include <stdlib.h>
+#include "transmit_data.h"
 
 
 // Binary included JPEG file in flash
@@ -14,80 +15,92 @@
 
 //change in this file, platformio.ini and CMakeLists.TXT
 // Note: hyphens '-' and dots '.' in filenames are automatically converted to underscores '_' in assembly symbols
-extern const uint8_t f1_start[] 
-asm("_binary_frame1_jpg_start");
-extern const uint8_t f1_end[]   
-asm("_binary_frame1_jpg_end");
 
-extern const uint8_t f2_start[]
-asm("_binary_frame2_jpg_start");
-extern const uint8_t f2_end[]   
-asm("_binary_frame2_jpg_end");
+    extern const uint8_t f1_start[] 
+    asm("_binary_frame1_jpg_start");
+    extern const uint8_t f1_end[]   
+    asm("_binary_frame1_jpg_end");
 
-extern const uint8_t f3_start[] 
-asm("_binary_frame3_jpg_start");
-extern const uint8_t f3_end[]   
-asm("_binary_frame3_jpg_end");
+    extern const uint8_t f2_start[]
+    asm("_binary_frame2_jpg_start");
+    extern const uint8_t f2_end[]   
+    asm("_binary_frame2_jpg_end");
 
-extern const uint8_t f4_start[]
-asm("_binary_frame4_jpg_start");
-extern const uint8_t f4_end[]   
-asm("_binary_frame4_jpg_end");
+    extern const uint8_t f3_start[] 
+    asm("_binary_frame3_jpg_start");
+    extern const uint8_t f3_end[]   
+    asm("_binary_frame3_jpg_end");
 
-extern const uint8_t f5_start[] 
-asm("_binary_frame5_jpg_start");
-extern const uint8_t f5_end[]   
-asm("_binary_frame5_jpg_end");
+    extern const uint8_t f4_start[]
+    asm("_binary_frame4_jpg_start");
+    extern const uint8_t f4_end[]   
+    asm("_binary_frame4_jpg_end");
 
-extern const uint8_t f6_start[]
-asm("_binary_frame6_jpg_start");
-extern const uint8_t f6_end[]   
-asm("_binary_frame6_jpg_end");
+    extern const uint8_t f5_start[] 
+    asm("_binary_frame5_jpg_start");
+    extern const uint8_t f5_end[]   
+    asm("_binary_frame5_jpg_end");
 
-extern const uint8_t f7_start[] 
-asm("_binary_frame7_jpg_start");
-extern const uint8_t f7_end[]   
-asm("_binary_frame7_jpg_end");
+    extern const uint8_t f6_start[]
+    asm("_binary_frame6_jpg_start");
+    extern const uint8_t f6_end[]   
+    asm("_binary_frame6_jpg_end");
 
-extern const uint8_t f8_start[]
-asm("_binary_frame8_jpg_start");
-extern const uint8_t f8_end[]   
-asm("_binary_frame8_jpg_end");
+    extern const uint8_t f7_start[] 
+    asm("_binary_frame7_jpg_start");
+    extern const uint8_t f7_end[]   
+    asm("_binary_frame7_jpg_end");
 
-extern const uint8_t f9_start[]
-asm("_binary_frame9_jpg_start");
-extern const uint8_t f9_end[]   
-asm("_binary_frame9_jpg_end");
+    extern const uint8_t f8_start[]
+    asm("_binary_frame8_jpg_start");
+    extern const uint8_t f8_end[]   
+    asm("_binary_frame8_jpg_end");
 
-extern const uint8_t f10_start[]
-asm("_binary_frame10_jpg_start");
-extern const uint8_t f10_end[]   
-asm("_binary_frame10_jpg_end");
+    extern const uint8_t f9_start[]
+    asm("_binary_frame9_jpg_start");
+    extern const uint8_t f9_end[]   
+    asm("_binary_frame9_jpg_end");
 
-extern const uint8_t f11_start[]
-asm("_binary_frame11_jpg_start");
-extern const uint8_t f11_end[]   
-asm("_binary_frame11_jpg_end");
+    extern const uint8_t f10_start[]
+    asm("_binary_frame10_jpg_start");
+    extern const uint8_t f10_end[]   
+    asm("_binary_frame10_jpg_end");
 
-extern const uint8_t f12_start[]
-asm("_binary_frame12_jpg_start");
-extern const uint8_t f12_end[]   
-asm("_binary_frame12_jpg_end");
+    extern const uint8_t f11_start[]
+    asm("_binary_frame11_jpg_start");
+    extern const uint8_t f11_end[]   
+    asm("_binary_frame11_jpg_end");
 
-extern const uint8_t f13_start[]
-asm("_binary_frame13_jpg_start");
-extern const uint8_t f13_end[]   
-asm("_binary_frame13_jpg_end");
+    extern const uint8_t f12_start[]
+    asm("_binary_frame12_jpg_start");
+    extern const uint8_t f12_end[]   
+    asm("_binary_frame12_jpg_end");
 
-extern const uint8_t f14_start[]
-asm("_binary_frame14_jpg_start");
-extern const uint8_t f14_end[]   
-asm("_binary_frame14_jpg_end");
+    extern const uint8_t f13_start[]
+    asm("_binary_frame13_jpg_start");
+    extern const uint8_t f13_end[]   
+    asm("_binary_frame13_jpg_end");
 
-extern const uint8_t f15_start[]
-asm("_binary_frame15_jpg_start");
-extern const uint8_t f15_end[]   
-asm("_binary_frame15_jpg_end");
+    extern const uint8_t f14_start[]
+    asm("_binary_frame14_jpg_start");
+    extern const uint8_t f14_end[]   
+    asm("_binary_frame14_jpg_end");
+
+    extern const uint8_t f15_start[]
+    asm("_binary_frame15_jpg_start");
+    extern const uint8_t f15_end[]   
+    asm("_binary_frame15_jpg_end");
+
+    extern const uint8_t left_start[]
+    asm("_binary_left_jpg_start");
+    extern const uint8_t left_end[]
+    asm("_binary_left_jpg_end");
+
+    extern const uint8_t leftright_start[]
+    asm("_binary_leftright_jpg_start");
+    extern const uint8_t leftright_end[]
+    asm("_binary_leftright_jpg_end");
+
 
 //create array with ptrs to the images
 static const uint8_t *frame_starts[TOTAL_FRAMES] = {
@@ -124,12 +137,10 @@ static const uint8_t *frame_ends[TOTAL_FRAMES] = {
     f12_end,
     f13_end,
     f14_end,
-    f15_end
+    f15_end,
 };
 
-
 static const char *TAG = "ImageDec";
-
 // Struct to pass to decoder callback
 typedef struct {
     const uint8_t *inData;
@@ -204,9 +215,25 @@ esp_err_t decode_image(int frame_idx, uint16_t **pixels) {
     
     
 
-    jd.inData = frame_starts[frame_idx];
+    //jd.inData = frame_starts[frame_idx];
+    //jd.inLen = frame_ends[frame_idx] - frame_starts[frame_idx];
+        // In decode_image():
+    if (current_page == PAGE_MENU) {
+        // Menu page: play the 15-frame animation
+        jd.inData = frame_starts[frame_idx];
+        jd.inLen  = frame_ends[frame_idx] - frame_starts[frame_idx];
+    } 
+    else if (current_page == PAGE_YOUTUBE) {
+        // Last page: only has the LEFT arrow to go back
+        jd.inData = left_start;
+        jd.inLen  = left_end - left_start;
+    } 
+    else {
+        // Intermediate pages (LinkedIn, GitHub, Instagram): has BOTH Left and Right arrows
+        jd.inData = leftright_start;
+        jd.inLen  = leftright_end - leftright_start;
+    }
     jd.inPos = 0;
-    jd.inLen = frame_ends[frame_idx] - frame_starts[frame_idx];
     jd.outData = pixels;
 
     //zero out the decoder so that decoder.swap is not random stack garbage

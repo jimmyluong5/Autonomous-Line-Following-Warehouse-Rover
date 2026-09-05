@@ -527,7 +527,7 @@ static void animation_task(void *pvParameters) {
         }
 
         //frame delay
-        vTaskDelay(pdMS_TO_TICKS(300));
+        vTaskDelay(pdMS_TO_TICKS(40));
     }
 }
 void init_lcd_driver(void) {
@@ -544,7 +544,7 @@ void init_lcd_driver(void) {
 #ifdef CONFIG_LCD_OVERCLOCK
         .clock_speed_hz = 26 * 1000 * 1000,     //Clock out at 26 MHz
 #else
-        .clock_speed_hz = 10 * 1000 * 1000,     //Clock out at 10 MHz
+        .clock_speed_hz = 26 * 1000 * 1000,     //Clock out at 26 MHz
 #endif
         .mode = 0,                              //SPI mode 0
         .spics_io_num = PIN_NUM_CS,             //CS pin

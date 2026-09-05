@@ -33,7 +33,6 @@ void app_main(void)
     static data_packet_t last_sent_packet = {0};
     static uint32_t last_time = 0;
     static uint8_t current_speed = 0;
-    static uint8_t current_mode = MANUAL_MODE;
 
     while (1)
     {
@@ -44,15 +43,26 @@ void app_main(void)
         data_packet_t packet = {0};
         print_joystick_values();
 
+
+        
+
+        //read the buttons first, 
         packet.button_data = read_buttons();
+
+        //call the new arrow and mode processor, then from reading the buttons we know how to process 
+        //the arrow keys
+
+        process_arrow_keys(&packet);
+
         uint16_t raw_x = read_joystick_horizontal();
         uint16_t raw_y = read_joystick_vertical();
         
         packet.speed = current_speed;
-        packet.mode = current_mode;
+        packet.mode = active_mode; //send the confirmed mode to the rover via esp_now
+
         
         current_speed = update_speed(&packet);
-        current_mode = update_mode(&packet);
+        //current_mode = update_mode(&packet);
 
         // Deadband filter
         if (abs((int)raw_x - (int)last_sent_packet.joystick_x) < 25) {

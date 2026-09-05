@@ -37,7 +37,7 @@ int hovered_mode = 0;
 uint8_t active_mode = MANUAL_MODE; //default mode is the manual mode sure
 
 int page_length = PAGE_MAX_COUNT -1;
-
+int mode_length = TOTAL_MODES-1;
 
 // Array for the GPIO pins to loop through and read
 
@@ -91,8 +91,8 @@ void process_arrow_keys(data_packet_t *packet) {
     }
 
     //left arrow
-    if (just_pressed & LEFT_BTN) {
-        if (current_page < page_length) {
+    if (just_pressed & BTN_LEFT) {
+        if (current_page > 0) {
             current_page--; //decrease cuz we going left.
             //print on putty
             ESP_LOGI(TAG, "Next Page -> %d", current_page);
@@ -101,11 +101,34 @@ void process_arrow_keys(data_packet_t *packet) {
     }
 
     //up arrow
-    if (just_pressed & UP_BTN) {
-        
-    }
-    
+    if (current_page == PAGE_MENU) {
+        if (just_pressed & BTN_UP) {
+            hovered_mode--;
+            if (hovered_mode < 0)  {
+                hovered_mode = mode_length; // wrap around 
+            }
+            ESP_LOGI(TAG, "Cursor UP -> Mode %d", hovered_mode);
+        }
 
+        //down arrow
+        if (just_pressed & BTN_DOWN) {
+            hovered_mode++;
+             if (hovered_mode >= TOTAL_MODES)  {
+                hovered_mode = 0;   // wrap around
+            }
+            ESP_LOGI(TAG, "Cursor DOWN -> Mode %d", hovered_mode);
+        }
+
+        //center button
+        if (just_pressed & BTN_CENTER) {
+            active_mode = hovered_mode;
+            //then put the next mode into active_mode
+            packet->mode = active_mode; //update esp_now packet, 
+            //so we can send it to the rover.
+            ESP_LOGI(TAG, "*** ACTIVE MODE CONFIRMED: %d ***", active_mode);
+        }
+
+    }
 }
 
 

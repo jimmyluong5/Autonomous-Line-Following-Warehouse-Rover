@@ -18,4 +18,6 @@ idf_component_register(
         "frame13.jpg"
         "frame14.jpg"
         "frame15.jpg"
+        "left.jpg"
+        "leftright.jpg"
 )
