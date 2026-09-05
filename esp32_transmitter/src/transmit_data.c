@@ -22,9 +22,21 @@
 #define IMU_MODE 2
 #define PHONE_MODE 3
 
+#define BTN_LEFT   (1 << 0) // GPIO 10: Left Arrow
+#define BTN_DOWN   (1 << 1) // GPIO 11: Down Arrow
+#define BTN_UP     (1 << 2) // GPIO 12: Up Arrow
+#define BTN_CENTER (1 << 3) // GPIO 13: Center / Confirm
+#define BTN_RIGHT  (1 << 4) // GPIO 14: Right Arrow
+
+
 static const char *TAG = "TRANSMIT_DATA";
 // mode_selections array definition
 
+page_t current_page = PAGE_MENU;
+int hovered_mode = 0;
+uint8_t active_mode = MANUAL_MODE; //default mode is the manual mode sure
+
+int page_length = PAGE_MAX_COUNT -1;
 
 
 // Array for the GPIO pins to loop through and read
@@ -41,8 +53,62 @@ int modes_selection[] = {
     LEFT_BTN,   // Index 0: MANUAL_MODE (Left Button = 0)
     RIGHT_BTN,  // Index 1: AUTO_MODE (Right Button = 4)
     IMU_MODE,   // Index 2: IMU_MODE (Placeholder)
-    PHONE_MODE, // Index 3: PHONE_MODE (Placeholder)
 };
+
+
+void process_arrow_keys(data_packet_t *packet) {
+    //last button press
+    static uint8_t last_button_state = 0;
+
+    //detect new button press using riding edge
+    uint8_t just_pressed = packet->button_data & (~last_button_state);
+    last_button_state = packet->button_data;
+
+    //if we didn't press the button then just return
+    if (just_pressed == 0) {
+        return;
+    }
+
+    //right arrow 
+    //you logical and it because if they both have a set bit in the lsb,
+    //then its a right button click.
+    if (just_pressed & BTN_RIGHT) {
+        if (current_page < page_length) { //we will have 5 pages,
+            //0 index, 
+
+            //PAGE_MENU = 0,
+            //PAGE_LINKEDIN = 1
+            //PAGE_GITHUB = 2
+            //PAGE_INSTAGRAM = 3
+            //PAGE_YOUTUBE = 4
+            
+            //increase the current page by 1, because we're going to the next page.
+            current_page++;
+            //print on putty, not really needed
+            ESP_LOGI(TAG, "Next Page -> Page, %d", current_page);
+        }
+        return; //handled the page turn
+    }
+
+    //left arrow
+    if (just_pressed & LEFT_BTN) {
+        if (current_page < page_length) {
+            current_page--; //decrease cuz we going left.
+            //print on putty
+            ESP_LOGI(TAG, "Next Page -> %d", current_page);
+        }
+        return;
+    }
+
+    //up arrow
+    if (just_pressed & UP_BTN) {
+        
+    }
+    
+
+}
+
+
 
 void init_button_pin(void) {
 
