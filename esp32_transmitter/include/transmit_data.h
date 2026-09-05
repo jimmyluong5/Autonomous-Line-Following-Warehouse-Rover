@@ -24,12 +24,14 @@ typedef struct {
 
 typedef enum {
     PAGE_MENU = 0,
-    PAGE_LINKEDIN,
     PAGE_GITHUB,
-    PAGE_INSTAGRAM,
-    PAGE_YOUTUBE,
-    PAGE_MAX_COUNT //TOTAL NUMBER OF PAGES (5)
+    PAGE_LINKEDIN,
+    PAGE_LEFTPAGE,
+    PAGE_MAX_COUNT // TOTAL NUMBER OF PAGES (4)
 } page_t;
+
+#define PAGE_EMPTY     PAGE_LEFTPAGE
+#define PAGE_LEFT      PAGE_LEFTPAGE
 
 
 void init_button_pin(void);

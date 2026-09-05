@@ -20,4 +20,6 @@ idf_component_register(
         "frame15.jpg"
         "left.jpg"
         "leftright.jpg"
+        "linkedin.jpg"
+        "github.jpg"
 )

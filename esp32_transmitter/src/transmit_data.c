@@ -73,14 +73,11 @@ void process_arrow_keys(data_packet_t *packet) {
     //you logical and it because if they both have a set bit in the lsb,
     //then its a right button click.
     if (just_pressed & BTN_RIGHT) {
-        if (current_page < page_length) { //we will have 5 pages,
-            //0 index, 
-
-            //PAGE_MENU = 0,
-            //PAGE_LINKEDIN = 1
-            //PAGE_GITHUB = 2
-            //PAGE_INSTAGRAM = 3
-            //PAGE_YOUTUBE = 4
+        if (current_page < page_length) { // 4 pages total (0 to 3)
+            // PAGE_MENU     = 0 (Mode selection + Rover animation)
+            // PAGE_GITHUB   = 1 (GitHub QR)
+            // PAGE_LINKEDIN = 2 (LinkedIn QR)
+            // PAGE_LEFTPAGE = 3 (Left page - left.jpg)
             
             //increase the current page by 1, because we're going to the next page.
             current_page++;

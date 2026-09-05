@@ -10,6 +10,7 @@
 #include "pretty_effect.h"
 #include "lcd.h"
 #include "decode_image.h"
+#include "transmit_data.h"
 
 //this code is from the esp32 expressif github for this type of display 
 
@@ -507,27 +508,30 @@ static spi_device_handle_t spi;
 
 static void animation_task(void *pvParameters) {
     int current_frame = 0;
+    page_t last_rendered_page = (page_t)-1;
 
     while(1) {
+        if (current_page == PAGE_MENU) {
+            // Main menu: animate 15-frame rover and pulse the hover pill cursor
+            decode_image(current_frame, &pixels);
+            display_pretty_colors(spi);
 
-
-        //decode current image into pixel memory
-        //your current frame then the address of the pixels
-        decode_image(current_frame, &pixels);
-
-        //draw the pixels to the lcd
-        display_pretty_colors(spi);
-
-        //draw the current frame and loop back to 0 when reaching 8
-        //0 index so 0-7 
-        current_frame++;
-        if (current_frame >= TOTAL_FRAMES) {
-            //set the frame to 0
-            current_frame = 0;
+            current_frame++;
+            if (current_frame >= TOTAL_FRAMES) {
+                current_frame = 0;
+            }
+            last_rendered_page = PAGE_MENU;
+            vTaskDelay(pdMS_TO_TICKS(40));
+        } else {
+            // Showcase QR pages (LinkedIn, GitHub, Empty left, etc.)
+            // Decode and redraw only when entering a new page
+            if (current_page != last_rendered_page) {
+                decode_image(0, &pixels);
+                display_pretty_colors(spi);
+                last_rendered_page = current_page;
+            }
+            vTaskDelay(pdMS_TO_TICKS(50));
         }
-
-        //frame delay
-        vTaskDelay(pdMS_TO_TICKS(40));
     }
 }
 void init_lcd_driver(void) {

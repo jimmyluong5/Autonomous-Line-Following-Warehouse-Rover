@@ -101,6 +101,16 @@
     extern const uint8_t leftright_end[]
     asm("_binary_leftright_jpg_end");
 
+    extern const uint8_t linkedin_start[]
+    asm("_binary_linkedin_jpg_start");
+    extern const uint8_t linkedin_end[]
+    asm("_binary_linkedin_jpg_end");
+
+    extern const uint8_t github_start[]
+    asm("_binary_github_jpg_start");
+    extern const uint8_t github_end[]
+    asm("_binary_github_jpg_end");
+
 
 //create array with ptrs to the images
 static const uint8_t *frame_starts[TOTAL_FRAMES] = {
@@ -217,21 +227,32 @@ esp_err_t decode_image(int frame_idx, uint16_t **pixels) {
 
     //jd.inData = frame_starts[frame_idx];
     //jd.inLen = frame_ends[frame_idx] - frame_starts[frame_idx];
-        // In decode_image():
-    if (current_page == PAGE_MENU) {
-        // Menu page: play the 15-frame animation
-        jd.inData = frame_starts[frame_idx];
-        jd.inLen  = frame_ends[frame_idx] - frame_starts[frame_idx];
-    } 
-    else if (current_page == PAGE_YOUTUBE) {
-        // Last page: only has the LEFT arrow to go back
-        jd.inData = left_start;
-        jd.inLen  = left_end - left_start;
-    } 
-    else {
-        // Intermediate pages (LinkedIn, GitHub, Instagram): has BOTH Left and Right arrows
-        jd.inData = leftright_start;
-        jd.inLen  = leftright_end - leftright_start;
+    // Select image source based on current_page:
+    switch (current_page) {
+        case PAGE_MENU:
+            // Menu page: play the 15-frame animation
+            jd.inData = frame_starts[frame_idx];
+            jd.inLen  = frame_ends[frame_idx] - frame_starts[frame_idx];
+            break;
+
+        case PAGE_GITHUB:
+            // Page 1: GitHub Repo page
+            jd.inData = github_start;
+            jd.inLen  = github_end - github_start;
+            break;
+
+        case PAGE_LINKEDIN:
+            // Page 2: LinkedIn QR page
+            jd.inData = linkedin_start;
+            jd.inLen  = linkedin_end - linkedin_start;
+            break;
+
+        case PAGE_LEFTPAGE:
+        default:
+            // Page 3: Left page (left.jpg)
+            jd.inData = left_start;
+            jd.inLen  = left_end - left_start;
+            break;
     }
     jd.inPos = 0;
     jd.outData = pixels;
@@ -258,7 +279,6 @@ esp_err_t decode_image(int frame_idx, uint16_t **pixels) {
     }
 
     free(work);
-    ESP_LOGI(TAG, "JPEG successfully decoded (%d x %d px)!", decoder.width, decoder.height);
     return ESP_OK;
 
 err:
