@@ -9,6 +9,7 @@
 #include "esp_log.h"
 #include "pretty_effect.h"
 #include "lcd.h"
+#include "decode_image.h"
 
 //this code is from the esp32 expressif github for this type of display 
 
@@ -508,16 +509,25 @@ static void animation_task(void *pvParameters) {
     int current_frame = 0;
 
     while(1) {
-        //draw the current frame, decode it then send to the screen
-        current_frame++;
 
+
+        //decode current image into pixel memory
+        //your current frame then the address of the pixels
+        decode_image(current_frame, &pixels);
+
+        //draw the pixels to the lcd
+        display_pretty_colors(spi);
+
+        //draw the current frame and loop back to 0 when reaching 8
+        //0 index so 0-7 
+        current_frame++;
         if (current_frame >= TOTAL_FRAMES) {
             //set the frame to 0
             current_frame = 0;
         }
 
         //frame delay
-        vTaskDelay(pdMS_TO_TICKS(150));
+        vTaskDelay(pdMS_TO_TICKS(500));
     }
 }
 

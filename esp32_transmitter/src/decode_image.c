@@ -8,7 +8,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define TOTAL_FRAMES 8
 
 // Binary included JPEG file in flash
 //just change frame1 to whatever the img file is called to change the image.
@@ -122,11 +121,11 @@ static int outfunc(JDEC *decoder, void *bitmap, JRECT *rect) {
     return 1; // Continue decoding
 }
 
-esp_err_t decode_image(uint16_t **pixels) {
+esp_err_t decode_image(int frame_idx, uint16_t **pixels) {
     char *work = NULL;
     JDEC decoder;
     JpegDev jd;
-    *pixels = NULL;
+    //*pixels = NULL;
     esp_err_t ret = ESP_OK;
 
     // Workspace required by TJpgDec
@@ -138,17 +137,33 @@ esp_err_t decode_image(uint16_t **pixels) {
     }
 
     // Allocate memory for the 320x240 image
-    *pixels = (uint16_t *)calloc(IMAGE_H * IMAGE_W, sizeof(uint16_t));
-    if (*pixels == NULL) {
+
+    //we allocating memory for the images, 320*240*bits per pixel (16) = 76800*16 bits / 8bits = 154kb  
+    
+    if (*pixels == NULL) { //if empty we call calloc to request 154Kb of ram from teh esp32
+        //for the first frame, if its not null then the code skips the line below
+
+        //and reuses the same 154kb memory it requested before
+        *pixels = (uint16_t *)calloc(IMAGE_H * IMAGE_W, sizeof(uint16_t));
+        if (*pixels == NULL) { //checks if calloc actually worked or did the esp32 run out of ram.
+
         ESP_LOGE(TAG, "Cannot allocate pixel memory");
         ret = ESP_ERR_NO_MEM;
         goto err;
+        }
     }
+    
+    
 
-    jd.inData = image_jpg_start;
+    jd.inData = frame_starts[frame_idx];
     jd.inPos = 0;
-    jd.inLen = image_jpg_end - image_jpg_start;
+    jd.inLen = frame_ends[frame_idx] - frame_starts[frame_idx];
     jd.outData = pixels;
+
+    //zero out the decoder so that decoder.swap is not random stack garbage
+    memset(&decoder, 0, sizeof(JDEC));
+    decoder.swap=0;
+
 
     // Prepare the JPEG decoder
     JRESULT res = jd_prepare(&decoder, infunc, work, 3800, &jd);

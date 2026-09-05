@@ -57,13 +57,15 @@ void app_main(void)
         // Deadband filter
         if (abs((int)raw_x - (int)last_sent_packet.joystick_x) < 25) {
             packet.joystick_x = last_sent_packet.joystick_x;
-        } else {
+        } 
+        else {
             packet.joystick_x = raw_x;
         }
 
         if (abs((int)raw_y - (int)last_sent_packet.joystick_y) < 25) {
             packet.joystick_y = last_sent_packet.joystick_y;
-        } else {
+        } 
+        else {
             packet.joystick_y = raw_y;
         }
 

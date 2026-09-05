@@ -29,5 +29,5 @@ void pretty_effect_calc_lines(uint16_t *dest, int line, int frame, int linect)
 
 esp_err_t pretty_effect_init(void)
 {
-    return decode_image(&pixels);
+    return decode_image(0, &pixels);
 }
