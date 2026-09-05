@@ -54,6 +54,41 @@ asm("_binary_frame8_jpg_start");
 extern const uint8_t f8_end[]   
 asm("_binary_frame8_jpg_end");
 
+extern const uint8_t f9_start[]
+asm("_binary_frame9_jpg_start");
+extern const uint8_t f9_end[]   
+asm("_binary_frame9_jpg_end");
+
+extern const uint8_t f10_start[]
+asm("_binary_frame10_jpg_start");
+extern const uint8_t f10_end[]   
+asm("_binary_frame10_jpg_end");
+
+extern const uint8_t f11_start[]
+asm("_binary_frame11_jpg_start");
+extern const uint8_t f11_end[]   
+asm("_binary_frame11_jpg_end");
+
+extern const uint8_t f12_start[]
+asm("_binary_frame12_jpg_start");
+extern const uint8_t f12_end[]   
+asm("_binary_frame12_jpg_end");
+
+extern const uint8_t f13_start[]
+asm("_binary_frame13_jpg_start");
+extern const uint8_t f13_end[]   
+asm("_binary_frame13_jpg_end");
+
+extern const uint8_t f14_start[]
+asm("_binary_frame14_jpg_start");
+extern const uint8_t f14_end[]   
+asm("_binary_frame14_jpg_end");
+
+extern const uint8_t f15_start[]
+asm("_binary_frame15_jpg_start");
+extern const uint8_t f15_end[]   
+asm("_binary_frame15_jpg_end");
+
 //create array with ptrs to the images
 static const uint8_t *frame_starts[TOTAL_FRAMES] = {
     f1_start,
@@ -63,7 +98,14 @@ static const uint8_t *frame_starts[TOTAL_FRAMES] = {
     f5_start,
     f6_start,
     f7_start,
-    f8_start
+    f8_start,
+    f9_start,
+    f10_start,
+    f11_start,
+    f12_start,
+    f13_start,
+    f14_start,
+    f15_start
 };
 
 // the endings
@@ -75,7 +117,14 @@ static const uint8_t *frame_ends[TOTAL_FRAMES] = {
     f5_end,
     f6_end,
     f7_end,
-    f8_end
+    f8_end,
+    f9_end,
+    f10_end,
+    f11_end,
+    f12_end,
+    f13_end,
+    f14_end,
+    f15_end
 };
 
 

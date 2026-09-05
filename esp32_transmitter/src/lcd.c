@@ -527,20 +527,9 @@ static void animation_task(void *pvParameters) {
         }
 
         //frame delay
-        vTaskDelay(pdMS_TO_TICKS(500));
+        vTaskDelay(pdMS_TO_TICKS(300));
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 void init_lcd_driver(void) {
     esp_err_t ret;
     spi_bus_config_t buscfg = {

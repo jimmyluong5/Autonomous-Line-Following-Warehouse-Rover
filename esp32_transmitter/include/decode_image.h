@@ -5,7 +5,7 @@
 // Portrait orientation: 240 width x 320 height
 #define IMAGE_W 240
 #define IMAGE_H 320
-#define TOTAL_FRAMES 8
+#define TOTAL_FRAMES 15
 
 #ifdef __cplusplus
 extern "C" {

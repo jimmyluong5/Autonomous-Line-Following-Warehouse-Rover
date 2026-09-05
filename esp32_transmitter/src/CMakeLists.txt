@@ -11,4 +11,11 @@ idf_component_register(
         "frame6.jpg"
         "frame7.jpg"
         "frame8.jpg"
+        "frame9.jpg"
+        "frame10.jpg"
+        "frame11.jpg"
+        "frame12.jpg"
+        "frame13.jpg"
+        "frame14.jpg"
+        "frame15.jpg"
 )
