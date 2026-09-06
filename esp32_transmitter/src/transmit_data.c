@@ -35,7 +35,7 @@ static const char *TAG = "TRANSMIT_DATA";
 page_t current_page = PAGE_MENU;
 int hovered_mode = 0;
 uint8_t active_mode = MANUAL_MODE; //default mode is the manual mode sure
-
+uint8_t current_speed = 0;
 int page_length = PAGE_MAX_COUNT -1;
 int mode_length = TOTAL_MODES-1;
 
@@ -153,6 +153,31 @@ void process_arrow_keys(data_packet_t *packet) {
                 current_page = PAGE_MANUAL_DATA;
                 ESP_LOGI(TAG, "Manual Data Page");
             }
+
+            else if (clicked_up) {
+                if (current_speed  <= 255 - 13) {
+                    current_speed +=13;
+                }
+                else {
+                    //saturate the current speed
+                    current_speed = 255;
+                }
+                ESP_LOGI(TAG, "Speed UP -> %d (%d%%)", current_speed, (current_speed * 100) / 255);
+            }
+            else if (clicked_down){
+                if (current_speed >=13) {
+                    current_speed -=13;
+                }
+                else {
+                    current_speed = 0;
+                }
+                ESP_LOGI(TAG, "Speed DOWN -> %d (%d%%)", current_speed, (current_speed * 100) / 255);
+            }
+            else if (clicked_center) { //stopping button which is the centre button
+                current_speed = 0;
+                ESP_LOGI(TAG, "Emergency STOP -> Speed 0");
+            }
+
             break;
 
         //manual data page

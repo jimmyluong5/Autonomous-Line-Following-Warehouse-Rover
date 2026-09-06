@@ -10,6 +10,9 @@
 
 
 #define TOTAL_MODES 3
+
+extern uint8_t current_speed;
+
 typedef struct {
     uint8_t button_data;
     uint8_t speed;

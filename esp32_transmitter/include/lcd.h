@@ -12,4 +12,5 @@ uint32_t lcd_get_id(spi_device_handle_t spi);
 void init_lcd(spi_device_handle_t spi);
 int xpt2046_get_touch(spi_device_handle_t spi, uint16_t *x, uint16_t *y);
 void init_lcd_driver(void);
+
 #endif

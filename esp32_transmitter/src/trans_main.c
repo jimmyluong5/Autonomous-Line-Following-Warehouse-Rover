@@ -12,7 +12,22 @@
 #include "esp_log.h"
 #include "math.h"
 #include "lcd.h"
-
+static data_packet_t last_sent_packet = {0};
+void deadband_filter(data_packet_t* packet, uint16_t raw_x, uint16_t raw_y) {
+ // Deadband filter
+        if (abs((int)raw_x - (int)last_sent_packet.joystick_x) < 25) {
+            packet->joystick_x = last_sent_packet.joystick_x;
+        } 
+        else {
+            packet->joystick_x = raw_x;
+        }
+        if (abs((int)raw_y - (int)last_sent_packet.joystick_y) < 25) {
+            packet->joystick_y = last_sent_packet.joystick_y;
+        } 
+        else {
+            packet->joystick_y = raw_y;
+        }
+}
 void app_main(void)
 {
     // 1. Peripherals, NVS, WiFi, LCD, UART & ESP-NOW initialization
@@ -30,9 +45,8 @@ void app_main(void)
     printf("   Pure ESP-NOW Button Transmission Ready \r\n");
     printf("==========================================\r\n");
 
-    static data_packet_t last_sent_packet = {0};
     static uint32_t last_time = 0;
-    static uint8_t current_speed = 0;
+    //static uint8_t current_speed = 0;
 
     //eventually we will get rid of this super loop with preemptive scheduling 
     while (1)
@@ -40,59 +54,55 @@ void app_main(void)
         // Check for serial console commands
         UART_CONTROL_update();
 
+
         // Read joystick and buttons
+
+        //create a clean zeroed out packet strcuture for this 10ms time frame.
         data_packet_t packet = {0};
+
+        //print joystick debug readings to the console, not technically needed.
         print_joystick_values();
 
 
-        
-
-        //read the buttons first, 
+        //read the buttons first, and we sample the 5 push buttons with the debounce algo 
         packet.button_data = read_buttons();
 
         //call the new arrow and mode processor, then from reading the buttons we know how to process 
         //the arrow keys
-
         process_arrow_keys(&packet);
 
+        //read the analog adc voltafes from the joystick.
         uint16_t raw_x = read_joystick_horizontal();
         uint16_t raw_y = read_joystick_vertical();
         
-        packet.speed = current_speed;
-        packet.mode = active_mode; //send the confirmed mode to the rover via esp_now
+
+
+        //deadband filter.
+        deadband_filter(&packet, raw_x, raw_y);
 
         
-        current_speed = update_speed(&packet);
-        //current_mode = update_mode(&packet);
-
-        // Deadband filter
-        if (abs((int)raw_x - (int)last_sent_packet.joystick_x) < 25) {
-            packet.joystick_x = last_sent_packet.joystick_x;
-        } 
-        else {
-            packet.joystick_x = raw_x;
-        }
-
-        if (abs((int)raw_y - (int)last_sent_packet.joystick_y) < 25) {
-            packet.joystick_y = last_sent_packet.joystick_y;
-        } 
-        else {
-            packet.joystick_y = raw_y;
-        }
-
+        packet.speed = current_speed; //after process joystick data we place the current speed into the packet.
+        packet.mode = active_mode; //fill the mode into the packet.
         speaker_update(packet.button_data);
 
-        // Transmit if data changed
+        // Transmit if data changed 
         if (memcmp(&packet, &last_sent_packet, sizeof(data_packet_t)) != 0) {
+            
+            //sent the 12 byte data packet to the robot over the 2.4GHz ESP-NOW
             last_sent_packet = packet;
             transmit_data(receiver_mac, &packet);
 
+            //track the time stamp of when we last sent a packet.
             uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
             if (now - last_time > 250) {
                 last_time = now;
             }
         }
         
+        
+
+        //freertos non blocking delay, puts this task to sleep for 10ms, 
+        //lets the cpu tackle other tasks 
         vTaskDelay(pdMS_TO_TICKS(10));  
     }
 }
