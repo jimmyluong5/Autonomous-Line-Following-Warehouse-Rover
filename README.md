@@ -200,6 +200,8 @@ After transferring the rover to the 3D-printed chassis, I tested a **servo-actua
 The servo was used to adjust the front of the chassis and verify that the suspension mechanism could move reliably under control from the STM32.
 
 A short demonstration clip is included below.
+
+
 <img width="480" height="853" alt="servo_github" src="https://github.com/user-attachments/assets/aa3a12b8-8584-4048-a9af-15f80190c2fd" />
 
 
