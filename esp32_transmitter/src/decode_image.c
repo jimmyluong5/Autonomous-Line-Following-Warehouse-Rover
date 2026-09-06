@@ -112,6 +112,7 @@
     asm("_binary_github_jpg_end");
 
 
+
 //create array with ptrs to the images
 static const uint8_t *frame_starts[TOTAL_FRAMES] = {
     f1_start,
@@ -235,6 +236,24 @@ esp_err_t decode_image(int frame_idx, uint16_t **pixels) {
             jd.inLen  = frame_ends[frame_idx] - frame_starts[frame_idx];
             break;
 
+
+        // 1st page of any of the modes (double arrows)
+        case PAGE_MANUAL:
+        case PAGE_AUTO:
+        case PAGE_IMU:
+            jd.inData = leftright_start; // the page with double arrows
+            jd.inLen  = leftright_end - leftright_start;
+            break;
+
+        // 2nd page of any of the modes (single left arrow)
+        case PAGE_MANUAL_DATA:
+        case PAGE_AUTO_DATA:
+        case PAGE_IMU_DATA:
+        case PAGE_LEFTPAGE:
+            jd.inData = left_start;
+            jd.inLen  = left_end - left_start;
+            break;
+
         case PAGE_GITHUB:
             // Page 1: GitHub Repo page
             jd.inData = github_start;
@@ -247,9 +266,7 @@ esp_err_t decode_image(int frame_idx, uint16_t **pixels) {
             jd.inLen  = linkedin_end - linkedin_start;
             break;
 
-        case PAGE_LEFTPAGE:
         default:
-            // Page 3: Left page (left.jpg)
             jd.inData = left_start;
             jd.inLen  = left_end - left_start;
             break;

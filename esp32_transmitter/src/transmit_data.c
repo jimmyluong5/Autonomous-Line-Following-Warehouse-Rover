@@ -230,6 +230,7 @@ void process_arrow_keys(data_packet_t *packet) {
                 ESP_LOGI(TAG, "Back to the LinkedIn Page");
             }
             break;
+
         default: 
             break;
     }
@@ -244,7 +245,6 @@ void process_arrow_keys(data_packet_t *packet) {
 
 
 void init_button_pin(void) {
-
     //we need to initialize all the pins to input
     for (int i = 0; i < 5; i++) {
         gpio_set_direction(button_pins[i], GPIO_MODE_INPUT);
