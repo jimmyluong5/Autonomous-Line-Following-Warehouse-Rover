@@ -369,6 +369,67 @@ With the 3D-printed chassis, power distribution, and core firmware validated, th
   * `[p]` Piezo Speaker / Buzzer Frequency Testing
   * `[v]` / `[n]` Real-Time ADC Reflectance & Surface Classification
 
+
+### 13. Custom ESP32-S3 Wireless Handheld Controller & Real-Time Telemetry Dashboard
+
+To provide manual override, multi-mode switching, and live diagnostics for the rover, a dedicated handheld wireless controller was developed using a dual-core **ESP32-S3** (240 MHz) and a 2.4-inch **ILI9341 SPI TFT LCD (240×320)**.
+
+The controller provides an interactive graphical user interface (GUI), live telemetry monitoring, and low-latency packet transmission over **ESP-NOW**.
+
+#### 1. Hardware Architecture & Inputs
+* **Microcontroller**: Freenove ESP32-S3 WROOM (8MB Flash, 8MB PSRAM, Dual Xtensa LX7 cores running at 240 MHz).
+* **Display & Touch**: 2.4" 240×320 SPI LCD driven by an ILI9341 controller, sharing the SPI bus with an XPT2046 resistive touch controller.
+* **Analog 2D Joystick**: Multi-sampled through SAR ADC1 (GPIO 4 and GPIO 5) with 16× oversampling, software deadband filtering, and axis normalization.
+* **5-Way Tactile Button Matrix**: Multi-button input array with two-stage temporal debouncing for menu navigation, speed adjustments, and emergency stop.
+* **Audio Feedback**: PWM buzzer generating audible confirmation tones on button interactions.
+
+```text
+[ Analog Joystick (ADC1) ] ──┐
+[ 5-Button Matrix (GPIO) ] ──┼──> [ ESP32-S3 Controller ] ──(ESP-NOW 2.4GHz)──> [ Rover Receiver ]
+[ Piezo Speaker (LEDC)   ] ──┤      │ (FreeRTOS Core 0/1)
+[ ILI9341 240x320 LCD    ] ──┘      └──> [ Real-Time Telemetry & Graphics ]
+```
+
+#### 2. Embedded Graphics Engine & Menu Animation
+* **High-Speed JPEG Decoder (`tjpgd`)**: Decompresses embedded full-color JPEG assets directly from Flash memory into DMA-accessible RAM.
+* **Ping-Pong SPI DMA Buffering**: Uses dual parallel line buffers to pipeline SPI transfers asynchronously while computing the next scanline on the CPU.
+* **Main Menu UI**: Plays a 15-frame animated rover sequence with an active pulsing yellow hover cursor to select operating modes (**Manual Mode**, **Autonomous Mode**, **IMU Mode**).
+* **Showcase Pages**: Dedicated QR code and documentation screens for GitHub and LinkedIn.
+
+#### 3. Real-Time Manual Dashboard & Custom Bitmap Font Engine
+When entering **Manual Mode**, the controller renders an industrial diagnostic dashboard with live telemetry overlays:
+* **Interactive 2D Joystick Grid**: Renders a dynamic orange position dot with a contrasting border inside a 2D coordinate grid, reflecting real-time physical stick deflection.
+* **Embedded 5x7 ASCII Font Renderer**: A lightweight, zero-heap bitmap font engine (`font5x7`) that injects text characters directly into the scanline stream during display refresh.
+* **Vehicle Status Display**:
+  * **Speed Setting**: Real-time commanded throttle percentage (`0%` to `100%`).
+  * **Direction**: Real-time heading / deflection state (`STOP`, `FWD`, `REV`, `LEFT`, `RIGHT`, `FWD-R`, `FWD-L`, `REV-R`, `REV-L`).
+  * **Actual Speed**: Reserved telemetry slot for encoder feedback from the rover.
+
+#### 4. Real-Time System Performance & RTOS Telemetry
+To benchmark control loop determinism (comparing FreeRTOS preemptive multitasking vs bare-metal superloops), a dedicated telemetry module (`metrics.c`) tracks real-time performance indicators:
+
+| Telemetry Metric | Measurement Method | Typical Reading | Purpose |
+| :--- | :--- | :--- | :--- |
+| **CPU Load** | Active computation vs sleep duty cycle | `~12–20%` | Verifies compute headroom |
+| **Latency** | Hardware timer round-trip / send callback | `1.2–3.5 ms` | Measures wireless packet transmission latency |
+| **Jitter** | RFC 3550 Exponential Moving Average filter | `0.2–0.8 ms` | Tracks packet timing stability |
+| **Missed DL** | Execution time exceeding 10 ms budget | `0` | Proves hard real-time scheduling guarantees |
+| **Control Rate** | High-resolution period frequency | `100.0 Hz` | Confirms consistent 10 ms control loop execution |
+
+#### 5. Wireless Communication Protocol (`ESP-NOW`)
+Control packets (`data_packet_t`) are packed into a compact binary structure and transmitted as 2.4 GHz peer-to-peer unicast packets to the receiver ESP32 on the rover:
+```c
+typedef struct {
+    uint8_t  button_data;  // 5-bit tactile button mask
+    uint8_t  speed;        // Commanded throttle (0–255)
+    uint16_t joystick_x;   // Filtered X analog deflection
+    uint16_t joystick_y;   // Filtered Y analog deflection
+    uint8_t  imu_x;        // Reserved for IMU tilt control
+    uint8_t  imu_y;        // Reserved for IMU tilt control
+    uint8_t  mode;         // Active operating mode
+} data_packet_t;
+```
+
 ## Hardware
 
 | Component       | Purpose                                   |
@@ -431,7 +492,7 @@ Phase 3: Time-of-Flight (ToF) Collision Detection & Auto-Braking
 
 ### In Progress
 - [ ] Direct UART communication bridge between receiver ESP32-S3 and STM32G431KB
-- [ ] Analog 2-axis joystick integration on wireless transmitter
+- [x] Analog 2-axis joystick integration on wireless transmitter & 240x320 LCD telemetry dashboard
 
 ### Planned
 - [ ] IMU sensor integration & closed-loop heading stabilization
