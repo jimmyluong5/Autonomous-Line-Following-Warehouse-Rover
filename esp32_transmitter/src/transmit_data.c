@@ -64,131 +64,182 @@ void process_arrow_keys(data_packet_t *packet) {
     uint8_t just_pressed = packet->button_data & (~last_button_state);
     last_button_state = packet->button_data;
 
+    
+    
     //if we didn't press the button then just return
     if (just_pressed == 0) {
         return;
     }
 
-    //right arrow 
-    //you logical and it because if they both have a set bit in the lsb,
-    //then its a right button click.
-    if (just_pressed & BTN_RIGHT) {
-        if (current_page < page_length) { // 4 pages total (0 to 3)
-            // PAGE_MENU     = 0 (Mode selection + Rover animation)
-            // PAGE_GITHUB   = 1 (GitHub QR)
-            // PAGE_LINKEDIN = 2 (LinkedIn QR)
-            // PAGE_LEFTPAGE = 3 (Left page - left.jpg)
+    uint8_t clicked_right = just_pressed & BTN_RIGHT;
+    uint8_t clicked_left = just_pressed & BTN_LEFT;
+    uint8_t clicked_up = just_pressed & BTN_UP;
+    uint8_t clicked_down = just_pressed & BTN_DOWN;
+    uint8_t clicked_center = just_pressed & BTN_CENTER;
+
+    //check which page we're actually on
+    switch (current_page) {
+        case PAGE_MENU:
+            //if we move up then just decrease hovered_mode
+            if (clicked_up) {
+                hovered_mode--;
+                if (hovered_mode < 0 ) {
+                    //we check if we at the very top, we can loop back to the bottom
+                    hovered_mode = mode_length; //sets it back to the bottom mode
+                }
+            ESP_LOGI(TAG, "Cursor UP -> %d", hovered_mode);
+            return; //break out
+            }
+
+            //if we clicked down
+            if (clicked_down) {
+                hovered_mode++;
+                //check if we are greater than the length of the modes
+                if (hovered_mode > mode_length) {
+                    //then just set it back to the top
+                    hovered_mode = 0; //wrap to the top.
+                }
+                ESP_LOGI(TAG, "Cursor DOWN -> Mode %d", hovered_mode);
+                return;
+            }
+
+            //if we click the centre button
+            if (clicked_center) {
+                //set the active mode to the hovered mode then store it in packet->mode
+                active_mode = hovered_mode;
+                packet->mode = active_mode; //so we can set it through esp-now/wifi.
+                ESP_LOGI(TAG, "*** ACTIVE MODE CONFIRMED: %d ***", active_mode);
+
+                //now we check the hovered_mode and which mode we actually in
+                switch(hovered_mode) {
+                    case MANUAL_MODE:
+                        //set the current page to the manual page
+                        current_page = PAGE_MANUAL;
+                        ESP_LOGI(TAG, "Entering Manual Mode Dashboard");
+                        break;
+                    case AUTO_MODE:
+                        current_page = PAGE_AUTO;
+                        ESP_LOGI(TAG, "Entering Auto Mode Dashboard");
+                        break;
+                    case IMU_MODE:
+                        current_page = PAGE_IMU;
+                        ESP_LOGI(TAG, "Entering IMU Mode Dashboard");
+                        break; //escapes the current switch or loop, cpu continues running.
+                }
+                return; //escape the entire function immediately
+            }
+
+            //if we clicked the right page we cycle through the pages, 
+            //NOTE THAT WE are in the menu page, if we want to go to the linkin page, we
+            //must be on the github page.
+            if (clicked_right) {
+                current_page = PAGE_GITHUB;
+                ESP_LOGI(TAG, "Entering Showcase -> GitHub");
+                return;
+            }
+            break;
             
-            //increase the current page by 1, because we're going to the next page.
-            current_page++;
-            //print on putty, not really needed
-            ESP_LOGI(TAG, "Next Page -> Page, %d", current_page);
-        }
-        return; //handled the page turn
-    }
-
-    //left arrow
-    if (just_pressed & BTN_LEFT) {
-        if (current_page > 0) {
-            current_page--; //decrease cuz we going left.
-            //print on putty
-            ESP_LOGI(TAG, "Next Page -> %d", current_page);
-        }
-        return;
-    }
-
-    //if we are in the menu page.
-    if (current_page == PAGE_MENU) {
         
-        //up arrow
-        if (just_pressed & BTN_UP) {
-            hovered_mode--;
-            if (hovered_mode < 0)  {
-                hovered_mode = mode_length; // wrap around 
+
+
+        //now if we are in the manual mode page
+        case PAGE_MANUAL:
+            //if we click the left btn then we return back to the menu else we go to the next page.
+            if (clicked_left) {
+                current_page = PAGE_MENU;
+                ESP_LOGI(TAG, "Returning back to Menu Page");
             }
-            ESP_LOGI(TAG, "Cursor UP -> Mode %d", hovered_mode);
-        }
-
-        //down arrow
-        if (just_pressed & BTN_DOWN) {
-            hovered_mode++;
-             if (hovered_mode >= TOTAL_MODES)  {
-                hovered_mode = 0;   // wrap around
+            else if (clicked_right) {
+                current_page = PAGE_MANUAL_DATA;
+                ESP_LOGI(TAG, "Manual Data Page");
             }
-            ESP_LOGI(TAG, "Cursor DOWN -> Mode %d", hovered_mode);
-        }
+            break;
 
-        //center button, we clicked the center button.
-        if (just_pressed & BTN_CENTER) {
-            active_mode = hovered_mode; //set the active mode to whatever hovered_mode we're in.
-            //then put the next mode into active_mode
-            packet->mode = active_mode; //update esp_now packet, 
-            //so we can send it to the rover.
-            ESP_LOGI(TAG, "*** ACTIVE MODE CONFIRMED: %d ***", active_mode);
+        //manual data page
+        case PAGE_MANUAL_DATA:
+            //if we clicked the left go back to the main page
+            if (clicked_left) {
+                current_page = PAGE_MANUAL;
+                ESP_LOGI(TAG, "Back to Manual Page");
+            }
+            break;
+        //imu page
+        case PAGE_AUTO:
+            if (clicked_left) {
+                current_page = PAGE_MENU;
+                ESP_LOGI(TAG, "Returning back to Menu Page");
+            }
+            else if (clicked_right) {
+                current_page = PAGE_AUTO_DATA;
+                ESP_LOGI(TAG, "Auto Data Page");
+            }
+            break;
 
+        case PAGE_AUTO_DATA:
+            if (clicked_left) {
+                current_page = PAGE_AUTO;
+                ESP_LOGI(TAG, "Returning back to Auto Page");
+            }
+            break;
 
-            //just change the code here, like adding modes, so if
-            //we are in the manual mode then change the active mode to the manual mode, 
-            switch (hovered_mode) {
-                case MANUAL_MODE:
-                    current_page = PAGE_MANUAL;
-                    break;
-                case AUTO_MODE:
-                    current_page = PAGE_AUTO;
-                    break;
-                case IMU_MODE: 
-                    current_page = PAGE_IMU;
-                    break;
-                break; //need default state here?
+        case PAGE_IMU:
+            if (clicked_left) {
+                current_page = PAGE_MENU;
+                ESP_LOGI(TAG, "Returning back to Menu Page");
+            }
+            else if (clicked_right) {
+                current_page = PAGE_IMU_DATA;
+                ESP_LOGI(TAG, "IMU Data Page");
+            }
+            break;
+
+        case PAGE_IMU_DATA:
+            if (clicked_left) {
+                current_page = PAGE_IMU;
+                ESP_LOGI(TAG, "Returning back to IMU Page");
+            }
+            break;
+       
+        case PAGE_GITHUB:
+            //if we click the left we go back to the menu
+            if (clicked_left) {
+                current_page = PAGE_MENU;
+                ESP_LOGI(TAG, "Back to the MENU");
             }
             
-            switch(current_page) {
-                case PAGE_MANUAL:
-                    //we are in the manual page, now we can check if we click the left btn
-                    //then just move back to the menu
-                    if (just_pressed & BTN_LEFT) {
-                        current_page = PAGE_MENU;
-                        ESP_LOGI(TAG, "Back to Menu Page");
-                    }
-                    else {
-                        //we move to the 2nd page.
-                        current_page = PAGE_MANUAL_DATA;
-                        //we can display in putty
-                        ESP_LOGI(TAG, "Manual Page Data");
-                    }
-                    break;
-
-                case PAGE_AUTO:
-                    if (just_pressed & BTN_LEFT) {
-                        current_page = PAGE_MENU;
-                        ESP_LOGI(TAG, "Back to Menu Page");
-                    }
-                    else {
-                        current_page = PAGE_AUTO_DATA;
-                        ESP_LOGI(TAG, "Auto Page Data");
-                    }
-                    break;
-                case PAGE_IMU:
-                    if (just_pressed & BTN_LEFT) {
-                            current_page = PAGE_MENU;
-                            ESP_
-                            LOGI(TAG, "Back to Menu Page");
-                    }
-                    else {
-                        current_page = PAGE_IMU_DATA;
-                        ESP_LOGI(TAG, "IMU Page Data");
-                    }
-                    break;
+            else if (clicked_right) {
+                //we go to the linkedin page
+                current_page = PAGE_LINKEDIN;
+                ESP_LOGI(TAG, "Go to LinkedIn Page");
             }
+            break;
 
-            //then we check if the current page is page manual or auto or imu
+        case PAGE_LINKEDIN:
+            if (clicked_left) {
+                current_page = PAGE_GITHUB;
+                ESP_LOGI(TAG, "Back to the GitHub Page");
+            }
+            else if (clicked_right) {
+                current_page = PAGE_LEFTPAGE;
+            }
+            break;
 
-           
-            
-        }
-
+        case PAGE_LEFTPAGE:
+            if (clicked_left) {
+                current_page = PAGE_LINKEDIN;
+                ESP_LOGI(TAG, "Back to the LinkedIn Page");
+            }
+            break;
+        default: 
+            break;
     }
 }
+
+
+   
+
+    
+
 
 
 
