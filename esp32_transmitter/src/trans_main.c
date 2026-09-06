@@ -12,6 +12,7 @@
 #include "esp_log.h"
 #include "math.h"
 #include "lcd.h"
+#include "metrics.h"
 static data_packet_t last_sent_packet = {0};
 void deadband_filter(data_packet_t* packet, uint16_t raw_x, uint16_t raw_y) {
  // Deadband filter
@@ -51,6 +52,8 @@ void app_main(void)
     //eventually we will get rid of this super loop with preemptive scheduling 
     while (1)
     {
+        metrics_record_loop_start();
+
         // Check for serial console commands
         UART_CONTROL_update();
 
@@ -90,6 +93,7 @@ void app_main(void)
             
             //sent the 12 byte data packet to the robot over the 2.4GHz ESP-NOW
             last_sent_packet = packet;
+            metrics_record_espnow_tx_start();
             transmit_data(receiver_mac, &packet);
 
             //track the time stamp of when we last sent a packet.
@@ -99,7 +103,7 @@ void app_main(void)
             }
         }
         
-        
+        metrics_record_loop_end();
 
         //freertos non blocking delay, puts this task to sleep for 10ms, 
         //lets the cpu tackle other tasks 

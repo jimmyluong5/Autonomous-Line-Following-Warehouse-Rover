@@ -17,10 +17,12 @@ static const char *TAG = "ESP32_TRANSMITTER";
 //code used to identify a device on a network.
 uint8_t receiver_mac[ESP_NOW_ETH_ALEN] = {0xAC, 0x27, 0x6E, 0xA2, 0x87, 0x5C};
 
+#include "metrics.h"
+
 static void OnDataSent(const esp_now_send_info_t *tx_info,
                        esp_now_send_status_t status) {
   if (tx_info == NULL) return;
-  // Silenced log to avoid flooding UART terminal output
+  metrics_record_espnow_tx_done(status);
 }
 
 void init_esp_nvs(void) {

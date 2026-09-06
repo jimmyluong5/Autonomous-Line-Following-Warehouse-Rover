@@ -1,7 +1,20 @@
-FILE(GLOB_RECURSE app_sources ${CMAKE_SOURCE_DIR}/src/*.c)
-
 idf_component_register(
-    SRCS ${app_sources}
+    SRCS 
+        "adc.c"
+        "decode_image.c"
+        "font5x7.c"
+        "joystick.c"
+        "lcd.c"
+        "led.c"
+        "metrics.c"
+        "pretty_effect.c"
+        "setup.c"
+        "speaker.c"
+        "tjpgd.c"
+        "trans_main.c"
+        "transmit_data.c"
+        "uart_control.c"
+    INCLUDE_DIRS "../include"
     EMBED_FILES 
         "images/frame1.jpg"
         "images/frame2.jpg"
