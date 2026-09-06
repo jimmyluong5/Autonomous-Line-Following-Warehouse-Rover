@@ -21,9 +21,15 @@ typedef struct {
     uint8_t mode; //eventually it'll contain more modes.
 } data_packet_t;
 
-
+//everytime you want to add a page, just add it here.
 typedef enum {
     PAGE_MENU = 0,
+    PAGE_MANUAL,
+    PAGE_MANUAL_DATA, //2nd page of manual
+    PAGE_AUTO,
+    PAGE_AUTO_DATA,
+    PAGE_IMU,
+    PAGE_IMU_DATA,
     PAGE_GITHUB,
     PAGE_LINKEDIN,
     PAGE_LEFTPAGE,

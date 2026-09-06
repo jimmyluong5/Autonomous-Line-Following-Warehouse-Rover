@@ -97,8 +97,10 @@ void process_arrow_keys(data_packet_t *packet) {
         return;
     }
 
-    //up arrow
+    //if we are in the menu page.
     if (current_page == PAGE_MENU) {
+        
+        //up arrow
         if (just_pressed & BTN_UP) {
             hovered_mode--;
             if (hovered_mode < 0)  {
@@ -116,13 +118,73 @@ void process_arrow_keys(data_packet_t *packet) {
             ESP_LOGI(TAG, "Cursor DOWN -> Mode %d", hovered_mode);
         }
 
-        //center button
+        //center button, we clicked the center button.
         if (just_pressed & BTN_CENTER) {
-            active_mode = hovered_mode;
+            active_mode = hovered_mode; //set the active mode to whatever hovered_mode we're in.
             //then put the next mode into active_mode
             packet->mode = active_mode; //update esp_now packet, 
             //so we can send it to the rover.
             ESP_LOGI(TAG, "*** ACTIVE MODE CONFIRMED: %d ***", active_mode);
+
+
+            //just change the code here, like adding modes, so if
+            //we are in the manual mode then change the active mode to the manual mode, 
+            switch (hovered_mode) {
+                case MANUAL_MODE:
+                    current_page = PAGE_MANUAL;
+                    break;
+                case AUTO_MODE:
+                    current_page = PAGE_AUTO;
+                    break;
+                case IMU_MODE: 
+                    current_page = PAGE_IMU;
+                    break;
+                break; //need default state here?
+            }
+            
+            switch(current_page) {
+                case PAGE_MANUAL:
+                    //we are in the manual page, now we can check if we click the left btn
+                    //then just move back to the menu
+                    if (just_pressed & BTN_LEFT) {
+                        current_page = PAGE_MENU;
+                        ESP_LOGI(TAG, "Back to Menu Page");
+                    }
+                    else {
+                        //we move to the 2nd page.
+                        current_page = PAGE_MANUAL_DATA;
+                        //we can display in putty
+                        ESP_LOGI(TAG, "Manual Page Data");
+                    }
+                    break;
+
+                case PAGE_AUTO:
+                    if (just_pressed & BTN_LEFT) {
+                        current_page = PAGE_MENU;
+                        ESP_LOGI(TAG, "Back to Menu Page");
+                    }
+                    else {
+                        current_page = PAGE_AUTO_DATA;
+                        ESP_LOGI(TAG, "Auto Page Data");
+                    }
+                    break;
+                case PAGE_IMU:
+                    if (just_pressed & BTN_LEFT) {
+                            current_page = PAGE_MENU;
+                            ESP_
+                            LOGI(TAG, "Back to Menu Page");
+                    }
+                    else {
+                        current_page = PAGE_IMU_DATA;
+                        ESP_LOGI(TAG, "IMU Page Data");
+                    }
+                    break;
+            }
+
+            //then we check if the current page is page manual or auto or imu
+
+           
+            
         }
 
     }

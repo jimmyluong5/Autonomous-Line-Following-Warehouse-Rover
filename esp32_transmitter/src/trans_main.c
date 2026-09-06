@@ -34,6 +34,7 @@ void app_main(void)
     static uint32_t last_time = 0;
     static uint8_t current_speed = 0;
 
+    //eventually we will get rid of this super loop with preemptive scheduling 
     while (1)
     {
         // Check for serial console commands
