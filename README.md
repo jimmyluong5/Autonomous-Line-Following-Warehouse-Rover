@@ -371,14 +371,14 @@ With the 3D-printed chassis, power distribution, and core firmware validated, th
 
 
 ### 13. Custom ESP32-S3 Wireless Handheld Controller & Real-Time Telemetry Dashboard
-<img width="1086" height="1448" alt="a0c067bf-eb17-469f-8bce-e8e00589d6ca" src="https://github.com/user-attachments/assets/4d232a22-7998-4366-8bf8-9e7353e98997" />
+<img width="1920" height="2560" alt="photo_2026-09-06_17-12-59" src="https://github.com/user-attachments/assets/a79483f9-5157-4bf6-b995-1d22fd751318" />
 
 To provide manual override, multi-mode switching, and live diagnostics for the rover, a dedicated handheld wireless controller was developed using a dual-core **ESP32-S3** (240 MHz) and a 2.4-inch **ILI9341 SPI TFT LCD (240×320)**.
 
 The controller provides an interactive graphical user interface (GUI), live telemetry monitoring, and low-latency packet transmission over **ESP-NOW**.
 
 #### 1. Hardware Architecture & Inputs
-* **Microcontroller**: Freenove ESP32-S3 WROOM (8MB Flash, 8MB PSRAM, Dual Xtensa LX7 cores running at 240 MHz).
+* **Microcontroller**: Freenove ESP32-S3 WROOM (16MB Flash, 8MB PSRAM, Dual Xtensa LX7 cores running at 240 MHz).
 * **Display & Touch**: 2.4" 240×320 SPI LCD driven by an ILI9341 controller, sharing the SPI bus with an XPT2046 resistive touch controller.
 * **Analog 2D Joystick**: Multi-sampled through SAR ADC1 (GPIO 4 and GPIO 5) with 16× oversampling, software deadband filtering, and axis normalization.
 * **5-Way Tactile Button Matrix**: Multi-button input array with two-stage temporal debouncing for menu navigation, speed adjustments, and emergency stop.
@@ -386,7 +386,7 @@ The controller provides an interactive graphical user interface (GUI), live tele
 
 ```text
 [ Analog Joystick (ADC1) ] ──┐
-[ 5-Button Matrix (GPIO) ] ──┼──> [ ESP32-S3 Controller ] ──(ESP-NOW 2.4GHz)──> [ Rover Receiver ]
+[ 5-Button Matrix (GPIO) ] ──┼──> [ ESP32-S3#1 Controller & Transmitter ] ──(ESP-NOW 2.4GHz)──> [ESP32#2 Rover Receiver ]
 [ Piezo Speaker (LEDC)   ] ──┤      │ (FreeRTOS Core 0/1)
 [ ILI9341 240x320 LCD    ] ──┘      └──> [ Real-Time Telemetry & Graphics ]
 ```
@@ -492,10 +492,12 @@ Phase 3: Time-of-Flight (ToF) Collision Detection & Auto-Braking
 - [x] Handheld wireless button controller prototype with serial debugging
 
 ### In Progress
-- [ ] Direct UART communication bridge between receiver ESP32-S3 and STM32G431KB
+- [x] Direct UART communication bridge between receiver ESP32-S3 and STM32G431KB
 - [x] Analog 2-axis joystick integration on wireless transmitter & 240x320 LCD telemetry dashboard
 
 ### Planned
 - [ ] IMU sensor integration & closed-loop heading stabilization
 - [ ] Time-of-Flight (ToF) sensor integration for forward collision avoidance
+- [ ] Follow-me feature using the FireBeetle 2 Board ESP32-S3 (N16R8) AIoT Microcontroller with Camera.
+- [ ] Return to Home Feature using IMUs (Adafruit LSM6DS3TR-C 6-DoF Accel + Gyro IMU & Adafruit MPU-6050 6-DoF Accel and Gyro Sensor)
 
