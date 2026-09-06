@@ -67,18 +67,30 @@ void init_adc(void) {
     
 int read_joystick_x(void) {
     int raw_val = 0; //initialize the values to 0
-
-    //then just use the function to read the pins from earlier.
-    //use the error to check if its success then read
-    ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, JOYSTICK_X_CHANNEL, &raw_val));
-    return raw_val;
+    int sum = 0;
+    int valid_count = 0;
+    for (int i = 0; i < 8; i++) {
+        esp_err_t err = adc_oneshot_read(adc1_handle, JOYSTICK_X_CHANNEL, &raw_val);
+        if (err == ESP_OK) {
+            sum += raw_val;
+            valid_count++;
+        }
+    }
+    return valid_count > 0 ? (sum / valid_count) : 2000;
 }
 
 int read_joystick_y(void) {
     int raw_val = 0;
-
-    ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, JOYSTICK_Y_CHANNEL, &raw_val));
-    return raw_val;
+    int sum = 0;
+    int valid_count = 0;
+    for (int i = 0; i < 8; i++) {
+        esp_err_t err = adc_oneshot_read(adc1_handle, JOYSTICK_Y_CHANNEL, &raw_val);
+        if (err == ESP_OK) {
+            sum += raw_val;
+            valid_count++;
+        }
+    }  
+    return valid_count > 0 ? (sum / valid_count) : 2000;
 }
 
 

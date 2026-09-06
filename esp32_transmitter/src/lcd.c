@@ -3,6 +3,7 @@
 #include <string.h>
 #include <inttypes.h>
 #include "freertos/FreeRTOS.h"
+#include "freertos/projdefs.h"
 #include "freertos/task.h"
 #include "esp_system.h"
 #include "driver/gpio.h"
@@ -408,21 +409,22 @@ static void send_line_finish(spi_device_handle_t spi)
     }
 }
 
+static uint16_t *s_dma_lines[2] = {NULL, NULL};
+
 // Routine to draw the clean decoded image to the LCD once.
 static void display_pretty_colors(spi_device_handle_t spi) {
-    uint16_t *lines[2];
+    if (s_dma_lines[0] == NULL || s_dma_lines[1] == NULL) {
 #if CONFIG_LCD_BUFFER_IN_PSRAM
-    uint32_t mem_cap = MALLOC_CAP_SPIRAM | MALLOC_CAP_DMA;
-    printf("Get LCD buffer from PSRAM\n");
+        uint32_t mem_cap = MALLOC_CAP_SPIRAM | MALLOC_CAP_DMA;
 #else
-    uint32_t mem_cap = MALLOC_CAP_INTERNAL | MALLOC_CAP_DMA;
-    printf("Get LCD buffer from internal\n");
+        uint32_t mem_cap = MALLOC_CAP_INTERNAL | MALLOC_CAP_DMA;
 #endif
-
-    // Allocate memory for the pixel buffers
-    for (int i = 0; i < 2; i++) {
-        lines[i] = spi_bus_dma_memory_alloc(LCD_HOST, X_MAX * PARALLEL_LINES * sizeof(uint16_t), mem_cap);
-        assert(lines[i] != NULL);
+        for (int i = 0; i < 2; i++) {
+            if (s_dma_lines[i] == NULL) {
+                s_dma_lines[i] = spi_bus_dma_memory_alloc(LCD_HOST, X_MAX * PARALLEL_LINES * sizeof(uint16_t), mem_cap);
+                assert(s_dma_lines[i] != NULL);
+            }
+        }
     }
 
     int sending_line = -1;
@@ -430,21 +432,16 @@ static void display_pretty_colors(spi_device_handle_t spi) {
 
     // Render the entire image once across all 320 vertical lines
     for (int y = 0; y < Y_MAX; y += PARALLEL_LINES) {
-        pretty_effect_calc_lines(lines[calc_line], y, 0, PARALLEL_LINES);
+        pretty_effect_calc_lines(s_dma_lines[calc_line], y, 0, PARALLEL_LINES);
         if (sending_line != -1) {
             send_line_finish(spi);
         }
         sending_line = calc_line;
         calc_line = (calc_line == 1) ? 0 : 1;
-        send_lines(spi, y, lines[sending_line]);
+        send_lines(spi, y, s_dma_lines[sending_line]);
     }
     if (sending_line != -1) {
         send_line_finish(spi);
-    }
-
-    // Free pixel buffers to return memory
-    for (int i = 0; i < 2; i++) {
-        free(lines[i]);
     }
 }
 
@@ -522,7 +519,18 @@ static void animation_task(void *pvParameters) {
             }
             last_rendered_page = PAGE_MENU;
             vTaskDelay(pdMS_TO_TICKS(40));
-        } else {
+        } 
+        else if (current_page == PAGE_MANUAL) {
+            //decode the background image once
+            if (last_rendered_page != PAGE_MANUAL) {
+                decode_image(0, &pixels);
+                last_rendered_page = PAGE_MANUAL;
+            }
+            //display the live orange dot overlay
+            display_pretty_colors(spi);
+            vTaskDelay(pdMS_TO_TICKS(35));
+        }
+        else {
             // Showcase QR pages (LinkedIn, GitHub, Empty left, etc.)
             // Decode and redraw only when entering a new page
             if (current_page != last_rendered_page) {

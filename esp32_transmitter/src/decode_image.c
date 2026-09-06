@@ -111,6 +111,11 @@
     extern const uint8_t github_end[]
     asm("_binary_github_jpg_end");
 
+    extern const uint8_t blankfirstpage_start[]
+    asm("_binary_blankfirstpage_jpg_start");
+    extern const uint8_t blankfirstpage_end[]
+    asm("_binary_blankfirstpage_jpg_end");
+
 
 
 //create array with ptrs to the images
@@ -239,6 +244,10 @@ esp_err_t decode_image(int frame_idx, uint16_t **pixels) {
 
         // 1st page of any of the modes (double arrows)
         case PAGE_MANUAL:
+            //specific dashboard for this page
+            jd.inData = blankfirstpage_start;
+            jd.inLen = blankfirstpage_end - blankfirstpage_start;
+            break;
         case PAGE_AUTO:
         case PAGE_IMU:
             jd.inData = leftright_start; // the page with double arrows

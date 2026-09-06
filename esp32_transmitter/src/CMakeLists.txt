@@ -22,4 +22,5 @@ idf_component_register(
         "images/leftright.jpg"
         "images/linkedin.jpg"
         "images/github.jpg"
+        "images/blankfirstpage.jpg"
 )

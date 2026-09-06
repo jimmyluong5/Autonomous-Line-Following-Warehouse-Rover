@@ -5,6 +5,7 @@
 #include "transmit_data.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "joystick.h"
 
 
 #define SWAP16(c) (((c) >> 8) | (((c) & 0xFF) << 8))
@@ -19,6 +20,10 @@ uint16_t *pixels = NULL;
 //FFDE17 - golden yellow
 //FFFFF - pure white
 //39FF14 - 4DEEEA - vibrant lime or neon green
+
+
+#define COLOR_JOYSTICK      SWAP16(0xFD00)
+#define COLOR_DOT_BORDER    SWAP16(0xC260)
 
 #define COLOR_NORMAL_BORDER 0x7BEF //subtle gray
 #define COLOR_PULSE_YELLOW  SWAP16(0xFF66) // #FFEE33 (Bright Electric Yellow)
@@ -41,36 +46,42 @@ static inline uint16_t get_bgnd_pixel(int x, int y)
 
 // Determine the pixel color based on the current page and pill coordinates
 static inline uint16_t apply_overlay(int x, int y, uint16_t bg_pixel, uint16_t hover_color) {
-    // If not on the menu page, return clean background
-    if (current_page != PAGE_MENU) {
-        return bg_pixel; 
-    }
-
-    int cy = pill_center_y[hovered_mode];
-
-    // Quick bounding box check: expanded top to cy - 22 so top border is not clipped
-    if (y >= cy - 22 && y <= cy + 21 && x >= 51 && x <= 190) {
-        // Find horizontal distance to central line segment
-        int dx = 0;
-        if (x < 78) {
-            dx = 78 - x;       // In left rounded cap
-        } else if (x > 170) {
-            dx = x - 170;      // In right rounded cap
+    // 1. Menu mode cursor
+    if (current_page == PAGE_MENU) {
+        int cy = pill_center_y[hovered_mode];
+        if (y >= cy - 22 && y <= cy + 21 && x >= 51 && x <= 190) {
+            int dx = (x < 78) ? (78 - x) : (x > 170) ? (x - 170) : 0;
+            int dy = (y < cy) ? (y - cy + 1) : (y - cy);
+            int dist_sq = dx * dx + dy * dy;
+            if (dist_sq >= 335 && dist_sq <= 415) {
+                return hover_color;
+            }
         }
-
-        // Offset dy by +1 for the top half (y < cy) to reach 1 pixel higher
-        int dy = (y < cy) ? (y - cy + 1) : (y - cy);
-        int dist_sq = dx * dx + dy * dy;
-
-        // Radius: ~18.5 to ~20.5 gives a clean 2px border
-        if (dist_sq >= 335 && dist_sq <= 415) {
-            return hover_color;
-        }
+        return bg_pixel;
     }
-
-    // Inside the pill and everywhere else: original crisp artwork!
+    // 2. Manual mode: dynamic joystick dot!
+    if (current_page == PAGE_MANUAL) {
+        static int dot_x = GRID_CENTER_X;
+        static int dot_y = GRID_CENTER_Y;
+        // Sample latest coordinates once per frame (at the top-left pixel)
+        if (y == 0 && x == 0) {
+            get_joystick_screen_coords(&dot_x, &dot_y);
+        }
+        // Check if (x, y) is inside the joystick grid area on blankfirstpage.jpg
+        if (y >= 35 && y <= 120 && x >= 18 && x <= 108) {
+            int dx = x - dot_x;
+            int dy = y - dot_y;
+            int dist_sq = dx * dx + dy * dy;
+            // Circle radius = 4 pixels (4*4 = 16)
+            if (dist_sq <= 16) {
+                return (dist_sq >= 10) ? COLOR_DOT_BORDER : COLOR_JOYSTICK;
+            }
+        }
+        return bg_pixel;
+    }
     return bg_pixel;
 }
+
 
 
 void pretty_effect_calc_lines(uint16_t *dest, int line, int frame, int linect)
