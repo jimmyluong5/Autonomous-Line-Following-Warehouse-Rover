@@ -442,7 +442,7 @@ typedef struct {
 | MCP3208         | External ADC for reflectance measurements |
 | FIT0484         | DC drive motors                           |
 | TB6612FNG       | Dual DC motor driver                      |
-| ESP32-S3 ×2     | Wireless transmitter and receiver         |
+| ESP32-S3 ×3     | Wireless transmitter and receiver         |
 | LM2596          | Buck converters for voltage regulation    |
 | SG90 Servo      | Mechanical actuation                      |
 | LADDA Batteries | Main power source                         |
