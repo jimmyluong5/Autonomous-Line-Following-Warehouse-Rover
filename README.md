@@ -371,6 +371,7 @@ With the 3D-printed chassis, power distribution, and core firmware validated, th
 
 
 ### 13. Custom ESP32-S3 Wireless Handheld Controller & Real-Time Telemetry Dashboard
+<img width="1086" height="1448" alt="a0c067bf-eb17-469f-8bce-e8e00589d6ca" src="https://github.com/user-attachments/assets/4d232a22-7998-4366-8bf8-9e7353e98997" />
 
 To provide manual override, multi-mode switching, and live diagnostics for the rover, a dedicated handheld wireless controller was developed using a dual-core **ESP32-S3** (240 MHz) and a 2.4-inch **ILI9341 SPI TFT LCD (240×320)**.
 
