@@ -6,12 +6,15 @@
 #include "esp_log.h"
 #include "receive_data.h"
 #include "driver/gpio.h"
+#include "driver/uart.h"
+
 
 void app_main() {
   init_led();
   init_esp_nvs();
   init_wifi();
   init_pins();
+  init_uart();
 
   //since the i got the mac address of this esp32 ion need it no more.
   //need to get the MAC address of this esp32 and put it in the transmitter's esp32.
@@ -32,5 +35,9 @@ void app_main() {
 
     //gpio_set_level(GPIO_NUM_5, 0);
     //vTaskDelay(pdMS_TO_TICKS(200));
+
+    //need to initialize the pins for the uart to send to the stm32
+    
+
   }
 }

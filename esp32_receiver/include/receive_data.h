@@ -9,13 +9,18 @@ typedef struct {
     //uint16_t sequence;
     uint16_t joystick_x;
     uint16_t joystick_y;
+    uint8_t imu_x;        
+    uint8_t imu_y;
     uint8_t mode;
 } data_packet_t;
 
 
 
-void receive_button_press(data_packet_t* packet);
+void receive_button_press(data_packet_t *packet);
 void init_pins(void);
 //void update_speed(data_packet_t* packet); not needed because we not updating speed at all 
 //or calculating the speed of the car because the data packet sends us information.
+
+
+void send_packet_stm32(data_packet_t *packet);
 #endif

@@ -7,7 +7,7 @@
 #include <string.h>
 #include <driver/gpio.h>
 #include "esp_log.h"
-
+#include "driver/uart.h"
 #define LED_PIN GPIO_NUM_1
 
 #define LEFT_BTN 0
@@ -38,7 +38,10 @@ void receive_button_press(data_packet_t* packet) {
     ESP_LOGI(TAG, "JoyX: %u | JoyY: %u | Speed: %u | Mode: %u", 
              packet->joystick_x, packet->joystick_y, packet->speed, packet->mode);
 
-    for (int i = 0; i < 5; i++) {
+    //we can just send the data packet to the stm32
+    send_packet_stm32(packet);
+    
+    for (int i = 0; i < 5; i++) {   
         if ((packet->button_data & (1<<i)) != 0) {
             switch(i) {
                 case LEFT_BTN:
@@ -72,3 +75,19 @@ void receive_button_press(data_packet_t* packet) {
         }
     }
 }
+
+void send_packet_stm32(data_packet_t *packet) {
+    //create a 1 byte marker where if we see this marker then we know its the correct data packet
+    uint8_t marker = 0xAA;
+
+    //then just send the datapacket and the marker byte via uart, we are using port 1
+    uart_write_bytes(UART_NUM_1, (const char*)&marker, 1);
+
+    //send the actual data packet
+    uart_write_bytes(UART_NUM_1, (const char*)packet, sizeof(data_packet_t));
+}
+
+//uart_write_bytes inputs, is the uart port, the address of the variable we're sending,
+//third is the size of the packet.
+
+//uart doesn't know what a struct is, but it does lnow what are bytes.
