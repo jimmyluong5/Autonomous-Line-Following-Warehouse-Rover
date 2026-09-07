@@ -25,6 +25,26 @@ typedef struct __attribute__((packed)) {
     uint8_t mode; //eventually it'll contain more modes.
 } data_packet_t;
 
+typedef struct __attribute__((packed)) {
+    float   actualspeed;
+    float   leftWheelSpeed;
+    float   rightWheelSpeed;
+    int32_t leftEncoder;
+    int32_t rightEncoder;
+    uint8_t speedSetting;
+    uint8_t direction;
+    uint8_t lineSensors;
+    uint8_t emergencyStop;
+    uint8_t cpuLoad;
+    float   controlRate;
+    float   latencyMs;
+    float   jitterMs;
+    uint16_t missedDeadlines;
+} robot_status_t;
+extern robot_status_t g_robot_status;
+extern bool g_robot_status_received;
+
+
 //everytime you want to add a page, just add it here.
 typedef enum {
     PAGE_MENU = 0,

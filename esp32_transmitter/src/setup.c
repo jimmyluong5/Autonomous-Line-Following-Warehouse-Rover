@@ -18,11 +18,23 @@ static const char *TAG = "ESP32_TRANSMITTER";
 uint8_t receiver_mac[ESP_NOW_ETH_ALEN] = {0xAC, 0x27, 0x6E, 0xA2, 0x87, 0x5C};
 
 #include "metrics.h"
+#include "transmit_data.h"
+
+robot_status_t g_robot_status = {0};
+bool g_robot_status_received = false;
 
 static void OnDataSent(const esp_now_send_info_t *tx_info,
                        esp_now_send_status_t status) {
   if (tx_info == NULL) return;
   metrics_record_espnow_tx_done(status);
+}
+
+static void OnDataRecv(const esp_now_recv_info_t *esp_now_info,
+                       const uint8_t *data, int data_len) {
+  if (data_len == sizeof(robot_status_t)) {
+    memcpy(&g_robot_status, data, sizeof(robot_status_t));
+    g_robot_status_received = true;
+  }
 }
 
 void init_esp_nvs(void) {
@@ -49,6 +61,7 @@ void init_esp_now(void) {
   ESP_ERROR_CHECK(esp_now_init()); //this returns an esp_err_t, which is 
   //an error code. we use this to check if the function was successful.
   ESP_ERROR_CHECK(esp_now_register_send_cb(OnDataSent)); //this also returns an esp_err_t.
+  ESP_ERROR_CHECK(esp_now_register_recv_cb(OnDataRecv)); //register incoming telemetry callback
 
   esp_now_peer_info_t peerInfo = {}; //initialize the peer info struct.
   //it's just a struct that holds the information of the peer.

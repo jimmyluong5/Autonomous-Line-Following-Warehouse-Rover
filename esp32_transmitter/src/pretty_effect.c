@@ -59,9 +59,13 @@ static void prepare_manual_ui_strings(void) {
     s_ui_texts[2].x0 = 193 - (s_ui_texts[2].len * 6) / 2;
     s_ui_texts[2].y0 = 58;
 
-    // 4. Actual Speed Placeholder
-    const char *act_spd = metrics_get_actual_speed_str();
-    snprintf(s_ui_texts[3].str, sizeof(s_ui_texts[3].str), "%s", act_spd);
+    // 4. Actual Speed (from STM32 live telemetry or placeholder)
+    if (g_robot_status_received) {
+        snprintf(s_ui_texts[3].str, sizeof(s_ui_texts[3].str), "%.2f", g_robot_status.actualspeed);
+    } else {
+        const char *act_spd = metrics_get_actual_speed_str();
+        snprintf(s_ui_texts[3].str, sizeof(s_ui_texts[3].str), "%s", act_spd);
+    }
     s_ui_texts[3].len = strlen(s_ui_texts[3].str);
     s_ui_texts[3].x0 = 193 - (s_ui_texts[3].len * 6) / 2;
     s_ui_texts[3].y0 = 99;
