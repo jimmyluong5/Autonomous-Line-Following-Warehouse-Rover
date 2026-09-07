@@ -30,6 +30,7 @@
 #include <uart_control.h>
 #include "LSM6DS3.h"
 
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -126,6 +127,8 @@ int main(void)
   servo_init();
   Encoder_Init();
   stepper_init();
+  DWT_Init();
+
   /* USER CODE END 2 */
 
   /* Initialize leds */
@@ -137,8 +140,7 @@ int main(void)
   BspCOMInit.StopBits   = COM_STOPBITS_1;
   BspCOMInit.Parity     = COM_PARITY_NONE;
   BspCOMInit.HwFlowCtl  = COM_HWCONTROL_NONE;
-  if (BSP_COM_Init(COM1, &BspCOMInit) != BSP_ERROR_NONE)
-  {
+  if (BSP_COM_Init(COM1, &BspCOMInit) != BSP_ERROR_NONE) {
     Error_Handler();
   }
 
@@ -153,9 +155,7 @@ int main(void)
     Servo_Update();
 
     // Periodically print counts and speeds to PuTTY when in Motor Control Mode
-    if ((UART_CONTROL_GetMode() == UART_MODE_MOTOR ||
-         UART_CONTROL_GetMode() == UART_MODE_COMBINED) &&
-        (HAL_GetTick() - last_display_time >= 250)) {
+    if ((UART_CONTROL_GetMode() == UART_MODE_MOTOR || UART_CONTROL_GetMode() == UART_MODE_COMBINED) && (HAL_GetTick() - last_display_time >= 250)) {
       last_display_time = HAL_GetTick();
 
       char msg[160];
@@ -164,6 +164,13 @@ int main(void)
                Encoder_GetLeftTotal(), Encoder_GetRightTotal());
       HAL_UART_Transmit(&hcom_uart[COM1], (uint8_t *)msg, strlen(msg),
                         HAL_MAX_DELAY);
+    }
+
+    static uint32_t last_telemetry_time = 0;
+    if ((HAL_GetTick() - last_telemetry_time) > 50) {
+      last_telemetry_time = HAL_GetTick();
+      Telemetry_Update_Wheel_Speeds(0.05f);
+      UART_Send_Telemetry();
     }
     /* USER CODE END WHILE */
 
@@ -176,8 +183,7 @@ int main(void)
   * @brief System Clock Configuration
   * @retval None
   */
-void SystemClock_Config(void)
-{
+void SystemClock_Config(void) {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
@@ -198,8 +204,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
     Error_Handler();
   }
 
@@ -212,8 +217,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
-  {
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK) {
     Error_Handler();
   }
 }
@@ -223,8 +227,7 @@ void SystemClock_Config(void)
   * @param None
   * @retval None
   */
-static void MX_SPI1_Init(void)
-{
+static void MX_SPI1_Init(void) {
 
   /* USER CODE BEGIN SPI1_Init 0 */
 
@@ -248,8 +251,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CRCPolynomial = 7;
   hspi1.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
   hspi1.Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
-  if (HAL_SPI_Init(&hspi1) != HAL_OK)
-  {
+  if (HAL_SPI_Init(&hspi1) != HAL_OK) {
     Error_Handler();
   }
   /* USER CODE BEGIN SPI1_Init 2 */
@@ -263,8 +265,7 @@ static void MX_SPI1_Init(void)
   * @param None
   * @retval None
   */
-static void MX_TIM1_Init(void)
-{
+static void MX_TIM1_Init(void) {
 
   /* USER CODE BEGIN TIM1_Init 0 */
 
@@ -292,15 +293,13 @@ static void MX_TIM1_Init(void)
   sConfig.IC2Selection = TIM_ICSELECTION_DIRECTTI;
   sConfig.IC2Prescaler = TIM_ICPSC_DIV1;
   sConfig.IC2Filter = 4;
-  if (HAL_TIM_Encoder_Init(&htim1, &sConfig) != HAL_OK)
-  {
+  if (HAL_TIM_Encoder_Init(&htim1, &sConfig) != HAL_OK) {
     Error_Handler();
   }
   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
   sMasterConfig.MasterOutputTrigger2 = TIM_TRGO2_RESET;
   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
-  {
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK) {
     Error_Handler();
   }
   /* USER CODE BEGIN TIM1_Init 2 */
@@ -314,8 +313,7 @@ static void MX_TIM1_Init(void)
   * @param None
   * @retval None
   */
-static void MX_TIM2_Init(void)
-{
+static void MX_TIM2_Init(void) {
 
   /* USER CODE BEGIN TIM2_Init 0 */
 
@@ -333,22 +331,19 @@ static void MX_TIM2_Init(void)
   htim2.Init.Period = 999;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
-  {
+  if (HAL_TIM_PWM_Init(&htim2) != HAL_OK) {
     Error_Handler();
   }
   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
-  {
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK) {
     Error_Handler();
   }
   sConfigOC.OCMode = TIM_OCMODE_PWM1;
   sConfigOC.Pulse = 0;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
-  {
+  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_4) != HAL_OK) {
     Error_Handler();
   }
   /* USER CODE BEGIN TIM2_Init 2 */
@@ -363,8 +358,7 @@ static void MX_TIM2_Init(void)
   * @param None
   * @retval None
   */
-static void MX_TIM3_Init(void)
-{
+static void MX_TIM3_Init(void) {
 
   /* USER CODE BEGIN TIM3_Init 0 */
 
@@ -572,7 +566,7 @@ static void MX_GPIO_Init(void)
                           |DC_Motor_AIN1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(ADC_SPI_CS_GPIO_Port, ADC_SPI_CS_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOB, ADC_SPI_CS_Pin|IMU_SPI_CS_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : DC_Motor_BIN2_Pin DC_Motor_BIN1_Pin DC_Motor_STBY_Pin DC_Motor_AIN2_Pin
                            DC_Motor_AIN1_Pin */
@@ -583,12 +577,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : ADC_SPI_CS_Pin */
-  GPIO_InitStruct.Pin = ADC_SPI_CS_Pin;
+  /*Configure GPIO pins : ADC_SPI_CS_Pin IMU_SPI_CS_Pin */
+  GPIO_InitStruct.Pin = ADC_SPI_CS_Pin|IMU_SPI_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
-  HAL_GPIO_Init(ADC_SPI_CS_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
   /* Configure GPIO pin Output Level for RFID */

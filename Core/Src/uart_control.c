@@ -10,7 +10,9 @@
 #include <string.h>
 #include <uart_control.h>
 #include "LSM6DS3.h"
-
+#include <stdlib.h>
+#include "motor.h"
+#include <math.h>
 static uint8_t current_servo_angle = 90;
 static int16_t current_stepper_angle =
     0;                       // track current stepper angle starting at 0 deg.
@@ -236,6 +238,10 @@ void UART_CONTROL_update(void) {
                           UART_CLEAR_NEF | UART_CLEAR_FEF | UART_CLEAR_PEF);
   }
 
+  //hal_uart_receive function prototype.
+  //HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+
+
   // Check if one keyboard character was received (non-blocking)
   if (HAL_UART_Receive(&hcom_uart[COM1], &received_byte, 1, 0) == HAL_OK) {
     // Turn on the LED to indicate keypress
@@ -245,6 +251,57 @@ void UART_CONTROL_update(void) {
 
     // Update the last command timestamp
     last_command_time = HAL_GetTick();
+
+
+    //we need to process the received byte from the esp32
+    if (received_byte == 0xAA) { //this means we have the correct data_packet transmitted
+
+      //create a data packet with the struct we defined.
+      data_packet_t packet;
+
+      if (HAL_UART_Receive(&hcom_uart[COM1], (uint8_t*)&packet, sizeof(data_packet_t), 10) == HAL_OK) {
+
+        //since we have access to the data packet now we need to update a few things such as
+        //robot speed
+        
+        robot_speed = ((uint32_t)packet.speed * 999) / 255;
+        
+        //then for autonomous mode
+        if (packet.mode == 1) {
+          Robot_SetState(robot_auto);
+        }
+        else if (packet.mode == 0) {
+          //we need to move the motors based on our joystick
+          int32_t steer_raw = (int32_t) packet.joystick_x - 2048;
+          int32_t throttle_raw = (int32_t) packet.joystick_y - 2048;
+
+          // Deadband filter
+          if (abs(steer_raw) < 200)  {
+            steer_raw = 0;
+          }
+
+          if (abs(throttle_raw) < 200)  {
+            throttle_raw = 0;
+          }
+            
+          // Scale to robot speed PWM
+          int16_t fwd_pwm   = (throttle_raw * robot_speed) / 2048;
+          int16_t steer_pwm = (steer_raw * robot_speed) / 2048;
+
+          // Drive Left & Right motors
+          Motor_Left_SetSpeed(fwd_pwm + steer_pwm);
+          Motor_Right_SetSpeed(fwd_pwm - steer_pwm);
+        }
+        //this will be imu mode which i will add later.
+        else if (packet.mode == 2) {
+          //imu mode.
+        }
+        return; // Done handling wireless packet!
+        
+      }
+
+    }
+
     
     switch (current_mode) {
       case UART_MODE_MENU:
@@ -281,16 +338,16 @@ void UART_CONTROL_update(void) {
             menu_stepper();
             break;
             
-            case 'n':
-              current_mode = UART_MODE_NORMALIZE;
+          case 'n':
+            current_mode = UART_MODE_NORMALIZE;
 
-              //flag to determine whether to print the header or not
-              first_print = true;
+            //flag to determine whether to print the header or not
+            first_print = true;
 
-              //turn on sensor
-              sensor_test_active = true;
-              menu_normalized();
-              break;
+            //turn on sensor
+            sensor_test_active = true;
+            menu_normalized();
+            break;
 
           case 'a':
             current_mode = UART_MODE_AUTO;
@@ -894,4 +951,112 @@ void UART_CONTROL_check_timeout(void) {
 
 UART_ControlMode UART_CONTROL_GetMode(void) { 
   return current_mode; 
+}
+
+
+
+//the arm cpu from the stm32 has a hardware cycle counter (DWT) - data watchpoint and trace cycle counter.
+void DWT_Init(void) {
+    CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+
+    //reset the cycle counter value
+    DWT->CYCCNT = 0;
+
+    //enable the dwt cycle counter 
+    DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+}
+
+static inline uint32_t DWT_GetMicros(void) {
+  //systemcoreclock is 170 mhz (170 cycles is 1ms)
+  return DWT->CYCCNT / (SystemCoreClock/1000000);
+}
+
+
+// Static telemetry state variables
+static float    g_actual_speed     = 0.0f;
+static float    g_left_speed       = 0.0f;
+static float    g_right_speed      = 0.0f;
+static uint8_t  g_cpu_load         = 0;
+static float    g_control_rate     = 100.0f;
+static float    g_latency_ms       = 0.0f;
+static float    g_jitter_ms        = 0.0f;
+static uint16_t g_missed_deadlines = 0;
+static uint32_t last_loop_start_us = 0;
+static float    jitter_filter_us   = 0.0f;
+// Call this at the START of your 10ms control loop
+void Telemetry_Loop_Start(void) {
+    uint32_t now_us = DWT_GetMicros();
+    
+    // 1. Calculate Period & Control Rate (Hz)
+    uint32_t period_us = now_us - last_loop_start_us;
+    last_loop_start_us = now_us;
+    
+    if (period_us > 0 && period_us < 100000) {
+        g_control_rate = 1000000.0f / (float)period_us;
+        
+        // 2. Calculate Jitter using RFC 3550 EMA filter (nominal period = 10000 us)
+        float diff_us = fabsf((float)period_us - 10000.0f);
+        jitter_filter_us += (diff_us - jitter_filter_us) / 16.0f;
+        g_jitter_ms = jitter_filter_us / 1000.0f;
+    }
+}
+// Call this at the END of your 10ms control loop
+void Telemetry_Loop_End(uint32_t loop_start_us) {
+    uint32_t compute_time_us = DWT_GetMicros() - loop_start_us;
+    
+    // 3. Execution Latency (ms)
+    g_latency_ms = (float)compute_time_us / 1000.0f;
+    
+    // 4. CPU Load % (active compute time / 10ms budget)
+    uint32_t load = (compute_time_us * 100) / 10000;
+    g_cpu_load = (load > 100) ? 100 : (uint8_t)load;
+    
+    // 5. Missed Deadlines (only if active compute took >10ms)
+    if (compute_time_us > 10000) {
+        g_missed_deadlines++;
+    }
+}
+
+void Telemetry_Update_Wheel_Speeds(float delta_time_sec) {
+    static int32_t prev_left_ticks = 0;
+    static int32_t prev_right_ticks = 0;
+    int32_t cur_left = Encoder_GetLeftTotal();
+    int32_t cur_right = Encoder_GetRightTotal();
+    int32_t d_left = cur_left - prev_left_ticks;
+    int32_t d_right = cur_right - prev_right_ticks;
+    prev_left_ticks = cur_left;
+    prev_right_ticks = cur_right;
+    // Wheel circumference = 2 * PI * r
+    const float meters_per_tick = (2.0f * 3.14159f * 0.0215f) / 360.0f; // adjust to your wheel size & encoder CPR
+    g_left_speed  = ((float)d_left * meters_per_tick) / delta_time_sec;
+    g_right_speed = ((float)d_right * meters_per_tick) / delta_time_sec;
+    g_actual_speed = (g_left_speed + g_right_speed) / 2.0f;
+}
+
+void UART_Send_Telemetry(void) {
+  robot_status_t status = {0};
+    // Live Encoders
+    status.leftEncoder      = Encoder_GetLeftTotal();
+    status.rightEncoder     = Encoder_GetRightTotal();
+
+    // Live Speeds
+    status.actualspeed      = g_actual_speed;
+    status.leftWheelSpeed   = g_left_speed;
+    status.rightWheelSpeed  = g_right_speed;
+    status.speedSetting     = (robot_speed * 100) / 999;
+    status.direction        = (uint8_t)Robot_GetState();
+    status.emergencyStop    = (Robot_GetState() == robot_fault) ? 1 : 0;
+
+    // Live STM32 Real-Time Superloop Performance
+    status.cpuLoad          = g_cpu_load;
+    status.controlRate      = g_control_rate;
+    status.latencyMs        = g_latency_ms;
+    status.jitterMs         = g_jitter_ms;
+    status.missedDeadlines  = g_missed_deadlines;
+
+    // Transmit over UART (PA2)
+    uint8_t marker = 0xBB;
+    HAL_UART_Transmit(&hcom_uart[COM1], &marker, 1, 10);
+    HAL_UART_Transmit(&hcom_uart[COM1], (uint8_t*)&status, sizeof(robot_status_t), 10);
+
 }

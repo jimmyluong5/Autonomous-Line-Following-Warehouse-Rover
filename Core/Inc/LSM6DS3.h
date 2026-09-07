@@ -5,8 +5,10 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+//defining the cs gpio port for the imu, which is pb6 which is the same the adc 
+//pin 
 #define LSM6DS3_CS_GPIO_Port GPIOB
-#define LSM6DS3_CS_Pin       GPIO_PIN_6
+#define LSM6DS3_CS_Pin       GPIO_PIN_7
 
 #define LSM6DS3_WHO_AM_I         0x0F
 #define LSM6DS3_WHO_AM_I_VAL     0x69  // Classic LSM6DS3

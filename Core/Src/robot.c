@@ -21,7 +21,8 @@ void Robot_SetState(RobotState new_state) {
   current_state = new_state;
   if (current_state == robot_idle || current_state == robot_fault) {
     HAL_GPIO_WritePin(LED2_GPIO_PORT, LED2_PIN, GPIO_PIN_RESET);
-  } else {
+  } 
+  else {
     HAL_GPIO_WritePin(LED2_GPIO_PORT, LED2_PIN, GPIO_PIN_SET);
   }
 
@@ -29,19 +30,22 @@ void Robot_SetState(RobotState new_state) {
   switch (current_state) {
   case robot_forward:
     Motor_Forward(robot_speed);
+    Servo_SetAngle(SERVO_ANGLE_CENTER);
     break;
   case robot_reverse:
     Motor_Reverse(robot_speed);
+    Servo_SetAngle(SERVO_ANGLE_CENTER);
     break;
   case robot_left:
-    // Spin turn left with full 100% power (999 PWM) to overcome vehicle weight
-    Motor_Left_SetSpeed(-999);
-    Motor_Right_SetSpeed(999);
+    // Spin turn left: left motor backward, right motor forward
+    Motor_Left_SetSpeed(-robot_speed);
+    Motor_Right_SetSpeed(robot_speed);
     break;
   case robot_right:
-    // Spin turn right with full 100% power (999 PWM) to overcome vehicle weight
-    Motor_Left_SetSpeed(999);
-    Motor_Right_SetSpeed(-999);
+    // Spin turn right: left motor forward, right motor backward
+    Motor_Left_SetSpeed(robot_speed);
+    Motor_Right_SetSpeed(-robot_speed);
+
     break;
   case robot_idle:
     Motor_Stop();
