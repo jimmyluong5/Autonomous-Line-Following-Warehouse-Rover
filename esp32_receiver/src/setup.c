@@ -80,10 +80,9 @@ void init_uart(void) {
   //first we start uart buffered io with event queue
 
   const int uart_buffer_size = (1024*2);
-  QueueHandle_t uart_queue;
 
-  //install uart driver using an event queue
-  ESP_ERROR_CHECK(uart_driver_install(UART_NUM_1, uart_buffer_size, uart_buffer_size, 10, &uart_queue, 0) );
+  //install uart driver 
+  ESP_ERROR_CHECK(uart_driver_install(UART_NUM_1, uart_buffer_size, uart_buffer_size, 0, NULL, 0) );
 
   //set up the communication parameters
   uart_config_t uart_config = {
@@ -91,9 +90,12 @@ void init_uart(void) {
     .data_bits = UART_DATA_8_BITS,
     .parity = UART_PARITY_DISABLE,
     .stop_bits = UART_STOP_BITS_1,
-    .flow_ctrl = UART_HW_FLOWCTRL_CTS_RTS,
-    .rx_flow_ctrl_thresh = 122,
+    .flow_ctrl = UART_HW_FLOWCTRL_DISABLE, //disable
+    .source_clk = UART_SCLK_DEFAULT
   };
+  //check if the configuration of the uart is successful.
+  ESP_ERROR_CHECK(uart_param_config(UART_NUM_1, &uart_config));
+
 
 
   //we need to set the uart pins 
@@ -102,10 +104,12 @@ void init_uart(void) {
   //pin 42 - tx
   ESP_ERROR_CHECK(uart_set_pin(UART_NUM_1, 42, 41, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
     
+  //so we need to write our data_packet into the TX buffer, but we need to convert it into bytes first
+  //function prototype
+  // int uart_write_bytes(uart_port_t uart_num, const void* src, size_t size);
 
-  
-
-
+  //this function is not supposed to write bytes only to initalize the uart.
+  //uart_write_bytes(UART_NUM_1, &packet, sizeof(data_packet_t));
 }
 
 //then in order to send data we follow these steps 

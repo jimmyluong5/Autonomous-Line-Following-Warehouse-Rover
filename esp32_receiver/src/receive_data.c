@@ -84,7 +84,8 @@ void send_packet_stm32(data_packet_t *packet) {
     uart_write_bytes(UART_NUM_1, (const char*)&marker, 1);
 
     //send the actual data packet
-    uart_write_bytes(UART_NUM_1, (const char*)packet, sizeof(data_packet_t));
+    uart_write_bytes(UART_NUM_1, &packet, sizeof(data_packet_t));
+    //don't need to typecast the packet to (const char*), just send the address
 }
 
 //uart_write_bytes inputs, is the uart port, the address of the variable we're sending,

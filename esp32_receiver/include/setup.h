@@ -5,6 +5,6 @@
 void init_wifi(void);
 void init_esp_now(void);
 void init_esp_nvs(void);
-
+void init_uart(void);
 #endif
 

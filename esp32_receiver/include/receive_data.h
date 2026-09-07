@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-typedef struct {
+typedef struct __attribute__((packed)) {  //the struct must be in proper order, its now 10 bytes, 9 bytes and 1 padded byte.   
     uint8_t button_data;
     uint8_t speed;
     //uint16_t sequence;
