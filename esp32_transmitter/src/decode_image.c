@@ -116,6 +116,10 @@
     extern const uint8_t blankfirstpage_end[]
     asm("_binary_blankfirstpage_jpg_end");
 
+    extern const uint8_t secondpagedata_start[]
+    asm("_binary_secondpagedata_jpg_start");
+    extern const uint8_t secondpagedata_end[]
+    asm("_binary_secondpagedata_jpg_end");
 
 
 //create array with ptrs to the images
@@ -256,6 +260,11 @@ esp_err_t decode_image(int frame_idx, uint16_t **pixels) {
 
         // 2nd page of any of the modes (single left arrow)
         case PAGE_MANUAL_DATA:
+            jd.inData = secondpagedata_start;
+            jd.inLen = secondpagedata_end - secondpagedata_start;
+            break;
+
+            
         case PAGE_AUTO_DATA:
         case PAGE_IMU_DATA:
         case PAGE_LEFTPAGE:

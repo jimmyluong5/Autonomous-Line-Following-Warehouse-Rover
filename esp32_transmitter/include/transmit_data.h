@@ -13,7 +13,8 @@
 
 extern uint8_t current_speed;
 
-typedef struct {
+
+typedef struct __attribute__((packed)) {     
     uint8_t button_data;
     uint8_t speed;
     //uint16_t sequence;

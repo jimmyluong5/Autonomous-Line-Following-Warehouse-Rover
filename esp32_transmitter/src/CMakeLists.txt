@@ -36,4 +36,5 @@ idf_component_register(
         "images/linkedin.jpg"
         "images/github.jpg"
         "images/blankfirstpage.jpg"
+        "images/secondpagedata.jpg"
 )
