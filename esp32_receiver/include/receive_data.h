@@ -15,6 +15,24 @@ typedef struct __attribute__((packed)) {  //the struct must be in proper order, 
 } data_packet_t;
 
 
+//this is from the stm32, now we send this to the other esp32
+typedef struct __attribute__((packed)) {
+    float   actualspeed;
+    float   leftWheelSpeed;
+    float   rightWheelSpeed;
+    int32_t leftEncoder;
+    int32_t rightEncoder;
+    uint8_t speedSetting;
+    uint8_t direction;
+    uint8_t lineSensors;
+    uint8_t emergencyStop;
+    uint8_t cpuLoad;
+    float   controlRate;
+    float   latencyMs;
+    float   jitterMs;
+    uint16_t missedDeadlines;
+} robot_status_t;
+
 
 void receive_button_press(data_packet_t *packet);
 void init_pins(void);
