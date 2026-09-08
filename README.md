@@ -377,7 +377,6 @@ With the 3D-printed chassis, power distribution, and core firmware validated, th
 <img width="1920" height="2560" alt="image" src="https://github.com/user-attachments/assets/eae1eeb8-ab55-4b0b-a11c-10c700d05e61" />
 
 
-### 11. End-to-End Wireless UART Bridge & Bidirectional Telemetry
 
 The communication architecture establishes a complete, closed-loop bidirectional data link between the handheld transmitter controller, the on-rover ESP32-S3 receiver, and the main **STM32G431KB** robot brain:
 
@@ -393,7 +392,27 @@ The communication architecture establishes a complete, closed-loop bidirectional
 +------------------------------------+             +----------------------------------+             +----------------------------------+
 ```
 
-#### Hardware Interconnect (Receiver <-> STM32):
+##### 14. Inter-MCU UART Bridge & Hardware Verification (ESP32-S3 <-> STM32G431KB)
+
+To complete the end-to-end communication pipeline, hardware UART communication was established and verified between the rover's on-board **ESP32-S3 Receiver** and the **STM32G431KB** microcontroller:
+
+* **Hardware Pinout**:
+  * ESP32 Pin `42` (UART1 TX) --> STM32 `PA3` (`LPUART1_RX` / `D0`)
+  * ESP32 Pin `2` (UART1 RX) <-- STM32 `PA2` (`LPUART1_TX` / `D1`)
+  * Common `GND` reference and 115,200 baud rate.
+
+* **Verification & Results**:
+  * Built a bidirectional ping-pong diagnostic test where the ESP32 Receiver transmits `0xAA` drive packets and listens for incoming frames from the STM32.
+  * Successfully verified instantaneous reception of `127-byte` telemetry packets from STM32 `PA2`, confirming zero packet drop, active motor driving, and live return telemetry.
+
+<p align="center">
+  <img src="./assets/uart_esp32_stm32_test.png" width="85%" alt="UART Communication Verification between ESP32 and STM32" />
+  <br>
+  <i>PuTTY serial monitor verifying active transmission on Pin 42 and successful 127-byte telemetry reception from STM32 PA2.</i>
+</p>
+
+
+## Hardware Interconnect (Receiver <-> STM32):
 * **ESP32-S3 Pin 42 (UART1 TX)** --> **STM32 PA3 (LPUART1 RX / D0)** @ 115,200 baud
 * **ESP32-S3 Pin 2 (UART1 RX)** <-- **STM32 PA2 (LPUART1 TX / D1)** @ 115,200 baud
 * **Common Ground (GND)** connected across all modules with regulated 5V buck power distribution.
