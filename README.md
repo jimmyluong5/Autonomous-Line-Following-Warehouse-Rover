@@ -392,7 +392,7 @@ The communication architecture establishes a complete, closed-loop bidirectional
 +------------------------------------+             +----------------------------------+             +----------------------------------+
 ```
 
-##### 14. Inter-MCU UART Bridge & Hardware Verification (ESP32-S3 <-> STM32G431KB)
+### 14. Inter-MCU UART Bridge & Hardware Verification (ESP32-S3 <-> STM32G431KB)
 
 To complete the end-to-end communication pipeline, hardware UART communication was established and verified between the rover's on-board **ESP32-S3 Receiver** and the **STM32G431KB** microcontroller:
 
