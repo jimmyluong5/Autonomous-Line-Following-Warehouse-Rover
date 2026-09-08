@@ -10,6 +10,7 @@ uint16_t read_joystick_horizontal(void);
 uint16_t read_joystick_vertical(void);
 void print_joystick_values(void);
 void get_joystick_screen_coords(int *out_x, int *out_y);
+void get_joystick_raw_values(uint16_t *out_x, uint16_t *out_y);
 
 // Bounding box of the joystick grid on blankfirstpage.jpg
 #define GRID_CENTER_X   63

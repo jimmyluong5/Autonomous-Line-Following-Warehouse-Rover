@@ -132,6 +132,153 @@ static inline bool check_text_pixel(int x, int y) {
     return false;
 }
 
+static ui_text_item_t s_diag_texts[17];
+
+static void prepare_diag_ui_strings(void) {
+    // Read REAL physical joystick ADC values
+    uint16_t raw_x = 2000, raw_y = 2000;
+    get_joystick_raw_values(&raw_x, &raw_y);
+    int16_t jx = metrics_get_joy_x_val();
+    int16_t jy = metrics_get_joy_y_val();
+
+    // === 1. JOYSTICK DATA (Top Left: Box Center X = 89) ===
+    // Line 1: X ADC
+    snprintf(s_diag_texts[0].str, sizeof(s_diag_texts[0].str), "%u", raw_x);
+    s_diag_texts[0].len = strlen(s_diag_texts[0].str);
+    s_diag_texts[0].x0 = 89 - (s_diag_texts[0].len * 6) / 2;
+    s_diag_texts[0].y0 = 86;
+
+    // Line 2: Y ADC
+    snprintf(s_diag_texts[1].str, sizeof(s_diag_texts[1].str), "%u", raw_y);
+    s_diag_texts[1].len = strlen(s_diag_texts[1].str);
+    s_diag_texts[1].x0 = 89 - (s_diag_texts[1].len * 6) / 2;
+    s_diag_texts[1].y0 = 104;
+
+    // Line 3: X norm
+    snprintf(s_diag_texts[2].str, sizeof(s_diag_texts[2].str), "%+d%%", jx);
+    s_diag_texts[2].len = strlen(s_diag_texts[2].str);
+    s_diag_texts[2].x0 = 89 - (s_diag_texts[2].len * 6) / 2;
+    s_diag_texts[2].y0 = 121;
+
+    // Line 4: Y norm
+    snprintf(s_diag_texts[3].str, sizeof(s_diag_texts[3].str), "%+d%%", jy);
+    s_diag_texts[3].len = strlen(s_diag_texts[3].str);
+    s_diag_texts[3].x0 = 89 - (s_diag_texts[3].len * 6) / 2;
+    s_diag_texts[3].y0 = 138;
+
+    // === 2. MOTOR DATA (Top Right: Box Center X = 207) ===
+    uint8_t spd = g_robot_status_received ? g_robot_status.speedSetting : metrics_get_speed_percent();
+    // Line 1: Left PWM
+    snprintf(s_diag_texts[4].str, sizeof(s_diag_texts[4].str), "%u%%", spd);
+    s_diag_texts[4].len = strlen(s_diag_texts[4].str);
+    s_diag_texts[4].x0 = 207 - (s_diag_texts[4].len * 6) / 2;
+    s_diag_texts[4].y0 = 86;
+
+    // Line 2: Right PWM
+    snprintf(s_diag_texts[5].str, sizeof(s_diag_texts[5].str), "%u%%", spd);
+    s_diag_texts[5].len = strlen(s_diag_texts[5].str);
+    s_diag_texts[5].x0 = 207 - (s_diag_texts[5].len * 6) / 2;
+    s_diag_texts[5].y0 = 104;
+
+    float l_spd = g_robot_status_received ? g_robot_status.leftWheelSpeed : 0.0f;
+    // Line 3: Left speed
+    snprintf(s_diag_texts[6].str, sizeof(s_diag_texts[6].str), "%.2f", l_spd);
+    s_diag_texts[6].len = strlen(s_diag_texts[6].str);
+    s_diag_texts[6].x0 = 207 - (s_diag_texts[6].len * 6) / 2;
+    s_diag_texts[6].y0 = 121;
+
+    float r_spd = g_robot_status_received ? g_robot_status.rightWheelSpeed : 0.0f;
+    // Line 4: Right speed
+    snprintf(s_diag_texts[7].str, sizeof(s_diag_texts[7].str), "%.2f", r_spd);
+    s_diag_texts[7].len = strlen(s_diag_texts[7].str);
+    s_diag_texts[7].x0 = 207 - (s_diag_texts[7].len * 6) / 2;
+    s_diag_texts[7].y0 = 138;
+
+    // === 3. ENCODER DATA (Bottom Left: Box Center X = 94) ===
+    long l_enc = g_robot_status_received ? (long)g_robot_status.leftEncoder : 0;
+    // Line 1: Left ticks
+    snprintf(s_diag_texts[8].str, sizeof(s_diag_texts[8].str), "%ld", l_enc);
+    s_diag_texts[8].len = strlen(s_diag_texts[8].str);
+    s_diag_texts[8].x0 = 94 - (s_diag_texts[8].len * 6) / 2;
+    s_diag_texts[8].y0 = 207;
+
+    long r_enc = g_robot_status_received ? (long)g_robot_status.rightEncoder : 0;
+    // Line 2: Right ticks
+    snprintf(s_diag_texts[9].str, sizeof(s_diag_texts[9].str), "%ld", r_enc);
+    s_diag_texts[9].len = strlen(s_diag_texts[9].str);
+    s_diag_texts[9].x0 = 94 - (s_diag_texts[9].len * 6) / 2;
+    s_diag_texts[9].y0 = 224;
+
+    int l_rpm = (int)(l_spd / (2.0f * 3.14159f * 0.0215f) * 60.0f);
+    // Line 3: Left RPM
+    snprintf(s_diag_texts[10].str, sizeof(s_diag_texts[10].str), "%d", l_rpm);
+    s_diag_texts[10].len = strlen(s_diag_texts[10].str);
+    s_diag_texts[10].x0 = 94 - (s_diag_texts[10].len * 6) / 2;
+    s_diag_texts[10].y0 = 242;
+
+    int r_rpm = (int)(r_spd / (2.0f * 3.14159f * 0.0215f) * 60.0f);
+    // Line 4: Right RPM
+    snprintf(s_diag_texts[11].str, sizeof(s_diag_texts[11].str), "%d", r_rpm);
+    s_diag_texts[11].len = strlen(s_diag_texts[11].str);
+    s_diag_texts[11].x0 = 94 - (s_diag_texts[11].len * 6) / 2;
+    s_diag_texts[11].y0 = 260;
+
+    // === 4. STM32 PERFORMANCE (Bottom Right: Box Center X = 207) ===
+    unsigned int cpu = g_robot_status_received ? g_robot_status.cpuLoad : 0;
+    // Line 1: CPU LOAD
+    snprintf(s_diag_texts[12].str, sizeof(s_diag_texts[12].str), "%u%%", cpu);
+    s_diag_texts[12].len = strlen(s_diag_texts[12].str);
+    s_diag_texts[12].x0 = 207 - (s_diag_texts[12].len * 6) / 2;
+    s_diag_texts[12].y0 = 207;
+
+    float lat = g_robot_status_received ? g_robot_status.latencyMs : 0.0f;
+    // Line 2: LATENCY
+    snprintf(s_diag_texts[13].str, sizeof(s_diag_texts[13].str), "%.1f", lat);
+    s_diag_texts[13].len = strlen(s_diag_texts[13].str);
+    s_diag_texts[13].x0 = 207 - (s_diag_texts[13].len * 6) / 2;
+    s_diag_texts[13].y0 = 224;
+
+    float jit = g_robot_status_received ? g_robot_status.jitterMs : 0.0f;
+    // Line 3: JITTER
+    snprintf(s_diag_texts[14].str, sizeof(s_diag_texts[14].str), "%.1f", jit);
+    s_diag_texts[14].len = strlen(s_diag_texts[14].str);
+    s_diag_texts[14].x0 = 207 - (s_diag_texts[14].len * 6) / 2;
+    s_diag_texts[14].y0 = 241;
+
+    unsigned int mdl = g_robot_status_received ? g_robot_status.missedDeadlines : 0;
+    // Line 4: MISSED DL
+    snprintf(s_diag_texts[15].str, sizeof(s_diag_texts[15].str), "%u", mdl);
+    s_diag_texts[15].len = strlen(s_diag_texts[15].str);
+    s_diag_texts[15].x0 = 207 - (s_diag_texts[15].len * 6) / 2;
+    s_diag_texts[15].y0 = 258;
+
+    float hz = g_robot_status_received ? g_robot_status.controlRate : 0.0f;
+    // Line 5: LOOP RATE
+    snprintf(s_diag_texts[16].str, sizeof(s_diag_texts[16].str), "%.1f", hz);
+    s_diag_texts[16].len = strlen(s_diag_texts[16].str);
+    s_diag_texts[16].x0 = 207 - (s_diag_texts[16].len * 6) / 2;
+    s_diag_texts[16].y0 = 275;
+}
+
+static inline bool check_diag_text_pixel(int x, int y) {
+    for (int i = 0; i < 17; i++) {
+        int y0 = s_diag_texts[i].y0;
+        if (y >= y0 && y < y0 + 7) {
+            int x0 = s_diag_texts[i].x0;
+            int total_w = s_diag_texts[i].len * 6;
+            if (x >= x0 && x < x0 + total_w) {
+                int char_idx = (x - x0) / 6;
+                int char_x0 = x0 + char_idx * 6;
+                char c = s_diag_texts[i].str[char_idx];
+                if (font5x7_get_pixel(c, char_x0, y0, x, y)) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
 // Grab an rgb16 pixel from decoded JPEG buffer
 static inline uint16_t get_bgnd_pixel(int x, int y)
 {
@@ -160,26 +307,34 @@ static inline uint16_t apply_overlay(int x, int y, uint16_t bg_pixel, uint16_t h
     if (current_page == PAGE_MANUAL) {
         static int dot_x = GRID_CENTER_X;
         static int dot_y = GRID_CENTER_Y;
-        // Sample latest coordinates and prepare text strings at start of frame (0, 0)
         if (y == 0 && x == 0) {
             get_joystick_screen_coords(&dot_x, &dot_y);
             prepare_manual_ui_strings();
         }
 
-        // Draw metrics text
         if (check_text_pixel(x, y)) {
             return COLOR_TEXT_CYAN;
         }
 
-        // Check if inside joystick grid area on blankfirstpage.jpg
         if (y >= 35 && y <= 120 && x >= 18 && x <= 108) {
             int dx = x - dot_x;
             int dy = y - dot_y;
             int dist_sq = dx * dx + dy * dy;
-            // Circle radius = 4 pixels (4*4 = 16)
             if (dist_sq <= 16) {
                 return (dist_sq >= 10) ? COLOR_DOT_BORDER : COLOR_JOYSTICK;
             }
+        }
+        return bg_pixel;
+    }
+
+    // 3. Diagnostics Page (PAGE_MANUAL_DATA)
+    if (current_page == PAGE_MANUAL_DATA) {
+        if (y == 0 && x == 0) {
+            prepare_diag_ui_strings();
+        }
+
+        if (check_diag_text_pixel(x, y)) {
+            return COLOR_TEXT_CYAN;
         }
         return bg_pixel;
     }

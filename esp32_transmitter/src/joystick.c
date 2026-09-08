@@ -42,6 +42,11 @@ void get_joystick_screen_coords(int *out_x, int *out_y) {
     *out_y = pixel_y;
 }
 
+void get_joystick_raw_values(uint16_t *out_x, uint16_t *out_y) {
+    if (out_x) *out_x = s_latest_raw_x;
+    if (out_y) *out_y = s_latest_raw_y;
+}
+
 
 
 uint16_t read_joystick_horizontal(void) {

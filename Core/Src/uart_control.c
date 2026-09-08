@@ -255,11 +255,17 @@ void UART_CONTROL_update(void) {
 
     //we need to process the received byte from the esp32
     if (received_byte == 0xAA) { //this means we have the correct data_packet transmitted
+      // Toggle LED2 instantly on packet arrival
+      HAL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
 
       //create a data packet with the struct we defined.
       data_packet_t packet;
 
-      if (HAL_UART_Receive(&hcom_uart[COM1], (uint8_t*)&packet, sizeof(data_packet_t), 10) == HAL_OK) {
+      if (HAL_UART_Receive(&hcom_uart[COM1], (uint8_t*)&packet, sizeof(data_packet_t), 20) == HAL_OK) {
+        // Send immediate ACK and telemetry back to ESP32 Receiver on PA2 TX
+        const char ack_msg[] = "STM32_ACK\r\n";
+        HAL_UART_Transmit(&hcom_uart[COM1], (uint8_t*)ack_msg, strlen(ack_msg), 10);
+        UART_Send_Telemetry();
 
         //since we have access to the data packet now we need to update a few things such as
         //robot speed

@@ -376,6 +376,33 @@ With the 3D-printed chassis, power distribution, and core firmware validated, th
 <img width="1920" height="2560" alt="photo_2026-09-06_17-12-59" src="https://github.com/user-attachments/assets/a79483f9-5157-4bf6-b995-1d22fd751318" />
 <img width="1920" height="2560" alt="image" src="https://github.com/user-attachments/assets/eae1eeb8-ab55-4b0b-a11c-10c700d05e61" />
 
+
+### 11. End-to-End Wireless UART Bridge & Bidirectional Telemetry
+
+The communication architecture establishes a complete, closed-loop bidirectional data link between the handheld transmitter controller, the on-rover ESP32-S3 receiver, and the main **STM32G431KB** robot brain:
+
+```text
++------------------------------------+             +----------------------------------+             +----------------------------------+
+|    Handheld ESP32-S3 Transmitter   |             |     Rover ESP32-S3 Receiver      |             |       STM32G431KB Robot MCU      |
+|                                    |   ESP-NOW   |                                  |    UART1    |                                  |
+| - Analog Joystick (ADC1)           | ----------> | - Decodes ESP-NOW data_packet_t  | ----------> | - LPUART1 RX (PA3): 0xAA + packet|
+| - 5-Way Button Matrix (Mode/Speed) |   (2.4GHz)  | - Forwards 0xAA + packet via TX  |  (Pin 42)   | - Drives TB6612FNG Dual Motors   |
+|                                    |             |                                  |             |                                  |
+| - 2.4" ILI9341 Diagnostics Display | <---------- | - Forwards robot_status_t via TX | <---------- | - LPUART1 TX (PA2): 0xBB + status|
+|   (Live Speeds, Ticks, RTOS stats) |   ESP-NOW   | - Captures 0xBB + status via RX  |  (Pin 2)    | - DWT Timer Benchmarks & Metrics |
++------------------------------------+             +----------------------------------+             +----------------------------------+
+```
+
+#### Hardware Interconnect (Receiver <-> STM32):
+* **ESP32-S3 Pin 42 (UART1 TX)** --> **STM32 PA3 (LPUART1 RX / D0)** @ 115,200 baud
+* **ESP32-S3 Pin 2 (UART1 RX)** <-- **STM32 PA2 (LPUART1 TX / D1)** @ 115,200 baud
+* **Common Ground (GND)** connected across all modules with regulated 5V buck power distribution.
+
+#### Packet Protocols:
+1. **Control Packet (`0xAA + data_packet_t`)**: Transmitted at 100 Hz from transmitter to STM32, containing active-low button masks, commanded speed (`0-255`), 12-bit analog joystick X/Y deflections, and operating mode (`Manual`, `Autonomous`, `IMU`).
+2. **Telemetry Packet (`0xBB + robot_status_t`)**: Transmitted at 20 Hz from STM32 back to transmitter, delivering real-time wheel speeds (m/s), left/right encoder pulse counts, CPU load percentage, loop rate (Hz), latency (ms), jitter (ms), and missed deadline counters to the controller's diagnostic UI.
+
+
 To provide manual override, multi-mode switching, and live diagnostics for the rover, a dedicated handheld wireless controller was developed using a dual-core **ESP32-S3** (240 MHz) and a 2.4-inch **ILI9341 SPI TFT LCD (240×320)**.
 
 The controller provides an interactive graphical user interface (GUI), live telemetry monitoring, and low-latency packet transmission over **ESP-NOW**.
@@ -489,14 +516,16 @@ Phase 3: Time-of-Flight (ToF) Collision Detection & Auto-Braking
 - [x] 8-Channel reflectance array acquisition via MCP3208 SPI ADC
 - [x] Autonomous line-following navigation with PID control
 - [x] 3D-printed chassis assembly and mechanical integration
-- [x] Servo-actuated steering & suspension control (45°–135° limits)
+- [x] Servo-actuated steering & suspension control (45 deg - 135 deg limits)
 - [x] Multi-subsystem UART diagnostic & control dashboard
-- [x] Dual ESP32-S3 ESP-NOW wireless link with 8-bit command packet protocol
-- [x] Handheld wireless button controller prototype with serial debugging
+- [x] Dual ESP32-S3 ESP-NOW wireless link with binary command packet protocol
+- [x] Direct bidirectional UART communication bridge between receiver ESP32-S3 and STM32G431KB (`0xAA` control / `0xBB` telemetry)
+- [x] Handheld wireless controller with 2.4" 240x320 ILI9341 LCD, 2D joystick grid, and 4 diagnostic telemetry quadrants
+- [x] Closed-loop STM32 DWT performance metrics & encoder telemetry transmission over ESP-NOW back to handheld transmitter LCD
 
 ### In Progress
-- [x] Direct UART communication bridge between receiver ESP32-S3 and STM32G431KB
-- [x] Analog 2-axis joystick integration on wireless transmitter & 240x320 LCD telemetry dashboard
+- [ ] Closed-loop PID speed control based on real-time optical encoder feedback
+- [ ] IMU sensor integration & dynamic heading stabilization
 
 ### Planned
 - [ ] IMU sensor integration & closed-loop heading stabilization
