@@ -24,12 +24,11 @@ typedef struct __attribute__((packed)) {
     uint8_t mode; //eventually it'll contain more modes.
 } data_packet_t;
 
+//change this to make it better to understand, make it like stm32 data packet.
 typedef struct __attribute__((packed)) {
     float   actualspeed;
     float   leftWheelSpeed;
     float   rightWheelSpeed;
-    int32_t leftEncoder;
-    int32_t rightEncoder;
     uint8_t speedSetting;
     uint8_t direction;
     uint8_t lineSensors;
