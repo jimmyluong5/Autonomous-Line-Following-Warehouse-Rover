@@ -195,31 +195,27 @@ static void prepare_diag_ui_strings(void) {
     s_diag_texts[7].x0 = 207 - (s_diag_texts[7].len * 6) / 2;
     s_diag_texts[7].y0 = 138;
 
-    // === 3. ENCODER DATA (Bottom Left: Box Center X = 94) ===
-    long l_enc = g_robot_status_received ? (long)g_robot_status.leftEncoder : 0;
+    // === 3. ENCODER DATA (Bottom Left: Disabled - showing N/A) ===
     // Line 1: Left ticks
-    snprintf(s_diag_texts[8].str, sizeof(s_diag_texts[8].str), "%ld", l_enc);
+    snprintf(s_diag_texts[8].str, sizeof(s_diag_texts[8].str), "N/A");
     s_diag_texts[8].len = strlen(s_diag_texts[8].str);
     s_diag_texts[8].x0 = 94 - (s_diag_texts[8].len * 6) / 2;
     s_diag_texts[8].y0 = 207;
 
-    long r_enc = g_robot_status_received ? (long)g_robot_status.rightEncoder : 0;
     // Line 2: Right ticks
-    snprintf(s_diag_texts[9].str, sizeof(s_diag_texts[9].str), "%ld", r_enc);
+    snprintf(s_diag_texts[9].str, sizeof(s_diag_texts[9].str), "N/A");
     s_diag_texts[9].len = strlen(s_diag_texts[9].str);
     s_diag_texts[9].x0 = 94 - (s_diag_texts[9].len * 6) / 2;
     s_diag_texts[9].y0 = 224;
 
-    int l_rpm = (int)(l_spd / (2.0f * 3.14159f * 0.0215f) * 60.0f);
     // Line 3: Left RPM
-    snprintf(s_diag_texts[10].str, sizeof(s_diag_texts[10].str), "%d", l_rpm);
+    snprintf(s_diag_texts[10].str, sizeof(s_diag_texts[10].str), "N/A");
     s_diag_texts[10].len = strlen(s_diag_texts[10].str);
     s_diag_texts[10].x0 = 94 - (s_diag_texts[10].len * 6) / 2;
     s_diag_texts[10].y0 = 242;
 
-    int r_rpm = (int)(r_spd / (2.0f * 3.14159f * 0.0215f) * 60.0f);
     // Line 4: Right RPM
-    snprintf(s_diag_texts[11].str, sizeof(s_diag_texts[11].str), "%d", r_rpm);
+    snprintf(s_diag_texts[11].str, sizeof(s_diag_texts[11].str), "N/A");
     s_diag_texts[11].len = strlen(s_diag_texts[11].str);
     s_diag_texts[11].x0 = 94 - (s_diag_texts[11].len * 6) / 2;
     s_diag_texts[11].y0 = 260;
