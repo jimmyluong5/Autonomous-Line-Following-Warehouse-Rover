@@ -1,10 +1,10 @@
 C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:64:6:HAL_MspInit	16	static
 C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:91:6:HAL_SPI_MspInit	48	static
 C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:129:6:HAL_SPI_MspDeInit	16	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:159:6:HAL_TIM_Encoder_MspInit	56	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:219:6:HAL_TIM_PWM_MspInit	24	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:252:6:HAL_TIM_Base_MspInit	24	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:279:6:HAL_TIM_MspPostInit	48	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:352:6:HAL_TIM_Encoder_MspDeInit	16	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:399:6:HAL_TIM_PWM_MspDeInit	16	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:432:6:HAL_TIM_Base_MspDeInit	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:159:6:HAL_TIM_PWM_MspInit	24	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:192:6:HAL_TIM_Base_MspInit	24	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:219:6:HAL_TIM_MspPostInit	48	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:292:6:HAL_TIM_PWM_MspDeInit	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:325:6:HAL_TIM_Base_MspDeInit	16	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:358:6:HAL_UART_MspInit	112	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/stm32g4xx_hal_msp.c:406:6:HAL_UART_MspDeInit	16	static

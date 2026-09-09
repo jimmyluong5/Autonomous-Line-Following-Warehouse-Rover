@@ -76,16 +76,8 @@ void Error_Handler(void);
 #define Motor_Driver_PWMA_GPIO_Port GPIOA
 #define Servo_Suspension_Pin GPIO_PIN_0
 #define Servo_Suspension_GPIO_Port GPIOB
-#define RIGHT_B2_GREEN_Pin GPIO_PIN_8
-#define RIGHT_B2_GREEN_GPIO_Port GPIOA
-#define RIGHT_B2_YELLOW_Pin GPIO_PIN_9
-#define RIGHT_B2_YELLOW_GPIO_Port GPIOA
-#define Motor_Driver_PWMB_Pin GPIO_PIN_10
+#define Motor_Driver_PWMB_Pin GPIO_PIN_8
 #define Motor_Driver_PWMB_GPIO_Port GPIOA
-#define LEFT_A1_GREEN_Pin GPIO_PIN_11
-#define LEFT_A1_GREEN_GPIO_Port GPIOA
-#define LEFT_B1_YELLOW_Pin GPIO_PIN_12
-#define LEFT_B1_YELLOW_GPIO_Port GPIOA
 #define T_SWDIO_Pin GPIO_PIN_13
 #define T_SWDIO_GPIO_Port GPIOA
 #define T_SWCLK_Pin GPIO_PIN_14
