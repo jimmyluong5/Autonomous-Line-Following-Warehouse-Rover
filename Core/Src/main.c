@@ -25,7 +25,7 @@
 #include <motor.h>
 #include <robot.h>
 #include <servo.h>
-#include <stepper.h>
+//#include <stepper.h>
 #include <string.h>
 #include <uart_control.h>
 #include "LSM6DS3.h"
@@ -64,19 +64,19 @@ TIM_HandleTypeDef htim17;
 /* USER CODE BEGIN PV */
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim4;
-extern UART_HandleTypeDef hcom_uart[];
+UART_HandleTypeDef huart2;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_TIM2_Init(void);
 static void MX_TIM17_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_TIM16_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM4_Init(void);
+static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -115,18 +115,18 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_TIM2_Init();
   MX_TIM17_Init();
   MX_SPI1_Init();
   MX_TIM16_Init();
   MX_TIM3_Init();
   MX_TIM1_Init();
   MX_TIM4_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  Robot_Init();
+  Robot_Init(); //this calls motor_init.
   servo_init();
   Encoder_Init();
-  stepper_init();
+  //stepper_init();
   DWT_Init();
 
   /* USER CODE END 2 */
@@ -144,6 +144,8 @@ int main(void)
   {
     Error_Handler();
   }
+  huart2 = hcom_uart[COM1];
+  UART_CONTROL_init();
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -171,7 +173,7 @@ int main(void)
     if ((HAL_GetTick() - last_telemetry_time) > 50) {
       last_telemetry_time = HAL_GetTick();
       Telemetry_Update_Wheel_Speeds(0.05f);
-      UART_Send_Telemetry();
+      // UART_Send_Telemetry(); // Commented out to prevent binary frames from flooding PuTTY
     }
     /* USER CODE END WHILE */
 
@@ -580,7 +582,10 @@ static void MX_GPIO_Init(void)
                           |DC_Motor_AIN1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, ADC_SPI_CS_Pin|IMU_SPI_CS_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(ADC_SPI_CS_GPIO_Port, ADC_SPI_CS_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : DC_Motor_BIN2_Pin DC_Motor_BIN1_Pin DC_Motor_STBY_Pin DC_Motor_AIN2_Pin
                            DC_Motor_AIN1_Pin */
@@ -591,39 +596,38 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PA2 PA3 */
-  GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.Alternate = GPIO_AF12_LPUART1;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : ADC_SPI_CS_Pin IMU_SPI_CS_Pin */
-  GPIO_InitStruct.Pin = ADC_SPI_CS_Pin|IMU_SPI_CS_Pin;
+  /*Configure GPIO pin : ADC_SPI_CS_Pin */
+  GPIO_InitStruct.Pin = ADC_SPI_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(ADC_SPI_CS_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : LED2_Pin */
+  GPIO_InitStruct.Pin = LED2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(LED2_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
   /* Configure GPIO pin Output Level for RFID */
-  HAL_GPIO_WritePin(RFID_RST_GPIO_Port, RFID_RST_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(RFID_SPI_CS_GPIO_Port, RFID_SPI_CS_Pin, GPIO_PIN_SET);
+  //HAL_GPIO_WritePin(RFID_RST_GPIO_Port, RFID_RST_Pin, GPIO_PIN_SET);
+  //HAL_GPIO_WritePin(RFID_SPI_CS_GPIO_Port, RFID_SPI_CS_Pin, GPIO_PIN_SET);
 
   /* Configure GPIO pin : RFID_RST_Pin */
-  GPIO_InitStruct.Pin = RFID_RST_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  HAL_GPIO_Init(RFID_RST_GPIO_Port, &GPIO_InitStruct);
+  //GPIO_InitStruct.Pin = RFID_RST_Pin;
+  //GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  //GPIO_InitStruct.Pull = GPIO_NOPULL;
+  //GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  //HAL_GPIO_Init(RFID_RST_GPIO_Port, &GPIO_InitStruct);
 
   /* Configure GPIO pin : RFID_SPI_CS_Pin */
-  GPIO_InitStruct.Pin = RFID_SPI_CS_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
-  HAL_GPIO_Init(RFID_SPI_CS_GPIO_Port, &GPIO_InitStruct);
+  //GPIO_InitStruct.Pin = RFID_SPI_CS_Pin;
+  //GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  //GPIO_InitStruct.Pull = GPIO_NOPULL;
+  //GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
+  //HAL_GPIO_Init(RFID_SPI_CS_GPIO_Port, &GPIO_InitStruct);
   /* USER CODE END MX_GPIO_Init_2 */
 }
 

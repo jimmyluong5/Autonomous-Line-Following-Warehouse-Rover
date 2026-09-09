@@ -23,6 +23,7 @@ uint16_t *pixels = NULL;
 
 // Center Y of each pill button on the 240x320 screen
 static const int pill_center_y[TOTAL_MODES] = {
+    [MENU_MODE]   = 126,
     [MANUAL_MODE] = 126,
     [AUTO_MODE]   = 170,
     [IMU_MODE]    = 214

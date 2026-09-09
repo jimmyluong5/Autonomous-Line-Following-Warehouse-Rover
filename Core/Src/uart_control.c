@@ -6,7 +6,7 @@
 #include <servo.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <stepper.h>
+//#include <stepper.h>
 #include <string.h>
 #include <uart_control.h>
 #include "LSM6DS3.h"
@@ -14,11 +14,11 @@
 #include "motor.h"
 #include <math.h>
 static uint8_t current_servo_angle = 90;
-static int16_t current_stepper_angle =
-    0;                       // track current stepper angle starting at 0 deg.
+//static int16_t current_stepper_angle = 0; 
+// track current stepper angle starting at 0 deg.
 #define BLACK_THRESHOLD 2359 // 1.90V on 3.3V ADC
 
-extern UART_HandleTypeDef hcom_uart[];
+extern UART_HandleTypeDef huart2;
 extern SPI_HandleTypeDef hspi1;
 extern TIM_HandleTypeDef htim4;
 
@@ -61,6 +61,7 @@ void menu_main(void){
            " [t] - Stepper Mode \r\n"
            " [p] - Speaker/Buzzer Test Mode\r\n"
            " [i] - LSM6DS3 IMU Test Mode\r\n"
+           " [u] - UART Test Mode \r\n"
            "------------------------------------------\r\n"
            "Select Speed (Current: %d%%):\r\n"
            " [1] - Set Speed to 25%% PWM\r\n"
@@ -193,13 +194,27 @@ void menu_both(void) {
             "---------------------------------\r\n");
 }
 
+void menu_uart(void) {
+  UART_SendMessage(
+      "\x1b[2J\x1b[H"
+      "====================================================\r\n"
+      "     UART Wireless Packet Diagnostic Mode ('u')     \r\n"
+      "====================================================\r\n"
+      "Listening on LPUART1 for incoming ESP-NOW packets...\r\n"
+      "Frame Format: [0xAA] [data_packet_t (9 bytes)]\r\n"
+      "\r\n"
+      "Commands:\r\n"
+      " [h] - Return to Main Menu\r\n"
+      "----------------------------------------------------\r\n"
+      "Waiting for incoming packets from ESP32...\r\n\r\n");
+}
+
 
 
 
 // function to set a message in UART.
 static void UART_SendMessage(const char *message) {
-  HAL_UART_Transmit(&hcom_uart[COM1], (uint8_t *)message, strlen(message),
-                    HAL_MAX_DELAY);
+  HAL_UART_Transmit(&huart2, (uint8_t *)message, strlen(message), HAL_MAX_DELAY);
 }
 
 static uint32_t led_blink_start_time = 0;
@@ -228,14 +243,11 @@ void UART_CONTROL_update(void) {
   }
 
   // Clear any overrun or error flags that lock up UART reception
-  if (__HAL_UART_GET_FLAG(&hcom_uart[COM1], UART_FLAG_ORE)) {
-    __HAL_UART_CLEAR_OREFLAG(&hcom_uart[COM1]);
+  if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_ORE)) {
+    __HAL_UART_CLEAR_OREFLAG(&huart2);
   }
-  if (__HAL_UART_GET_FLAG(&hcom_uart[COM1], UART_FLAG_NE) ||
-      __HAL_UART_GET_FLAG(&hcom_uart[COM1], UART_FLAG_FE) ||
-      __HAL_UART_GET_FLAG(&hcom_uart[COM1], UART_FLAG_PE)) {
-    __HAL_UART_CLEAR_FLAG(&hcom_uart[COM1],
-                          UART_CLEAR_NEF | UART_CLEAR_FEF | UART_CLEAR_PEF);
+  if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_NE) ||__HAL_UART_GET_FLAG(&huart2, UART_FLAG_FE) ||__HAL_UART_GET_FLAG(&huart2, UART_FLAG_PE)) {
+    __HAL_UART_CLEAR_FLAG(&huart2, UART_CLEAR_NEF | UART_CLEAR_FEF | UART_CLEAR_PEF);
   }
 
   //hal_uart_receive function prototype.
@@ -243,7 +255,7 @@ void UART_CONTROL_update(void) {
 
 
   // Check if one keyboard character was received (non-blocking)
-  if (HAL_UART_Receive(&hcom_uart[COM1], &received_byte, 1, 0) == HAL_OK) {
+  if (HAL_UART_Receive(&huart2, &received_byte, 1, 0) == HAL_OK) {
     // Turn on the LED to indicate keypress
     HAL_GPIO_WritePin(LED2_GPIO_PORT, LED2_PIN, GPIO_PIN_SET);
     led_blink_start_time = HAL_GetTick();
@@ -261,46 +273,76 @@ void UART_CONTROL_update(void) {
       //create a data packet with the struct we defined.
       data_packet_t packet;
 
-      if (HAL_UART_Receive(&hcom_uart[COM1], (uint8_t*)&packet, sizeof(data_packet_t), 20) == HAL_OK) {
+      if (HAL_UART_Receive(&huart2, (uint8_t*)&packet, sizeof(data_packet_t), 20) == HAL_OK) {
         // Send immediate ACK and telemetry back to ESP32 Receiver on PA2 TX
-        const char ack_msg[] = "STM32_ACK\r\n";
-        HAL_UART_Transmit(&hcom_uart[COM1], (uint8_t*)ack_msg, strlen(ack_msg), 10);
-        UART_Send_Telemetry();
+        //const char ack_msg[] = "STM32_ACK\r\n";
+        //HAL_UART_Transmit(&huart2, (uint8_t*)ack_msg, strlen(ack_msg), 10);
+        //UART_Send_Telemetry();
 
-        //since we have access to the data packet now we need to update a few things such as
-        //robot speed
+        //1 calculate the effective speed
+        // Default to 50% PWM if speed is 0 or uninitialized
+          uint8_t effective_speed = packet.speed > 0 ? packet.speed : 128;
+          robot_speed = ((uint32_t)effective_speed * 999) / 255;
         
-        robot_speed = ((uint32_t)packet.speed * 999) / 255;
-        
-        //then for autonomous mode
-        if (packet.mode == 1) {
-          Robot_SetState(robot_auto);
-        }
-        else if (packet.mode == 0) {
+
+        //ensure motor driver is active.
+          Motor_SetStandby(false);
+          last_command_time = HAL_GetTick();
+
+          //process the joystick values
           //we need to move the motors based on our joystick
-          int32_t steer_raw = (int32_t) packet.joystick_x - 2048;
-          int32_t throttle_raw = (int32_t) packet.joystick_y - 2048;
+          int32_t x_raw = (int32_t) packet.joystick_x - 2048;
+          int32_t y_raw = (int32_t) packet.joystick_y - 2048;
 
           // Deadband filter
-          if (abs(steer_raw) < 200)  {
-            steer_raw = 0;
+          if (abs(x_raw) < 200)  {
+            x_raw = 0;
           }
 
-          if (abs(throttle_raw) < 200)  {
-            throttle_raw = 0;
+          if (abs(y_raw) < 200)  {
+            y_raw = 0;
           }
             
           // Scale to robot speed PWM
-          int16_t fwd_pwm   = (throttle_raw * robot_speed) / 2048;
-          int16_t steer_pwm = (steer_raw * robot_speed) / 2048;
-
-          // Drive Left & Right motors
-          Motor_Left_SetSpeed(fwd_pwm + steer_pwm);
-          Motor_Right_SetSpeed(fwd_pwm - steer_pwm);
+          int16_t fwd_pwm   = (y_raw * (int32_t)robot_speed) / 2048;
+          int16_t side_pwm = (x_raw * (int32_t)robot_speed) / 2048;
+          int16_t left_pwm = fwd_pwm + side_pwm;
+          int16_t right_pwm = fwd_pwm - side_pwm;
+          
+        if (current_mode == UART_MODE_STM32) {
+          //we need to create a buffer to send the values over putty
+          char packet_values[160];
+          snprintf(packet_values, sizeof(packet_values), "[STM32 RX] JoyX:%4u | JoyY:%4u | Speed:%3u | Mode:%u | Btns:0x%02X -> PWM L:%+4d R:%+4d\r\n", 
+          packet.joystick_x, packet.joystick_y, packet.speed, packet.mode, packet.button_data, left_pwm, right_pwm);
+          UART_SendMessage(packet_values);
         }
+        
+        //handle the actual modes.
+        if (packet.mode == MANUAL_MODE) {
+          //we need to move the motors
+          Motor_Left_SetSpeed(left_pwm);
+          Motor_Right_SetSpeed(right_pwm);
+          if (current_mode != UART_MODE_STM32) {
+             // Print live debug message to PuTTY
+            char dbg_buf[140];
+            snprintf(dbg_buf, sizeof(dbg_buf), "[STM32] JoyX:%4u | JoyY:%4u | Speed:%3u%% -> Motors: L=%+4d, R=%+4d\r\n", packet.joystick_x, packet.joystick_y, (unsigned int)((robot_speed * 100) / 999), (int)(left_pwm), (int)(right_pwm));
+            UART_SendMessage(dbg_buf);
+          }
+           
+        }
+
+        //then for autonomous mode
+        else if (packet.mode == AUTO_MODE) {
+          Robot_SetState(robot_auto);
+        }
+
         //this will be imu mode which i will add later.
-        else if (packet.mode == 2) {
+        else if (packet.mode == IMU_MODE) {
           //imu mode.
+        }
+        else {
+          packet.mode = MENU_MODE;
+          Motor_Stop();
         }
         return; // Done handling wireless packet!
         
@@ -312,6 +354,11 @@ void UART_CONTROL_update(void) {
     switch (current_mode) {
       case UART_MODE_MENU:
         switch(received_byte) {
+          case 'u':
+            current_mode = UART_MODE_STM32;
+            menu_uart();
+            break;
+
           case 'm':
             current_mode = UART_MODE_MOTOR;
             menu_motor();
@@ -335,13 +382,13 @@ void UART_CONTROL_update(void) {
             break;
 
           case 't':
-            current_mode = UART_MODE_STEPPER;
-            first_print = true;
+            //current_mode = UART_MODE_STEPPER;
+            //first_print = true;
 
             //reset stepper angle to 0
-            current_stepper_angle = 0;
-            stepper_init();
-            menu_stepper();
+            //current_stepper_angle = 0;
+            //stepper_init();
+            //menu_stepper();
             break;
             
           case 'n':
@@ -562,6 +609,17 @@ void UART_CONTROL_update(void) {
       }
       break;
 
+      //just tells us how to exit.
+    case UART_MODE_STM32:
+      current_mode = UART_MODE_STM32;
+      
+      if (received_byte == 'h') {
+        //set the current mode to the menu
+        current_mode = UART_MODE_MENU;
+        UART_SendMessage("\r\n--- Exited Packet Monitor Mode ---\r\n\r\n");
+        menu_main();
+      }
+      break;
     case UART_MODE_VOLTAGE:
 
       if (received_byte == 'h' || received_byte == 'v' || received_byte == 'x') {
@@ -668,12 +726,13 @@ void UART_CONTROL_update(void) {
       break;
     }
 
-    case UART_MODE_STEPPER: {
+   /*
+     case UART_MODE_STEPPER: {
       int16_t target_angle = current_stepper_angle;
       bool angle_changed = false;
       switch(received_byte) {
         case 'h':
-          stepper_stop();
+          //stepper_stop();
           UART_SendMessage("\r\n--- Exited Stepper Mode ---\r\n");
           UART_CONTROL_init();
           break;
@@ -721,8 +780,9 @@ void UART_CONTROL_update(void) {
                  current_stepper_angle);
         UART_SendMessage(angle_buf);
       }
-      break;
-    }
+  }
+   */
+  
 
     case UART_MODE_SPEAKER:
       switch(received_byte) { 
@@ -1062,7 +1122,7 @@ void UART_Send_Telemetry(void) {
 
     // Transmit over UART (PA2)
     uint8_t marker = 0xBB;
-    HAL_UART_Transmit(&hcom_uart[COM1], &marker, 1, 10);
-    HAL_UART_Transmit(&hcom_uart[COM1], (uint8_t*)&status, sizeof(robot_status_t), 10);
+    HAL_UART_Transmit(&huart2, &marker, 1, 10);
+    HAL_UART_Transmit(&huart2, (uint8_t*)&status, sizeof(robot_status_t), 10);
 
 }

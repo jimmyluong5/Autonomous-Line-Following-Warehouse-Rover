@@ -2,6 +2,8 @@
 #include <main.h>
 #include <string.h>
 
+#if RFID_ENABLE 
+
 //spi stuff 
 extern SPI_HandleTypeDef hspi1;
 
@@ -631,3 +633,5 @@ RFID_Status RFID_Halt(void)
 
     return status;
 }
+
+#endif

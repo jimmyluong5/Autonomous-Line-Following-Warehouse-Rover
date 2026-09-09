@@ -29,8 +29,7 @@ void deadband_filter(data_packet_t* packet, uint16_t raw_x, uint16_t raw_y) {
             packet->joystick_y = raw_y;
         }
 }
-void app_main(void)
-{
+void app_main(void) {
     // 1. Peripherals, NVS, WiFi, LCD, UART & ESP-NOW initialization
     init_esp_nvs();
     init_wifi();
@@ -40,6 +39,7 @@ void app_main(void)
     init_speaker();
     init_lcd_driver();
     UART_CONTROL_init();
+    
 
     printf("\r\n==========================================\r\n");
     printf("   ESP32 TRANSMITTER READY               \r\n");
@@ -84,23 +84,17 @@ void app_main(void)
         deadband_filter(&packet, raw_x, raw_y);
 
         
-        packet.speed = current_speed; //after process joystick data we place the current speed into the packet.
+        packet.speed = (current_speed > 0) ? current_speed : 128; // default to 50% speed
         packet.mode = active_mode; //fill the mode into the packet.
         speaker_update(packet.button_data);
 
-        // Transmit if data changed 
-        if (memcmp(&packet, &last_sent_packet, sizeof(data_packet_t)) != 0) {
-            
-            //sent the 12 byte data packet to the robot over the 2.4GHz ESP-NOW
+        // Transmit continuously at 40 Hz (every 25ms) or immediately if data changed
+        uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
+        if (memcmp(&packet, &last_sent_packet, sizeof(data_packet_t)) != 0 || (now - last_time >= 25)) {
             last_sent_packet = packet;
+            last_time = now;
             metrics_record_espnow_tx_start();
             transmit_data(receiver_mac, &packet);
-
-            //track the time stamp of when we last sent a packet.
-            uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
-            if (now - last_time > 250) {
-                last_time = now;
-            }
         }
         
         metrics_record_loop_end();

@@ -4,6 +4,13 @@
 #include <stdio.h>
 #include <stdint.h>
 
+
+#define MENU_MODE 0 
+#define MANUAL_MODE 1
+#define AUTO_MODE 2
+#define IMU_MODE 3
+#define TOTAL_MODES 4
+
 typedef struct __attribute__((packed)) {
     uint8_t  button_data;
     uint8_t  speed;
@@ -13,6 +20,8 @@ typedef struct __attribute__((packed)) {
     uint8_t  imu_y;
     uint8_t  mode;
 } data_packet_t;
+
+
 
 
 
@@ -52,7 +61,8 @@ typedef enum {
   UART_MODE_SERVO,
   UART_MODE_STEPPER,
   UART_MODE_SPEAKER,
-  UART_MODE_IMU
+  UART_MODE_IMU,
+  UART_MODE_STM32
 } UART_ControlMode;
 
 void UART_CONTROL_init(void);
@@ -70,6 +80,7 @@ void menu_autonomous(void);
 void menu_servo(void);
 void menu_voltage(void);
 void menu_both(void);
+void menu_uart(void);
 void Telemetry_Update_Wheel_Speeds(float delta_time_sec);
 void UART_Send_Telemetry(void);
 void DWT_Init(void);

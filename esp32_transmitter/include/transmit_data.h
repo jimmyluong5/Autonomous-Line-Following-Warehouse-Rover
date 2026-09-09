@@ -4,12 +4,11 @@
 #include <stdint.h>
 #include "esp_now.h"
 
-#define MANUAL_MODE 0
-#define AUTO_MODE 1
-#define IMU_MODE 2
-
-
-#define TOTAL_MODES 3
+#define MENU_MODE 0 
+#define MANUAL_MODE 1
+#define AUTO_MODE 2
+#define IMU_MODE 3
+#define TOTAL_MODES 4
 
 extern uint8_t current_speed;
 

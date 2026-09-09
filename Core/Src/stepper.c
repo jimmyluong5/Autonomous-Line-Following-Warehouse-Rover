@@ -1,6 +1,11 @@
 #include <main.h>
 #include <stepper.h>
 
+
+
+#if STEPPER_ENABLE
+
+
 #define stepper_gear_ratio 100.0f
 #define base_step_angle 18.0f
 #define output_step_angle (base_step_angle / stepper_gear_ratio) // 0.18
@@ -24,7 +29,9 @@ void stepper_set_dir(void) {
 }
 
 // function for moving the stepper motor starting the PWM
-void stepper_step(void) { stepper_move_steps(1, 1000); }
+void stepper_step(void) { 
+  stepper_move_steps(1, 1000); 
+}
 
 // function to move the stepper motor in one direction for a certain number of
 // steps.
@@ -101,3 +108,5 @@ void stepper_stop(void) {
   HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
   HAL_GPIO_WritePin(Stepper_ENABLE_GPIO_Port, Stepper_ENABLE_Pin, GPIO_PIN_SET);
 }
+
+#endif

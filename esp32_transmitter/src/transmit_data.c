@@ -17,11 +17,6 @@
 #define STOP_BTN 3
 #define RIGHT_BTN 4
 
-#define MANUAL_MODE 0
-#define AUTO_MODE 1
-#define IMU_MODE 2
-#define PHONE_MODE 3
-
 #define BTN_LEFT   (1 << 0) // GPIO 10: Left Arrow
 #define BTN_DOWN   (1 << 1) // GPIO 11: Down Arrow
 #define BTN_UP     (1 << 2) // GPIO 12: Up Arrow
@@ -33,8 +28,8 @@ static const char *TAG = "TRANSMIT_DATA";
 // mode_selections array definition
 
 page_t current_page = PAGE_MENU;
-int hovered_mode = 0;
-uint8_t active_mode = MANUAL_MODE; //default mode is the manual mode sure
+int hovered_mode = MANUAL_MODE; //start hovering on the manual mode at the start
+uint8_t active_mode = MENU_MODE; //default mode is the manual mode sure, default mode is dummy mode
 uint8_t current_speed = 128; // default 50% speed
 int page_length = PAGE_MAX_COUNT -1;
 int mode_length = TOTAL_MODES-1;
@@ -83,12 +78,12 @@ void process_arrow_keys(data_packet_t *packet) {
             //if we move up then just decrease hovered_mode
             if (clicked_up) {
                 hovered_mode--;
-                if (hovered_mode < 0 ) {
+                if (hovered_mode < MANUAL_MODE) {
                     //we check if we at the very top, we can loop back to the bottom
                     hovered_mode = mode_length; //sets it back to the bottom mode
                 }
             ESP_LOGI(TAG, "Cursor UP -> %d", hovered_mode);
-            return; //break out
+            return; //break ouz
             }
 
             //if we clicked down
@@ -97,7 +92,7 @@ void process_arrow_keys(data_packet_t *packet) {
                 //check if we are greater than the length of the modes
                 if (hovered_mode > mode_length) {
                     //then just set it back to the top
-                    hovered_mode = 0; //wrap to the top.
+                    hovered_mode = MANUAL_MODE; //wrap to the top.
                 }
                 ESP_LOGI(TAG, "Cursor DOWN -> Mode %d", hovered_mode);
                 return;
@@ -139,7 +134,7 @@ void process_arrow_keys(data_packet_t *packet) {
             }
             break;
             
-        
+         
 
 
         //now if we are in the manual mode page
@@ -147,6 +142,10 @@ void process_arrow_keys(data_packet_t *packet) {
             //if we click the left btn then we return back to the menu else we go to the next page.
             if (clicked_left) {
                 current_page = PAGE_MENU;
+                //set the active_mode to menu mode
+                active_mode = MENU_MODE;
+                packet->mode = active_mode;
+                //then set the active_mode to the menu page
                 ESP_LOGI(TAG, "Returning back to Menu Page");
             }
             else if (clicked_right) {
@@ -185,6 +184,8 @@ void process_arrow_keys(data_packet_t *packet) {
             //if we clicked the left go back to the main page
             if (clicked_left) {
                 current_page = PAGE_MANUAL;
+                active_mode = MENU_MODE;
+                packet->mode = active_mode;
                 ESP_LOGI(TAG, "Back to Manual Page");
             }
             else if (clicked_up) {
@@ -212,6 +213,8 @@ void process_arrow_keys(data_packet_t *packet) {
         case PAGE_AUTO:
             if (clicked_left) {
                 current_page = PAGE_MENU;
+                active_mode = MENU_MODE;
+                packet->mode = active_mode;
                 ESP_LOGI(TAG, "Returning back to Menu Page");
             }
             else if (clicked_right) {
@@ -230,6 +233,8 @@ void process_arrow_keys(data_packet_t *packet) {
         case PAGE_IMU:
             if (clicked_left) {
                 current_page = PAGE_MENU;
+                active_mode = MENU_MODE;
+                packet->mode = active_mode;
                 ESP_LOGI(TAG, "Returning back to Menu Page");
             }
             else if (clicked_right) {

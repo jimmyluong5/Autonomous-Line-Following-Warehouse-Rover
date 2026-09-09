@@ -4,14 +4,19 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+
+#define STEPPER_ENABLE 0 //1 to turn on, 0 to turn off
+#if STEPPER_ENABLE
+
+ 
+
+
 //define stepper motor parameters
 
 #define stepper_gear_ratio 100.0f
 #define base_step_angle 18.0f
 #define output_step_angle (base_step_angle / stepper_gear_ratio) //0.18 degrees.
 #define step_per_revolution (360 / output_step_angle) //2000 steps per rev.
-
-
 
 //initalize stepper motor, going to enable the stepper motor here.
 void stepper_init(void);
@@ -33,4 +38,5 @@ void stepper_move_degrees(float degrees, uint32_t speed);
 //func to stop the motor
 void stepper_stop(void);
 
+#endif
 #endif

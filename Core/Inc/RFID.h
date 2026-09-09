@@ -1,7 +1,11 @@
 #ifndef RFID_H
 #define RFID_H
-
 #include <stdint.h>
+
+#define RFID_ENABLE 0 //0 to turn off, 1 to turn on 
+
+#if RFID_ENABLE
+
 
 #define RFID_UID_SIZE 5U
 
@@ -28,3 +32,4 @@ RFID_Status RFID_Poll(RFID_UID *uid);
 RFID_Status RFID_Halt(void);
 
 #endif // RFID_H
+#endif

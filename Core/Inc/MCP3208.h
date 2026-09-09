@@ -9,8 +9,7 @@
 #define MCP3208_ERROR_VALUE                                                    \
   0xFFFFU // 4095 (12 bit ADC extender) but 2^12-1 to account for 0
 
-uint16_t MCP3208_ReadChannel(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port,
-                             uint16_t cs_pin, uint8_t channel);
+uint16_t MCP3208_ReadChannel(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port, uint16_t cs_pin, uint8_t channel);
 // this 16 bit integer reads the ADC
 // channel and converts it to voltage
 // to calculate voltage its

@@ -172,7 +172,7 @@ void HAL_TIM_Encoder_MspInit(TIM_HandleTypeDef* htim_encoder)
     PA8     ------> TIM1_CH1
     PA9     ------> TIM1_CH2
     */
-    GPIO_InitStruct.Pin = RIGHT_B2_YELLOW_Pin|RIGHT_A2_GREEN_Pin;
+    GPIO_InitStruct.Pin = RIGHT_B2_GREEN_Pin|RIGHT_B2_YELLOW_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_PULLUP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -291,7 +291,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
     GPIO_InitStruct.Pin = Motor_Driver_PWMB_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF10_TIM2;
     HAL_GPIO_Init(Motor_Driver_PWMB_GPIO_Port, &GPIO_InitStruct);
 
@@ -363,7 +363,7 @@ void HAL_TIM_Encoder_MspDeInit(TIM_HandleTypeDef* htim_encoder)
     PA8     ------> TIM1_CH1
     PA9     ------> TIM1_CH2
     */
-    HAL_GPIO_DeInit(GPIOA, RIGHT_B2_YELLOW_Pin|RIGHT_A2_GREEN_Pin);
+    HAL_GPIO_DeInit(GPIOA, RIGHT_B2_GREEN_Pin|RIGHT_B2_YELLOW_Pin);
 
     /* USER CODE BEGIN TIM1_MspDeInit 1 */
 

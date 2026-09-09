@@ -28,21 +28,15 @@ void app_main() {
     ESP_LOGI(TAG, "   RX: GPIO 2  <- STM32 PA2 (TX)              ");
     ESP_LOGI(TAG, "=============================================");
 
-    uint8_t rx_byte = 0;
-    robot_status_t status_packet;
+    uint8_t rx_buf[160];
 
     while (1) {
-        // Read incoming telemetry from STM32 on UART1 (Pin 2)
-        int len = uart_read_bytes(UART_NUM_1, &rx_byte, 1, pdMS_TO_TICKS(10));
-        if (len > 0 && rx_byte == 0xBB) {
-            // Read full robot_status_t payload following the 0xBB header
-            int status_len = uart_read_bytes(UART_NUM_1, (uint8_t*)&status_packet, sizeof(robot_status_t), pdMS_TO_TICKS(20));
-            if (status_len == sizeof(robot_status_t)) {
-                // Forward telemetry back to the transmitter via ESP-NOW
-                if (g_transmitter_paired) {
-                    esp_now_send(g_transmitter_mac, (uint8_t*)&status_packet, sizeof(robot_status_t));
-                }
-            }
+        // Read incoming responses / debug prints from STM32 on UART1 (Pin 2)
+        int len = uart_read_bytes(UART_NUM_1, rx_buf, sizeof(rx_buf) - 1, pdMS_TO_TICKS(10));
+        if (len > 0) {
+            rx_buf[len] = '\0';
+            // Print STM32's direct serial response to PuTTY
+            printf("%s", (char*)rx_buf);
         }
         vTaskDelay(pdMS_TO_TICKS(5));
     }

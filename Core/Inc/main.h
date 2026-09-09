@@ -76,10 +76,10 @@ void Error_Handler(void);
 #define Motor_Driver_PWMA_GPIO_Port GPIOA
 #define Servo_Suspension_Pin GPIO_PIN_0
 #define Servo_Suspension_GPIO_Port GPIOB
-#define RIGHT_B2_YELLOW_Pin GPIO_PIN_8
+#define RIGHT_B2_GREEN_Pin GPIO_PIN_8
+#define RIGHT_B2_GREEN_GPIO_Port GPIOA
+#define RIGHT_B2_YELLOW_Pin GPIO_PIN_9
 #define RIGHT_B2_YELLOW_GPIO_Port GPIOA
-#define RIGHT_A2_GREEN_Pin GPIO_PIN_9
-#define RIGHT_A2_GREEN_GPIO_Port GPIOA
 #define Motor_Driver_PWMB_Pin GPIO_PIN_10
 #define Motor_Driver_PWMB_GPIO_Port GPIOA
 #define LEFT_A1_GREEN_Pin GPIO_PIN_11
@@ -92,28 +92,25 @@ void Error_Handler(void);
 #define T_SWCLK_GPIO_Port GPIOA
 #define ADC_SPI_CS_Pin GPIO_PIN_6
 #define ADC_SPI_CS_GPIO_Port GPIOB
-#define IMU_SPI_CS_Pin GPIO_PIN_7
-#define IMU_SPI_CS_GPIO_Port GPIOB
+#define LED2_Pin GPIO_PIN_8
+#define LED2_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 // Map ADC_CS to the newly generated ADC_SPI_CS pin
 #define ADC_CS_Pin ADC_SPI_CS_Pin
 #define ADC_CS_GPIO_Port ADC_SPI_CS_GPIO_Port
 
-#define Stepper_STEP_Pin GPIO_PIN_8
-#define Stepper_STEP_GPIO_Port GPIOA
-#define Stepper_DIR_Pin GPIO_PIN_9
-#define Stepper_DIR_GPIO_Port GPIOA
-#define Stepper_ENABLE_Pin GPIO_PIN_11
-#define Stepper_ENABLE_GPIO_Port GPIOA
+//#define Stepper_STEP_Pin GPIO_PIN_8
+//#define Stepper_STEP_GPIO_Port GPIOA
+//#define Stepper_DIR_Pin GPIO_PIN_9
+//#define Stepper_DIR_GPIO_Port GPIOA
+//#define Stepper_ENABLE_Pin GPIO_PIN_11
+//#define Stepper_ENABLE_GPIO_Port GPIOA
 
-#define Speaker_Pin GPIO_PIN_7
-#define Speaker_GPIO_Port GPIOB
-
-#define RFID_RST_Pin GPIO_PIN_12
-#define RFID_RST_GPIO_Port GPIOA
-#define RFID_SPI_CS_Pin GPIO_PIN_15
-#define RFID_SPI_CS_GPIO_Port GPIOA
+//#define RFID_RST_Pin GPIO_PIN_12
+//#define RFID_RST_GPIO_Port GPIOA
+//#define RFID_SPI_CS_Pin GPIO_PIN_15
+//#define RFID_SPI_CS_GPIO_Port GPIOA
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
