@@ -82,3 +82,7 @@
 229	1437	8106499497432874	C:/Users/jimmy/Downloads/warehouse_proj/build/CMakeFiles/flash	29d278b80edd985f
 17	1228	8106499579656061	CMakeFiles/flash	29d278b80edd985f
 17	1228	8106499579656061	C:/Users/jimmy/Downloads/warehouse_proj/build/CMakeFiles/flash	29d278b80edd985f
+11	139	8106501777921136	CMakeFiles/warehouse_proj.dir/Core/Src/uart_control.c.obj	9b7a0a95c465e3fc
+140	246	8106501779208204	warehouse_proj.elf	7f4b602464a4ecad
+3	1220	8106502095622239	CMakeFiles/flash	29d278b80edd985f
+3	1220	8106502095622239	C:/Users/jimmy/Downloads/warehouse_proj/build/CMakeFiles/flash	29d278b80edd985f

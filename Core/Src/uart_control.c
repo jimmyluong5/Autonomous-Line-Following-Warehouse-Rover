@@ -264,6 +264,12 @@ void UART_CONTROL_update(void) {
     // Update the last command timestamp
     last_command_time = HAL_GetTick();
 
+    // In UART Test Mode, print every received byte in hex to see raw incoming stream
+    if (current_mode == UART_MODE_STM32 && received_byte != 'h' && received_byte != 'x') {
+      char raw_hex[16];
+      snprintf(raw_hex, sizeof(raw_hex), "<%02X>", received_byte);
+      UART_SendMessage(raw_hex);
+    }
 
     //we need to process the received byte from the esp32
     if (received_byte == 0xAA) { //this means we have the correct data_packet transmitted
