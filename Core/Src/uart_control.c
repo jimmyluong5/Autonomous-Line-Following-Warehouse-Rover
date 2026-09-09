@@ -1,6 +1,5 @@
 #include "robot.h"
 #include <MCP3208.h>
-#include <encoder.h>
 #include <line_following.h>
 #include <main.h>
 #include <servo.h>
@@ -18,9 +17,9 @@ static uint8_t current_servo_angle = 90;
 // track current stepper angle starting at 0 deg.
 #define BLACK_THRESHOLD 2359 // 1.90V on 3.3V ADC
 
-extern UART_HandleTypeDef huart2;
+extern UART_HandleTypeDef huart1; // USART1: ESP32 Receiver (PA10 RX / PA9 TX)
+extern UART_HandleTypeDef huart2; // LPUART1: PC PuTTY Terminal (PA2 TX / PA3 RX)
 extern SPI_HandleTypeDef hspi1;
-extern TIM_HandleTypeDef htim4;
 
 static uint32_t last_command_time = 0;
 
@@ -94,7 +93,6 @@ void menu_motor(void){
             " [a] - Spin Turn Left\r\n"
             " [d] - Spin Turn Right\r\n"
             " [x] - Stop / Idle\r\n"
-            " [z] - Reset Encoder Counts (L=0, R=0)\r\n"
             " [f] - Force Fault\r\n"
             " [1, 2, 3, 4] - Set Speed to 25%, 50%, 75%, 100% PWM\r\n"
             " [h] - Return to Main Menu\r\n"
@@ -112,7 +110,6 @@ void menu_combined(void) {
             " [a] - Steer Left (Hold for 45 deg turn)\r\n"
             " [d] - Steer Right (Hold for 135 deg turn)\r\n"
             " [x] - Stop / Idle (Servo Center)\r\n"
-            " [z] - Reset Encoder Counts (L=0, R=0)\r\n"
             " [f] - Force Fault\r\n"
             " [1, 2, 3, 4] - Set Speed (25%, 50%, 75%, 100% PWM)\r\n"
             " [h] - Return to Main Menu\r\n"
@@ -242,119 +239,83 @@ void UART_CONTROL_update(void) {
     led_is_blinking = false;
   }
 
-  // Clear any overrun or error flags that lock up UART reception
-  if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_ORE)) {
-    __HAL_UART_CLEAR_OREFLAG(&huart2);
+  // -------------------------------------------------------------------------
+  // 1. Process incoming ESP-NOW packets from ESP32 on huart1 (USART1 / PA10)
+  // -------------------------------------------------------------------------
+  if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_ORE)) {
+    __HAL_UART_CLEAR_OREFLAG(&huart1);
   }
-  if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_NE) ||__HAL_UART_GET_FLAG(&huart2, UART_FLAG_FE) ||__HAL_UART_GET_FLAG(&huart2, UART_FLAG_PE)) {
-    __HAL_UART_CLEAR_FLAG(&huart2, UART_CLEAR_NEF | UART_CLEAR_FEF | UART_CLEAR_PEF);
+  if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_NE) || __HAL_UART_GET_FLAG(&huart1, UART_FLAG_FE) || __HAL_UART_GET_FLAG(&huart1, UART_FLAG_PE)) {
+    __HAL_UART_CLEAR_FLAG(&huart1, UART_CLEAR_NEF | UART_CLEAR_FEF | UART_CLEAR_PEF);
   }
 
-  //hal_uart_receive function prototype.
-  //HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
-
-
-  // Check if one keyboard character was received (non-blocking)
-  if (HAL_UART_Receive(&huart2, &received_byte, 1, 0) == HAL_OK) {
-    // Turn on the LED to indicate keypress
-    HAL_GPIO_WritePin(LED2_GPIO_PORT, LED2_PIN, GPIO_PIN_SET);
-    led_blink_start_time = HAL_GetTick();
-    led_is_blinking = true;
-
-    // Update the last command timestamp
-    last_command_time = HAL_GetTick();
-
-    // In UART Test Mode, print every received byte in hex to see raw incoming stream
-    if (current_mode == UART_MODE_STM32 && received_byte != 'h' && received_byte != 'x') {
-      char raw_hex[16];
-      snprintf(raw_hex, sizeof(raw_hex), "<%02X>", received_byte);
-      UART_SendMessage(raw_hex);
-    }
-
-    //we need to process the received byte from the esp32
-    if (received_byte == 0xAA) { //this means we have the correct data_packet transmitted
+  uint8_t esp_byte;
+  if (HAL_UART_Receive(&huart1, &esp_byte, 1, 0) == HAL_OK) {
+    if (esp_byte == 0xAA) {
       // Toggle LED2 instantly on packet arrival
       HAL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
 
-      //create a data packet with the struct we defined.
       data_packet_t packet;
+      if (HAL_UART_Receive(&huart1, (uint8_t*)&packet, sizeof(data_packet_t), 20) == HAL_OK) {
+        uint8_t effective_speed = packet.speed > 0 ? packet.speed : 128;
+        robot_speed = ((uint32_t)effective_speed * 999) / 255;
 
-      if (HAL_UART_Receive(&huart2, (uint8_t*)&packet, sizeof(data_packet_t), 20) == HAL_OK) {
-        // Send immediate ACK and telemetry back to ESP32 Receiver on PA2 TX
-        //const char ack_msg[] = "STM32_ACK\r\n";
-        //HAL_UART_Transmit(&huart2, (uint8_t*)ack_msg, strlen(ack_msg), 10);
-        //UART_Send_Telemetry();
+        Motor_SetStandby(false);
+        last_command_time = HAL_GetTick();
 
-        //1 calculate the effective speed
-        // Default to 50% PWM if speed is 0 or uninitialized
-          uint8_t effective_speed = packet.speed > 0 ? packet.speed : 128;
-          robot_speed = ((uint32_t)effective_speed * 999) / 255;
-        
+        // Process joystick values
+        int32_t x_raw = (int32_t)packet.joystick_x - 2048;
+        int32_t y_raw = (int32_t)packet.joystick_y - 2048;
 
-        //ensure motor driver is active.
-          Motor_SetStandby(false);
-          last_command_time = HAL_GetTick();
+        if (abs(x_raw) < 200) x_raw = 0;
+        if (abs(y_raw) < 200) y_raw = 0;
 
-          //process the joystick values
-          //we need to move the motors based on our joystick
-          int32_t x_raw = (int32_t) packet.joystick_x - 2048;
-          int32_t y_raw = (int32_t) packet.joystick_y - 2048;
+        int16_t fwd_pwm   = (y_raw * (int32_t)robot_speed) / 2048;
+        int16_t side_pwm  = (x_raw * (int32_t)robot_speed) / 2048;
+        int16_t left_pwm  = fwd_pwm + side_pwm;
+        int16_t right_pwm = fwd_pwm - side_pwm;
 
-          // Deadband filter
-          if (abs(x_raw) < 200)  {
-            x_raw = 0;
-          }
-
-          if (abs(y_raw) < 200)  {
-            y_raw = 0;
-          }
-            
-          // Scale to robot speed PWM
-          int16_t fwd_pwm   = (y_raw * (int32_t)robot_speed) / 2048;
-          int16_t side_pwm = (x_raw * (int32_t)robot_speed) / 2048;
-          int16_t left_pwm = fwd_pwm + side_pwm;
-          int16_t right_pwm = fwd_pwm - side_pwm;
-          
         if (current_mode == UART_MODE_STM32) {
-          //we need to create a buffer to send the values over putty
           char packet_values[160];
-          snprintf(packet_values, sizeof(packet_values), "[STM32 RX] JoyX:%4u | JoyY:%4u | Speed:%3u | Mode:%u | Btns:0x%02X -> PWM L:%+4d R:%+4d\r\n", 
-          packet.joystick_x, packet.joystick_y, packet.speed, packet.mode, packet.button_data, left_pwm, right_pwm);
+          snprintf(packet_values, sizeof(packet_values), "[ESP32->STM32] JoyX:%4u | JoyY:%4u | Spd:%3u | Mode:%u | Btns:0x%02X -> PWM L:%+4d R:%+4d\r\n",
+                   packet.joystick_x, packet.joystick_y, packet.speed, packet.mode, packet.button_data, left_pwm, right_pwm);
           UART_SendMessage(packet_values);
         }
-        
-        //handle the actual modes.
+
         if (packet.mode == MANUAL_MODE) {
-          //we need to move the motors
           Motor_Left_SetSpeed(left_pwm);
           Motor_Right_SetSpeed(right_pwm);
           if (current_mode != UART_MODE_STM32) {
-             // Print live debug message to PuTTY
             char dbg_buf[140];
-            snprintf(dbg_buf, sizeof(dbg_buf), "[STM32] JoyX:%4u | JoyY:%4u | Speed:%3u%% -> Motors: L=%+4d, R=%+4d\r\n", packet.joystick_x, packet.joystick_y, (unsigned int)((robot_speed * 100) / 999), (int)(left_pwm), (int)(right_pwm));
+            snprintf(dbg_buf, sizeof(dbg_buf), "[STM32] JoyX:%4u | JoyY:%4u | Spd:%3u%% -> Motors: L=%+4d, R=%+4d\r\n",
+                     packet.joystick_x, packet.joystick_y, (unsigned int)((robot_speed * 100) / 999), (int)(left_pwm), (int)(right_pwm));
             UART_SendMessage(dbg_buf);
           }
-           
         }
-
-        //then for autonomous mode
         else if (packet.mode == AUTO_MODE) {
           Robot_SetState(robot_auto);
-        }
-
-        //this will be imu mode which i will add later.
-        else if (packet.mode == IMU_MODE) {
-          //imu mode.
         }
         else {
           packet.mode = MENU_MODE;
           Motor_Stop();
         }
-        return; // Done handling wireless packet!
-        
       }
-
     }
+  }
+
+  // -------------------------------------------------------------------------
+  // 2. Process incoming keyboard inputs from PuTTY on huart2 (LPUART1 / USB)
+  // -------------------------------------------------------------------------
+  if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_ORE)) {
+    __HAL_UART_CLEAR_OREFLAG(&huart2);
+  }
+  if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_NE) || __HAL_UART_GET_FLAG(&huart2, UART_FLAG_FE) || __HAL_UART_GET_FLAG(&huart2, UART_FLAG_PE)) {
+    __HAL_UART_CLEAR_FLAG(&huart2, UART_CLEAR_NEF | UART_CLEAR_FEF | UART_CLEAR_PEF);
+  }
+
+  if (HAL_UART_Receive(&huart2, &received_byte, 1, 0) == HAL_OK) {
+    last_command_time = HAL_GetTick();
+
 
     
     switch (current_mode) {
@@ -582,12 +543,6 @@ void UART_CONTROL_update(void) {
                 UART_SendMessage("ROBOT FAULT\r\n");
               }
               break;
-
-            case 'z':
-              Encoder_ResetLeft();
-              Encoder_ResetRight();
-              UART_SendMessage("\r\n[Encoders Reset: L=0, R=0]\r\n");
-              break;
             
             case '1':
               robot_speed = 250;
@@ -793,27 +748,19 @@ void UART_CONTROL_update(void) {
     case UART_MODE_SPEAKER:
       switch(received_byte) { 
         case 'h':
-          HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
           UART_SendMessage("\r\n--- Exited Speaker Test Mode ---\r\n");
           UART_CONTROL_init();
           break;
 
         case '1':
-          __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, 500);
-          HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
-          UART_SendMessage("\rPlaying 1 kHz tone... (Press '0' to stop)\r\n");
+          UART_SendMessage("\rSpeaker tone (disabled - no timer configured).\r\n");
           break;
 
         case '2':
-          UART_SendMessage("\rPlaying 100ms beep...\r\n");
-          __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, 500);
-          HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
-          HAL_Delay(100);
-          HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
+          UART_SendMessage("\rSpeaker beep (disabled - no timer configured).\r\n");
           break;
 
         case '0':
-          HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2);
           UART_SendMessage("\rTone stopped.\r\n");
           break;
 
@@ -918,10 +865,8 @@ void UART_CONTROL_update(void) {
       }
       int percent = (robot_speed * 100) / 999;
       len += snprintf(buffer + len, sizeof(buffer) - len,
-                      "State: %-10s | Speed: %d%% PWM (%d/999) | Enc: L=%ld, "
-                      "R=%ld         \r\n",
-                      state_str, percent, robot_speed, Encoder_GetLeftTotal(),
-                      Encoder_GetRightTotal());
+                      "State: %-10s | Speed: %d%% PWM (%d/999)         \r\n",
+                      state_str, percent, robot_speed);
     }
 
     uint8_t black_count = 0;
@@ -1090,26 +1035,16 @@ void Telemetry_Loop_End(uint32_t loop_start_us) {
 }
 
 void Telemetry_Update_Wheel_Speeds(float delta_time_sec) {
-    static int32_t prev_left_ticks = 0;
-    static int32_t prev_right_ticks = 0;
-    int32_t cur_left = Encoder_GetLeftTotal();
-    int32_t cur_right = Encoder_GetRightTotal();
-    int32_t d_left = cur_left - prev_left_ticks;
-    int32_t d_right = cur_right - prev_right_ticks;
-    prev_left_ticks = cur_left;
-    prev_right_ticks = cur_right;
-    // Wheel circumference = 2 * PI * r
-    const float meters_per_tick = (2.0f * 3.14159f * 0.0215f) / 360.0f; // adjust to your wheel size & encoder CPR
-    g_left_speed  = ((float)d_left * meters_per_tick) / delta_time_sec;
-    g_right_speed = ((float)d_right * meters_per_tick) / delta_time_sec;
-    g_actual_speed = (g_left_speed + g_right_speed) / 2.0f;
+    g_left_speed   = 0.0f;
+    g_right_speed  = 0.0f;
+    g_actual_speed = 0.0f;
 }
 
 void UART_Send_Telemetry(void) {
   robot_status_t status = {0};
-    // Live Encoders
-    status.leftEncoder      = Encoder_GetLeftTotal();
-    status.rightEncoder     = Encoder_GetRightTotal();
+    // Encoders (disabled)
+    status.leftEncoder      = 0;
+    status.rightEncoder     = 0;
 
     // Live Speeds
     status.actualspeed      = g_actual_speed;

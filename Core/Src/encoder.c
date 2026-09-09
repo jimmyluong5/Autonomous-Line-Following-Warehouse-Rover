@@ -4,12 +4,8 @@
 #include <string.h>
 
 // Set to 1 to enable hardware timers, or 0 to run encoders in stub mode
-#define ENCODERS_ENABLED 1
+#define ENCODERS_ENABLED 0
 
-#if ENCODERS_ENABLED
-extern TIM_HandleTypeDef htim1;
-extern TIM_HandleTypeDef htim4;
-#endif
 
 // Global structures holding state for Left and Right encoders
 Encoder_HandleTypeDef left_encoder = {0};

@@ -21,7 +21,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <encoder.h>
 #include <motor.h>
 #include <robot.h>
 #include <servo.h>
@@ -62,8 +61,6 @@ TIM_HandleTypeDef htim17;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-TIM_HandleTypeDef htim1;
-TIM_HandleTypeDef htim4;
 UART_HandleTypeDef huart2;
 /* USER CODE END PV */
 
@@ -123,7 +120,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
   Robot_Init(); //this calls motor_init.
   servo_init();
-  Encoder_Init();
   //stepper_init();
   DWT_Init();
 
@@ -142,6 +138,8 @@ int main(void)
   {
     Error_Handler();
   }
+  huart2 = hcom_uart[COM1];
+  UART_CONTROL_init();
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -149,24 +147,8 @@ int main(void)
   while (1) {
     UART_CONTROL_update();
     UART_CONTROL_check_timeout();
-    Encoder_Update();
     Robot_Update();
     Servo_Update();
-
-    Motor_Left_SetSpeed(500);
-    Motor_Right_SetSpeed(500);
-
-    // Periodically print counts and speeds to PuTTY when in Motor Control Mode
-    if ((UART_CONTROL_GetMode() == UART_MODE_MOTOR || UART_CONTROL_GetMode() == UART_MODE_COMBINED) && (HAL_GetTick() - last_display_time >= 250)) {
-      last_display_time = HAL_GetTick();
-
-      char msg[160];
-      // \r returns cursor to column 0, \x1B[2K clears the current line
-      snprintf(msg, sizeof(msg), "\r\x1B[2KEnc: L=%ld, R=%ld ",
-               Encoder_GetLeftTotal(), Encoder_GetRightTotal());
-      HAL_UART_Transmit(&hcom_uart[COM1], (uint8_t *)msg, strlen(msg),
-                        HAL_MAX_DELAY);
-    }
 
     static uint32_t last_telemetry_time = 0;
     if ((HAL_GetTick() - last_telemetry_time) > 50) {
