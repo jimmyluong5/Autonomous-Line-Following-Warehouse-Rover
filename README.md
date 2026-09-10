@@ -427,6 +427,13 @@ The manual driving implementation provides responsive, proportional throttle and
   <i>Live demonstration: Real-time proportional manual joystick control and responsive wireless maneuvering.</i>
 </p>
 
+
+
+https://github.com/user-attachments/assets/510c7fbb-fd98-4aba-af33-ecc1c66d9171
+
+
+
+
 ## Hardware Interconnect (Receiver <-> STM32):
 * **ESP32-S3 Pin 42 (UART1 TX)** --> **STM32 PA10 (USART1 RX / D1)** @ 115,200 baud
 * **ESP32-S3 Pin 2 (UART1 RX)** <-- **STM32 PA9 (USART1 TX / D0)** @ 115,200 baud
