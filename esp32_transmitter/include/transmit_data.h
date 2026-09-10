@@ -27,8 +27,6 @@ typedef struct __attribute__((packed)) {
 //change this to make it better to understand, make it like stm32 data packet.
 typedef struct __attribute__((packed)) {
     float   actualspeed;
-    float   leftWheelSpeed;
-    float   rightWheelSpeed;
     uint8_t speedSetting;
     uint8_t direction;
     uint8_t lineSensors;
@@ -73,5 +71,6 @@ extern page_t current_page; //this is the default mode
 extern int hovered_mode; //which button is the cursor on
 extern uint8_t active_mode; 
 void process_arrow_keys(data_packet_t* packet);
+void check_failsafe();
 
 #endif /* TRANSMIT_DATA_H */

@@ -10,6 +10,8 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "speaker.h"
+#include <stdbool.h>
+
 
 #define LEFT_BTN 0
 #define DOWN_BTN 1
@@ -23,7 +25,8 @@
 #define BTN_CENTER (1 << 3) // GPIO 13: Center / Confirm
 #define BTN_RIGHT  (1 << 4) // GPIO 14: Right Arrow
 
-
+extern bool failsafe_flag;
+extern uint32_t last_time_rx;
 static const char *TAG = "TRANSMIT_DATA";
 // mode_selections array definition
 
@@ -109,6 +112,8 @@ void process_arrow_keys(data_packet_t *packet) {
                 switch(hovered_mode) {
                     case MANUAL_MODE:
                         //set the current page to the manual page
+                        failsafe_flag = false; //reset the flag so we don't trip from the time browsing the menu
+                        last_time_rx = pdTICKS_TO_MS(xTaskGetTickCount());
                         current_page = PAGE_MANUAL;
                         ESP_LOGI(TAG, "Entering Manual Mode Dashboard");
                         break;
@@ -285,14 +290,6 @@ void process_arrow_keys(data_packet_t *packet) {
             break;
     }
 }
-
-
-   
-
-    
-
-
-
 
 void init_button_pin(void) {
     //we need to initialize all the pins to input

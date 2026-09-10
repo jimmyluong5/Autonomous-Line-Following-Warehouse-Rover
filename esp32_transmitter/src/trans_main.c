@@ -13,7 +13,13 @@
 #include "math.h"
 #include "lcd.h"
 #include "metrics.h"
+#include "stdbool.h"
+
+#define failsafe_time 2000
+bool failsafe_flag = false;
+
 static data_packet_t last_sent_packet = {0};
+uint32_t last_time_rx = 0;
 void deadband_filter(data_packet_t* packet, uint16_t raw_x, uint16_t raw_y) {
  // Deadband filter
         if (abs((int)raw_x - (int)last_sent_packet.joystick_x) < 25) {
@@ -28,6 +34,32 @@ void deadband_filter(data_packet_t* packet, uint16_t raw_x, uint16_t raw_y) {
         else {
             packet->joystick_y = raw_y;
         }
+}
+
+void check_failsafe(void) {
+    //if we're in the manual page
+    if (current_page == PAGE_MANUAL || current_page == PAGE_MANUAL_DATA) {
+        //if the time is greater than 2000ms then we return to the menu 
+        uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
+        
+        
+        if ((now - last_time_rx) > 2000) {
+            last_time_rx = now;
+            speaker_pattern(3, 100, 100);
+            ESP_LOGW("FAILSAFE", "No packets set for 2 seconds, activating failure!");
+
+            failsafe_flag = true;
+
+
+            //set the current page to the page menu
+            current_page = PAGE_MENU;
+            //set the active mode to the menu mode
+            active_mode = MENU_MODE;
+            //set the hovered_page to the manual mode
+            hovered_mode = MANUAL_MODE;
+            
+        }
+    }
 }
 void app_main(void) {
     // 1. Peripherals, NVS, WiFi, LCD, UART & ESP-NOW initialization
@@ -89,13 +121,19 @@ void app_main(void) {
         speaker_update(packet.button_data);
 
         // Transmit continuously at 40 Hz (every 25ms) or immediately if data changed
-        uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
+        uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount()); //this is the current time
         if (memcmp(&packet, &last_sent_packet, sizeof(data_packet_t)) != 0 || (now - last_time >= 25)) {
             last_sent_packet = packet;
             last_time = now;
+            
+            //update the reset failsafe timer
+            last_time_rx = now;
             metrics_record_espnow_tx_start();
             transmit_data(receiver_mac, &packet);
         }
+        //check failsafe every iteration
+        check_failsafe();
+       
         
         metrics_record_loop_end();
 

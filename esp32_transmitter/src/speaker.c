@@ -110,4 +110,21 @@ void speaker_off(void){
     }
 }
 
+void speaker_pattern(int beep_count, uint32_t beep_on, uint32_t beep_off) {
+    for (int i = 0; i < beep_count; i++) {
+        //as we do the beep count we just turn the speaker on and off, so turn on and have a delay 
 
+        //so we set the frequency
+        ledc_set_freq(LEDC_MODE, LEDC_TIMER, JOYSTICK_FREQ); //we can change the frequency its at 2048 Hz rn
+        
+        //then turn on the speaker
+        speaker_on();
+        //have a delay
+        vTaskDelay(pdMS_TO_TICKS(beep_on));
+
+        //then turn off
+        speaker_off();
+        vTaskDelay(pdMS_TO_TICKS(beep_off));
+    }
+    
+}

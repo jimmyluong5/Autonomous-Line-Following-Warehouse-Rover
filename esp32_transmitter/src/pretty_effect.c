@@ -10,11 +10,11 @@
 #include "joystick.h"
 #include "metrics.h"
 #include "font5x7.h"
-
+#include <stdbool.h>
 #define SWAP16(c) (((c) >> 8) | (((c) & 0xFF) << 8))
 
 uint16_t *pixels = NULL;
-
+extern bool failsafe_flag;
 #define COLOR_JOYSTICK      SWAP16(0xFD00)
 #define COLOR_DOT_BORDER    SWAP16(0xC260)
 #define COLOR_PULSE_YELLOW  SWAP16(0xFF66) // #FFEE33
@@ -36,9 +36,10 @@ typedef struct {
     int len;
 } ui_text_item_t;
 
-static ui_text_item_t s_ui_texts[10];
+static ui_text_item_t s_ui_texts[11];
 
 static void prepare_manual_ui_strings(void) {
+
     // 1. Joystick X (-100 to +100)
     int16_t jx = metrics_get_joy_x_val();
     snprintf(s_ui_texts[0].str, sizeof(s_ui_texts[0].str), "%+d", jx);
@@ -60,13 +61,19 @@ static void prepare_manual_ui_strings(void) {
     s_ui_texts[2].x0 = 193 - (s_ui_texts[2].len * 6) / 2;
     s_ui_texts[2].y0 = 58;
 
-    // 4. Actual Speed (from STM32 live telemetry or placeholder)
-    if (g_robot_status_received) {
-        snprintf(s_ui_texts[3].str, sizeof(s_ui_texts[3].str), "%.2f", g_robot_status.actualspeed);
-    } else {
-        const char *act_spd = metrics_get_actual_speed_str();
-        snprintf(s_ui_texts[3].str, sizeof(s_ui_texts[3].str), "%s", act_spd);
+       //11 failsafe 
+    //if we have the flag as true, then we must change the UI
+    if (failsafe_flag == true) {
+        //then we draw the word failsafe word tripped
+        snprintf(s_ui_texts[3].str, sizeof(s_ui_texts[3].str), "TRIPPED");
     }
+    else if (current_page == PAGE_MANUAL || current_page == PAGE_MANUAL_DATA) {
+        snprintf(s_ui_texts[3].str, sizeof(s_ui_texts[3].str), "ARMED");
+    } 
+    else {
+         snprintf(s_ui_texts[3].str, sizeof(s_ui_texts[3].str), "IDLE");
+    }
+
     s_ui_texts[3].len = strlen(s_ui_texts[3].str);
     s_ui_texts[3].x0 = 193 - (s_ui_texts[3].len * 6) / 2;
     s_ui_texts[3].y0 = 99;
@@ -112,10 +119,12 @@ static void prepare_manual_ui_strings(void) {
     s_ui_texts[9].len = strlen(s_ui_texts[9].str);
     s_ui_texts[9].x0 = 172 - (s_ui_texts[9].len * 6) / 2;
     s_ui_texts[9].y0 = 280;
+
+ 
 }
 
 static inline bool check_text_pixel(int x, int y) {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 11; i++) {
         int y0 = s_ui_texts[i].y0;
         if (y >= y0 && y < y0 + 7) {
             int x0 = s_ui_texts[i].x0;
@@ -180,45 +189,6 @@ static void prepare_diag_ui_strings(void) {
     s_diag_texts[5].len = strlen(s_diag_texts[5].str);
     s_diag_texts[5].x0 = 207 - (s_diag_texts[5].len * 6) / 2;
     s_diag_texts[5].y0 = 104;
-
-    float l_spd = g_robot_status_received ? g_robot_status.leftWheelSpeed : 0.0f;
-    // Line 3: Left speed
-    snprintf(s_diag_texts[6].str, sizeof(s_diag_texts[6].str), "%.2f", l_spd);
-    s_diag_texts[6].len = strlen(s_diag_texts[6].str);
-    s_diag_texts[6].x0 = 207 - (s_diag_texts[6].len * 6) / 2;
-    s_diag_texts[6].y0 = 121;
-
-    float r_spd = g_robot_status_received ? g_robot_status.rightWheelSpeed : 0.0f;
-    // Line 4: Right speed
-    snprintf(s_diag_texts[7].str, sizeof(s_diag_texts[7].str), "%.2f", r_spd);
-    s_diag_texts[7].len = strlen(s_diag_texts[7].str);
-    s_diag_texts[7].x0 = 207 - (s_diag_texts[7].len * 6) / 2;
-    s_diag_texts[7].y0 = 138;
-
-    // === 3. ENCODER DATA (Bottom Left: Disabled - showing N/A) ===
-    // Line 1: Left ticks
-    snprintf(s_diag_texts[8].str, sizeof(s_diag_texts[8].str), "N/A");
-    s_diag_texts[8].len = strlen(s_diag_texts[8].str);
-    s_diag_texts[8].x0 = 94 - (s_diag_texts[8].len * 6) / 2;
-    s_diag_texts[8].y0 = 207;
-
-    // Line 2: Right ticks
-    snprintf(s_diag_texts[9].str, sizeof(s_diag_texts[9].str), "N/A");
-    s_diag_texts[9].len = strlen(s_diag_texts[9].str);
-    s_diag_texts[9].x0 = 94 - (s_diag_texts[9].len * 6) / 2;
-    s_diag_texts[9].y0 = 224;
-
-    // Line 3: Left RPM
-    snprintf(s_diag_texts[10].str, sizeof(s_diag_texts[10].str), "N/A");
-    s_diag_texts[10].len = strlen(s_diag_texts[10].str);
-    s_diag_texts[10].x0 = 94 - (s_diag_texts[10].len * 6) / 2;
-    s_diag_texts[10].y0 = 242;
-
-    // Line 4: Right RPM
-    snprintf(s_diag_texts[11].str, sizeof(s_diag_texts[11].str), "N/A");
-    s_diag_texts[11].len = strlen(s_diag_texts[11].str);
-    s_diag_texts[11].x0 = 94 - (s_diag_texts[11].len * 6) / 2;
-    s_diag_texts[11].y0 = 260;
 
     // === 4. STM32 PERFORMANCE (Bottom Right: Box Center X = 207) ===
     unsigned int cpu = g_robot_status_received ? g_robot_status.cpuLoad : 0;
