@@ -24,8 +24,8 @@ uint8_t receiver_mac[ESP_NOW_ETH_ALEN] = {0xAC, 0x27, 0x6E, 0xA2, 0x87, 0x5C};
 #include "transmit_data.h"
 
 extern uint32_t last_time_rx; //extern means the variable actually exists from another .c file.
-robot_status_t g_robot_status = {0};
-bool g_robot_status_received = false;
+robot_status_t robot_packet = {0};
+bool robot_packet_received = false;
 
 //function to send data
 static void OnDataSent(const esp_now_send_info_t *tx_info, esp_now_send_status_t status) {
@@ -40,14 +40,21 @@ static void OnDataSent(const esp_now_send_info_t *tx_info, esp_now_send_status_t
 static void OnDataRecv(const esp_now_recv_info_t *esp_now_info, const uint8_t *data, int data_len) {
   //if we got the length of the packet back from the stm32
   if (data_len == sizeof(robot_status_t)) {
-    memcpy(&g_robot_status, data, sizeof(robot_status_t));
-    g_robot_status_received = true;
+    memcpy(&robot_packet, data, sizeof(robot_status_t));
+    robot_packet_received = true;
     //update the last time we received the packet
     last_time_rx = pdTICKS_TO_MS(xTaskGetTickCount());
 
+    //record incoming rssi and packet count
+    int8_t rssi = (esp_now_info && esp_now_info->rx_ctrl) ? esp_now_info->rx_ctrl->rssi : 0;
+    metrics_record_espnow_rx(rssi);
+
+    ESP_LOGI(TAG, "Telemetery RX OK! CPU: %u%%, Latency: %.1fms, RSSI: %d dBm",
+             robot_packet.cpuLoad, robot_packet.latencyMs, rssi);
+  } else {
+    ESP_LOGW(TAG, "Telemetry size mismatch! Got %d bytes, expected %u bytes",
+             data_len, (unsigned int)sizeof(robot_status_t));
   }
-  
-  
 }
 
 void init_esp_nvs(void) {

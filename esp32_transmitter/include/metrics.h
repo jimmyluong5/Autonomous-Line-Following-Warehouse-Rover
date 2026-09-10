@@ -11,7 +11,6 @@ extern "C" {
 //metric functions
 uint8_t     metrics_get_speed_percent(void);
 const char* metrics_get_direction_str(void);
-const char* metrics_get_actual_speed_str(void);
 int16_t     metrics_get_joy_x_val(void);
 int16_t     metrics_get_joy_y_val(void);
 float       metrics_get_cpu_load(void);        // CPU % (e.g. 12.4%)
@@ -25,6 +24,18 @@ void metrics_record_loop_start(void);
 void metrics_record_loop_end(void);
 void metrics_record_espnow_tx_start(void);
 void metrics_record_espnow_tx_done(esp_now_send_status_t status);
+
+
+//functions for the stm32 shit
+int8_t metrics_get_rssi(void);
+float metrics_get_packet_loss_pct(void);
+
+uint32_t metrics_get_rx_count(void);
+uint32_t metrics_get_last_tx_ms_ago(void);
+
+void metrics_record_espnow_rx_start(void);
+void metrics_record_espnow_rx_end(void);
+void metrics_record_espnow_rx(int8_t rssi);
 
 
 

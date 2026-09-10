@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include "esp_now.h"
+#include <stdbool.h>
 
 #define MENU_MODE 0 
 #define MANUAL_MODE 1
@@ -37,8 +38,8 @@ typedef struct __attribute__((packed)) {
     float   jitterMs;
     uint16_t missedDeadlines;
 } robot_status_t;
-extern robot_status_t g_robot_status;
-extern bool g_robot_status_received;
+extern robot_status_t robot_packet;
+extern bool robot_packet_received;
 
 
 //everytime you want to add a page, just add it here.

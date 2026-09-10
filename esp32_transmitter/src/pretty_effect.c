@@ -177,7 +177,7 @@ static void prepare_diag_ui_strings(void) {
     s_diag_texts[3].y0 = 138;
 
     // === 2. MOTOR DATA (Top Right: Box Center X = 207) ===
-    uint8_t spd = g_robot_status_received ? g_robot_status.speedSetting : metrics_get_speed_percent();
+    uint8_t spd = robot_packet_received ? robot_packet.speedSetting : metrics_get_speed_percent();
     // Line 1: Left PWM
     snprintf(s_diag_texts[4].str, sizeof(s_diag_texts[4].str), "%u%%", spd);
     s_diag_texts[4].len = strlen(s_diag_texts[4].str);
@@ -190,36 +190,66 @@ static void prepare_diag_ui_strings(void) {
     s_diag_texts[5].x0 = 207 - (s_diag_texts[5].len * 6) / 2;
     s_diag_texts[5].y0 = 104;
 
+    //num 3 - stm32 diagnotics shit.
+    //line 1: rssi - receiver signal strength indicator 
+    int8_t rssi = metrics_get_rssi();
+    snprintf(s_diag_texts[6].str, sizeof(s_diag_texts[6].str), "%d dBm", rssi);
+    s_diag_texts[6].len = strlen(s_diag_texts[6].str);
+    s_diag_texts[6].x0 = 94 - (s_diag_texts[6].len * 6) / 2;
+    s_diag_texts[6].y0 = 207;
+
+    //line 2 packet loss in percentages of the packets loss from the receiver to the stm32
+    float loss = metrics_get_packet_loss_pct();
+    snprintf(s_diag_texts[7].str, sizeof(s_diag_texts[7].str), "%.1f%%", loss);
+    s_diag_texts[7].len = strlen(s_diag_texts[7].str);
+    s_diag_texts[7].x0 = 94 - (s_diag_texts[7].len * 6) / 2;
+    s_diag_texts[7].y0 = 224;
+
+
+    //line 3 - packets received form the stm32
+    uint32_t rx_pkts = metrics_get_rx_count();
+    snprintf(s_diag_texts[8].str, sizeof(s_diag_texts[8].str), "%lu", (unsigned long)rx_pkts);
+    s_diag_texts[8].len = strlen(s_diag_texts[8].str);
+    s_diag_texts[8].x0 = 94 - (s_diag_texts[8].len * 6) / 2;
+    s_diag_texts[8].y0 = 242;
+
+    //line 4 - last packet transmitted (ms)
+    uint32_t tx_ms_ago = metrics_get_last_tx_ms_ago();
+    snprintf(s_diag_texts[9].str, sizeof(s_diag_texts[9].str), "%lums", (unsigned long)tx_ms_ago);
+    s_diag_texts[9].len = strlen(s_diag_texts[9].str);
+    s_diag_texts[9].x0 = 94 - (s_diag_texts[9].len * 6) / 2;
+    s_diag_texts[9].y0 = 260;
+
     // === 4. STM32 PERFORMANCE (Bottom Right: Box Center X = 207) ===
-    unsigned int cpu = g_robot_status_received ? g_robot_status.cpuLoad : 0;
+    unsigned int cpu = robot_packet_received ? robot_packet.cpuLoad : 0;
     // Line 1: CPU LOAD
     snprintf(s_diag_texts[12].str, sizeof(s_diag_texts[12].str), "%u%%", cpu);
     s_diag_texts[12].len = strlen(s_diag_texts[12].str);
     s_diag_texts[12].x0 = 207 - (s_diag_texts[12].len * 6) / 2;
     s_diag_texts[12].y0 = 207;
 
-    float lat = g_robot_status_received ? g_robot_status.latencyMs : 0.0f;
+    float lat = robot_packet_received ? robot_packet.latencyMs : 0.0f;
     // Line 2: LATENCY
     snprintf(s_diag_texts[13].str, sizeof(s_diag_texts[13].str), "%.1f", lat);
     s_diag_texts[13].len = strlen(s_diag_texts[13].str);
     s_diag_texts[13].x0 = 207 - (s_diag_texts[13].len * 6) / 2;
     s_diag_texts[13].y0 = 224;
 
-    float jit = g_robot_status_received ? g_robot_status.jitterMs : 0.0f;
+    float jit = robot_packet_received ? robot_packet.jitterMs : 0.0f;
     // Line 3: JITTER
     snprintf(s_diag_texts[14].str, sizeof(s_diag_texts[14].str), "%.1f", jit);
     s_diag_texts[14].len = strlen(s_diag_texts[14].str);
     s_diag_texts[14].x0 = 207 - (s_diag_texts[14].len * 6) / 2;
     s_diag_texts[14].y0 = 241;
 
-    unsigned int mdl = g_robot_status_received ? g_robot_status.missedDeadlines : 0;
+    unsigned int mdl = robot_packet_received ? robot_packet.missedDeadlines : 0;
     // Line 4: MISSED DL
     snprintf(s_diag_texts[15].str, sizeof(s_diag_texts[15].str), "%u", mdl);
     s_diag_texts[15].len = strlen(s_diag_texts[15].str);
     s_diag_texts[15].x0 = 207 - (s_diag_texts[15].len * 6) / 2;
     s_diag_texts[15].y0 = 258;
 
-    float hz = g_robot_status_received ? g_robot_status.controlRate : 0.0f;
+    float hz = robot_packet_received ? robot_packet.controlRate : 0.0f;
     // Line 5: LOOP RATE
     snprintf(s_diag_texts[16].str, sizeof(s_diag_texts[16].str), "%.1f", hz);
     s_diag_texts[16].len = strlen(s_diag_texts[16].str);

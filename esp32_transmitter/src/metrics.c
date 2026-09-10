@@ -20,10 +20,52 @@ static volatile float    s_jitter_ms = 0.2f;
 static volatile float    s_control_rate_hz = 100.0f;
 static volatile uint32_t s_missed_deadlines = 0;
 
+//adding variables for the stm32 send back part
+static volatile int8_t s_last_rssi = 0;
+static volatile uint32_t s_tx_success_count = 0;
+static volatile uint32_t s_tx_fail_count = 0;
+static volatile uint32_t s_rx_packet_count = 0;
+static volatile uint32_t s_last_tx_timestamp_ms = 0;
+
+
 static float   s_prev_latency_ms = 1.2f;
 static int64_t s_active_time_accum = 0;
 static int64_t s_total_time_accum = 0;
 static uint32_t s_sample_count = 0;
+
+
+//functions for the rssi which stands for receiver signal strength indicator
+int8_t metrics_get_rssi(void) {
+    //just return the rssi from the stm32
+    return s_last_rssi;
+}
+
+uint32_t metrics_get_rx_count(void){
+    //just regurn the rx_packet_count
+    return s_rx_packet_count;
+}
+
+
+uint32_t metrics_get_last_tx_ms_ago(void) {
+    //if the last time stamp was zero then just keep it to zero.
+    if (s_last_tx_timestamp_ms == 0) {
+        return 0;
+    }
+    else {
+        return pdTICKS_TO_MS(xTaskGetTickCount()) - s_last_tx_timestamp_ms;
+    }
+}
+
+
+float metrics_get_packet_loss_pct(void) {
+    uint32_t total = s_tx_success_count + s_tx_fail_count;
+    if (total == 0) {
+        return 0.0f;
+    }
+    return ((float)s_tx_fail_count * 100.0f) / (float)total;
+    
+
+}
 
 // 1. Direction from Joystick X/Y deflection
 const char* metrics_get_direction_str(void) {
@@ -140,13 +182,23 @@ void metrics_record_loop_end(void) {
 
 void metrics_record_espnow_tx_start(void) {
     s_tx_start_time = esp_timer_get_time();
+    s_last_tx_timestamp_ms = pdTICKS_TO_MS(xTaskGetTickCount());
 }
+
 
 void metrics_record_espnow_tx_done(esp_now_send_status_t status) {
     if (s_tx_start_time <= 0) return;
     int64_t now = esp_timer_get_time();
     int64_t duration_us = now - s_tx_start_time;
     s_tx_start_time = 0;
+
+    if (status == ESP_NOW_SEND_SUCCESS) {
+        s_tx_success_count++;
+    }
+    else {
+        s_tx_fail_count++;
+    }
+
 
     if (duration_us > 0 && duration_us < 100000) {
         float instant_ms = (float)duration_us / 1000.0f;
@@ -157,4 +209,9 @@ void metrics_record_espnow_tx_done(esp_now_send_status_t status) {
         s_jitter_ms += (delta - s_jitter_ms) * 0.125f;
         s_latency_ms = s_latency_ms * 0.85f + instant_ms * 0.15f;
     }
+}
+
+void metrics_record_espnow_rx(int8_t rssi) {
+    s_last_rssi = rssi;
+    s_rx_packet_count++;
 }
