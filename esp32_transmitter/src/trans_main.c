@@ -36,30 +36,33 @@ void deadband_filter(data_packet_t* packet, uint16_t raw_x, uint16_t raw_y) {
         }
 }
 
-void check_failsafe(void) {
+void check_failsafe(data_packet_t *packet) {
     //if we're in the manual page
     if (current_page == PAGE_MANUAL || current_page == PAGE_MANUAL_DATA) {
         //if the time is greater than 2000ms then we return to the menu 
         uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
         
+        //then we check if we pressed a button or the joystick moved
+        bool user_active = (packet->button_data !=0 || (abs(metrics_get_joy_x_val()) > 10) || (abs(metrics_get_joy_y_val()) > 10)); 
         
+        //if active then we set the last time to now,
+        if (user_active == true) {
+            last_time_rx = now; //so we reset the time if the user pressed the button or
+        }
+
+         // 2. If 5 seconds of idle inactivity passed, trip!
         if ((now - last_time_rx) > 5000) {
             failsafe_flag = true; 
             last_time_rx = now;
             speaker_pattern(8, 75, 75);
-            ESP_LOGW("FAILSAFE", "No packets set for 2 seconds, activating failure!");
-
-            failsafe_flag = true;
-
-
-            //set the current page to the page menu
+            ESP_LOGW("FAILSAFE", "Inactivity timeout (5s), activating failsafe!");
+            // Return to menu
             current_page = PAGE_MENU;
-            //set the active mode to the menu mode
             active_mode = MENU_MODE;
-            //set the hovered_page to the manual mode
             hovered_mode = MANUAL_MODE;
-            
         }
+        
+        
     }
 }
 void app_main(void) {
@@ -132,7 +135,7 @@ void app_main(void) {
             transmit_data(receiver_mac, &packet);
         }
         //check failsafe every iteration
-        check_failsafe();
+        check_failsafe(&packet);
        
         
         metrics_record_loop_end();

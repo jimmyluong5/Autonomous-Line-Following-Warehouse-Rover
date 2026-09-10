@@ -71,6 +71,6 @@ extern page_t current_page; //this is the default mode
 extern int hovered_mode; //which button is the cursor on
 extern uint8_t active_mode; 
 void process_arrow_keys(data_packet_t* packet);
-void check_failsafe();
+void check_failsafe(data_packet_t* packet);
 
 #endif /* TRANSMIT_DATA_H */
