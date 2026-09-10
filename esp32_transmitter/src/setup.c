@@ -75,6 +75,14 @@ void init_wifi(void) {
   ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
   ESP_ERROR_CHECK(esp_wifi_start());
   ESP_ERROR_CHECK(esp_wifi_set_channel(1, WIFI_SECOND_CHAN_NONE));
+
+  uint8_t transmitter_mac[6];
+  esp_read_mac(transmitter_mac, ESP_MAC_WIFI_STA);
+  ESP_LOGI(TAG, "************************************************");
+  ESP_LOGI(TAG, "TRANSMITTER MAC: %02X:%02X:%02X:%02X:%02X:%02X",
+           transmitter_mac[0], transmitter_mac[1], transmitter_mac[2],
+           transmitter_mac[3], transmitter_mac[4], transmitter_mac[5]);
+  ESP_LOGI(TAG, "************************************************");
 }
 
 void init_esp_now(void) {

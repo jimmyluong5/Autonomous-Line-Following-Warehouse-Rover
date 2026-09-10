@@ -16,8 +16,7 @@ C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:228:6:UART_CONTR
 C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:957:6:UART_CONTROL_check_timeout	8	static
 C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:969:18:UART_CONTROL_GetMode	4	static
 C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:976:6:DWT_Init	4	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:986:24:DWT_GetMicros	4	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:1004:6:Telemetry_Loop_Start	24	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:1021:6:Telemetry_Loop_End	24	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:1037:6:Telemetry_Update_Wheel_Speeds	16	static
-C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:1043:6:UART_Send_Telemetry	56	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:986:10:DWT_GetMicros	4	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:1001:6:Telemetry_Loop_Start	24	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:1022:6:Telemetry_Loop_End	40	static
+C:/Users/jimmy/Downloads/warehouse_proj/Core/Src/uart_control.c:1048:6:UART_Send_Telemetry	40	static

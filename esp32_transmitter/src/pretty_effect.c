@@ -190,32 +190,31 @@ static void prepare_diag_ui_strings(void) {
     s_diag_texts[5].x0 = 207 - (s_diag_texts[5].len * 6) / 2;
     s_diag_texts[5].y0 = 104;
 
-    //num 3 - stm32 diagnotics shit.
-    //line 1: rssi - receiver signal strength indicator 
-    int8_t rssi = metrics_get_rssi();
-    snprintf(s_diag_texts[6].str, sizeof(s_diag_texts[6].str), "%d dBm", rssi);
+    // === 3. LINK DATA (Bottom Left: Box Center X = 94) ===
+    // Line 1: Packets Rx
+    uint32_t rx_pkts = metrics_get_rx_count();
+    snprintf(s_diag_texts[6].str, sizeof(s_diag_texts[6].str), "%lu", (unsigned long)rx_pkts);
     s_diag_texts[6].len = strlen(s_diag_texts[6].str);
     s_diag_texts[6].x0 = 94 - (s_diag_texts[6].len * 6) / 2;
     s_diag_texts[6].y0 = 207;
 
-    //line 2 packet loss in percentages of the packets loss from the receiver to the stm32
+    // Line 2: Packets Lost (%)
     float loss = metrics_get_packet_loss_pct();
     snprintf(s_diag_texts[7].str, sizeof(s_diag_texts[7].str), "%.1f%%", loss);
     s_diag_texts[7].len = strlen(s_diag_texts[7].str);
     s_diag_texts[7].x0 = 94 - (s_diag_texts[7].len * 6) / 2;
     s_diag_texts[7].y0 = 224;
 
-
-    //line 3 - packets received form the stm32
-    uint32_t rx_pkts = metrics_get_rx_count();
-    snprintf(s_diag_texts[8].str, sizeof(s_diag_texts[8].str), "%lu", (unsigned long)rx_pkts);
+    // Line 3: Last packet (ms)
+    uint32_t tx_ms_ago = metrics_get_last_tx_ms_ago();
+    snprintf(s_diag_texts[8].str, sizeof(s_diag_texts[8].str), "%lums", (unsigned long)tx_ms_ago);
     s_diag_texts[8].len = strlen(s_diag_texts[8].str);
     s_diag_texts[8].x0 = 94 - (s_diag_texts[8].len * 6) / 2;
     s_diag_texts[8].y0 = 242;
 
-    //line 4 - last packet transmitted (ms)
-    uint32_t tx_ms_ago = metrics_get_last_tx_ms_ago();
-    snprintf(s_diag_texts[9].str, sizeof(s_diag_texts[9].str), "%lums", (unsigned long)tx_ms_ago);
+    // Line 4: RSSI (dBm)
+    int8_t rssi = metrics_get_rssi();
+    snprintf(s_diag_texts[9].str, sizeof(s_diag_texts[9].str), "%d dBm", rssi);
     s_diag_texts[9].len = strlen(s_diag_texts[9].str);
     s_diag_texts[9].x0 = 94 - (s_diag_texts[9].len * 6) / 2;
     s_diag_texts[9].y0 = 260;
@@ -229,8 +228,8 @@ static void prepare_diag_ui_strings(void) {
     s_diag_texts[12].y0 = 207;
 
     float lat = robot_packet_received ? robot_packet.latencyMs : 0.0f;
-    // Line 2: LATENCY
-    snprintf(s_diag_texts[13].str, sizeof(s_diag_texts[13].str), "%.1f", lat);
+    // Line 2: LATENCY (ms)
+    snprintf(s_diag_texts[13].str, sizeof(s_diag_texts[13].str), "%.2f", lat);
     s_diag_texts[13].len = strlen(s_diag_texts[13].str);
     s_diag_texts[13].x0 = 207 - (s_diag_texts[13].len * 6) / 2;
     s_diag_texts[13].y0 = 224;

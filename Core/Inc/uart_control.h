@@ -1,4 +1,4 @@
-#ifndef UART_CONTROL_H
+﻿#ifndef UART_CONTROL_H
 #define UART_CONTROL_H
 
 #include <stdio.h>
@@ -70,11 +70,14 @@ void menu_servo(void);
 void menu_voltage(void);
 void menu_both(void);
 void menu_uart(void);
-void Telemetry_Update_Wheel_Speeds(float delta_time_sec);
 void UART_Send_Telemetry(void);
 void DWT_Init(void);
+void Telemetry_Loop_Start(void);
+void Telemetry_Loop_End(uint32_t loop_start_us);
+uint32_t DWT_GetMicros(void);
 
 
 
 
 #endif
+

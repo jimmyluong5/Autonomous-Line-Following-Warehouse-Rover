@@ -14,6 +14,7 @@
 #include "lcd.h"
 #include "metrics.h"
 #include "stdbool.h"
+#include "esp_mac.h"
 
 #define failsafe_time 2000
 bool failsafe_flag = false;
@@ -136,6 +137,16 @@ void app_main(void) {
         }
         //check failsafe every iteration
         check_failsafe(&packet);
+
+        // Print transmitter MAC address every 3 seconds to console
+        static uint32_t last_mac_print = 0;
+        if (now - last_mac_print > 3000) {
+            last_mac_print = now;
+            uint8_t mac[6];
+            esp_read_mac(mac, ESP_MAC_WIFI_STA);
+            printf(">> TRANSMITTER MAC: {0x%02X, 0x%02X, 0x%02X, 0x%02X, 0x%02X, 0x%02X}\r\n",
+                   mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+        }
        
         
         metrics_record_loop_end();

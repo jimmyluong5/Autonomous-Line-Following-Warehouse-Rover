@@ -520,18 +520,19 @@ static void animation_task(void *pvParameters) {
             last_rendered_page = PAGE_MENU;
             vTaskDelay(pdMS_TO_TICKS(40));
         } 
-        else if (current_page == PAGE_MANUAL) {
-            //decode the background image once
-            if (last_rendered_page != PAGE_MANUAL) {
+        else if (current_page == PAGE_MANUAL || current_page == PAGE_MANUAL_DATA ||
+                 current_page == PAGE_AUTO_DATA || current_page == PAGE_IMU_DATA) {
+            // Decode the background image once upon entering the page
+            if (last_rendered_page != current_page) {
                 decode_image(0, &pixels);
-                last_rendered_page = PAGE_MANUAL;
+                last_rendered_page = current_page;
             }
-            //display the live orange dot overlay
+            // Continuously redraw live telemetry numbers, RF stats & overlays in real time!
             display_pretty_colors(spi);
             vTaskDelay(pdMS_TO_TICKS(35));
         }
         else {
-            // Showcase QR pages (LinkedIn, GitHub, Empty left, etc.)
+            // Showcase QR static pages (LinkedIn, GitHub, Empty left, etc.)
             // Decode and redraw only when entering a new page
             if (current_page != last_rendered_page) {
                 decode_image(0, &pixels);

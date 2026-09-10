@@ -143,18 +143,21 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint32_t last_display_time = 0;
   while (1) {
+    uint32_t loop_start_us = DWT_GetMicros();
+    Telemetry_Loop_Start();
+
     UART_CONTROL_update();
     UART_CONTROL_check_timeout();
     Robot_Update();
     Servo_Update();
 
+    Telemetry_Loop_End(loop_start_us);
+
     static uint32_t last_telemetry_time = 0;
-    if ((HAL_GetTick() - last_telemetry_time) > 50) {
+    if ((HAL_GetTick() - last_telemetry_time) >= 50) {
       last_telemetry_time = HAL_GetTick();
-      Telemetry_Update_Wheel_Speeds(0.05f);
-      // UART_Send_Telemetry(); // Commented out to prevent binary frames from flooding PuTTY
+      UART_Send_Telemetry();
     }
     /* USER CODE END WHILE */
 

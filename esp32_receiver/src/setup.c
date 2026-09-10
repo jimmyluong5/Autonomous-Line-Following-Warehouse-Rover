@@ -12,21 +12,21 @@
 
 static const char *TAG = "RECEIVER_SETUP";
 
-uint8_t g_transmitter_mac[6] = {0};
+uint8_t transmitter_mac[ESP_NOW_ETH_ALEN] = {0xAC, 0x27, 0x6E, 0xA1, 0x9F, 0x34};
+
 bool g_transmitter_paired = false;
 
 static void OnDataRecv(const esp_now_recv_info_t *esp_now_info, const uint8_t *data, int data_len) {
-    // Auto-pair transmitter MAC address for return telemetry
     if (!g_transmitter_paired && esp_now_info != NULL) {
-        memcpy(g_transmitter_mac, esp_now_info->src_addr, 6);
-        if (!esp_now_is_peer_exist(g_transmitter_mac)) {
+        memcpy(transmitter_mac, esp_now_info->src_addr, 6);
+        if (!esp_now_is_peer_exist(transmitter_mac)) {
             esp_now_peer_info_t peer_info = {0};
-            memcpy(peer_info.peer_addr, g_transmitter_mac, 6);
+            memcpy(peer_info.peer_addr, transmitter_mac, 6);
             peer_info.channel = 1;
             peer_info.encrypt = false;
             if (esp_now_add_peer(&peer_info) == ESP_OK) {
                 g_transmitter_paired = true;
-                ESP_LOGI(TAG, "Paired with Transmitter MAC: " MACSTR, MAC2STR(g_transmitter_mac));
+                ESP_LOGI(TAG, "Paired with Transmitter MAC: " MACSTR, MAC2STR(transmitter_mac));
             }
         } else {
             g_transmitter_paired = true;
@@ -53,6 +53,16 @@ void init_wifi(void) {
 void init_esp_now(void) {
     ESP_ERROR_CHECK(esp_now_init());
     ESP_ERROR_CHECK(esp_now_register_recv_cb(OnDataRecv));
+
+    // Pre-register transmitter as peer
+    esp_now_peer_info_t peer_info = {0};
+    memcpy(peer_info.peer_addr, transmitter_mac, ESP_NOW_ETH_ALEN);
+    peer_info.channel = 1;
+    peer_info.encrypt = false;
+    if (!esp_now_is_peer_exist(transmitter_mac)) {
+        esp_now_add_peer(&peer_info);
+    }
+    g_transmitter_paired = true;
 }
 
 void init_esp_nvs(void) {
@@ -79,7 +89,7 @@ void init_uart(void) {
     };
     ESP_ERROR_CHECK(uart_param_config(UART_NUM_1, &uart_config));
 
-    // TX: GPIO 42 (Pin labeled "42") -> STM32 PA3 (RX / D0)
-    // RX: GPIO 2  (Pin labeled "2")  <- STM32 PA2 (TX / D1)
+    // TX: GPIO 42 (Pin labeled "42") -> STM32 PA10 (RX / D0)
+    // RX: GPIO 2  (Pin labeled "2")  <- STM32 PA9  (TX / D1)
     ESP_ERROR_CHECK(uart_set_pin(UART_NUM_1, 42, 2, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
 }
