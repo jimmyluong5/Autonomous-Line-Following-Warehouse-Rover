@@ -26,27 +26,16 @@ typedef struct __attribute__((packed)) {
 
 
 typedef struct __attribute__((packed)) {
-  float actualspeed;
-  float leftWheelSpeed;
-  float rightWheelSpeed;
-
-  //wheel encoders
-  int32_t leftEncoder;
-  int32_t rightEncoder;
-
-  //states and status
-  uint8_t speedSetting;      // Commanded throttle %
-  uint8_t direction;         // 0=STOP, 1=FWD, 2=REV, etc.
-  uint8_t lineSensors;       // 8-bit sensor mask
-  uint8_t emergencyStop;     // 1 if stopped, 0 if OK
-
-  //stm32 shit
-  uint8_t cpuLoad; //stm32 cpu load
-  float controlRate;//loop frequency 
-  float latencyMs; //execution latency
-  float jitterMs; //loop jitter 
-  uint16_t missedDeadlines;
-
+    float   actualspeed;
+    uint8_t speedSetting;
+    uint8_t direction;
+    uint8_t lineSensors;
+    uint8_t emergencyStop;
+    uint8_t cpuLoad;
+    float   controlRate;
+    float   latencyMs;
+    float   jitterMs;
+    uint16_t missedDeadlines;
 } robot_status_t;
 
 //everytime you want to add a new mode, just add it here.
