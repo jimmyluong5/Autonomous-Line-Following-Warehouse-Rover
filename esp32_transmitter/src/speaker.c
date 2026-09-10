@@ -14,8 +14,8 @@
 #define LEDC_CHANNEL    LEDC_CHANNEL_0
 #define LEDC_DUTY_RES   LEDC_TIMER_10_BIT // 10-bit timer (0 to 1023 max)
 #define LEDC_FREQUENCY  1024              // either 3072 or 1024 Hz
-#define JOYSTICK_FREQ 2048 //or 2731 for loud
-#define BUTTON_FREQ 1024
+#define JOYSTICK_FREQ   2048 //or 2731 for loud
+#define BUTTON_FREQ     1024
 
 //static const char *TAG = "SPEAKER";
 

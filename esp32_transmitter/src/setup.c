@@ -4,6 +4,9 @@
 #include "esp_mac.h"
 #include "esp_system.h"
 #include "esp_wifi.h"
+#include "freertos/idf_additions.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 #include "nvs_flash.h"
 #include <string.h>
 
@@ -20,21 +23,31 @@ uint8_t receiver_mac[ESP_NOW_ETH_ALEN] = {0xAC, 0x27, 0x6E, 0xA2, 0x87, 0x5C};
 #include "metrics.h"
 #include "transmit_data.h"
 
+extern uint32_t last_time_rx; //extern means the variable actually exists from another .c file.
 robot_status_t g_robot_status = {0};
 bool g_robot_status_received = false;
 
-static void OnDataSent(const esp_now_send_info_t *tx_info,
-                       esp_now_send_status_t status) {
-  if (tx_info == NULL) return;
+//function to send data
+static void OnDataSent(const esp_now_send_info_t *tx_info, esp_now_send_status_t status) {
+  if (tx_info == NULL)  {
+    return;
+  }
   metrics_record_espnow_tx_done(status);
 }
 
-static void OnDataRecv(const esp_now_recv_info_t *esp_now_info,
-                       const uint8_t *data, int data_len) {
+
+//function to receive data
+static void OnDataRecv(const esp_now_recv_info_t *esp_now_info, const uint8_t *data, int data_len) {
+  //if we got the length of the packet back from the stm32
   if (data_len == sizeof(robot_status_t)) {
     memcpy(&g_robot_status, data, sizeof(robot_status_t));
     g_robot_status_received = true;
+    //update the last time we received the packet
+    last_time_rx = pdTICKS_TO_MS(xTaskGetTickCount());
+
   }
+  
+  
 }
 
 void init_esp_nvs(void) {

@@ -43,9 +43,10 @@ void check_failsafe(void) {
         uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
         
         
-        if ((now - last_time_rx) > 2000) {
+        if ((now - last_time_rx) > 5000) {
+            failsafe_flag = true; 
             last_time_rx = now;
-            speaker_pattern(3, 100, 100);
+            speaker_pattern(8, 75, 75);
             ESP_LOGW("FAILSAFE", "No packets set for 2 seconds, activating failure!");
 
             failsafe_flag = true;
@@ -126,8 +127,7 @@ void app_main(void) {
             last_sent_packet = packet;
             last_time = now;
             
-            //update the reset failsafe timer
-            last_time_rx = now;
+        
             metrics_record_espnow_tx_start();
             transmit_data(receiver_mac, &packet);
         }
