@@ -394,33 +394,48 @@ The communication architecture establishes a complete, closed-loop bidirectional
 
 ### 14. Inter-MCU UART Bridge & Hardware Verification (ESP32-S3 <-> STM32G431KB)
 
-To complete the end-to-end communication pipeline, hardware UART communication was established and verified between the rover's on-board **ESP32-S3 Receiver** and the **STM32G431KB** microcontroller:
+To complete the end-to-end communication pipeline, dedicated hardware UART communication was established and verified between the rover's on-board **ESP32-S3 Receiver** and the **STM32G431KB** microcontroller:
 
 * **Hardware Pinout**:
-  * ESP32 Pin `42` (UART1 TX) --> STM32 `PA3` (`LPUART1_RX` / `D0`)
-  * ESP32 Pin `2` (UART1 RX) <-- STM32 `PA2` (`LPUART1_TX` / `D1`)
-  * Common `GND` reference and 115,200 baud rate.
+  * **ESP32-S3 Pin 42 (UART1 TX)** --> **STM32 PA10 (USART1 RX / D1)** @ 115,200 baud
+  * **ESP32-S3 Pin 2 (UART1 RX)** <-- **STM32 PA9 (USART1 TX / D0)** @ 115,200 baud
+  * **ST-Link Debug Console**: **STM32 PA2 (TX) / PA3 (RX)** via LPUART1 @ 115,200 baud (keeps PuTTY console communication completely isolated from rover control traffic).
+  * **Common Ground (GND)** connected across all modules with regulated 5V buck power distribution.
 
-* **Verification & Results**:
-  * Built a bidirectional ping-pong diagnostic test where the ESP32 Receiver transmits `0xAA` drive packets and listens for incoming frames from the STM32.
-  * Successfully verified instantaneous reception of `127-byte` telemetry packets from STM32 `PA2`, confirming zero packet drop, active motor driving, and live return telemetry.
+### 15. Real-Time Proportional Manual Control & Closed-Loop Wireless Driving
+
+The manual driving implementation provides responsive, proportional throttle and differential steering mapped directly from the analog 2D joystick on the handheld controller to the rover's TB6612FNG motor driver:
+
+* **Joystick Mixing & Proportional Control**:
+  * Filtered joystick X/Y coordinates from SAR ADC1 are converted into differential drive PWM duty cycles (`0%` to `100%`) for smooth acceleration, reverse, and spot-turning.
+  * Real-time deadband filtering ($\pm 25$ ADC counts) prevents unintended motor creep when the spring-centered joystick is resting at neutral.
+* **Safety Watchdog & Inactivity Alarm**:
+  * An integrated 5-second inactivity watchdog trips into fail-safe mode if wireless packets or user input stall, sounding an audible 8-beep alarm pattern on the piezo buzzer and automatically disarming the motors.
+* **Live Return Diagnostics**:
+  * The STM32 sends back 20 Hz binary telemetry frames (`0xAA + robot_status_t`) carrying live DWT superloop metrics (CPU load, latency, jitter, loop frequency) and link quality parameters directly overlaid on the 2.4" TFT LCD.
 
 <p align="center">
-  <img src="./assets/uart_esp32_stm32_test.png" width="85%" alt="UART Communication Verification between ESP32 and STM32" />
+  <img src="./assets/telemetry_diagnostics_live.jpg" width="85%" alt="Live 4-Quadrant Diagnostic Dashboard on Handheld Controller" />
   <br>
-  <i>PuTTY serial monitor verifying active transmission on Pin 42 and successful 127-byte telemetry reception from STM32 PA2.</i>
+  <i>Handheld 2.4" TFT LCD displaying real-time 4-quadrant diagnostics: Live Joystick coordinates, Differential Motor PWM, ESP-NOW Link Quality, and STM32 Superloop Performance.</i>
 </p>
 
+<p align="center">
+  <!-- Manual Driving Demonstration GIF -->
+  <img src="./assets/manual_drive_demo.gif" width="85%" alt="Manual Rover Driving Demonstration" />
+  <br>
+  <i>Live demonstration: Real-time proportional manual joystick control and responsive wireless maneuvering.</i>
+</p>
 
 ## Hardware Interconnect (Receiver <-> STM32):
-* **ESP32-S3 Pin 42 (UART1 TX)** --> **STM32 PA3 (LPUART1 RX / D0)** @ 115,200 baud
-* **ESP32-S3 Pin 2 (UART1 RX)** <-- **STM32 PA2 (LPUART1 TX / D1)** @ 115,200 baud
+* **ESP32-S3 Pin 42 (UART1 TX)** --> **STM32 PA10 (USART1 RX / D1)** @ 115,200 baud
+* **ESP32-S3 Pin 2 (UART1 RX)** <-- **STM32 PA9 (USART1 TX / D0)** @ 115,200 baud
+* **ST-Link Debug Console**: **STM32 PA2 (TX) / PA3 (RX)** via LPUART1 @ 115,200 baud
 * **Common Ground (GND)** connected across all modules with regulated 5V buck power distribution.
 
 #### Packet Protocols:
-1. **Control Packet (`0xAA + data_packet_t`)**: Transmitted at 100 Hz from transmitter to STM32, containing active-low button masks, commanded speed (`0-255`), 12-bit analog joystick X/Y deflections, and operating mode (`Manual`, `Autonomous`, `IMU`).
-2. **Telemetry Packet (`0xBB + robot_status_t`)**: Transmitted at 20 Hz from STM32 back to transmitter, delivering real-time wheel speeds (m/s), left/right encoder pulse counts, CPU load percentage, loop rate (Hz), latency (ms), jitter (ms), and missed deadline counters to the controller's diagnostic UI.
-
+1. **Control Packet (`0xAA + data_packet_t`)**: Transmitted at 40 Hz from transmitter to STM32, containing 5-bit tactile button masks, commanded speed (`0-255`), 12-bit analog joystick X/Y deflections, and operating mode (`Manual`, `Autonomous`, `IMU`).
+2. **Telemetry Packet (`0xAA + robot_status_t`)**: Transmitted at 20 Hz from STM32 back to transmitter, delivering real-time CPU load percentage, loop rate (Hz), execution latency (ms), jitter (ms), and missed deadline counters to the controller's diagnostic UI.
 
 To provide manual override, multi-mode switching, and live diagnostics for the rover, a dedicated handheld wireless controller was developed using a dual-core **ESP32-S3** (240 MHz) and a 2.4-inch **ILI9341 SPI TFT LCD (240×320)**.
 
@@ -431,13 +446,13 @@ The controller provides an interactive graphical user interface (GUI), live tele
 * **Display & Touch**: 2.4" 240×320 SPI LCD driven by an ILI9341 controller, sharing the SPI bus with an XPT2046 resistive touch controller.
 * **Analog 2D Joystick**: Multi-sampled through SAR ADC1 (GPIO 4 and GPIO 5) with 16× oversampling, software deadband filtering, and axis normalization.
 * **5-Way Tactile Button Matrix**: Multi-button input array with two-stage temporal debouncing for menu navigation, speed adjustments, and emergency stop.
-* **Audio Feedback**: PWM buzzer generating audible confirmation tones on button interactions.
+* **Audio Feedback**: PWM buzzer generating audible confirmation tones on button interactions and a 5-second inactivity watchdog alarm.
 
 ```text
 [ Analog Joystick (ADC1) ] ──┐
-[ 5-Button Matrix (GPIO) ] ──┼──> [ ESP32-S3#1 Controller & Transmitter ] ──(ESP-NOW 2.4GHz)──> [ESP32#2 Rover Receiver ]
-[ Piezo Speaker (LEDC)   ] ──┤      │ (FreeRTOS Core 0/1)
-[ ILI9341 240x320 LCD    ] ──┘      └──> [ Real-Time Telemetry & Graphics ]
+[ 5-Button Matrix (GPIO) ] ──┼──> [ ESP32-S3#1 Controller & Transmitter ] ──(ESP-NOW 2.4GHz)──> [ESP32#2 Rover Receiver ] ──(USART1 PA9/PA10)──> [ STM32G431KB ]
+[ Piezo Speaker (LEDC)   ] ──┤      │ (FreeRTOS Core 0/1)                                                                                         │
+[ ILI9341 240x320 LCD    ] ──┘      └──<── Live 4-Quadrant Diagnostic Telemetry Return <──────────────────────────────────────────────────────────┘
 ```
 
 #### 2. Embedded Graphics Engine & Menu Animation
@@ -446,30 +461,43 @@ The controller provides an interactive graphical user interface (GUI), live tele
 * **Main Menu UI**: Plays a 15-frame animated rover sequence with an active pulsing yellow hover cursor to select operating modes (**Manual Mode**, **Autonomous Mode**, **IMU Mode**).
 * **Showcase Pages**: Dedicated QR code and documentation screens for GitHub and LinkedIn.
 
-#### 3. Real-Time Manual Dashboard & Custom Bitmap Font Engine
-When entering **Manual Mode**, the controller renders an industrial diagnostic dashboard with live telemetry overlays:
-* **Interactive 2D Joystick Grid**: Renders a dynamic orange position dot with a contrasting border inside a 2D coordinate grid, reflecting real-time physical stick deflection.
-* **Embedded 5x7 ASCII Font Renderer**: A lightweight, zero-heap bitmap font engine (`font5x7`) that injects text characters directly into the scanline stream during display refresh.
-* **Vehicle Status Display**:
-  * **Speed Setting**: Real-time commanded throttle percentage (`0%` to `100%`).
-  * **Direction**: Real-time heading / deflection state (`STOP`, `FWD`, `REV`, `LEFT`, `RIGHT`, `FWD-R`, `FWD-L`, `REV-R`, `REV-L`).
-  * **Actual Speed**: Reserved telemetry slot for encoder feedback from the rover.
+#### 3. Real-Time Manual Dashboard & 4-Quadrant Diagnostics
+When entering **Manual Mode**, the controller renders an industrial diagnostic dashboard with live telemetry overlays across four dedicated quadrants:
+
+1. **Quadrant 1: Joystick Data (Top Left)**:
+   * **X / Y ADC**: 12-bit raw analog reading from SAR ADC1 (`0–4095`).
+   * **X / Y norm**: Normalized deflection percentage (`-100%` to `+100%`) with center deadband filtering.
+2. **Quadrant 2: Motor Data (Top Right)**:
+   * **Left / Right PWM**: Real-time commanded throttle percentage dispatched to the TB6612FNG H-bridge drivers.
+   * **Steering / Differential Drive**: Proportional steering mixing turning commands cleanly into left and right wheel speeds.
+3. **Quadrant 3: Link Data (Bottom Left)**:
+   * **Packets RX**: Total return telemetry frames successfully received.
+   * **Packets Lost**: Real-time ESP-NOW packet drop rate (`0.0%`).
+   * **Last packet**: Inter-packet arrival latency (`20 ms`).
+   * **RSSI**: Receiver signal strength indicator in dBm (`-24 dBm`).
+4. **Quadrant 4: STM32 Performance (Bottom Right)**:
+   * **CPU Load**: Real-time superloop CPU utilization percentage measured by hardware DWT cycle counting.
+   * **Latency**: Active loop execution latency measured to 0.01 ms precision.
+   * **Jitter**: RFC 3550 exponential moving average loop jitter filter.
+   * **Missed DL**: Missed loop deadline counter (execution taking >10 ms).
+   * **Loop Rate**: Deterministic superloop update frequency (~184 Hz).
 
 #### 4. Real-Time System Performance & RTOS Telemetry
-To benchmark control loop determinism (comparing FreeRTOS preemptive multitasking vs bare-metal superloops), a dedicated telemetry module (`metrics.c`) tracks real-time performance indicators:
+To benchmark control loop determinism (comparing FreeRTOS preemptive multitasking vs bare-metal superloops), a dedicated telemetry module (`metrics.c` on ESP32 & `uart_control.c` on STM32) tracks real-time performance indicators:
 
 | Telemetry Metric | Measurement Method | Typical Reading | Purpose |
 | :--- | :--- | :--- | :--- |
-| **CPU Load** | Active computation vs sleep duty cycle | `~12–20%` | Verifies compute headroom |
-| **Latency** | Hardware timer round-trip / send callback | `1.2–3.5 ms` | Measures wireless packet transmission latency |
-| **Jitter** | RFC 3550 Exponential Moving Average filter | `0.2–0.8 ms` | Tracks packet timing stability |
+| **CPU Load** | Active computation vs superloop budget | `~5–8%` | Verifies compute headroom |
+| **Latency** | ARM Cortex-M4 DWT Cycle Counter (`CYCCNT`) | `0.01–0.05 ms` | Measures microcontroller active compute latency |
+| **Jitter** | RFC 3550 Exponential Moving Average filter | `1.5–6.8 ms` | Tracks loop timing stability |
 | **Missed DL** | Execution time exceeding 10 ms budget | `0` | Proves hard real-time scheduling guarantees |
-| **Control Rate** | High-resolution period frequency | `100.0 Hz` | Confirms consistent 10 ms control loop execution |
+| **Loop Rate** | Hardware period reciprocal (`1 / dt`) | `~100–185 Hz` | Confirms responsive control execution |
+| **Link RSSI** | ESP-NOW WiFi MAC RX Control Metadata | `-24 to -48 dBm` | Verifies wireless link budget and antenna range |
 
-#### 5. Wireless Communication Protocol (`ESP-NOW`)
+#### 5. Wireless Communication Protocol (`ESP-NOW`) & Safety Watchdog
 Control packets (`data_packet_t`) are packed into a compact binary structure and transmitted as 2.4 GHz peer-to-peer unicast packets to the receiver ESP32 on the rover:
 ```c
-typedef struct {
+typedef struct __attribute__((packed)) {
     uint8_t  button_data;  // 5-bit tactile button mask
     uint8_t  speed;        // Commanded throttle (0–255)
     uint16_t joystick_x;   // Filtered X analog deflection
@@ -479,6 +507,8 @@ typedef struct {
     uint8_t  mode;         // Active operating mode
 } data_packet_t;
 ```
+
+* **5-Second Inactivity Fail-Safe**: If no user input or joystick deflection is detected for 5 seconds in Manual Mode, the transmitter automatically triggers an audible buzzer alarm pattern (`speaker_pattern(8, 75, 75)`), trips the fail-safe state, cuts motor drive output to neutral stop, and returns safely to the main menu.
 
 ## Hardware
 
@@ -531,24 +561,25 @@ Phase 3: Time-of-Flight (ToF) Collision Detection & Auto-Braking
 ## Current Status Summary
 
 ### Completed
-- [x] Bidirectional DC motor control with TB6612FNG & PWM
+- [x] Bidirectional DC motor control with TB6612FNG & dual hardware PWM (TIM1_CH1 / TIM17_CH1)
 - [x] 8-Channel reflectance array acquisition via MCP3208 SPI ADC
 - [x] Autonomous line-following navigation with PID control
 - [x] 3D-printed chassis assembly and mechanical integration
 - [x] Servo-actuated steering & suspension control (45 deg - 135 deg limits)
 - [x] Multi-subsystem UART diagnostic & control dashboard
-- [x] Dual ESP32-S3 ESP-NOW wireless link with binary command packet protocol
-- [x] Direct bidirectional UART communication bridge between receiver ESP32-S3 and STM32G431KB (`0xAA` control / `0xBB` telemetry)
+- [x] Dual ESP32-S3 ESP-NOW wireless link with binary command packet protocol (40 Hz)
+- [x] Dedicated dual UART routing on STM32 (USART1 on PA9/PA10 for ESP32 receiver, LPUART1 on PA2/PA3 for PC PuTTY console)
 - [x] Handheld wireless controller with 2.4" 240x320 ILI9341 LCD, 2D joystick grid, and 4 diagnostic telemetry quadrants
-- [x] Closed-loop STM32 DWT performance metrics & encoder telemetry transmission over ESP-NOW back to handheld transmitter LCD
+- [x] Real-time proportional manual joystick driving with differential throttle mixing
+- [x] 5-second inactivity fail-safe timeout watchdog with multi-tone audio alarm
+- [x] Closed-loop STM32 DWT performance metrics & link telemetry transmission over ESP-NOW back to handheld transmitter LCD (20 Hz)
 
 ### In Progress
-- [ ] Closed-loop PID speed control based on real-time optical encoder feedback
-- [ ] IMU sensor integration & dynamic heading stabilization
+- [ ] IMU sensor integration & dynamic heading stabilization (LSM6DS3 6-DoF accelerometer + gyroscope)
 
 ### Planned
-- [ ] IMU sensor integration & closed-loop heading stabilization
-- [ ] Time-of-Flight (ToF) sensor integration for forward collision avoidance
-- [ ] Follow-me feature using the FireBeetle 2 Board ESP32-S3 (N16R8) AIoT Microcontroller with Camera.
-- [ ] Return to Home Feature using IMUs (Adafruit LSM6DS3TR-C 6-DoF Accel + Gyro IMU & Adafruit MPU-6050 6-DoF Accel and Gyro Sensor)
+- [ ] IMU-based closed-loop straight-line heading stabilization & tilt compensation
+- [ ] Time-of-Flight (ToF) sensor integration for forward collision avoidance & emergency braking
+- [ ] Follow-me feature using the FireBeetle 2 Board ESP32-S3 (N16R8) AIoT Microcontroller with Camera
+- [ ] Return to Home Feature using dual IMUs (Adafruit LSM6DS3TR-C & MPU-6050)
 
