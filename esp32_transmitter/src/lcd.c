@@ -438,25 +438,35 @@ static void display_pretty_colors(spi_device_handle_t spi) {
         uint32_t mem_cap = MALLOC_CAP_INTERNAL | MALLOC_CAP_DMA;
 #endif
 //allocate memory for our 2 buffers
+//You allocate 7.68 KB because that is the exact memory size 
+// needed to hold 16 lines of 240-pixel RGB565 color data, 
+// allowing you to render the 320-line screen in 20 fast, memory-efficient slices.
+
+
         for (int i = 0; i < 2; i++) {
             if (s_dma_lines[i] == NULL) { //checks if the buffer is empty before allocating.
                 s_dma_lines[i] = spi_bus_dma_memory_alloc(LCD_HOST, X_MAX * PARALLEL_LINES * sizeof(uint16_t), mem_cap);
                 assert(s_dma_lines[i] != NULL);
             }
             //x_max = 240 *parallel lines is 16 * sizeof 16 bit int is 2 bytes
-            // so 7.68kb alloacted per buffer. half
+            // so 7.68kb alloacted per buffer per slice, there about 20 slices for entire image.
         }
     }
 
+    //this tracks which buffer the dma hardware is currently transmitting, it starts at 
+    //-1 because we haven't sent anything yet with the dma.
     int sending_line = -1;
+
+    //this tracks which buffer the cpu is currently filling, it starts at buffer 0 
     int calc_line = 0;
 
     // Render the entire image once across all 320 vertical lines
     for (int y = 0; y < Y_MAX; y += PARALLEL_LINES) {
         pretty_effect_calc_lines(s_dma_lines[calc_line], y, 0, PARALLEL_LINES);
-        if (sending_line != -1) {
+        if (sending_line != -1) { //if we are actually sending lines, then we send via spi.
             send_line_finish(spi);
         }
+        
         sending_line = calc_line;
         calc_line = (calc_line == 1) ? 0 : 1;
         send_lines(spi, y, s_dma_lines[sending_line]);

@@ -32,6 +32,7 @@ static void OnDataSent(const esp_now_send_info_t *tx_info, esp_now_send_status_t
   if (tx_info == NULL)  {
     return;
   }
+  //if our status is good then we stop the timer. 
   metrics_record_espnow_tx_done(status);
 }
 
