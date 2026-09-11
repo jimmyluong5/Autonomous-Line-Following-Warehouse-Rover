@@ -12,7 +12,7 @@
 
 static volatile int64_t s_loop_start_time = 0;
 static volatile int64_t s_last_loop_start_time = 0;
-static volatile int64_t s_tx_start_time = 0;
+static volatile int64_t s_tx_start_time = 0; //start time of transmitting the data packet.
 
 static volatile float    s_cpu_load_pct = 5.0f;
 static volatile float    s_latency_ms = 1.2f;
@@ -40,10 +40,12 @@ int8_t metrics_get_rssi(void) {
     return s_last_rssi;
 }
 
+//this is to get the number of packets received by the stm32 by the transmitter.
 uint32_t metrics_get_rx_count(void){
-    //just regurn the rx_packet_count
+    //just return the rx_packet_count
     return s_rx_packet_count;
 }
+
 
 
 uint32_t metrics_get_last_tx_ms_ago(void) {
@@ -92,10 +94,7 @@ uint8_t metrics_get_speed_percent(void) {
     return (uint8_t)(((uint32_t)current_speed * 100) / 255);
 }
 
-// 3. Actual Speed (Placeholder until encoder is wired)
-const char* metrics_get_actual_speed_str(void) {
-    return "--"; 
-}
+
 
 // 4. Joystick X/Y percentage values (-100 to +100)
 int16_t metrics_get_joy_x_val(void) {
@@ -139,10 +138,12 @@ float metrics_get_control_rate_hz(void) {
 
 // --- Timing / Statistics Calculation Hooks ---
 
+
 void metrics_record_loop_start(void) {
     int64_t now = esp_timer_get_time();
-    s_loop_start_time = now;
+    s_loop_start_time = now; 
 
+    
     if (s_last_loop_start_time > 0) {
         int64_t period = now - s_last_loop_start_time;
         if (period > 1000 && period < 100000) {
@@ -185,15 +186,24 @@ void metrics_record_espnow_tx_start(void) {
     s_last_tx_timestamp_ms = pdTICKS_TO_MS(xTaskGetTickCount());
 }
 
-
+//this is the function to calculate the latency of the packet sent
+//it takes the status flag and if successful it calculates the latency
+//which is the time we sent the packet - the time it takes for a confirmation from the receiver side
 void metrics_record_espnow_tx_done(esp_now_send_status_t status) {
-    if (s_tx_start_time <= 0) return;
+    if (s_tx_start_time <= 0) {
+       return;
+    }
+    //get the current time
     int64_t now = esp_timer_get_time();
+
+    //determine the latency.
     int64_t duration_us = now - s_tx_start_time;
+
+    //then restart the start time of the transmission of packets.
     s_tx_start_time = 0;
 
     if (status == ESP_NOW_SEND_SUCCESS) {
-        s_tx_success_count++;
+        s_tx_success_count++; //this is for the number of sucessful packets sent over espnow
     }
     else {
         s_tx_fail_count++;

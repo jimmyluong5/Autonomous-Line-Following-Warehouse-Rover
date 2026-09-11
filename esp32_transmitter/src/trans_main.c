@@ -89,7 +89,8 @@ void app_main(void) {
     //eventually we will get rid of this super loop with preemptive scheduling 
     while (1)
     {
-        metrics_record_loop_start();
+        metrics_record_loop_start(); 
+
 
         // Check for serial console commands
         UART_CONTROL_update();
@@ -127,26 +128,21 @@ void app_main(void) {
 
         // Transmit continuously at 40 Hz (every 25ms) or immediately if data changed
         uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount()); //this is the current time
+        //if we copied the right number of bytes from the last byte into the next one and its correct
+        //and we must send a packet every 25 ms, then update the last_sent_packet to the current one.
         if (memcmp(&packet, &last_sent_packet, sizeof(data_packet_t)) != 0 || (now - last_time >= 25)) {
             last_sent_packet = packet;
-            last_time = now;
+            last_time = now; //update the time
             
-        
+            //start the transmission time
             metrics_record_espnow_tx_start();
+            //send the packet, then wait for 
             transmit_data(receiver_mac, &packet);
         }
         //check failsafe every iteration
         check_failsafe(&packet);
 
-        // Print transmitter MAC address every 3 seconds to console
-        static uint32_t last_mac_print = 0;
-        if (now - last_mac_print > 3000) {
-            last_mac_print = now;
-            uint8_t mac[6];
-            esp_read_mac(mac, ESP_MAC_WIFI_STA);
-            printf(">> TRANSMITTER MAC: {0x%02X, 0x%02X, 0x%02X, 0x%02X, 0x%02X, 0x%02X}\r\n",
-                   mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
-        }
+        
        
         
         metrics_record_loop_end();
