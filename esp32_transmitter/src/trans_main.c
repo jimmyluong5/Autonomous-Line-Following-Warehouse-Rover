@@ -136,7 +136,7 @@ void app_main(void) {
             
             //start the transmission time
             metrics_record_espnow_tx_start();
-            //send the packet, then wait for 
+            //send the packet, then wait for the confirmation flag that we got it, then stop the timer on the receiver side.
             transmit_data(receiver_mac, &packet);
         }
         //check failsafe every iteration

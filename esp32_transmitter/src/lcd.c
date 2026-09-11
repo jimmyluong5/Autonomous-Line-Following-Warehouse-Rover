@@ -441,7 +441,14 @@ static void display_pretty_colors(spi_device_handle_t spi) {
 //You allocate 7.68 KB because that is the exact memory size 
 // needed to hold 16 lines of 240-pixel RGB565 color data, 
 // allowing you to render the 320-line screen in 20 fast, memory-efficient slices.
+//the old image bytes are just overwritten by the next image.
 
+//to draw 1 frame, the screen is sliced into 20 chunks, 320 lines / 16 lines = 20 chunks
+//the height is 320 pixels or has 320 lines rights
+//instead of allocating memory for 320 lines at once (which takes too much memory)
+//the screen is sliced into 16 line chynks
+
+//we defined 2 buffers each 7.68kb each holding 16 lines worth of image bytes.
 
         for (int i = 0; i < 2; i++) {
             if (s_dma_lines[i] == NULL) { //checks if the buffer is empty before allocating.
@@ -450,6 +457,7 @@ static void display_pretty_colors(spi_device_handle_t spi) {
             }
             //x_max = 240 *parallel lines is 16 * sizeof 16 bit int is 2 bytes
             // so 7.68kb alloacted per buffer per slice, there about 20 slices for entire image.
+            //this specific amount each buffer because one full image byte is about 153
         }
     }
 
