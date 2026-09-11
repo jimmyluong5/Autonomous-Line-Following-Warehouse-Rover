@@ -409,21 +409,42 @@ static void send_line_finish(spi_device_handle_t spi)
     }
 }
 
+
+
+//we allocate two ping pong empty buffers for the ram so that the dma hardware and cpu
+//swap each time dma reads the bytes 
+
+//so the cpu decodes the image into bytes and places it into buffer 1
+//buffer 2 is empty
+//dma hardware reads buffer 1 and places those bytes onto spi bus and pushes it to the LCD
+//while dma hardware is reading, the cpu decodes the next image into 
+//bytes into the empty buffer 1
+
+//then the cycle repeats, this happens in parallel so its very fast, 
+// and solves the problem of the cpu decoding the image and allocating memory then the 
+//dma hardware reading bytes then sending onto spi bus.
+
+//2 pointers for each of our buffers
 static uint16_t *s_dma_lines[2] = {NULL, NULL};
 
+//the very first time this function runs, it allocates memory for both buffers.
 // Routine to draw the clean decoded image to the LCD once.
 static void display_pretty_colors(spi_device_handle_t spi) {
+    //if our buffers are empty.
     if (s_dma_lines[0] == NULL || s_dma_lines[1] == NULL) {
-#if CONFIG_LCD_BUFFER_IN_PSRAM
+#if CONFIG_LCD_BUFFER_IN_PSRAM //if this is set, then we allocate memory in psram
         uint32_t mem_cap = MALLOC_CAP_SPIRAM | MALLOC_CAP_DMA;
-#else
+#else //else we allocate memory using internal sram.
         uint32_t mem_cap = MALLOC_CAP_INTERNAL | MALLOC_CAP_DMA;
 #endif
+//allocate memory for our 2 buffers
         for (int i = 0; i < 2; i++) {
-            if (s_dma_lines[i] == NULL) {
+            if (s_dma_lines[i] == NULL) { //checks if the buffer is empty before allocating.
                 s_dma_lines[i] = spi_bus_dma_memory_alloc(LCD_HOST, X_MAX * PARALLEL_LINES * sizeof(uint16_t), mem_cap);
                 assert(s_dma_lines[i] != NULL);
             }
+            //x_max = 240 *parallel lines is 16 * sizeof 16 bit int is 2 bytes
+            // so 7.68kb alloacted per buffer. half
         }
     }
 
@@ -564,9 +585,16 @@ void init_lcd_driver(void) {
         .queue_size = 7,                        //We want to be able to queue 7 transactions at a time
         .pre_cb = lcd_spi_pre_transfer_callback, //Specify pre-transfer callback to handle D/C line
     };
+
+
+
     //Initialize the SPI bus
+    //we initialize the spi bus with the hardware direct memory address. 
+    // SPI_DMA_CH_AUTO tells ESP-IDF to automatically select and assign an available
+    // hardware DMA channel to this SPI bus so transfers happen in the 
+    // background without CPU intervention.
     ret = spi_bus_initialize(LCD_HOST, &buscfg, SPI_DMA_CH_AUTO);
-    ESP_ERROR_CHECK(ret);
+    ESP_ERROR_CHECK(ret); //check if this is successful or not.
 
     // 1. Configure the T_IRQ pin as input with pull-up enabled
     gpio_config_t irq_conf = {
