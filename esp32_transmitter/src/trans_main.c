@@ -126,17 +126,14 @@ void app_main(void) {
         packet.mode = active_mode; //fill the mode into the packet.
         speaker_update(packet.button_data);
 
-        // Transmit continuously at 40 Hz (every 25ms) or immediately if data changed
-        uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount()); //this is the current time
-        //if we copied the right number of bytes from the last byte into the next one and its correct
-        //and we must send a packet every 25 ms, then update the last_sent_packet to the current one.
-        if (memcmp(&packet, &last_sent_packet, sizeof(data_packet_t)) != 0 || (now - last_time >= 25)) {
+        // Transmit at a steady 40 Hz (every 25ms)
+        uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
+        if (now - last_time >= 25) {
             last_sent_packet = packet;
-            last_time = now; //update the time
+            last_time = now;
             
-            //start the transmission time
+            // Start the transmission time
             metrics_record_espnow_tx_start();
-            //send the packet, then wait for the confirmation flag that we got it, then stop the timer on the receiver side.
             transmit_data(receiver_mac, &packet);
         }
         //check failsafe every iteration

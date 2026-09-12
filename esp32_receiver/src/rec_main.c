@@ -32,7 +32,7 @@ void app_main() {
         uint8_t header = 0;
         // Check if marker byte 0xAA arrived from STM32 PA9
         if (uart_read_bytes(UART_NUM_1, &header, 1, pdMS_TO_TICKS(10)) > 0) {
-            if (header == 0xAA) {
+            if (header == 0xAA) { //check for magic byte.
                 robot_status_t status = {0};
                 int bytes_read = uart_read_bytes(UART_NUM_1, (uint8_t*)&status, sizeof(robot_status_t), pdMS_TO_TICKS(20));
                 

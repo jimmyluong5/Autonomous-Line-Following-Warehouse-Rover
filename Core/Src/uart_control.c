@@ -11,6 +11,7 @@
 #include "LSM6DS3.h"
 #include <stdlib.h>
 #include "motor.h"
+#include "stm32g4xx_hal_uart.h"
 #include <math.h>
 static uint8_t current_servo_angle = 90;
 //static int16_t current_stepper_angle = 0; 
@@ -252,11 +253,11 @@ void UART_CONTROL_update(void) {
   uint8_t esp_byte;
   if (HAL_UART_Receive(&huart1, &esp_byte, 1, 0) == HAL_OK) {
     if (esp_byte == 0xAA) {
-      // Toggle LED2 instantly on packet arrival
-      HAL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
-
       data_packet_t packet;
       if (HAL_UART_Receive(&huart1, (uint8_t*)&packet, sizeof(data_packet_t), 20) == HAL_OK) {
+        // Toggle LED2 instantly on valid packet arrival
+        HAL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+
         uint8_t effective_speed = packet.speed > 0 ? packet.speed : 128;
         robot_speed = ((uint32_t)effective_speed * 999) / 255;
 
@@ -285,12 +286,6 @@ void UART_CONTROL_update(void) {
         if (packet.mode == MANUAL_MODE) {
           Motor_Left_SetSpeed(left_pwm);
           Motor_Right_SetSpeed(right_pwm);
-          if (current_mode != UART_MODE_STM32) {
-            char dbg_buf[140];
-            snprintf(dbg_buf, sizeof(dbg_buf), "[STM32] JoyX:%4u | JoyY:%4u | Spd:%3u%% -> Motors: L=%+4d, R=%+4d\r\n",
-                     packet.joystick_x, packet.joystick_y, (unsigned int)((robot_speed * 100) / 999), (int)(left_pwm), (int)(right_pwm));
-            UART_SendMessage(dbg_buf);
-          }
         }
         else if (packet.mode == AUTO_MODE) {
           Robot_SetState(robot_auto);

@@ -1,4 +1,4 @@
-﻿#include "receive_data.h"
+#include "receive_data.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <esp_now.h>
@@ -51,5 +51,5 @@ void receive_button_press(data_packet_t* packet) {
 void send_packet_stm32(data_packet_t *packet) {
     uint8_t marker = 0xAA;
     uart_write_bytes(UART_NUM_1, (const char*)&marker, 1);
-    uart_write_bytes(UART_NUM_1, packet, sizeof(data_packet_t));
+    uart_write_bytes(UART_NUM_1, (const char*)packet, sizeof(data_packet_t));
 }
