@@ -37,24 +37,30 @@ void deadband_filter(data_packet_t* packet, uint16_t raw_x, uint16_t raw_y) {
         }
 }
 
+uint32_t last_user_active_time = 0;
+
 void check_failsafe(data_packet_t *packet) {
-    //if we're in the manual page
+    // If we're in the manual page
     if (current_page == PAGE_MANUAL || current_page == PAGE_MANUAL_DATA) {
-        //if the time is greater than 2000ms then we return to the menu 
         uint32_t now = pdTICKS_TO_MS(xTaskGetTickCount());
         
-        //then we check if we pressed a button or the joystick moved
-        bool user_active = (packet->button_data !=0 || (abs(metrics_get_joy_x_val()) > 10) || (abs(metrics_get_joy_y_val()) > 10)); 
-        
-        //if active then we set the last time to now,
-        if (user_active == true) {
-            last_time_rx = now; //so we reset the time if the user pressed the button or
+        if (last_user_active_time == 0) {
+            last_user_active_time = now;
         }
 
-         // 2. If 5 seconds of idle inactivity passed, trip!
-        if ((now - last_time_rx) > 5000) {
+        // Check if we pressed a button or the joystick moved
+        int16_t jx = metrics_get_joy_x_val();
+        int16_t jy = metrics_get_joy_y_val();
+        bool user_active = (packet->button_data != 0 || abs(jx) > 10 || abs(jy) > 10); 
+        
+        if (user_active) {
+            last_user_active_time = now; // Reset the inactivity timer on user input
+        }
+
+        // If 5 seconds of idle inactivity passed, trip!
+        if ((now - last_user_active_time) > 5000) {
             failsafe_flag = true; 
-            last_time_rx = now;
+            last_user_active_time = now;
             speaker_pattern(8, 75, 75);
             ESP_LOGW("FAILSAFE", "Inactivity timeout (5s), activating failsafe!");
             // Return to menu
@@ -62,8 +68,8 @@ void check_failsafe(data_packet_t *packet) {
             active_mode = MENU_MODE;
             hovered_mode = MANUAL_MODE;
         }
-        
-        
+    } else {
+        last_user_active_time = 0;
     }
 }
 void app_main(void) {
@@ -122,7 +128,7 @@ void app_main(void) {
         deadband_filter(&packet, raw_x, raw_y);
 
         
-        packet.speed = (current_speed > 0) ? current_speed : 128; // default to 50% speed
+        packet.speed = current_speed;
         packet.mode = active_mode; //fill the mode into the packet.
         speaker_update(packet.button_data);
 

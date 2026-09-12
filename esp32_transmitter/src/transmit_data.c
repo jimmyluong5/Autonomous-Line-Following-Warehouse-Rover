@@ -27,6 +27,7 @@
 
 extern bool failsafe_flag;
 extern uint32_t last_time_rx;
+extern uint32_t last_user_active_time;
 static const char *TAG = "TRANSMIT_DATA";
 // mode_selections array definition
 
@@ -113,6 +114,7 @@ void process_arrow_keys(data_packet_t *packet) {
                     case MANUAL_MODE:
                         //set the current page to the manual page
                         failsafe_flag = false; //reset the flag so we don't trip from the time browsing the menu
+                        last_user_active_time = pdTICKS_TO_MS(xTaskGetTickCount());
                         last_time_rx = pdTICKS_TO_MS(xTaskGetTickCount());
                         current_page = PAGE_MANUAL;
                         ESP_LOGI(TAG, "Entering Manual Mode Dashboard");
@@ -178,8 +180,8 @@ void process_arrow_keys(data_packet_t *packet) {
                 ESP_LOGI(TAG, "Speed DOWN -> %d (%d%%)", current_speed, (current_speed * 100) / 255);
             }
             else if (clicked_center) { //stopping button which is the centre button
-                current_speed = 0;
-                ESP_LOGI(TAG, "Emergency STOP -> Speed 0");
+                current_speed = 128;
+                ESP_LOGI(TAG, "Emergency STOP -> Speed Reset to 50%% (128)");
             }
 
             break;
@@ -210,8 +212,8 @@ void process_arrow_keys(data_packet_t *packet) {
                 ESP_LOGI(TAG, "Speed DOWN -> %d (%d%%)", current_speed, (current_speed * 100) / 255);
             }
             else if (clicked_center) {
-                current_speed = 0;
-                ESP_LOGI(TAG, "Emergency STOP -> Speed 0");
+                current_speed = 128;
+                ESP_LOGI(TAG, "Emergency STOP -> Speed Reset to 50%% (128)");
             }
             break;
         //imu page
@@ -407,8 +409,9 @@ uint8_t update_speed(data_packet_t *packet){
             last_speed_trigger = now;
             switch(i) {
                 case STOP_BTN:
-                    packet->speed = 0;
-                    ESP_LOGI(TAG, "STOP | Speed = %u\n", packet->speed);
+                    packet->speed = 128;
+                    current_speed = 128;
+                    ESP_LOGI(TAG, "STOP | Speed Reset to 50%% (128)\n");
                     break;
 
                 case UP_BTN: //packet->button_data we access
