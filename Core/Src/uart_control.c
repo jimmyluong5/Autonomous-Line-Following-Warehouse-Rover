@@ -498,8 +498,8 @@ void UART_CONTROL_update(void) {
             Robot_SetState(robot_left);
             if (current_mode == UART_MODE_COMBINED) {
 
-              if (current_servo_angle > SERVO_ANGLE_MIN) {
-                current_servo_angle = (current_servo_angle < SERVO_ANGLE_MIN + 10) ? SERVO_ANGLE_MIN : (current_servo_angle - 10);
+              if (current_servo_angle < SERVO_ANGLE_MAX) {
+                current_servo_angle = (current_servo_angle + 10 > SERVO_ANGLE_MAX) ? SERVO_ANGLE_MAX : (current_servo_angle + 10);
               }
               Servo_SetAngle(current_servo_angle);
               char angle_msg[64];
@@ -517,8 +517,8 @@ void UART_CONTROL_update(void) {
               Robot_SetState(robot_right);
               if (current_mode == UART_MODE_COMBINED) {
 
-                  if (current_servo_angle < SERVO_ANGLE_MAX) {
-                    current_servo_angle = (current_servo_angle + 10 > SERVO_ANGLE_MAX) ? SERVO_ANGLE_MAX : (current_servo_angle + 10);
+                  if (current_servo_angle > SERVO_ANGLE_MIN) {
+                    current_servo_angle = (current_servo_angle < SERVO_ANGLE_MIN + 10) ? SERVO_ANGLE_MIN : (current_servo_angle - 10);
                   }
                   Servo_SetAngle(current_servo_angle);
                   char angle_msg[64];
@@ -644,17 +644,17 @@ void UART_CONTROL_update(void) {
           break;
 
         case 'a':
-          current_servo_angle = (current_servo_angle >= SERVO_ANGLE_MIN + 5) ? current_servo_angle - 5 : SERVO_ANGLE_MIN;
-          angle_changed = true;
-          break;
-
-        case 'd':
           current_servo_angle = (current_servo_angle <= SERVO_ANGLE_MAX - 5) ? current_servo_angle + 5 : SERVO_ANGLE_MAX;
           angle_changed = true;
           break;
 
+        case 'd':
+          current_servo_angle = (current_servo_angle >= SERVO_ANGLE_MIN + 5) ? current_servo_angle - 5 : SERVO_ANGLE_MIN;
+          angle_changed = true;
+          break;
+
         case '1':
-          current_servo_angle = SERVO_ANGLE_LEFT; // 45 deg
+          current_servo_angle = SERVO_ANGLE_LEFT; // 135 deg
           angle_changed = true;
           break;
 
@@ -664,7 +664,7 @@ void UART_CONTROL_update(void) {
           break;
 
         case '3':
-          current_servo_angle = SERVO_ANGLE_RIGHT; // 135 deg
+          current_servo_angle = SERVO_ANGLE_RIGHT; // 45 deg
           angle_changed = true;
           break;
 

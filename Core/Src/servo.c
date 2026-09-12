@@ -12,7 +12,7 @@ static bool pwm_active = false;
 static uint16_t step_interval_ms = 3;       // 3ms interval for fast, responsive movement
 static float step_size_deg = 2.0f;           // 2.0° per step -> 180° full turn in ~270ms
 static uint16_t auto_detach_delay_ms = 500; // Turn off PWM 500ms after reaching target
-static bool auto_detach_enabled = true;
+static bool auto_detach_enabled = false;
 
 static void update_compare_value(uint8_t angle) {
     if (angle < SERVO_ANGLE_MIN) {
@@ -132,4 +132,4 @@ uint8_t Servo_GetCurrentAngle(void) {
 
 bool Servo_IsMoving(void) {
     return ((uint8_t)current_angle != target_angle);
-}
+}
